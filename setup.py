@@ -1,11 +1,15 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='snotra',
-    version='0.0.1dev',
+    version='0.0.1',
     packages=['snotra',],
     license='MIT',
     include_package_data=True,
+    author="Hans Olav Melberg",
+    author_email="hans.melberg@gmail.com",
+    description=("Tool to analyze data on hospital events, prescriptions and similar types of health data"),
+    keywords="health pandas",
     long_description='''
     Snotra - Health registry research using Pandas and Python
     ---------------------------------------------------------
