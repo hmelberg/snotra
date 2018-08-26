@@ -1,21 +1,21 @@
 # Snotra - Health registry research using Pandas and Python
 Snotra is a tool that extends and builds on the Pandas library to make it easier to analyze data on hospital events, prescriptions and similar types of health data.
 
-Snotra is also a Norse Goodess associated with the Norse word for clever. Although the library is related to health research, the Norse term is in no way connected to snot.
+Snotra is also a Norse Goddess associated with the Norse word for clever. Although the library is related to health research, the Norse term is in no way connected to snot.
 
 ### Examples
 - **Count the number of unique persons with a diagnosis in event data**
     - Using special notation (star, hyphen and colon)
         ```python
-        df.count_persons(codes=['K50*', 'K51*]', cols='icd*')        
+        df.count_persons(codes=['K50*', 'K51*'], cols='icd*')        
         df.count_persons(codes=['K50.0-K51.9]', cols='icd*')        
-          ```
+        ```
   
     - Using logical expressions
         ```python
-        df.count_persons(codes=['K50* or K51' and not K52*]', cols='icd*')        
+        df.count_persons(codes=['K50* or K51 and not K52*]', cols='icd*')        
         df.count_persons(codes='K50 in: icd and 4AB02 in:atc1, atc2')
-          ```
+        ```
 
     
 - **Select all events for some persons using codelists or logical expressions**
@@ -35,7 +35,6 @@ Snotra is also a Norse Goodess associated with the Norse word for clever. Althou
 - **Calculate Charlson Comorbidity Index***
     ```python
     cci = rr.charlson(df=df, cols=['icd1', 'icd2'], sep=',')
-
     ```
 
  ### License
