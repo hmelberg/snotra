@@ -9,12 +9,12 @@ Snotra is also a Norse Goddess associated with the Norse word for clever. Althou
         ```python
         df.count_persons(codes=['K50*', 'K51*'], cols='icd*')  
         
-        df.count_persons(codes=['K50.0-K51.9]', cols='icd*')        
+        df.count_persons(codes=['K50.0-K51.9'], cols='icd*')        
         ```
   
     - Using logical expressions
         ```python
-        df.count_persons(codes=['K50* or K51 and not K52*]', cols='icd*')
+        df.count_persons(codes='K50 or K51 and not K52', cols='icd*')
           
         df.count_persons(codes='K50 in: icd and 4AB02 in:atc1, atc2')
         ```

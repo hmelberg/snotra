@@ -1,2 +1,2 @@
-include codebooks/*.csv
-include data/*.csv
+include snotra/codebooks/*.csv
+include snotra/data/*.csv
