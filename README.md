@@ -1,7 +1,7 @@
 # Snotra - Health registry research using Pandas and Python
 Snotra is a tool that extends and builds on the Pandas library to make it easier to analyze data on hospital events, prescriptions and similar types of health data.
 
-Snotra is also a Norse Goodess associated with the Norse word for clever. Although the library is related to health research, the Norse term is in no way connected to snot.
+Snotra is also a Norse Goddess associated with the Norse word for clever. Although the library is related to health research, the Norse term is in no way connected to snot.
 
 ### Examples
 - **Count the number of unique persons with a diagnosis in event data**
