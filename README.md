@@ -37,8 +37,6 @@ Snotra is also a Norse Goddess associated with the Norse word for clever. Althou
     cci = rr.charlson(df=df, cols=['icd1', 'icd2'], sep=',')
     ```
 
-    ```
-
  ### License
  MIT
  
