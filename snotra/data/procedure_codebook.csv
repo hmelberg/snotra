@@ -1,0 +1,66 @@
+;event_code;event_description
+0;23426006;Measurement of respiratory function (procedure)
+1;252160004;Standard pregnancy test
+2;237001001;Augmentation of labor
+3;11466000;Cesarean section
+4;169553002;Insertion of subcutaneous contraceptive
+5;428191000124101;Documentation of current medications
+6;73761001;Colonoscopy
+7;274474001;Bone immobilization
+8;312681000;Bone density scan (procedure)
+11;311791003;Information gathering (procedure)
+21;288086009;Suture open wound
+35;228557008;Cognitive and behavioral therapy
+50;117015009;Throat culture (procedure) 
+54;76601001;Intramuscular injection
+56;305428000;Admission to orthopedic department
+85;46706006;Replacement of contraceptive intrauterine device
+87;68254000;Removal of intrauterine device
+90;714812005;Induced termination of pregnancy
+95;31208007;Medical induction of labor
+99;22523008;Vasectomy
+104;66348005;Childbirth
+106;65588006;Premature birth of newborn
+110;65200003;Insertion of intrauterine contraceptive device
+135;127783003;Spirometry (procedure)
+141;15081005;Pulmonary rehabilitation (regime/therapy)
+204;399208008;Plain chest X-ray (procedure)
+205;418891003;Computed tomography of chest and abdomen
+206;173160006;Diagnostic fiberoptic bronchoscopy (procedure)
+207;698354004;Magnetic resonance imaging for measurement of brain volume (procedure)
+208;703423002;Combined chemotherapy and radiation therapy (procedure)
+225;269911007;Sputum examination (procedure)
+228;180256009;Subcutaneous immunotherapy
+281;395142003;Allergy screening test
+327;387685009;Surgical manipulation of shoulder joint
+366;384700001;Injection of tetanus antitoxin
+391;1015401000000100;Fecal occult blood test
+392;274031008;Rectal polypectomy
+423;447365002;Insertion of biventricular implantable cardioverter defibrillator
+424;18286008;Catheter ablation of tissue of heart
+451;433112001;Percutaneous mechanical thrombectomy of portal vein using fluoroscopic guidance
+676;85548006;Episiotomy
+680;18946005;Epidural anesthesia
+685;301807007;Removal of subcutaneous contraceptive
+708;54550000;Seizure Count Cerebral Cortex Electroencephalogram (EEG)
+709;699253003;Surgical manipulation of joint of knee
+720;80146002;Appendectomy
+724;65546002;Extraction of wisdom tooth
+730;313191000;Injection of adrenaline
+734;171231001;Asthma screening
+919;755621000000101;Replacement of subcutaneous contraceptive
+982;112790001;Nasal sinus endoscopy (procedure)
+1038;415070008;Percutaneous coronary intervention
+1039;232717009;Coronary artery bypass grafting
+1129;287664005;Bilateral tubal ligation
+1307;236974004;Instrumental delivery
+1349;76164006;Biopsy of colon
+1553;43075005;Partial resection of colon
+2279;183450002;Admission to burn unit
+2280;305340004;Admission to long stay hospital
+2829;432231006;Fine needle aspiration biopsy of lung (procedure)
+3406;445912000;Excision of fallopian tube and surgical removal of ectopic pregnancy
+4412;91602002;Thoracentesis (procedure)
+4589;167995008;Sputum microscopy (procedure)
+6909;88039007;Transplant of lung (procedure)
+7690;609588000;Total knee replacement

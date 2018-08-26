@@ -1,0 +1,98 @@
+﻿code;long_text;text
+WL000;Utstedelse av H-resept på legemiddel;Utstedelse av H-resept på legemiddel
+1AC01;Behandling med legemiddel H01AC01 (Somatropin);Somatropin
+1AC03;Behandling med legemiddel H01AC03 (Mecasermin);Mecasermin
+1AC09;Behandling med legemiddel B01AC09 (Epoprostenol);Epoprostenol
+1AC11;Behandling med legemiddel B01AC11 (Iloprost);Iloprost
+1AC21;Behandling med legemiddel B01AC21 (Treprostinil);Treprostinil
+1AC27;Behandling med legemiddel B01AC27 (Selexipag);Selexipag
+1BA01;Behandling med legemiddel S01BA01 (Deksametason);Deksametason
+1LA01;Behandling med legemiddel S01LA01 (Verteporfin);Verteporfin
+1LA04;Behandling med legemiddel S01LA04 (Ranibizumab);Ranibizumab
+1LA05;Behandling med legemiddel S01LA05 (Aflibercept);Aflibercept
+1XA22;Behandling med legemiddel S01XA22 (Okriplasmin);Okriplasmin
+1XC02;Behandling med legemiddel L01XC02 (Rituximab);Rituximab
+1XC03;Behandling med legemiddel L01XC03 (Trastuzumab);Trastuzumab
+1XC07;Behandling med legemiddel L01XC07 (Bevacizumab);Bevacizumab
+1XC11;Behandling med legemiddel L01XC11 (Ipilimumab);Ipilimumab
+1XC12;Behandling med legemiddel L01XC12 (Brentuximab vedotin);Brentuximab vedotin
+1XC13;Behandling med legemiddel L01XC13 (Pertuzumab);Pertuzumab
+1XC15;Behandling med legemiddel L01XC15 (Obinutuzumab);Obinutuzumab
+1XC17;Behandling med legemiddel L01XC17 (Nivolumab);Nivolumab
+1XC18;Behandling med legemiddel L01XC18 (Pembrolizumab);Pembrolizumab
+1XE15;Behandling med legemiddel L01XE15 (Vemurafenib);Vemurafenib
+1XE23;Behandling med legemiddel L01XE23 (Dabrafenib);Dabrafenib
+1XE25;Behandling med legemiddel L01XE25 (Trametinib);Trametinib
+1XE27;Behandling med legemiddel L01XE27 (Ibrutinib);Ibrutinib
+1XX01;Intravenøs trombolysebehandling ved akutt hjerneinfarkt;Intravenøs trombolysebehandling ved akutt hjerneinfarkt
+1XX46;Behandling med legemiddel L01XX46 (Olaparib);Olaparib
+1XX47;Behandling med legemiddel L01XX47 (Idelalisib);Idelalisib
+2BB01;Behandling med legemiddel B02BB01 (Fibrinogen, human);Fibrinogen, human
+2BB04;Behandling med legemiddel L02BB04 (Enzalutamid);Enzalutamid
+2BD01;Behandling med legemiddel B02BD01 (Koagulasjonsfaktor II, VII, IX og X i kombinasjon);Koagulasjonsfaktor II, VII, IX og X i kombinasjon
+2BD02;Behandling med legemiddel B02BD02 (Koagulasjonsfaktor VIII);Koagulasjonsfaktor VIII
+2BD03;Behandling med legemiddel B02BD03 (Faktor VIII-inhibitor bypass-aktivitet);Faktor VIII-inhibitor bypass-aktivitet
+2BD04;Behandling med legemiddel B02BD04 (Koagulasjonsfaktor IX);Koagulasjonsfaktor IX
+2BD06;Behandling med legemiddel B02BD06 (Von Willebrands faktor og koagulasjonsfaktor VIII i kombinasjon);Von Willebrands faktor og koagulasjonsfaktor VIII i kombinasjon
+2BD07;Behandling med legemiddel B02BD07 (Koagulasjonsfaktor XIII);Koagulasjonsfaktor XIII
+2BD08;Behandling med legemiddel B02BD08 (Eptacog alfa (aktivert));Eptacog alfa (aktivert
+2BD09;Behandling med legemiddel B02BD09 (Nonacog alfa);Nonacog alfa
+2BD10;Behandling med legemiddel B02BD10 (Von Willebrands faktor);Von Willebrands faktor
+2BD11;Behandling med legemiddel B02BD11 (Katridekakog);Katridekakog
+2BX03;Behandling med legemiddel L02BX03 (Abirateronacetat);Abirateronacetat
+2KX01;Behandling med legemiddel C02KX01 (Bosentan);Bosentan
+2KX02;Behandling med legemiddel C02KX02 (Ambrisentan);Ambrisentan
+2KX04;Behandling med legemiddel C02KX04 (Macitentan);Macitentan
+2KX05;Behandling med legemiddel C02KX05 (Riociguat);Riociguat
+3AA02;Behandling med legemiddel L03AA02 (Filgrastim);Filgrastim
+3AA13;Behandling med legemiddel L03AA13 (Pegfilgrastim);Pegfilgrastim
+3AA14 ;Behandling med legemiddel L03AA14 (Lipegfilgrastim);Lipegfilgrastim
+3AB07;Behandling med legemiddel L03AB07 (Interferon beta-1a);Interferon beta-1a
+3AB08;Behandling med legemiddel L03AB08 (Interferon beta-1b);Interferon beta-1b
+3AB13;Behandling med legemiddel L03AB13 (Peginterferon beta-1a);Peginterferon beta-1a
+3AX01;Behandling med legemiddel M03AX01 (Botulinum toxin);Botulinum toxin
+3AX13;Behandling med legemiddel L03AX13 (Glatirameracetat);Glatirameracetat
+3BX01;Behandling med legemiddel M03BX01 (Baclofen);Baclofen
+3XA01;Behandling med legemiddel B03XA01 (Erytropoietin);Erytropoietin
+3XA02;Behandling med legemiddel B03XA02 (Darbepoetin alfa);Darbepoetin alfa
+3XA03;Behandling med legemiddel B03XA03 (Metoksypolyetylenglykol-epoetin beta);Metoksypolyetylenglykol-epoetin beta
+4AA23;Behandling med legemiddel L04AA23 (Natalizumab);Natalizumab
+4AA24;Behandling med legemiddel L04AA24 (Abatacept);Abatacept
+4AA26;Behandling med legemiddel L04AA26 (Belimumab);Belimumab
+4AA27;Behandling med legemiddel L04AA27 (Fingolimod);Fingolimod
+4AA31;Behandling med legemiddel L04AA31 (Teriflunomide);Teriflunomide
+4AA33;Behandling med legemiddel L04AA33 (Vedolizumab);Vedolizumab
+4AA34;Behandling med legemiddel L04AA34 (Alemtuzumab);Alemtuzumab
+4AB01;Behandling med legemiddel L04AB01 (Etanercept);Etanercept
+4AB02;Behandling med legemiddel L04AB02 (Infliximab);Infliximab
+4AB04;Behandling med legemiddel L04AB04 (Adalimumab);Adalimumab
+4AB05;Behandling med legemiddel L04AB05 (Certolizumab pegol);Certolizumab pegol
+4AB06;Behandling med legemiddel L04AB06 (Golimumab);Golimumab
+4AC03;Behandling med legemiddel L04AC03 (Anakinra);Anakinra
+4AC05;Behandling med legemiddel L04AC05 (Ustekinumab);Ustekinumab
+4AC07;Behandling med legemiddel L04AC07 (Tocilizumab);Tocilizumab
+4AC10;Behandling med legemiddel L04AC10 (Secukinumab);Secukinumab
+4BE03;Behandling med legemiddel G04BE03 (Sildenafil);Sildenafil
+4BE08;Behandling med legemiddel G04BE08 (Tadalafil);Tadalafil
+5AE14;Behandling med legemiddel J05AE14 (Simeprevir);Simeprevir
+5AX14;Behandling med legemiddel J05AX14 (Daklatasvir);Daklatasvir
+5AX15;Behandling med legemiddel J05AX15 (Sofosbuvir);Sofosbuvir
+5AX16;Behandling med legemiddel J05AX16 (Dasabuvir);Dasabuvir
+5AX65;Behandling med legemiddel J05AX65 (Sofosbuvir og Ledipasvir);Sofosbuvir og Ledipasvir
+5AX67;Behandling med legemiddel J05AX67 (Ombitasvir, paritaprevir og ritonavir);Ombitasvir, paritaprevir og ritonavir
+5BX04;Behandling med legemiddel M05BX04 (Denosumab);Denosumab
+6BA02;Behandling med legemiddel J06BA02 (Humant normalt immunglobulin);Humant normalt immunglobulin
+7XX09;Behandling med legemiddel N07XX09 (Dimethyl fumarat);Dimethyl fumarat
+9AB02;Behandling med legemiddel M09AB02 (Kollagenase clostridium histolyticum);Kollagenase clostridium histolyticum
+A0093;Pasientadministrert peritonealdialyse;Pasientadministrert peritonealdialyse
+A0094;Pasientadministrert hemodialyse;Pasientadministrert hemodialyse
+A0099;Grupperettet pasientopplæring;Grupperettet pasientopplæring
+B0001;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i apotek;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i apotek
+B0002;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i regi av kommunal tjeneste;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i regi av kommunal tjeneste
+B0003;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i spesialistpoliklinikk;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i spesialistpoliklinikk
+B0004;Kontinuerlig legemiddelbehandling gjennom LAR - pasientadministrert for minst 7 dager av gangen;Kontinuerlig legemiddelbehandling gjennom LAR - pasientadministrert for minst 7 dager av gangen
+B0005;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig diagnostiske formål;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig diagnostiske formål
+B0006;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig terapeutiske formål;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig terapeutiske formål
+17X01;Behandling med legemiddel L01XC10 (Ofatumumab);Ofatumumab
+17X02;Behandling med legemiddel J05AX68 (Elbasvir, Grazoprevir);Elbasvir, Grazoprevir
+17X03;Behandling med legemiddel J05AX69 (Sofosbuvir, Velpatasvir);Sofosbuvir, Velpatasvir

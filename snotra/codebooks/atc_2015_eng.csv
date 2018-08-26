@@ -1,0 +1,1142 @@
+table;code;text;level;year;order;valid
+atc;A;Alimentary tract and metabolism;1;2015;1;0
+atc;A01A;Stomatological preparations;4;2015;2;1
+atc;A01AA;Caries prophylactic agents;5;2015;3;1
+atc;A01AB;Anti-infectives and antiseptics for local oral treatment;5;2015;4;1
+atc;A01AC;Corticosteroids for local oral treatment;5;2015;5;1
+atc;A01AD;Other agents for local oral treatment;5;2015;6;0
+atc;A02;Drugs for acid related disorders;3;2015;7;0
+atc;A02A;Antacid drugs (Stomach acid drugs);4;2015;8;1
+atc;A02AA;Magnesium compounds;5;2015;9;1
+atc;A02AB;Aluminium compounds;5;2015;10;1
+atc;A02AC;Calcium compounds list;5;2015;11;1
+atc;A02AD;Combinations and complexes of aluminium;5;2015;12;1
+atc;A02AF;Antacids with antiflatulents;5;2015;13;0
+atc;A02B;Drugs for peptic ulcer and gastro-oesophageal reflux disease;4;2015;14;1
+atc;A02BA;H2-receptor antagonists;5;2015;15;1
+atc;A02BB;Prostaglandins;5;2015;16;1
+atc;A02BC;Proton pump inhibitors;5;2015;17;1
+atc;A02BD;Combinations for eradication of Helicobacter pylori;5;2015;18;1
+atc;A02BX;Other drugs for peptic ulcer and gastro-oesophageal reflux disease (GORD/GERD);5;2015;19;0
+atc;A02X;Other drugs for acid related disorders;4;2015;20;0
+atc;A03;Drugs for functional gastrointestinal disorders;3;2015;21;0
+atc;A03A;Drugs for functional bowel disorders;4;2015;22;1
+atc;A03AA;Synthetic anticholinergics;5;2015;23;1
+atc;A03AB;Synthetic anticholinergics;5;2015;24;1
+atc;A03AC;Synthetic antispasmodics;5;2015;25;1
+atc;A03AD;Papaverine and derivatives;5;2015;26;1
+atc;A03AE;Serotonin receptor antagonists;5;2015;27;1
+atc;A03AX;Other drugs for functional gastrointestinal disorders;5;2015;28;0
+atc;A03B;Belladonna and derivatives;4;2015;29;0
+atc;A03C;Antispasmodics in combination with psycholeptics;4;2015;30;0
+atc;A03D;Antispasmodics in combination with analgesics;4;2015;31;0
+atc;A03E;Antispasmodics and anticholinergics in combination with other drugs;4;2015;32;0
+atc;A03F;Propulsives;4;2015;33;0
+atc;A04A;Antiemetics and antinauseants;4;2015;34;1
+atc;A04AA;Serotonin (5-HT3) antagonists;5;2015;35;0
+atc;A04AA01;Ondansetron;7;2015;36;0
+atc;A04AA02;Granisetron;7;2015;37;0
+atc;A04AA03;Tropisetron;7;2015;38;0
+atc;A04AA04;Dolasetron;7;2015;39;0
+atc;A04AA05;Palonosetron;7;2015;40;0
+atc;A04AA55;Palonosetron;7;2015;41;1
+atc;A04AD;Other antiemetics;5;2015;42;0
+atc;A04AD01;Scopolamine;7;2015;43;0
+atc;A04AD02;Cerium oxalate;7;2015;44;0
+atc;A04AD04;Chlorobutanol;7;2015;45;0
+atc;A04AD05;Metopimazine;7;2015;46;0
+atc;A04AD10;Dronabinol;7;2015;47;0
+atc;A04AD11;Nabilone;7;2015;48;0
+atc;A04AD12;Aprepitant;7;2015;49;0
+atc;A04AD13;Casopitant;7;2015;50;0
+atc;A04AD51;Scopolamine;7;2015;51;0
+atc;A04AD54;Chlorobutanol;7;2015;52;0
+atc;A05;Bile and liver therapy;3;2015;53;0
+atc;A05A;Bile therapy;4;2015;54;0
+atc;A05B;Liver therapy;4;2015;55;0
+atc;A05C;Drugs for bile therapy and lipotropics in combination;4;2015;56;1
+atc;A05AA;Bile acid preparations;5;2015;57;1
+atc;A05AB;Preparations for biliary tract therapy;5;2015;58;1
+atc;A05AX;Other drugs for bile therapy;5;2015;59;1
+atc;A05BA;Liver therapy;5;2015;60;0
+atc;A06A;Drugs for constipation;4;2015;61;1
+atc;A06AA;Softeners;5;2015;62;1
+atc;A06AB;Contact laxatives;5;2015;63;1
+atc;A06AC;Bulk-forming laxatives;5;2015;64;1
+atc;A06AD;Osmotically acting laxatives;5;2015;65;1
+atc;A06AG;Enemas drugs;5;2015;66;1
+atc;A06AH;Peripheral opioid receptor antagonists;5;2015;67;1
+atc;A06AX;Other drugs for constipation;5;2015;68;0
+atc;A07;Antidiarrheals;3;2015;69;0
+atc;A07A;Intestinal anti-infectives;4;2015;70;1
+atc;A07AA;Antibiotics;5;2015;71;1
+atc;A07AB;Sulfonamides;5;2015;72;1
+atc;A07AC;Imidazole derivatives;5;2015;73;1
+atc;A07AX;Other intestinal anti-infectives;5;2015;74;0
+atc;A07B;Intestinal adsorbents;4;2015;75;1
+atc;A07BA;Charcoal preparations;5;2015;76;1
+atc;A07BC;Other intestinal adsorbents;5;2015;77;0
+atc;A07C;Electrolytes with carbohydrates;4;2015;78;1
+atc;A07CA;Oral rehydration salt formulations;5;2015;79;1
+atc;A07DA;Antipropulsives;5;2015;80;0
+atc;A07E;Intestinal anti-inflammatory agents;4;2015;81;1
+atc;A07EA;Corticosteroids acting locally;5;2015;82;1
+atc;A07EB;Antiallergic agents;5;2015;83;1
+atc;A07EC;Aminosalicylic acid and similar agents;5;2015;84;1
+atc;A07FA;Antidiarrheal micro-organisms;5;2015;85;1
+atc;A07XA;Other antidiarrheals;5;2015;86;0
+atc;A08;Antiobesity preparations;3;2015;87;0
+atc;A08A;Anti obesity drugs list;4;2015;88;1
+atc;A08AA;Centrally acting anti obesity drugs;5;2015;89;1
+atc;A08AB;Peripherally acting anti obesity drugs;5;2015;90;1
+atc;A08AX;Other anti obesity drugs;5;2015;91;0
+atc;A09A;Digestives;4;2015;92;1
+atc;A09AA;Enzyme preparations;5;2015;93;1
+atc;A09AB;Acid preparations;5;2015;94;1
+atc;A09AC;Enzyme and acid preparations;5;2015;95;0
+atc;A10;Drugs used in diabetes;3;2015;96;0
+atc;A10A;Insulins and analogues;4;2015;97;0
+atc;A10B;Blood glucose lowering drugs;4;2015;98;0
+atc;A10X;Other drugs used in diabetes;4;2015;99;1
+atc;A10AB;Insulins and analogues for injection;5;2015;100;1
+atc;A10AC;Insulins and analogues for injection;5;2015;101;1
+atc;A10AD;Insulins and analogues for injection;5;2015;102;1
+atc;A10AE;Insulins and analogues for injection;5;2015;103;1
+atc;A10AF;Insulins and analogues for inhalation;5;2015;104;1
+atc;A10BA;Biguanides;5;2015;105;1
+atc;A10BB;Sulfonylureas;5;2015;106;1
+atc;A10BC;Sulfonamides (heterocyclic);5;2015;107;1
+atc;A10BD;Combinations of oral blood glucose lowering drugs;5;2015;108;1
+atc;A10BF;Alpha glucosidase inhibitors;5;2015;109;1
+atc;A10BG;Thiazolidinediones;5;2015;110;1
+atc;A10BH;Dipeptidyl peptidase 4 (DPP-4) inhibitors;5;2015;111;1
+atc;A10BJ;Glucagon-like peptide-1 receptor (GLP-1) analogues;5;2015;112;1
+atc;A10BK;Sodium-glucose co-transporter 2 (SGLT2) inhibitors;5;2015;113;1
+atc;A10BX;Other blood glucose lowering drugs;5;2015;114;1
+atc;A10XA;Aldose reductase inhibitors;5;2015;115;0
+atc;A11;Vitamins;3;2015;116;0
+atc;A11A;Multivitamins;4;2015;117;0
+atc;A11B;Multivitamins;4;2015;118;0
+atc;A11C;Vitamin A and D;4;2015;119;0
+atc;A11D;Vitamin B1;4;2015;120;0
+atc;A11E;Vitamin B-complex;4;2015;121;0
+atc;A11G;Ascorbic acid (vitamin C);4;2015;122;1
+atc;A11HA;Other plain vitamin preparations;5;2015;123;0
+atc;A11J;Other vitamin products;4;2015;124;1
+atc;A11AA;Multivitamins with minerals;5;2015;125;1
+atc;A11AB;Multivitamins;5;2015;126;1
+atc;A11CA;Vitamin A;5;2015;127;1
+atc;A11CB;Vitamin A and D in combination;5;2015;128;1
+atc;A11CC;Vitamin D and analogues;5;2015;129;1
+atc;A11DA;Vitamin B1;5;2015;130;1
+atc;A11DB;Vitamin B1 in combination with vitamin B6 and/or vitamin B12;5;2015;131;1
+atc;A11EA;Vitamin B-complex;5;2015;132;1
+atc;A11EB;Vitamin B-complex with vitamin C;5;2015;133;1
+atc;A11EC;Vitamin B-complex with minerals;5;2015;134;1
+atc;A11ED;Vitamin B-complex with anabolic steroids;5;2015;135;1
+atc;A11EX;Vitamin B-complex;5;2015;136;1
+atc;A11GA;Ascorbic acid (vitamin C);5;2015;137;1
+atc;A11GB;Ascorbic acid (vitamin C);5;2015;138;0
+atc;A11HA01;Nicotinamide;7;2015;139;0
+atc;A11HA02;Pyridoxine (vitamin B6);7;2015;140;0
+atc;A11HA03;Tocopherol (vitamin E);7;2015;141;0
+atc;A11HA04;Riboflavin (vitamin B2);7;2015;142;0
+atc;A11HA05;Biotin;7;2015;143;0
+atc;A11HA06;Pyridoxal phosphate;7;2015;144;0
+atc;A11HA07;Inositol;7;2015;145;0
+atc;A11HA08;Tocofersolan;7;2015;146;0
+atc;A11HA30;Dexpanthenol;7;2015;147;0
+atc;A11HA31;Calcium pantothenate;7;2015;148;0
+atc;A11HA32;Pantethine;7;2015;149;1
+atc;A11JA;Combinations of vitamins;5;2015;150;1
+atc;A11JB;Vitamins with minerals;5;2015;151;1
+atc;A11JC;Vitamins;5;2015;152;0
+atc;A12;Mineral supplements;3;2015;153;0
+atc;A12A;Calcium;4;2015;154;1
+atc;A12BA;Potassium;5;2015;155;0
+atc;A12C;Other mineral supplements;4;2015;156;1
+atc;A12AA;Calcium;5;2015;157;1
+atc;A12AX;Calcium;5;2015;158;1
+atc;A12CA;Sodium;5;2015;159;1
+atc;A12CB;Zinc;5;2015;160;1
+atc;A12CC;Magnesium;5;2015;161;1
+atc;A12CD;Fluoride;5;2015;162;1
+atc;A12CE;Selenium;5;2015;163;1
+atc;A12CX;Other mineral products;5;2015;164;0
+atc;A13;Tonics;3;2015;165;0
+atc;A14;Anabolic agents for systemic use;3;2015;166;0
+atc;A14A;Anabolic steroids;4;2015;167;0
+atc;A14B;Other anabolic agents;4;2015;168;1
+atc;A14AA;Androstan derivatives;5;2015;169;1
+atc;A14AB;Estren derivatives;5;2015;170;0
+atc;A15;Appetite stimulants;3;2015;171;0
+atc;A16A;Other alimentary tract and metabolism products;4;2015;172;1
+atc;A16AA;Amino acids and derivatives;5;2015;173;1
+atc;A16AB;Enzymes;5;2015;174;1
+atc;A16AX;Various alimentary tract and metabolism products;5;2015;175;0
+atc;B;Blood and blood forming organs;1;2015;176;0
+atc;B01A;Antithrombotic agents;4;2015;177;1
+atc;B01AA;Vitamin K antagonists;5;2015;178;1
+atc;B01AB;Heparin group;5;2015;179;1
+atc;B01AC;Platelet aggregation inhibitors excluding heparin;5;2015;180;1
+atc;B01AD;Enzymes;5;2015;181;1
+atc;B01AE;Direct thrombin inhibitors;5;2015;182;1
+atc;B01AF;Direct factor Xa inhibitors;5;2015;183;1
+atc;B01AX;Other antithrombotic agents;5;2015;184;0
+atc;B02;Antihemorrhagic drugs;3;2015;185;0
+atc;B02A;Antifibrinolytics;4;2015;186;1
+atc;B02AA;Amino acids;5;2015;187;1
+atc;B02AB;Proteinase inhibitors;5;2015;188;0
+atc;B02B;Vitamin K and other hemostatics;4;2015;189;1
+atc;B02BA;Vitamin K;5;2015;190;1
+atc;B02BB;Fibrinogen;5;2015;191;1
+atc;B02BC;Local hemostatics;5;2015;192;1
+atc;B02BD;Blood coagulation factors;5;2015;193;1
+atc;B02BX;Other systemic hemostatics;5;2015;194;0
+atc;B03;Antianemic drugs;3;2015;195;0
+atc;B03A;Iron preparations;4;2015;196;1
+atc;B03AA;Iron bivalent;5;2015;197;1
+atc;B03AB;Iron trivalent;5;2015;198;1
+atc;B03AD;Iron in combination with folic acid;5;2015;199;1
+atc;B03AE;Iron in other combinations;5;2015;200;0
+atc;B03B;Vitamin B12 and folic acid;4;2015;201;1
+atc;B03BA;Vitamin B12 (cyanocobalamin and analogues);5;2015;202;1
+atc;B03BB;Folic acid and derivatives;5;2015;203;1
+atc;B03XA;Other antianemic preparations;5;2015;204;0
+atc;B05;Blood substitutes and perfusion solutions;3;2015;205;0
+atc;B05A;Blood and related products;4;2015;206;1
+atc;B05AA;Blood substitutes and plasma protein fractions;5;2015;207;1
+atc;B05AX;Other blood products;5;2015;208;0
+atc;B05B;I.V. solutions;4;2015;209;1
+atc;B05BA;Solutions for parenteral nutrition;5;2015;210;1
+atc;B05BB;Solutions affecting the electrolyte balance;5;2015;211;1
+atc;B05BC;Solutions producing osmotic diuresis;5;2015;212;0
+atc;B05C;Irrigating solutions;4;2015;213;1
+atc;B05CA;Antiinfectives;5;2015;214;1
+atc;B05CB;Salt solutions;5;2015;215;1
+atc;B05CX;Other irrigating solutions;5;2015;216;0
+atc;B05X;I.V. solution additives;4;2015;217;1
+atc;B05XA;Electrolyte solutions;5;2015;218;1
+atc;B05XB;Amino acids;5;2015;219;1
+atc;B05XX;Other i.v. solution additives;5;2015;220;0
+atc;B06A;Other hematologic drugs;4;2015;221;1
+atc;B06AA;Enzymes;5;2015;222;1
+atc;B06AB;Other hematological products;5;2015;223;1
+atc;B06AC;Drugs used in hereditary angioedema;5;2015;224;0
+atc;C;Cardiovascular system;1;2015;225;0
+atc;C01;Cardiac therapy;3;2015;226;0
+atc;C01A;Cardiac glycosides list;4;2015;227;1
+atc;C01AA;Digitalis glycosides;5;2015;228;1
+atc;C01AB;Scilla glycosides;5;2015;229;1
+atc;C01AC;Strophantus glycosides;5;2015;230;1
+atc;C01AX;Other cardiac glycosides;5;2015;231;0
+atc;C01B;Class 1 and 3 antiarrhythmic drugs;4;2015;232;1
+atc;C01BA;Class 1a antiarrhythmic drugs;5;2015;233;1
+atc;C01BB;Class 1b antiarrhythmic drugs;5;2015;234;1
+atc;C01BC;Class 1c antiarrhythmic drugs;5;2015;235;1
+atc;C01BD;Class 3 antiarrhythmic drugs;5;2015;236;1
+atc;C01BG;Class 1 and 3 antiarrhythmic drugs;5;2015;237;0
+atc;C01C;Cardiac stimulants excluding cardiac glycosides;4;2015;238;1
+atc;C01CA;Adrenergic and dopaminergic agents;5;2015;239;1
+atc;C01CE;Phosphodiesterase inhibitors drugs;5;2015;240;1
+atc;C01CX;Other cardiac stimulants drugs;5;2015;241;0
+atc;C01D;Vasodilators used in cardiac diseases;4;2015;242;1
+atc;C01DA;Organic nitrates;5;2015;243;1
+atc;C01DB;Quinolone vasodilators;5;2015;244;1
+atc;C01DX;Other vasodilators used in cardiac diseases;5;2015;245;0
+atc;C01E;Other cardiac preparations;4;2015;246;1
+atc;C01EA;Prostaglandins;5;2015;247;1
+atc;C01EB;Other cardiac preparations;5;2015;248;0
+atc;C02;Antihypertensive drugs;3;2015;249;0
+atc;C02A;Antiadrenergic agents;4;2015;250;1
+atc;C02AA;Rauvolfia alkaloids;5;2015;251;1
+atc;C02AB;Methyldopa;5;2015;252;1
+atc;C02AC;Imidazoline receptor agonists;5;2015;253;0
+atc;C02B;Antiadrenergic agents;4;2015;254;1
+atc;C02BA;Sulfonium derivatives;5;2015;255;1
+atc;C02BB;Secondary and tertiary amines;5;2015;256;0
+atc;C02C;Antiadrenergic agents;4;2015;257;1
+atc;C02CA;Alpha-adrenoreceptor antagonists;5;2015;258;1
+atc;C02CC;Guanidine derivatives;5;2015;259;0
+atc;C02D;Arteriolar smooth muscle;4;2015;260;1
+atc;C02DA;Thiazide derivatives;5;2015;261;1
+atc;C02DB;Hydrazinophthalazine derivatives;5;2015;262;1
+atc;C02DC;Pyrimidine derivatives;5;2015;263;1
+atc;C02DD;Nitroferricyanide derivatives;5;2015;264;1
+atc;C02DG;Guanidine derivatives;5;2015;265;0
+atc;C02K;Other antihypertensives;4;2015;266;1
+atc;C02KA;Alkaloids;5;2015;267;1
+atc;C02KB;Tyrosine hydroxylase inhibitors;5;2015;268;1
+atc;C02KC;MAO inhibitors;5;2015;269;1
+atc;C02KD;Serotonin antagonists;5;2015;270;1
+atc;C02KX;Antihypertensives for pulmonary arterial hypertension;5;2015;271;0
+atc;C02L;Antihypertensives and diuretics in combination;4;2015;272;1
+atc;C02LA;Rauwolfia alkaloids and diuretics in combination;5;2015;273;1
+atc;C02LB;Methyldopa and diuretics in combination;5;2015;274;1
+atc;C02LC;Imidazoline receptor agonists in combination with diuretics;5;2015;275;1
+atc;C02LE;Alpha-adrenoreceptor antagonists and diuretics;5;2015;276;1
+atc;C02LF;Guanidine derivatives and diuretics;5;2015;277;1
+atc;C02LG;Hydrazinophthalazine derivatives and diuretics;5;2015;278;1
+atc;C02LK;Alkaloids in combination with diuretics;5;2015;279;1
+atc;C02LL;MAO inhibitors and diuretics;5;2015;280;1
+atc;C02LX;Other antihypertensives and diuretics;5;2015;281;0
+atc;C03;Diuretic drugs;3;2015;282;0
+atc;C03A;Low-ceiling diuretics;4;2015;283;1
+atc;C03AA;Thiazides;5;2015;284;1
+atc;C03AB;Thiazides and potassium in combination;5;2015;285;1
+atc;C03AH;Thiazides;5;2015;286;1
+atc;C03AX;Thiazides;5;2015;287;0
+atc;C03B;Low-ceiling diuretics;4;2015;288;1
+atc;C03BA;Sulfonamides;5;2015;289;1
+atc;C03BB;Sulfonamides and potassium in combination;5;2015;290;1
+atc;C03BC;Mercurial diuretics;5;2015;291;1
+atc;C03BD;Xanthine derivatives;5;2015;292;1
+atc;C03BX;Other low-ceiling diuretics;5;2015;293;0
+atc;C03C;High-ceiling diuretics;4;2015;294;1
+atc;C03CA;Sulfonamides;5;2015;295;1
+atc;C03CB;Sulfonamides and potassium in combination;5;2015;296;1
+atc;C03CC;Aryloxyacetic acid derivatives;5;2015;297;1
+atc;C03CD;Pyrazolone derivatives;5;2015;298;1
+atc;C03CX;Other high-ceiling diuretics;5;2015;299;0
+atc;C03D;Potassium-sparing agents;4;2015;300;1
+atc;C03DA;Aldosterone antagonists;5;2015;301;1
+atc;C03DB;Other potassium-sparing agents;5;2015;302;0
+atc;C03E;Diuretics and potassium-sparing agents in combination;4;2015;303;1
+atc;C03EA;Low-ceiling diuretics and potassium-sparing agents;5;2015;304;1
+atc;C03EB;High-ceiling diuretics and potassium-sparing agents;5;2015;305;0
+atc;C03X;Other diuretics;4;2015;306;1
+atc;C03XA;Vasopressin antagonists;5;2015;307;0
+atc;C04;Peripheral vasodilators;3;2015;308;0
+atc;C04A;Peripheral vasodilators;4;2015;309;1
+atc;C04AA;2-amino-1-phenylethanol derivatives;5;2015;310;1
+atc;C04AB;Imidazoline derivatives;5;2015;311;1
+atc;C04AC;Nicotinic acid and derivatives;5;2015;312;1
+atc;C04AD;Purine derivatives;5;2015;313;1
+atc;C04AE;Ergot alkaloids;5;2015;314;1
+atc;C04AF;Enzymes;5;2015;315;1
+atc;C04AX;Other peripheral vasodilators;5;2015;316;0
+atc;C05;Vasoprotective drugs;3;2015;317;0
+atc;C05A;Agents for treatment of hemorrhoids and anal fissures for topical use;4;2015;318;1
+atc;C05AA;Corticosteroids;5;2015;319;1
+atc;C05AD;Local anesthetics;5;2015;320;1
+atc;C05AE;Muscle relaxants;5;2015;321;1
+atc;C05AX;Other agents for treatment of hemorrhoids and anal fissures for topical use;5;2015;322;0
+atc;C05B;Antivaricose therapy;4;2015;323;1
+atc;C05BA;Heparins or heparinoids for topical use;5;2015;324;1
+atc;C05BB;Sclerosing agents for local injection;5;2015;325;1
+atc;C05BX;Other sclerosing agents;5;2015;326;0
+atc;C05C;Capillary stabilising agents;4;2015;327;1
+atc;C05CA;Bioflavonoids;5;2015;328;1
+atc;C05CX;Other capillary stabilising agents;5;2015;329;0
+atc;C07;Beta blocking agents;3;2015;330;0
+atc;C07A;Beta blocking agents;4;2015;331;1
+atc;C07AA;Beta blocking agents;5;2015;332;1
+atc;C07AB;Beta blocking agents;5;2015;333;1
+atc;C07AG;Alpha and beta blocking agents;5;2015;334;0
+atc;C07B;Beta blocking agents and thiazides;4;2015;335;1
+atc;C07BA;Beta blocking agents and thiazides;5;2015;336;1
+atc;C07BB;Beta blocking agents and thiazides;5;2015;337;1
+atc;C07BG;Alpha and beta blocking agents and thiazides;5;2015;338;0
+atc;C07C;Beta blocking agents and other diuretics;4;2015;339;1
+atc;C07CA;Beta blocking agents and other diuretics;5;2015;340;1
+atc;C07CB;Beta blocking agents and other diuretics;5;2015;341;1
+atc;C07CG;Alpha and beta blocking agents and other diuretics;5;2015;342;0
+atc;C07D;Beta blocking agents;4;2015;343;1
+atc;C07DA;Beta blocking agents thiazides and other diuretics;5;2015;344;1
+atc;C07DB;Beta blocking agents thiazides and other diuretics;5;2015;345;0
+atc;C07F;Beta blocking agents and other antihypertensives;4;2015;346;1
+atc;C07FA;Beta blocking agents and other antihypertensives;5;2015;347;1
+atc;C07FB;Beta blocking agents and other antihypertensives;5;2015;348;1
+atc;C07FX;Beta blocking agents;5;2015;349;0
+atc;C08;Calcium channel blockers;3;2015;350;0
+atc;C08C;Selective calcium channel blockers with mainly vascular effects;4;2015;351;1
+atc;C08CA;Dihydropyridine derivatives;5;2015;352;1
+atc;C08CX;Other selective calcium channel blockers with mainly vascular effects;5;2015;353;0
+atc;C08D;Selective calcium channel blockers with direct cardiac effects;4;2015;354;1
+atc;C08DA;Phenylalkylamine derivatives;5;2015;355;1
+atc;C08DB;Benzothiazepine derivatives;5;2015;356;0
+atc;C08E;Non-selective calcium channel blockers;4;2015;357;1
+atc;C08EA;Phenylalkylamine derivatives;5;2015;358;1
+atc;C08EX;Other non-selective calcium channel blockers;5;2015;359;1
+atc;C08GA;Calcium channel blockers and diuretics;5;2015;360;0
+atc;C09;Agents acting on the renin-angiotensin system;3;2015;361;1
+atc;C09AA;ACE inhibitors;5;2015;362;0
+atc;C09B;ACE inhibitors;4;2015;363;1
+atc;C09BA;ACE inhibitors and diuretics;5;2015;364;1
+atc;C09BB;ACE inhibitors and calcium channel blockers;5;2015;365;1
+atc;C09BX;ACE inhibitors;5;2015;366;1
+atc;C09CA;Angiotensin II antagonists;5;2015;367;0
+atc;C09D;Angiotensin II antagonists;4;2015;368;1
+atc;C09DA;Angiotensin II antagonists and diuretics;5;2015;369;1
+atc;C09DB;Angiotensin II antagonists and calcium channel blockers;5;2015;370;1
+atc;C09DX;Angiotensin II antagonists;5;2015;371;0
+atc;C09X;Other agents acting on the renin-angiotensin system;4;2015;372;1
+atc;C09XA;Renin-inhibitors;5;2015;373;0
+atc;C10;Lipid modifying agents;3;2015;374;0
+atc;C10A;Lipid modifying agents;4;2015;375;1
+atc;C10AA;HMG CoA reductase inhibitors;5;2015;376;1
+atc;C10AB;Fibrates;5;2015;377;1
+atc;C10AC;Bile acid sequestrants;5;2015;378;1
+atc;C10AD;Nicotinic acid and derivatives;5;2015;379;1
+atc;C10AX;Other lipid modifying agents;5;2015;380;0
+atc;C10B;Lipid modifying agents;4;2015;381;1
+atc;C10BA;HMG CoA reductase inhibitors in combination with other lipid modifying agents;5;2015;382;1
+atc;C10BX;HMG CoA reductase inhibitors;5;2015;383;0
+atc;D;Dermatological drugs;1;2015;384;0
+atc;D01;Antifungals for dermatological use;3;2015;385;0
+atc;D01A;Antifungals for topical use;4;2015;386;1
+atc;D01AA;Antibiotics;5;2015;387;1
+atc;D01AC;Imidazole and triazole derivatives;5;2015;388;1
+atc;D01AE;Other antifungals for topical use;5;2015;389;1
+atc;D01BA;Antifungals for systemic use;5;2015;390;0
+atc;D02;Emollients and protectants;3;2015;391;0
+atc;D02A;Emollients and protectives;4;2015;392;1
+atc;D02AE;Carbamide products;5;2015;393;0
+atc;D02B;Protectives against UV-radiation;4;2015;394;1
+atc;D02BA;Protectives against UV-radiation for topical use;5;2015;395;1
+atc;D02BB;Protectives against UV-radiation for systemic use;5;2015;396;0
+atc;D03;Treatment of wounds and ulcers;3;2015;397;0
+atc;D03A;Cicatrizants;4;2015;398;1
+atc;D03AA;Cod-liver oil ointments;5;2015;399;1
+atc;D03AX;Other cicatrizants;5;2015;400;0
+atc;D03B;Enzymes;4;2015;401;1
+atc;D03BA;Proteolytic enzymes;5;2015;402;0
+atc;D04;Antipyretics drugs;3;2015;403;0
+atc;D04A;Antipruritics anesthetics etc.;4;2015;404;1
+atc;D04AA;Topical antihistamines;5;2015;405;1
+atc;D04AB;Topical anesthetics;5;2015;406;0
+atc;D05;Antipsoriatic drugs;3;2015;407;0
+atc;D05A;Antipsoriatics for topical use;4;2015;408;1
+atc;D05AC;Antracen derivatives;5;2015;409;1
+atc;D05AD;Psoralens for topical use;5;2015;410;1
+atc;D05AX;Other antipsoriatics for topical use;5;2015;411;0
+atc;D05B;Antipsoriatics for systemic use;4;2015;412;1
+atc;D05BA;Psoralens for systemic use;5;2015;413;1
+atc;D05BB;Retinoids for treatment of psoriasis;5;2015;414;1
+atc;D05BX;Other antipsoriatics for systemic use;5;2015;415;0
+atc;D06;Antibiotics and chemotherapeutics for dermatological use;3;2015;416;0
+atc;D06A;Antibiotics for topical use;4;2015;417;1
+atc;D06AA;Tetracycline and derivatives;5;2015;418;1
+atc;D06AX;Other antibiotics for topical use;5;2015;419;0
+atc;D06B;Chemotherapeutics for topical use;4;2015;420;1
+atc;D06BA;Sulfonamides;5;2015;421;1
+atc;D06BB;Antivirals;5;2015;422;1
+atc;D06BX;Other chemotherapeutics;5;2015;423;0
+atc;D07;Topical dermatological corticosteroids;3;2015;424;0
+atc;D07A;Corticosteroids;4;2015;425;1
+atc;D07AA;Corticosteroids;5;2015;426;1
+atc;D07AB;Corticosteroids;5;2015;427;1
+atc;D07AC;Corticosteroids;5;2015;428;1
+atc;D07AD;Corticosteroids;5;2015;429;0
+atc;D07B;Corticosteroids;4;2015;430;1
+atc;D07BA;Corticosteroids combinations with antiseptics;5;2015;431;1
+atc;D07BB;Corticosteroids combinations with antiseptics;5;2015;432;1
+atc;D07BC;Corticosteroids combinations with antiseptics;5;2015;433;0
+atc;D07C;Corticosteroids;4;2015;434;1
+atc;D07CA;Corticosteroids combinations with antibiotics;5;2015;435;1
+atc;D07CB;Corticosteroids combinations with antibiotics;5;2015;436;1
+atc;D07CC;Corticosteroids combinations with antibiotics;5;2015;437;1
+atc;D07CD;Corticosteroids combinations with antibiotics;5;2015;438;0
+atc;D07X;Corticosteroids;4;2015;439;1
+atc;D07XA;Corticosteroids other combinations;5;2015;440;1
+atc;D07XB;Corticosteroids other combinations;5;2015;441;1
+atc;D07XC;Corticosteroids other combinations;5;2015;442;0
+atc;D08;Antiseptics and disinfectants drugs;3;2015;443;0
+atc;D08A;Antiseptics and disinfectants;4;2015;444;1
+atc;D08AA;Acridine derivatives;5;2015;445;1
+atc;D08AC;Biguanides and amidines;5;2015;446;1
+atc;D08AE;Phenol and derivatives;5;2015;447;1
+atc;D08AF;Nitrofuran derivatives;5;2015;448;1
+atc;D08AG;Iodine products;5;2015;449;1
+atc;D08AH;Quinoline derivatives;5;2015;450;1
+atc;D08AJ;Quaternary ammonium compounds;5;2015;451;1
+atc;D08AK;Mercurial products;5;2015;452;1
+atc;D08AL;Silver compounds;5;2015;453;1
+atc;D08AX;Other antiseptics and disinfectants;5;2015;454;0
+atc;D09;Medicated dressings;3;2015;455;0
+atc;D09A;Medicated dressings;4;2015;456;1
+atc;D09AA;Medicated dressings with antiinfectives;5;2015;457;1
+atc;D09AB;Zinc bandages;5;2015;458;1
+atc;D09AX;Soft paraffin dressings;5;2015;459;0
+atc;D10;Acne drugs;3;2015;460;0
+atc;D10A;Topical acne drugs;4;2015;461;1
+atc;D10AA;Corticosteroids;5;2015;462;1
+atc;D10AB;Preparations containing sulfur;5;2015;463;1
+atc;D10AD;Retinoids for topical use in acne;5;2015;464;1
+atc;D10AE;Peroxides;5;2015;465;1
+atc;D10AF;Anti-infectives for treatment of acne;5;2015;466;1
+atc;D10AX;Other anti-acne preparations for topical use;5;2015;467;0
+atc;D10B;Anti-acne preparations for systemic use;4;2015;468;1
+atc;D10BA;Retinoids for treatment of acne;5;2015;469;1
+atc;D10BX;Other anti-acne preparations for systemic use;5;2015;470;0
+atc;D11;Other dermatological drugs;3;2015;471;0
+atc;D11A;Other dermatological preparations;4;2015;472;1
+atc;D11AC;Medicated shampoos;5;2015;473;1
+atc;D11AE;Androgens for topical use;5;2015;474;1
+atc;D11AH;Agents for dermatitis;5;2015;475;1
+atc;D11AX;Other dermatologicals;5;2015;476;0
+atc;G;Genitourinary system and reproductive hormones;1;2015;477;0
+atc;G01;Gynecological anti-infectives and antiseptics;3;2015;478;0
+atc;G01A;Anti infectives and antiseptics;4;2015;479;1
+atc;G01AA;Antibiotics;5;2015;480;1
+atc;G01AB;Arsenic compounds;5;2015;481;1
+atc;G01AC;Quinoline derivatives;5;2015;482;1
+atc;G01AD;Organic acids;5;2015;483;1
+atc;G01AE;Sulfonamides;5;2015;484;1
+atc;G01AF;Imidazole derivatives;5;2015;485;1
+atc;G01AG;Triazole derivatives;5;2015;486;1
+atc;G01AX;Other anti-infectives and antiseptics;5;2015;487;0
+atc;G02;Other gynecological drugs;3;2015;488;0
+atc;G02A;Uterotonics;4;2015;489;1
+atc;G02AB;Ergot alkaloids;5;2015;490;1
+atc;G02AC;Ergot alkaloids and oxytocin including analogues;5;2015;491;1
+atc;G02AD;Prostaglandins;5;2015;492;0
+atc;G02B;Contraceptives for topical use;4;2015;493;1
+atc;G02BA;Intrauterine contraceptives;5;2015;494;1
+atc;G02BB;Intravaginal contraceptives;5;2015;495;0
+atc;G02C;Other gynecologicals;4;2015;496;1
+atc;G02CA;Sympathomimetics;5;2015;497;1
+atc;G02CB;Prolactin inhibitors;5;2015;498;1
+atc;G02CC;Anti-inflammatory products for vaginal administration;5;2015;499;1
+atc;G02CX;Other gynecologicals;5;2015;500;0
+atc;G03;Sex hormones and modulators of the genital system;3;2015;501;0
+atc;G03A;Hormonal contraceptives for systemic use;4;2015;502;1
+atc;G03AA;Progestogens and estrogens;5;2015;503;1
+atc;G03AB;Progestogens and estrogens;5;2015;504;1
+atc;G03AC;Progestogens;5;2015;505;1
+atc;G03AD;Emergency contraceptives;5;2015;506;0
+atc;G03B;Androgens;4;2015;507;1
+atc;G03BA;3-oxoandrosten-(4) derivatives;5;2015;508;1
+atc;G03BB;5-androstanon-(3) derivatives;5;2015;509;0
+atc;G03C;Estrogens;4;2015;510;1
+atc;G03CA;Natural and semisynthetic estrogens;5;2015;511;1
+atc;G03CB;Synthetic estrogens;5;2015;512;1
+atc;G03CC;Estrogens;5;2015;513;1
+atc;G03CX;Other estrogens;5;2015;514;0
+atc;G03D;Progestogens;4;2015;515;1
+atc;G03DA;Pregnen-(4) derivatives;5;2015;516;1
+atc;G03DB;Pregnadien derivatives;5;2015;517;1
+atc;G03DC;Estren derivatives;5;2015;518;0
+atc;G03E;Androgens and female sex hormones in combination;4;2015;519;1
+atc;G03EA;Androgens and estrogens;5;2015;520;1
+atc;G03EK;Androgens and female sex hormones in combination with other drugs;5;2015;521;0
+atc;G03F;Progestogens and estrogens in combination;4;2015;522;1
+atc;G03FA;Progestogens and estrogens;5;2015;523;1
+atc;G03FB;Progestogens and estrogens;5;2015;524;0
+atc;G03G;Gonadotropins and other ovulation stimulants;4;2015;525;1
+atc;G03GA;Gonadotropins;5;2015;526;1
+atc;G03GB;Ovulation stimulants;5;2015;527;0
+atc;G03H;Antiandrogens;4;2015;528;1
+atc;G03HA;Antiandrogens;5;2015;529;1
+atc;G03HB;Antiandrogens and estrogens;5;2015;530;0
+atc;G03X;Other sex hormones and modulators of the genital system;4;2015;531;0
+atc;G04;Urological drugs;3;2015;532;0
+atc;G04B;Urologicals;4;2015;533;1
+atc;G04BA;Acidifiers;5;2015;534;1
+atc;G04BC;Urinary concrement solvents;5;2015;535;1
+atc;G04BD;Drugs for urinary frequency and incontinence;5;2015;536;1
+atc;G04BE;Drugs used in erectile dysfunction;5;2015;537;1
+atc;G04BX;Other urologicals;5;2015;538;0
+atc;G04C;Drugs used in benign prostatic hypertrophy;4;2015;539;1
+atc;G04CA;Alpha-adrenoreceptor antagonists;5;2015;540;1
+atc;G04CB;Testosterone-5-alpha reductase inhibitors;5;2015;541;1
+atc;G04CX;Other drugs used in benign prostatic hypertrophy;5;2015;542;0
+atc;H;Systemic hormonal preparations;1;2015;543;0
+atc;H01;Pituitary and hypothalamic hormones and analogues;3;2015;544;0
+atc;H01A;Anterior pituitary lobe hormones and analogues;4;2015;545;1
+atc;H01AA;Adrenocorticotropic hormone;5;2015;546;1
+atc;H01AB;Thyrotropin;5;2015;547;1
+atc;H01AC;Somatropin and somatropin agonists;5;2015;548;1
+atc;H01AX;Other anterior pituitary lobe hormones and analogues;5;2015;549;0
+atc;H01B;Posterior pituitary lobe hormones;4;2015;550;1
+atc;H01BA;Vasopressin and analogues;5;2015;551;1
+atc;H01BB;Oxytocin and analogues;5;2015;552;0
+atc;H01C;Hypothalamic hormones;4;2015;553;1
+atc;H01CA;Gonadotropin-releasing hormones;5;2015;554;1
+atc;H01CB;Somatostatin and analogues;5;2015;555;1
+atc;H01CC;Anti-gonadotropin-releasing hormones;5;2015;556;0
+atc;H02;Corticosteroids systemic;3;2015;557;0
+atc;H02A;Corticosteroids for systemic use;4;2015;558;1
+atc;H02AA;Mineralocorticoids;5;2015;559;1
+atc;H02AB;Glucocorticoids;5;2015;560;1
+atc;H02BX;Corticosteroids for systemic use;5;2015;561;0
+atc;H03;Thyroid therapy;3;2015;562;0
+atc;H03A;Thyroid preparations;4;2015;563;1
+atc;H03AA;Thyroid hormones;5;2015;564;0
+atc;H03B;Antithyroid preparations;4;2015;565;1
+atc;H03BA;Thiouracils;5;2015;566;1
+atc;H03BB;Sulphur-containing imidazole derivatives;5;2015;567;1
+atc;H03BC;Perchlorates;5;2015;568;1
+atc;H03BX;Other antithyroid preparations;5;2015;569;0
+atc;H04;Pancreatic hormones;3;2015;570;1
+atc;H04AA;Glycogenolytic hormones;5;2015;571;0
+atc;H05;Calcium homeostasis;3;2015;572;1
+atc;H05AA;Parathyroid hormones and analogues;5;2015;573;0
+atc;H05B;Anti-parathyroid agents;4;2015;574;1
+atc;H05BA;Calcitonin preparations;5;2015;575;1
+atc;H05BX;Other anti-parathyroid agents;5;2015;576;0
+atc;J;Antiinfectives for systemic use;1;2015;577;0
+atc;J01;Antibacterial drugs;3;2015;578;1
+atc;J01AA;Tetracyclines;5;2015;579;1
+atc;J01BA;Amphenicols;5;2015;580;0
+atc;J01C;Beta lactam antibiotics;4;2015;581;1
+atc;J01CA;Penicillins;5;2015;582;1
+atc;J01CE;Beta-lactamase sensitive penicillins;5;2015;583;1
+atc;J01CF;Beta-lactamase resistant penicillins;5;2015;584;1
+atc;J01CG;Beta-lactamase inhibitors;5;2015;585;1
+atc;J01CR;Combinations of penicillins;5;2015;586;0
+atc;J01D;Other beta-lactam antibacterials;4;2015;587;1
+atc;J01DB;First generation cephalosporins list;5;2015;588;1
+atc;J01DC;Second generation cephalosporins list;5;2015;589;1
+atc;J01DD;Third-generation cephalosporins;5;2015;590;1
+atc;J01DE;Fourth-generation cephalosporins;5;2015;591;1
+atc;J01DF;Monobactams;5;2015;592;1
+atc;J01DH;Carbapenems;5;2015;593;1
+atc;J01DI;Other cephalosporins and penems;5;2015;594;0
+atc;J01E;Sulfonamides and trimethoprim;4;2015;595;1
+atc;J01EA;Trimethoprim and derivatives;5;2015;596;1
+atc;J01EB;Short-acting sulfonamides;5;2015;597;1
+atc;J01EC;Intermediate-acting sulfonamides;5;2015;598;1
+atc;J01ED;Long-acting sulfonamides;5;2015;599;1
+atc;J01EE;Combinations of sulfonamides and trimethoprim;5;2015;600;0
+atc;J01F;Macrolides;4;2015;601;1
+atc;J01FA;Macrolide antibiotics;5;2015;602;1
+atc;J01FF;Lincosamide antibiotics;5;2015;603;1
+atc;J01FG;Streptogramin antibiotics;5;2015;604;0
+atc;J01G;Aminoglycoside antibacterials;4;2015;605;1
+atc;J01GA;Streptomycins;5;2015;606;1
+atc;J01GB;Other aminoglycosides;5;2015;607;0
+atc;J01M;Quinolone antibacterials;4;2015;608;1
+atc;J01MA;Fluoroquinolones;5;2015;609;1
+atc;J01MB;Other quinolones;5;2015;610;1
+atc;J01RA;Combinations of antibacterials;5;2015;611;0
+atc;J01X;Other antibacterial drugs;4;2015;612;1
+atc;J01XA;Glycopeptide antibacterials;5;2015;613;1
+atc;J01XB;Polymyxins;5;2015;614;1
+atc;J01XC;Steroid antibacterials;5;2015;615;1
+atc;J01XD;Imidazole derivatives;5;2015;616;1
+atc;J01XE;Nitrofuran derivatives;5;2015;617;1
+atc;J01XX;Other antibacterials;5;2015;618;0
+atc;J02;Antimycotic drugs;3;2015;619;0
+atc;J02A;Antimycotics for systemic use;4;2015;620;1
+atc;J02AA;Antibiotics;5;2015;621;1
+atc;J02AB;Imidazole derivatives;5;2015;622;1
+atc;J02AC;Triazole derivatives;5;2015;623;1
+atc;J02AX;Other antimycotics for systemic use;5;2015;624;0
+atc;J04;Antimycobacterials;3;2015;625;0
+atc;J04A;Drugs for treatment of tuberculosis;4;2015;626;1
+atc;J04AA;Aminosalicylic acid and derivatives;5;2015;627;1
+atc;J04AB;Antibiotics;5;2015;628;1
+atc;J04AC;Hydrazides;5;2015;629;1
+atc;J04AD;Thiocarbamide derivatives;5;2015;630;1
+atc;J04AK;Other drugs for treatment of tuberculosis;5;2015;631;1
+atc;J04AM;Combinations of drugs for treatment of tuberculosis;5;2015;632;1
+atc;J04BA;Drugs for treatment of lepra;5;2015;633;0
+atc;J05;Antiviral drugs;3;2015;634;0
+atc;J05A;Direct acting antiviral drugs;4;2015;635;1
+atc;J05AA;Thiosemicarbazones;5;2015;636;1
+atc;J05AB;Nucleosides and nucleotides excluding reverse transcriptase inhibitors;5;2015;637;1
+atc;J05AC;Cyclic amines;5;2015;638;1
+atc;J05AD;Phosphonic acid derivatives;5;2015;639;1
+atc;J05AE;Protease inhibitors;5;2015;640;1
+atc;J05AF;Nucleoside and nucleotide reverse transcriptase inhibitors;5;2015;641;1
+atc;J05AG;Non-nucleoside reverse transcriptase inhibitors;5;2015;642;1
+atc;J05AH;Neuraminidase inhibitors;5;2015;643;1
+atc;J05AR;Antivirals for treatment of HIV infections;5;2015;644;1
+atc;J05AX;Other antivirals;5;2015;645;0
+atc;J06;Immune sera and immunoglobulins;3;2015;646;1
+atc;J06AA;Immune sera;5;2015;647;0
+atc;J06B;Immunoglobulins;4;2015;648;1
+atc;J06BA;Immunoglobulins;5;2015;649;1
+atc;J06BB;Specific immunoglobulins;5;2015;650;1
+atc;J06BC;Other immunoglobulins;5;2015;651;0
+atc;J07;Vaccines;3;2015;652;0
+atc;J07A;Bacterial vaccines;4;2015;653;1
+atc;J07AC;Anthrax vaccines;5;2015;654;1
+atc;J07AD;Brucellosis vaccines;5;2015;655;1
+atc;J07AE;Cholera vaccines;5;2015;656;1
+atc;J07AF;Diphtheria vaccines;5;2015;657;1
+atc;J07AG;Haemophilus influenzae B vaccine;5;2015;658;1
+atc;J07AH;Meningococcal vaccines;5;2015;659;1
+atc;J07AJ;Pertussis vaccines;5;2015;660;1
+atc;J07AK;Plague vaccines;5;2015;661;1
+atc;J07AL;Pneumococcal vaccines;5;2015;662;1
+atc;J07AM;Tetanus vaccines;5;2015;663;1
+atc;J07AN;Tuberculosis vaccines;5;2015;664;1
+atc;J07AP;Typhoid vaccines;5;2015;665;1
+atc;J07AR;Typhus (exanthematicus) vaccines;5;2015;666;0
+atc;J07B;Viral vaccines;4;2015;667;1
+atc;J07BA;Encephalitis vaccines;5;2015;668;1
+atc;J07BB;Influenza vaccines;5;2015;669;1
+atc;J07BC;Hepatitis vaccines;5;2015;670;1
+atc;J07BD;Measles vaccines;5;2015;671;1
+atc;J07BE;Mumps vaccines;5;2015;672;1
+atc;J07BF;Poliomyelitis vaccines;5;2015;673;1
+atc;J07BG;Rabies vaccines;5;2015;674;1
+atc;J07BH;Rotavirus diarrhea vaccines;5;2015;675;1
+atc;J07BJ;Rubella vaccines;5;2015;676;1
+atc;J07BK;Varicella zoster vaccines;5;2015;677;1
+atc;J07BL;Yellow fever vaccines;5;2015;678;1
+atc;J07BM;Papillomavirus vaccines;5;2015;679;1
+atc;J07BX;Other viral vaccines;5;2015;680;1
+atc;J07CA;Bacterial and viral vaccines;5;2015;681;0
+atc;L;Antineoplastic and immunomodulating agents;1;2015;682;0
+atc;L01;Antineoplastic drugs;3;2015;683;0
+atc;L01A;Alkylating agents list;4;2015;684;1
+atc;L01AA;Nitrogen mustard analogues;5;2015;685;1
+atc;L01AB;Alkyl sulfonates;5;2015;686;1
+atc;L01AC;Ethylene imines;5;2015;687;1
+atc;L01AD;Nitrosoureas;5;2015;688;1
+atc;L01AG;Epoxides;5;2015;689;1
+atc;L01AX;Other alkylating agents;5;2015;690;0
+atc;L01B;Antimetabolites;4;2015;691;1
+atc;L01BA;Folic acid analogues;5;2015;692;1
+atc;L01BB;Purine analogues;5;2015;693;1
+atc;L01BC;Pyrimidine analogues;5;2015;694;0
+atc;L01C;Plant alkaloids and other natural products;4;2015;695;1
+atc;L01CA;Vinca alkaloids and analogues;5;2015;696;1
+atc;L01CB;Podophyllotoxin derivatives;5;2015;697;1
+atc;L01CC;Colchicine derivatives;5;2015;698;1
+atc;L01CD;Taxanes;5;2015;699;1
+atc;L01CX;Other plant alkaloids and natural products;5;2015;700;0
+atc;L01D;Cytotoxic antibiotics and related substances;4;2015;701;1
+atc;L01DA;Actinomycin;5;2015;702;1
+atc;L01DB;Anthracyclines and related substances;5;2015;703;1
+atc;L01DC;Other cytotoxic antibiotics;5;2015;704;0
+atc;L01X;Other antineoplastic agents;4;2015;705;1
+atc;L01XA;Platinum compounds;5;2015;706;1
+atc;L01XB;Methylhydrazines;5;2015;707;1
+atc;L01XC;Monoclonal antibodies;5;2015;708;1
+atc;L01XD;Sensitizers used in photodynamic/radiation therapy;5;2015;709;1
+atc;L01XE;Protein kinase inhibitors;5;2015;710;1
+atc;L01XX;Other antineoplastic agents;5;2015;711;0
+atc;L02;Endocrine therapy;3;2015;712;0
+atc;L02A;Hormones and related agents;4;2015;713;1
+atc;L02AA;Estrogens;5;2015;714;1
+atc;L02AB;Progestogens;5;2015;715;1
+atc;L02AE;Gonadotropin-releasing hormone analogues;5;2015;716;0
+atc;L02B;Hormone antagonists and related agents;4;2015;717;1
+atc;L02BA;Anti-estrogens;5;2015;718;1
+atc;L02BB;Anti-androgens;5;2015;719;1
+atc;L02BG;Aromatase inhibitors;5;2015;720;1
+atc;L02BX;Other hormone antagonists and related agents;5;2015;721;0
+atc;L03A;Immunostimulants drugs;4;2015;722;1
+atc;L03AA;Colony stimulating factors;5;2015;723;1
+atc;L03AB;Interferons;5;2015;724;1
+atc;L03AC;Interleukins;5;2015;725;1
+atc;L03AX;Other immunostimulants;5;2015;726;0
+atc;L04A;Immunosuppressants drugs;4;2015;727;1
+atc;L04AA;Selective immunosuppressants;5;2015;728;1
+atc;L04AB;Tumor necrosis factor alpha (TNF-a) inhibitors;5;2015;729;1
+atc;L04AC;Interleukin inhibitors;5;2015;730;1
+atc;L04AD;Calcineurin inhibitors;5;2015;731;1
+atc;L04AX;Other immunosuppressants;5;2015;732;0
+atc;M;Musculoskeletal system;1;2015;733;0
+atc;M01;Anti-inflammatory and antirheumatic drugs;3;2015;734;0
+atc;M01A;Anti-inflammatory and antirheumatic products;4;2015;735;1
+atc;M01AA;Butylpyrazolidines;5;2015;736;1
+atc;M01AB;Acetic acid derivatives and related substances;5;2015;737;1
+atc;M01AC;Oxicams;5;2015;738;1
+atc;M01AE;Propionic acid derivatives;5;2015;739;1
+atc;M01AG;Fenamate Drugs;5;2015;740;1
+atc;M01AH;Coxibs;5;2015;741;1
+atc;M01AX;Other anti-inflammatory and antirheumatic agents;5;2015;742;0
+atc;M01B;Anti-inflammatory/antirheumatic agents in combination;4;2015;743;1
+atc;M01BA;Anti-inflammatory/antirheumatic agents in combination with corticosteroids;5;2015;744;0
+atc;M01C;Specific antirheumatic agents;4;2015;745;1
+atc;M01CA;Quinolines;5;2015;746;1
+atc;M01CB;Gold preparations;5;2015;747;1
+atc;M01CC;Penicillamine and similar agents;5;2015;748;1
+atc;M01CX;Other specific antirheumatic agents;5;2015;749;0
+atc;M02;Topical products for joint and muscular pain;3;2015;750;0
+atc;M02A;Topical products for joint and muscular pain;4;2015;751;1
+atc;M02AA;Anti-inflammatory preparations;5;2015;752;1
+atc;M02AB;Capsaicin and similar agents;5;2015;753;1
+atc;M02AC;Preparations with salicylic acid derivatives;5;2015;754;1
+atc;M02AX;Other topical products for joint and muscular pain;5;2015;755;0
+atc;M03;Muscle relaxants;3;2015;756;0
+atc;M03A;Muscle relaxants;4;2015;757;1
+atc;M03AA;Curare alkaloids;5;2015;758;1
+atc;M03AB;Choline derivatives;5;2015;759;1
+atc;M03AC;Other quaternary ammonium compounds;5;2015;760;1
+atc;M03AX;Other muscle relaxants;5;2015;761;0
+atc;M03B;Muscle relaxants;4;2015;762;1
+atc;M03BA;Carbamic acid esters;5;2015;763;1
+atc;M03BB;Oxazol and triazine derivatives;5;2015;764;1
+atc;M03BC;Ethers;5;2015;765;1
+atc;M03BX;Other centrally acting agents;5;2015;766;0
+atc;M03C;Muscle relaxants;4;2015;767;1
+atc;M03CA;Dantrolene and derivatives;5;2015;768;0
+atc;M04A;Antigout preparations;4;2015;769;1
+atc;M04AA;Preparations inhibiting uric acid production;5;2015;770;1
+atc;M04AB;Preparations increasing uric acid excretion;5;2015;771;1
+atc;M04AC;Preparations with no effect on uric acid metabolism;5;2015;772;1
+atc;M04AX;Other antigout preparations;5;2015;773;0
+atc;M05B;Drugs affecting bone structure and mineralization;4;2015;774;1
+atc;M05BA;Bisphosphonates;5;2015;775;1
+atc;M05BB;Bisphosphonates;5;2015;776;1
+atc;M05BC;Bone morphogenetic proteins;5;2015;777;1
+atc;M05BX;Other drugs affecting bone structure and mineralization;5;2015;778;0
+atc;M09A;Other drugs for disorders of the musculo-skeletal system;4;2015;779;1
+atc;M09AA;Quinine and derivatives;5;2015;780;1
+atc;M09AB;Enzymes;5;2015;781;1
+atc;M09AX;Other drugs for disorders of the musculo-skeletal system;5;2015;782;0
+atc;N;Nervous system;1;2015;783;0
+atc;N01;Anesthetic drugs;3;2015;784;0
+atc;N01A;General anesthetics list;4;2015;785;1
+atc;N01AA;Ethers;5;2015;786;1
+atc;N01AB;Halogenated hydrocarbons;5;2015;787;1
+atc;N01AF;Barbiturates;5;2015;788;1
+atc;N01AG;Barbiturates in combination with other drugs;5;2015;789;1
+atc;N01AH;Opioid anesthetics;5;2015;790;1
+atc;N01AX;Other general anesthetics;5;2015;791;0
+atc;N01B;Local anesthesia drugs;4;2015;792;1
+atc;N01BA;Esters of aminobenzoic acid;5;2015;793;1
+atc;N01BB;Amides;5;2015;794;1
+atc;N01BC;Esters of benzoic acid;5;2015;795;1
+atc;N01BX;Other local anesthesia drugs;5;2015;796;0
+atc;N02;Analgesic drugs;3;2015;797;0
+atc;N02A;Opioid drugs list;4;2015;798;1
+atc;N02AA;Natural opium alkaloids list;5;2015;799;1
+atc;N02AB;Phenylpiperidine derivatives;5;2015;800;1
+atc;N02AC;Diphenylpropylamine derivatives;5;2015;801;1
+atc;N02AD;Benzomorphan derivatives;5;2015;802;1
+atc;N02AE;Oripavine derivatives;5;2015;803;1
+atc;N02AF;Morphinan derivatives;5;2015;804;1
+atc;N02AG;Opioids in combination with antispasmodics;5;2015;805;1
+atc;N02AJ;Opioids in combination with non-opioid analgesics;5;2015;806;1
+atc;N02AX;Other opioids;5;2015;807;0
+atc;N02B;Other analgesics and antipyretics;4;2015;808;1
+atc;N02BA;Salicylic acid and derivatives;5;2015;809;1
+atc;N02BB;Pyrazolones;5;2015;810;1
+atc;N02BE;Anilides;5;2015;811;1
+atc;N02BG;Other analgesics and antipyretics;5;2015;812;0
+atc;N02C;Migraine medication;4;2015;813;1
+atc;N02CA;Ergot alkaloids;5;2015;814;1
+atc;N02CB;Corticosteroid derivatives;5;2015;815;1
+atc;N02CC;Selective serotonin (5-HT1) agonists;5;2015;816;1
+atc;N02CX;Other migraine drugs;5;2015;817;0
+atc;N03A;Antiepileptic drugs;4;2015;818;1
+atc;N03AA;Barbiturates and derivatives;5;2015;819;1
+atc;N03AB;Hydantoin derivatives;5;2015;820;1
+atc;N03AC;Oxazolidine derivatives;5;2015;821;1
+atc;N03AD;Succinimide derivatives;5;2015;822;1
+atc;N03AE;Benzodiazepine derivatives;5;2015;823;1
+atc;N03AF;Carboxamide derivatives;5;2015;824;1
+atc;N03AG;Fatty acid derivatives;5;2015;825;1
+atc;N03AX;Other antiepileptics;5;2015;826;0
+atc;N04;Antiparkinson drugs;3;2015;827;0
+atc;N04A;Anticholinergic agents for Parkinson;4;2015;828;1
+atc;N04AA;Tertiary amines;5;2015;829;1
+atc;N04AB;Ethers chemically close to antihistamines;5;2015;830;1
+atc;N04AC;Ethers of tropine or tropine derivatives;5;2015;831;0
+atc;N04B;Dopaminergic agents;4;2015;832;1
+atc;N04BA;Dopa and dopa derivatives;5;2015;833;1
+atc;N04BB;Adamantane derivatives;5;2015;834;1
+atc;N04BC;Dopamine agonists;5;2015;835;1
+atc;N04BD;Monoamine oxidase B inhibitors;5;2015;836;1
+atc;N04BX;Other dopaminergic agents;5;2015;837;0
+atc;N05;Psycholeptics drugs;3;2015;838;0
+atc;N05A;Antipsychotic drugs;4;2015;839;1
+atc;N05AA;Phenothiazines with aliphatic side-chain;5;2015;840;1
+atc;N05AB;Phenothiazines with piperazine structure;5;2015;841;1
+atc;N05AC;Phenothiazines with piperidine structur;5;2015;842;1
+atc;N05AD;Butyrophenone derivatives;5;2015;843;1
+atc;N05AE;Indole derivatives drugs;5;2015;844;1
+atc;N05AF;Thioxanthene derivatives;5;2015;845;1
+atc;N05AG;Diphenylbutylpiperidine derivatives;5;2015;846;1
+atc;N05AH;Diazepines thiazepines and oxepines;5;2015;847;1
+atc;N05AL;Benzamide antipsychotics;5;2015;848;1
+atc;N05AN;Lithium;5;2015;849;1
+atc;N05AX;Other antipsychotics;5;2015;850;0
+atc;N05B;Anxiolytic drugs;4;2015;851;1
+atc;N05BA;Benzodiazepine derivatives anxiolytics;5;2015;852;1
+atc;N05BB;Diphenylmethane derivatives;5;2015;853;1
+atc;N05BC;Carbamates;5;2015;854;1
+atc;N05BD;Dibenzo-bicyclo-octadiene derivatives;5;2015;855;1
+atc;N05BE;Azaspirodecanedione derivatives;5;2015;856;1
+atc;N05BX;Other anxiolytic drugs;5;2015;857;0
+atc;N05C;Hypnotics and sedatives drugs;4;2015;858;1
+atc;N05CA;Barbiturates;5;2015;859;1
+atc;N05CB;Barbiturates;5;2015;860;1
+atc;N05CC;Aldehydes and derivatives;5;2015;861;1
+atc;N05CD;Benzodiazepine derivatives;5;2015;862;1
+atc;N05CE;Piperidinedione drugs;5;2015;863;1
+atc;N05CF;Benzodiazepine related drugs;5;2015;864;1
+atc;N05CH;Melatonin receptor agonist drugs;5;2015;865;1
+atc;N05CM;Other hypnotic and sedative drugs;5;2015;866;1
+atc;N05CX;Hypnotics and sedatives in combination;5;2015;867;0
+atc;N06;Psychoanaleptics;3;2015;868;0
+atc;N06A;Antidepressant drugs;4;2015;869;1
+atc;N06AA;Non-selective monoamine reuptake inhibitors;5;2015;870;1
+atc;N06AB;Selective Serotonin Reuptake Inhibitors;5;2015;871;1
+atc;N06AF;Monoamine oxidase inhibitors;5;2015;872;1
+atc;N06AG;Monoamine oxidase A inhibitors;5;2015;873;1
+atc;N06AX;Other antidepressant drugs;5;2015;874;0
+atc;N06B;Psychostimulants;4;2015;875;1
+atc;N06BA;Centrally acting sympathomimetics;5;2015;876;1
+atc;N06BC;Xanthine derivatives;5;2015;877;1
+atc;N06BX;Other psychostimulants and nootropics;5;2015;878;0
+atc;N06C;Psycholeptics and psychoanaleptics in combination;4;2015;879;1
+atc;N06CA;Antidepressants in combination with psycholeptics;5;2015;880;0
+atc;N06D;Dementia drugs;4;2015;881;1
+atc;N06DA;Anticholinesterase drugs;5;2015;882;1
+atc;N06DX;Other anti-dementia drugs;5;2015;883;0
+atc;N07;Other nervous system drugs;3;2015;884;0
+atc;N07A;Parasympathomimetic drugs;4;2015;885;1
+atc;N07AA;Anticholinesterase drugs;5;2015;886;1
+atc;N07AB;Choline esters;5;2015;887;1
+atc;N07AX;Other parasympathomimetics;5;2015;888;0
+atc;N07B;Drugs used in addictive disorders;4;2015;889;1
+atc;N07BA;Drugs used in nicotine dependence;5;2015;890;1
+atc;N07BB;Drugs used in alcohol dependence;5;2015;891;1
+atc;N07BC;Drugs used in opioid dependence;5;2015;892;0
+atc;N07C;Antivertigo preparations;4;2015;893;1
+atc;N07CA;Antivertigo drugs;5;2015;894;1
+atc;N07XX;Other nervous system drugs;5;2015;895;0
+atc;P;Antiparasitic products;1;2015;896;0
+atc;P01;Antiprotozoal drugs;3;2015;897;0
+atc;P01A;Agents against amoebiasis and other protozoal diseases;4;2015;898;1
+atc;P01AA;Hydroxyquinoline derivatives;5;2015;899;1
+atc;P01AB;Nitroimidazole derivatives;5;2015;900;1
+atc;P01AC;Dichloroacetamide derivatives;5;2015;901;1
+atc;P01AR;Arsenic compounds;5;2015;902;1
+atc;P01AX;Other agents against amoebiasis and other protozoal diseases;5;2015;903;0
+atc;P01B;Antimalarials;4;2015;904;1
+atc;P01BA;Aminoquinolines;5;2015;905;1
+atc;P01BB;Biguanides;5;2015;906;1
+atc;P01BC;Methanolquinolines;5;2015;907;1
+atc;P01BD;Diaminopyrimidines;5;2015;908;1
+atc;P01BE;Artemisinin and derivatives;5;2015;909;1
+atc;P01BF;Artemisinin and derivatives;5;2015;910;1
+atc;P01BX;Other antimalarials;5;2015;911;0
+atc;P01C;Agents against leishmaniasis and trypanosomiasis;4;2015;912;1
+atc;P01CA;Nitroimidazole derivatives;5;2015;913;1
+atc;P01CB;Antimony compounds;5;2015;914;1
+atc;P01CC;Nitrofuran derivatives;5;2015;915;1
+atc;P01CD;Arsenic compounds;5;2015;916;1
+atc;P01CX;Other agents against leishmaniasis and trypanosomiasis;5;2015;917;0
+atc;P02;Anthelmintic drugs;3;2015;918;0
+atc;P02B;Antitrematodals;4;2015;919;1
+atc;P02BA;Quinoline derivatives and related substances;5;2015;920;1
+atc;P02BB;Organophosphorous compounds;5;2015;921;1
+atc;P02BX;Other antitrematodal agents;5;2015;922;0
+atc;P02C;Antinematodal agents;4;2015;923;1
+atc;P02CA;Benzimidazole derivatives;5;2015;924;1
+atc;P02CB;Piperazine and derivatives;5;2015;925;1
+atc;P02CC;Tetrahydropyrimidine derivatives;5;2015;926;1
+atc;P02CE;Imidazothiazole derivatives;5;2015;927;1
+atc;P02CF;Avermectines;5;2015;928;1
+atc;P02CX;Other antinematodals;5;2015;929;0
+atc;P02D;Anticestodals;4;2015;930;1
+atc;P02DA;Salicylic acid derivatives;5;2015;931;1
+atc;P02DX;Other anticestodals;5;2015;932;0
+atc;P03;Ectoparasiticides insecticides and repellents;3;2015;933;0
+atc;P03A;Ectoparasiticides;4;2015;934;1
+atc;P03AA;Sulfur containing products;5;2015;935;1
+atc;P03AB;Chlorine containing products;5;2015;936;1
+atc;P03AC;Pyrethrines;5;2015;937;1
+atc;P03AX;Other ectoparasiticides;5;2015;938;0
+atc;P03B;Insecticides and repellents;4;2015;939;1
+atc;P03BA;Pyrethrines;5;2015;940;1
+atc;P03BX;Other insecticides and repellents;5;2015;941;0
+atc;R;Respiratory system;1;2015;942;0
+atc;R01;Nasal preparations;3;2015;943;0
+atc;R01A;Decongestants and other nasal preparations for topical use;4;2015;944;1
+atc;R01AA;Sympathomimetics;5;2015;945;1
+atc;R01AB;Sympathomimetics;5;2015;946;1
+atc;R01AC;Antiallergic agents;5;2015;947;1
+atc;R01AD;Corticosteroids;5;2015;948;1
+atc;R01AX;Other nasal preparations;5;2015;949;1
+atc;R01BA;Nasal decongestants for systemic use;5;2015;950;0
+atc;R02A;Throat drugs;4;2015;951;1
+atc;R02AA;Throat antiseptics;5;2015;952;1
+atc;R02AB;Throat antibiotics;5;2015;953;1
+atc;R02AD;Anesthetics;5;2015;954;1
+atc;R02AX;Other throat preparations;5;2015;955;0
+atc;R03;Drugs for obstructive airway diseases;3;2015;956;0
+atc;R03A;Adrenergics;4;2015;957;1
+atc;R03AA;Alpha and beta adrenoreceptor agonists;5;2015;958;1
+atc;R03AB;Non-selective beta-adrenoreceptor agonists;5;2015;959;1
+atc;R03AC;Selective beta-2-adrenoreceptor agonists;5;2015;960;1
+atc;R03AH;Combinations of adrenergics;5;2015;961;1
+atc;R03AK;Adrenergics in combination with corticosteroids or other drugs;5;2015;962;1
+atc;R03AL;Adrenergics in combination with anticholinergics;5;2015;963;0
+atc;R03B;Other drugs for obstructive airway diseases;4;2015;964;1
+atc;R03BA;Glucocorticoids;5;2015;965;1
+atc;R03BB;Anticholinergics;5;2015;966;1
+atc;R03BC;Antiallergic agents;5;2015;967;1
+atc;R03BX;Other drugs for obstructive airway diseases;5;2015;968;0
+atc;R03C;Adrenergics for systemic use;4;2015;969;1
+atc;R03CA;Alpha- and beta-adrenoreceptor agonists;5;2015;970;1
+atc;R03CB;Non-selective beta-adrenoreceptor agonists;5;2015;971;1
+atc;R03CC;Selective beta-2-adrenoreceptor agonists;5;2015;972;1
+atc;R03CK;Adrenergics and other drugs for obstructive airway diseases;5;2015;973;0
+atc;R03D;Other systemic drugs for obstructive airway diseases;4;2015;974;1
+atc;R03DA;Xanthines;5;2015;975;1
+atc;R03DB;Xanthines and adrenergics;5;2015;976;1
+atc;R03DC;Leukotriene receptor antagonists;5;2015;977;1
+atc;R03DX;Other systemic drugs for obstructive airway diseases;5;2015;978;0
+atc;R05;Cough and cold drugs;3;2015;979;0
+atc;R05C;Expectorants;4;2015;980;1
+atc;R05CA;Expectorants;5;2015;981;1
+atc;R05CB;Mucolytics;5;2015;982;0
+atc;R05D;Cough suppressants;4;2015;983;1
+atc;R05DA;Opium alkaloids and derivatives;5;2015;984;1
+atc;R05DB;Other cough suppressants;5;2015;985;0
+atc;R05F;Cough suppressants and expectorants;4;2015;986;1
+atc;R05FA;Opium derivatives and expectorants;5;2015;987;1
+atc;R05FB;Other cough suppressants and expectorants;5;2015;988;0
+atc;R06A;Antihistamines for systemic use;4;2015;989;1
+atc;R06AA;Aminoalkyl ethers;5;2015;990;1
+atc;R06AB;Substituted alkylamines;5;2015;991;1
+atc;R06AC;Substituted ethylene diamines;5;2015;992;1
+atc;R06AD;Phenothiazine derivatives;5;2015;993;1
+atc;R06AE;Piperazine derivatives;5;2015;994;1
+atc;R06AX;Other antihistamines for systemic use;5;2015;995;0
+atc;R07A;Other respiratory system products;4;2015;996;1
+atc;R07AA;Lung surfactants;5;2015;997;1
+atc;R07AB;Respiratory stimulants;5;2015;998;1
+atc;R07AX;Other respiratory system products;5;2015;999;0
+atc;S;Sensory organs;1;2015;1000;0
+atc;S01;Ophthalmological drugs;3;2015;1001;0
+atc;S01A;Eye Anti-infectives;4;2015;1002;1
+atc;S01AA;Eye Antibiotics;5;2015;1003;1
+atc;S01AB;Eye Sulfonamides;5;2015;1004;1
+atc;S01AD;Eye Antivirals;5;2015;1005;1
+atc;S01AE;Eye Fluoroquinolones;5;2015;1006;1
+atc;S01AX;Other Eye anti-infectives;5;2015;1007;0
+atc;S01B;Anti-inflammatory agents;4;2015;1008;1
+atc;S01BA;Corticosteroids;5;2015;1009;1
+atc;S01BB;Corticosteroids and mydriatics in combination;5;2015;1010;1
+atc;S01BC;Anti-inflammatory agents;5;2015;1011;0
+atc;S01C;Anti-inflammatory agents and anti-infectives in combination;4;2015;1012;1
+atc;S01CA;Corticosteroids and anti-infectives in combination;5;2015;1013;1
+atc;S01CB;Corticosteroids / anti-infectives / mydriatics in combination;5;2015;1014;1
+atc;S01CC;Anti-inflammatory agents;5;2015;1015;0
+atc;S01E;Antiglaucoma preparations and miotics;4;2015;1016;1
+atc;S01EA;Sympathomimetics in glaucoma therapy;5;2015;1017;1
+atc;S01EB;Parasympathomimetics;5;2015;1018;1
+atc;S01EC;Carbonic anhydrase inhibitors;5;2015;1019;1
+atc;S01ED;Beta blocking agents;5;2015;1020;1
+atc;S01EE;Prostaglandin analogues;5;2015;1021;1
+atc;S01EX;Other antiglaucoma preparations;5;2015;1022;0
+atc;S01F;Mydriatics and cycloplegics;4;2015;1023;1
+atc;S01FA;Anticholinergics;5;2015;1024;1
+atc;S01FB;Sympathomimetics excluding antiglaucoma preparations;5;2015;1025;0
+atc;S01G;Decongestants and antiallergics;4;2015;1026;1
+atc;S01GA;Sympathomimetics used as decongestants;5;2015;1027;1
+atc;S01GX;Other antiallergics;5;2015;1028;1
+atc;S01HA;Local anesthetics;5;2015;1029;0
+atc;S01J;Diagnostic agents;4;2015;1030;1
+atc;S01JA;Colouring agents;5;2015;1031;0
+atc;S01K;Surgical aids;4;2015;1032;1
+atc;S01KA;Viscoelastic substances;5;2015;1033;1
+atc;S01KX;Other surgical aids;5;2015;1034;0
+atc;S01L;Ocular vascular disorder agents;4;2015;1035;1
+atc;S01LA;Antineovascularisation agents;5;2015;1036;1
+atc;S01XA;Other ophthalmologicals;5;2015;1037;0
+atc;S02;Otologicals;3;2015;1038;1
+atc;S02AA;Anti-infectives;5;2015;1039;1
+atc;S02BA;Corticosteroids;5;2015;1040;1
+atc;S02CA;Corticosteroids and anti-infectives in combination;5;2015;1041;0
+atc;S02D;Other otologicals;4;2015;1042;1
+atc;S02DA;Analgesics and anesthetics;5;2015;1043;0
+atc;S03;Ophthalmological and otological preparations;3;2015;1044;1
+atc;S03AA;Anti-infectives;5;2015;1045;1
+atc;S03BA;Corticosteroids;5;2015;1046;1
+atc;S03CA;Corticosteroids and anti-infectives in combination;5;2015;1047;0
+atc;V;Various ATC structures;1;2015;1048;1
+atc;V01AA;Allergen extracts;5;2015;1049;0
+atc;V03A;All other therapeutic products;4;2015;1050;1
+atc;V03AB;Antidotes;5;2015;1051;1
+atc;V03AC;Iron chelating agents;5;2015;1052;1
+atc;V03AE;Drugs for treatment of hyperkalemia and hyperphosphatemia;5;2015;1053;1
+atc;V03AF;Detoxifying agents for antineoplastic treatment;5;2015;1054;1
+atc;V03AG;Drugs for treatment of hypercalcemia;5;2015;1055;1
+atc;V03AH;Drugs for treatment of hypoglycaemia;5;2015;1056;1
+atc;V03AK;Tissue adhesives;5;2015;1057;1
+atc;V03AM;Drugs for embolisation;5;2015;1058;1
+atc;V03AN;Medical gases;5;2015;1059;1
+atc;V03AX;Other therapeutic products;5;2015;1060;1
+atc;V03AZ;Nerve depressants;5;2015;1061;0
+atc;V04;Diagnostic agents;3;2015;1062;0
+atc;V04B;Urine tests;4;2015;1063;0
+atc;V04C;Other diagnostic agents;4;2015;1064;1
+atc;V04CA;Tests for diabetes;5;2015;1065;1
+atc;V04CB;Tests for fat absorption;5;2015;1066;1
+atc;V04CC;Tests for bile duct patency;5;2015;1067;1
+atc;V04CD;Tests for pituitary function;5;2015;1068;1
+atc;V04CE;Tests for liver functional capacity;5;2015;1069;1
+atc;V04CF;Tuberculosis diagnostics;5;2015;1070;1
+atc;V04CG;Tests for gastric secretion;5;2015;1071;1
+atc;V04CH;Tests for renal function and ureteral injuries;5;2015;1072;1
+atc;V04CJ;Tests for thyreoidea function;5;2015;1073;1
+atc;V04CK;Tests for pancreatic function;5;2015;1074;1
+atc;V04CL;Tests for allergic diseases;5;2015;1075;1
+atc;V04CM;Tests for fertility disturbances;5;2015;1076;0
+atc;V06;General nutrients;3;2015;1077;0
+atc;V06A;Diet formulations for treatment of obesity;4;2015;1078;0
+atc;V06B;Protein supplements;4;2015;1079;0
+atc;V06C;Infant formulas;4;2015;1080;0
+atc;V06D;Other nutrients;4;2015;1081;1
+atc;V06DC;Carbohydrates;5;2015;1082;0
+atc;V07;All other non-therapeutic products;3;2015;1083;0
+atc;V08;Contrast media;3;2015;1084;0
+atc;V08A;X-ray contrast media;4;2015;1085;1
+atc;V08AA;Water-soluble high osmolar X-ray contrast media;5;2015;1086;1
+atc;V08AB;Water-soluble low osmolar X-ray contrast media;5;2015;1087;1
+atc;V08AC;Water-soluble;5;2015;1088;1
+atc;V08AD;Non-watersoluble X-ray contrast media;5;2015;1089;0
+atc;V08B;X-ray contrast media;4;2015;1090;1
+atc;V08BA;Barium sulfate containing X-ray contrast media;5;2015;1091;0
+atc;V08C;Magnetic resonance imaging contrast media;4;2015;1092;1
+atc;V08CA;Paramagnetic contrast media;5;2015;1093;1
+atc;V08CB;Superparamagnetic contrast media;5;2015;1094;1
+atc;V08CX;Other magnetic resonance imaging contrast media;5;2015;1095;1
+atc;V08DA;Ultrasound contrast media;5;2015;1096;0
+atc;V09;Diagnostic radiopharmaceuticals;3;2015;1097;0
+atc;V09A;Central nervous system;4;2015;1098;1
+atc;V09AA;Technetium (99mTc) compounds;5;2015;1099;1
+atc;V09AB;Iodine (123I) compounds;5;2015;1100;1
+atc;V09AX;Other central nervous system diagnostic radiopharmaceuticals;5;2015;1101;0
+atc;V09B;Skeleton;4;2015;1102;1
+atc;V09BA;Technetium (99mTc) compounds;5;2015;1103;0
+atc;V09C;Renal system;4;2015;1104;1
+atc;V09CA;Technetium (99mTc) compounds;5;2015;1105;1
+atc;V09CX;Other renal system diagnostic radiopharmaceuticals;5;2015;1106;0
+atc;V09D;Hepatic and reticulo endothelial system;4;2015;1107;1
+atc;V09DA;Technetium (99mTc) compounds;5;2015;1108;1
+atc;V09DB;Technetium (99mTc);5;2015;1109;1
+atc;V09DX;Other hepatic and reticulo endothelial system diagnostic radiopharmaceuticals;5;2015;1110;0
+atc;V09E;Respiratory system;4;2015;1111;1
+atc;V09EA;Technetium (99mTc) inhalants;5;2015;1112;1
+atc;V09EB;Technetium (99mTc) particles for injection;5;2015;1113;1
+atc;V09EX;Other respiratory system diagnostic radiopharmaceuticals;5;2015;1114;0
+atc;V09F;Thyroid;4;2015;1115;1
+atc;V09FX;Various thyroid diagnostic radiopharmaceuticals;5;2015;1116;0
+atc;V09G;Cardiovascular system;4;2015;1117;1
+atc;V09GA;Technetium (99mTc) compounds;5;2015;1118;1
+atc;V09GB;Iodine (125I) compounds;5;2015;1119;1
+atc;V09GX;Other cardiovascular system diagnostic radiopharmaceuticals;5;2015;1120;0
+atc;V09H;Inflammation and infection detection;4;2015;1121;1
+atc;V09HA;Technetium (99mTc) compounds;5;2015;1122;1
+atc;V09HB;Indium (111In) compounds;5;2015;1123;1
+atc;V09HX;Other diagnostic radiopharmaceuticals for inflammation and infection detection;5;2015;1124;0
+atc;V09I;Tumour detection;4;2015;1125;1
+atc;V09IA;Technetium (99mTc) compounds;5;2015;1126;1
+atc;V09IB;Indium (111In) compounds;5;2015;1127;1
+atc;V09IX;Other diagnostic radiopharmaceuticals for tumour detection;5;2015;1128;0
+atc;V09X;Other diagnostic radiopharmaceuticals;4;2015;1129;1
+atc;V09XA;Iodine (131I) compounds;5;2015;1130;1
+atc;V09XX;Various diagnostic radiopharmaceuticals;5;2015;1131;0
+atc;V10;Therapeutic radiopharmaceuticals;3;2015;1132;0
+atc;V10A;Anti-inflammatory agents;4;2015;1133;1
+atc;V10AA;Yttrium (90Y) compounds;5;2015;1134;1
+atc;V10AX;Other anti-inflammatory therapeutic radiopharmaceuticals;5;2015;1135;0
+atc;V10B;Pain palliation (bone seeking agents);4;2015;1136;1
+atc;V10BX;Various pain palliation radiopharmaceuticals;5;2015;1137;0
+atc;V10X;Other therapeutic radiopharmaceuticals;4;2015;1138;1
+atc;V10XA;Iodine (131I) compounds;5;2015;1139;1
+atc;V10XX;Various therapeutic radiopharmaceuticals;5;2015;1140;0
+atc;V20;Surgical dressings;3;2015;1141;0

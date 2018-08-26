@@ -1,0 +1,32 @@
+;event_code;description
+0;185349003;Outpatient Encounter
+1;185345009;Encounter for symptom
+3;698314001;Consultation for treatment
+7;424441002;Prenatal initial visit
+8;424619006;Prenatal visit
+15;183460006;Obstetric emergency hospital admission
+20;308646001;Death Certification
+23;185349003;Encounter for 'check-up'
+25;50849002;Emergency room admission
+30;210098006;Domiciliary or rest home patient evaluation and management
+70;170258001;Outpatient Encounter
+74;185347001;Encounter for problem
+127;308335008;Patient encounter procedure
+203;270427003;Patient-initiated encounter
+397;316744009;Office Visit
+405;34285007;Hospital admission
+422;394701000;Asthma follow-up
+438;184347001;Encounter for problem
+481;50849002;Emergency Room Admission
+539;371883000;Outpatient procedure
+596;170838006;Allergic disorder follow-up assessment
+702;183495009;Non-urgent orthopedic admission
+815;32485007;Hospital admission
+904;50849002;Emergency Encounter
+1139;170837001;Allergic disorder initial assessment
+1446;183452005;Encounter Inpatient
+1491;183478001;Emergency hospital admission for asthma
+2404;305408004;Admission to surgical department
+3441;266707007;Drug addiction therapy
+3447;56876005;Drug rehabilitation and detoxification
+14115;305411003;Admission to thoracic surgery department

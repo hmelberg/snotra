@@ -1,0 +1,866 @@
+﻿code;group;text;weight;djusted_K-drg;trimpunkt;surgical_or_medical
+1A;1;Intrakraniell operasjon for svulst i sentralnervesystemet;4,458;;21;S
+1B;1;Annen intrakraniell vaskulær operasjon;7,403;;50;S
+1C;1;Operasjon for intrakraniell aneurisme, vaskulær anomali eller hemangiom;6,006;;13;S
+1D;1;Intrakraniell cerebrospinal fluid shuntoperasjon;4,174;;22;S
+1E;1;Annen kraniotomi unntatt ved traume;5,298;;33;S
+2A;1;Annen kraniotomi ved traume;6,745;;43;S
+2B;1;Operasjon for kronisk subduralt hematom;3,202;;10;S
+3N;1;Stereotaktisk intrakraniell strålebehandling;1,1;;5;M
+3O;1;Kraniotomi, dagkirurgisk behandling;0,34;0,034;1;S
+3P;1;Stereotaktisk intrakraniell strålebehandling, dagmedisinsk behandling;0,426;;1;M
+4;1;Op på kolumna/spinalkanal/ryggmarg/nerverøtter;4,677;-0,135;32;S
+4O;1;Op på kolumna/spinalkanal/ryggmarg/nerverøtter, dagkirurgisk behandling;2,098;0,21;1;S
+5;1;Operasjoner på ekstrakranielle kar;3,294;;25;S
+5O;1;Operasjoner på ekstrakranielle kar, dagkirurgisk behandling;1,647;0,165;1;S
+6;1;Operasjoner ved karpaltunnelsyndrom;0,591;-0,017;5;S
+6O;1;Operasjoner ved karpaltunnelsyndrom, dagkirurgisk behandling;0,232;0,023;1;S
+7;1;Perifere, hjerne- & andre nerveop m/bk;2,709;-0,078;22;S
+8;1;Perifere, hjerne- & andre nerveop u/bk;1,642;-0,047;8;S
+8O;1;Perifere, hjerne- & andre nerveop, dagkirurgisk behandling;0,736;0,074;1;S
+9;1;Sykdommer i og skader på ryggmargen;1,079;;10;M
+10;1;Svulster i nervesystemet m/bk;1,618;;20;M
+11;1;Svulster i nervesystemet u/bk;1,097;;14;M
+12;1;Degenerative sykdommer i nervesystemet;0,901;;12;M
+13;1;Multippel sklerose & cerebellar ataksi;0,975;;11;M
+14A;1;Spesifikke karsykdommer i hjernen ekskl TIA m/bk;1,64;;21;M
+14B;1;Spesifikke karsykdommer i hjernen ekskl TIA u/bk;1,074;;21;M
+15;1;TIA og okklusjon av precerebrale arterier;0,649;;6;M
+16;1;Uspesifikke karsykdommer i hjernen m/bk;1,014;;15;M
+17;1;Uspesifikke karsykdommer i hjernen u/bk;0,705;;7;M
+18;1;Sykdommer i hjernenerver & perifere nerver m/bk;1,236;;17;M
+19;1;Sykdommer i hjernenerver & perifere nerver u/bk;0,863;;9;M
+20;1;Infeksjon i nervesystemet ekskl viral meningitt;2,697;;30;M
+21;1;Viral meningitt;0,839;;8;M
+23;1;Ikke-traumatisk koma & stupor;0,856;;7;M
+24;1;Kramper & hodepine >17 år m/bk;0,925;;11;M
+25;1;Kramper & hodepine >17 år u/bk;0,578;;13;M
+26;1;Kramper & hodepine 0-17 år;0,853;;10;M
+27;1;Alvorlig traumatisk hjerneskade;1,358;;15;M
+28;1;Traumatisk hjerneskade >17år m/bk;1,25;;10;M
+29;1;Traumatisk hjerneskade >17år u/bk;0,571;;4;M
+30;1;Traumatisk hjerneskade 0-17 år;0,805;;5;M
+31;1;Hjernerystelse >17 år m/bk;0,39;;4;M
+32;1;Hjernerystelse >17 år u/bk;0,39;;3;M
+33;1;Hjernerystelse 0-17 år;0,373;;2;M
+34;1;Sykdommer i nervesystemet ITAD m/bk;1,436;;15;M
+35;1;Sykdommer i nervesystemet ITAD u/bk;0,922;;8;M
+36A;2;Andre inngrep på øyets bakre strukturer;1,152;-0,033;10;S
+36B;2;Større inngrep ved netthinneløsning;2,463;-0,071;7;S
+36C;2;Brakyterapi av øyet;3,35;-0,096;15;S
+36D;2;Andre større inngrep på øyet;1,966;-0,057;10;S
+36O;2;Op på corpus vitreum, choroidea, retina, dagkirurgisk behandling;0,421;0,042;1;S
+37;2;Op på orbita inkl enukleasjon/eviscerasjon av øye;1,791;-0,052;7;S
+37O;2;Op på orbita inkl enukleasjon/eviscerasjon av øye, dagkirurgisk behandling;0,917;0,092;1;S
+38;2;Intraokulære op hovedsaklig på regnbuehinne ITAD;1,269;-0,037;9;S
+38O;2;Intraokulære op hovedsaklig på regnbuehinne ITAD, dagkirurgisk behandling;0,415;0,042;1;S
+39;2;Operasjoner på linsen;0,891;-0,026;4;S
+39P;2;Bilaterale operasjoner på linsen, dagkirurgisk behandling;0,355;0,036;1;S
+39Q;2;Unilaterale operasjoner på linsen, dagkirurgisk behandling;0,273;0,027;1;S
+40N;2;Op på cornea/sklera/ekstraokulære strukturer  >17 år;0,902;-0,026;6;S
+41;2;Op på cornea/sklera/ekstraokulære strukturer  0-17 år;0,757;-0,022;4;S
+41O;2;Op på cornea/sklera/ekstraokulære strukturer, dagkirurgisk behandling;0,305;0,031;1;S
+41P;2;Operasjoner for skjeling, dagkirurgisk behandling;0,305;0,031;1;S
+42;2;Op for glaukom & op på glasslegemet ITAD;1,215;-0,035;11;S
+42O;2;Op for glaukom & op på glasslegemet ITAD, dagkirurgisk behandling;0,478;0,048;1;S
+43;2;Hyphema, kontusjonsskader i øyeregionen;0,586;;7;M
+44;2;Alvorlige akutte øyeinfeksjoner;1,294;;15;M
+45;2;Nevrologiske øyesykdommer;0,927;;8;M
+46;2;Øyesykdommer ITAD >17 år m/bk;0,955;;12;M
+47;2;Øyesykdommer ITAD >17 år u/bk;0,71;;9;M
+48;2;Øyesykdommer ITAD 0-17 år;0,887;;7;M
+49A;3;Større operasjoner på ØNH ekskl cochleaimplantat;4,071;-0,117;17;S
+49B;3;Cochleaimplantat;5,862;;6;S
+50N;3;Kirurgisk fjerning av ørespyttkjertelen (glandula parotis);1,457;-0,042;5;S
+51N;3;Kirurgisk inngrep på spyttkjertel, bortsett fra fjerning av ørespyttkjertelen;1,019;-0,029;4;S
+51O;3;Op på spyttkjertler ekskl fjerning av spyttkjertler, dagkirurgisk behandling;0,374;0,037;1;S
+52;3;Operasjoner for leppe- og ganespalte;1,853;-0,053;8;S
+53A;3;Operasjoner på bihuler;0,752;-0,022;5;S
+53B;3;Operasjoner på temporalben, masteoideus og indre øre;1,154;-0,033;8;S
+54O;3;Operasjoner på bihuler, dagkirurgisk behandling;0,344;0,034;1;S
+54P;3;Operasjoner på temporalben, masteoideus og indre øre, dagkirurgisk behandling;0,735;0,074;1;S
+55;3;Diverse operasjoner på øre/nese/hals;0,85;-0,024;5;S
+55O;3;Diverse større op på øre/nese/hals, dagkirurgisk behandling;0,25;0,025;1;S
+55P;3;Andre mindre op på øre/nese/hals, dagkirurgisk behandling;0,201;0,02;1;S
+56;3;Plastiske operasjoner på nesen;0,69;-0,02;3;S
+56O;3;Plastiske operasjoner på nesen, dagkirurgisk behandling;0,38;0,038;1;S
+59N;3;Operasjoner på tonsiller eller adenoid vev >17 år;0,554;-0,016;3;S
+60N;3;Operasjoner på tonsiller eller adenoid vev 0-17 år;0,586;-0,017;3;S
+60O;3;Operasjoner på tonsiller og/eller adenoid vev, dagkirurgisk behandling;0,235;0,024;1;S
+63;3;Operasjoner på øre, nese, hals ITAD;1,559;-0,045;8;S
+63O;3;Operasjoner på øre, nese, hals ITAD, dagkirurgisk behandling;0,623;0,062;1;S
+64;3;Ondartede sykdommer i øre, nese, hals;2,329;;25;M
+65;3;Svimmelhet;0,516;;5;M
+66;3;Neseblødning;0,507;;5;M
+67;3;Epiglottitt;1,367;;9;M
+68;3;Otitis media & øvre luftveisinfeksjon >17 år m/bk;0,694;;7;M
+69;3;Otitis media & øvre luftveisinfeksjon >17 år u/bk;0,505;;5;M
+70A;3;Otitis media & øvre luftveisinfeksjon 0-17 år m/bk;0,755;;5;M
+70B;3;Otitis media & øvre luftveisinfeksjon 0-17 år u/bk;0,501;;4;M
+71;3;Laryngotrakeitt;0,522;;7;M
+72;3;Neseskade & medfødt nesedeformitet;0,352;;3;M
+73;3;Sykdommer i øre, nese, hals ITAD >17 år;0,654;;7;M
+74;3;Sykdommer i øre, nese, hals ITAD 0-17 år;0,773;;13;M
+75;4;Større thoraxop, visse op på perikard/trachea/diafragma m.m.;4,277;;22;S
+75O;4;Større thoraxoperasjoner, dagkirurgisk behandling;0,716;0,072;1;S
+76;4;Op på åndedrettssystemet ITAD m/bk;3,055;;27;S
+77;4;Op på åndedrettssystemet ITAD u/bk;1,703;;15;S
+77O;4;Op på åndedrettssystemet ITAD, dagkirurgisk behandling;0,285;0,029;1;S
+78;4;Lungeemboli, luftemboli og fettembolisyndrom;1,222;;12;M
+79;4;Infeksjoner & inflammasjoner i åndedr.syst >17år m/bk;2,54;;29;M
+80;4;Infeksjoner & inflammasjoner i åndedr.syst >17 år u/bk;1,955;;24;M
+81;4;Infeksjoner & inflammasjoner i åndedr.syst 0-17 år;2,371;;21;M
+82;4;Svulster i åndedrettssystemet;1,268;;16;M
+83;4;Større thoraxskader m/bk;1,604;;12;M
+84;4;Større thoraxskader u/bk;0,805;;6;M
+85;4;Pleuritis exudativa m/bk;1,145;;15;M
+86;4;Pleuritis exudativa u/bk;0,891;;11;M
+87;4;Respirasjonssvikt & lungeødem ekskl ved hjertesvikt;1,281;;13;M
+88;4;Kroniske obstruktive lungesykdommer  (KOLS);0,843;;14;M
+89;4;Lungebetennelse & pleuritt >17 år m/bk;1,287;;13;M
+90;4;Lungebetennelse & pleuritt >17 år u/bk;0,772;;8;M
+91A;4;Lungebetennelse & pleuritt 0-17 år m/bk;1,441;;8;M
+91B;4;Lungebetennelse & pleuritt 0-17 år u/bk;0,882;;5;M
+92;4;Interstitielle lungesykdommer m/bk;1,418;;21;M
+93;4;Interstitielle lungesykdommer u/bk;0,85;;14;M
+94;4;Pneumothorax m/bk;1,576;;17;M
+95;4;Pneumothorax u/bk;0,905;;9;M
+96;4;Bronkitt og astma >17 år m/bk;1,043;;10;M
+97;4;Bronkitt og astma >17 år u/bk;0,795;;14;M
+98A;4;Bronkitt og astma 0-17 år m/bk;1,213;;32;M
+98B;4;Bronkitt og astma 0-17 år u/bk;0,813;;17;M
+99;4;Funn og symptomer fra åndedrettsorganer m/bk;0,673;;10;M
+100;4;Funn og symptomer fra åndedrettsorganer u/bk;0,462;;8;M
+101;4;Sykdommer i åndedrettsorganer ITAD m/bk;1,228;;16;M
+102;4;Sykdommer i åndedrettsorganer ITAD u/bk;0,745;;6;M
+103;5;Hjertetransplantasjon og implantasjon av VAD;31,532;;76;S
+104A;5;Operasjoner på hjerteklaff u/bk;5,258;;12;S
+104B;5;Operasjoner på flere hjerteklaffer eller en hjerteklaffoperasjon m/bk;6,601;;27;S
+104C;5;Kateterbasert aortaklaffimplantasjon (TAVI);7,866;;15;S
+104O;5;Operasjoner på hjerteklaff inkl hjertekateterisering, dagkirurgisk behandling;2,63;0,263;1;S
+107A;5;Koronar bypass uten hjertekateterisering eller komplekse ledsagende prosedyrer u/bk;2,281;;10;S
+107B;5;Koronar bypass med hjertekateterisering;3,179;;17;S
+107C;5;Koronar bypass med komplekse ledsagende prosedyrer eller m/bk;3,409;;20;S
+107O;5;Koronar bypass uten hjertekateterisering, dagkirurgisk behandling;1,141;0,114;1;S
+108;5;Op på hjerte og store intratorakale kar ITAD;4,17;-0,12;19;S
+108O;5;Op på hjerte og store intratorakale kar ITAD, dagkirurgisk behandling;1,415;0,142;1;S
+109N;5;Operasjoner på thorakalt aortaaneurisme;5,576;;28;S
+110;5;Større kardiovaskulære op m/bk;5,484;-0,158;28;S
+110O;5;Større kardiovaskulære op, dagkirurgisk behandling;1,068;0,107;1;S
+111;5;Større kardiovaskulære op u/bk;3,314;-0,095;12;S
+112A;5;Annen perkutan kardiovaskulær prosedyre;3,76;;19;S
+112B;5;Perkutan ablationsbehandling for hjertearytmi;3,288;;5;S
+112C;5;PCI uten AMI u/bk;1,242;;4;S
+112D;5;PCI uten AMI m/bk;1,556;;9;S
+112E;5;PCI med AMI u/bk;1,721;;5;S
+112F;5;PCI med AMI m/bk;1,953;;11;S
+112O;5;Perkutane op på hjerte og store intratorakale kar, dagkirurgisk behandling;0,98;;1;S
+113;5;Amputasjon av underekstr ekskl tå v/ sirk.svikt;3,981;;30;S
+113O;5;Amputasjon av underekstr ekskl tå v/ sirk.svikt, dagkirurgisk behandling;1,991;0,199;1;S
+114;5;Amputasjon av overekstr eller tå v/ sirk.svikt;2,172;-0,063;26;S
+114O;5;Amputasjon av overekstr eller tå v/ sirk.svikt, dagkirurgisk behandling;1,086;0,109;1;S
+115A;5;Fjerning av permanent pacemaker eller defibrillator;1,222;-0,035;9;S
+115B;5;Implantasjon eller bytte av pacemaker;1,614;-0,046;12;S
+115C;5;Innsetting eller bytte av defibrillator;3,912;-0,113;18;S
+115O;5;Revisjon eller fjerning av permanent pacemaker ved AMI, hjertesvikt eller sjokk, dagkirurgisk behandling;0,48;0,048;1;S
+116O;5;Implantasjon eller bytte av pacemaker, dagkirurgisk behandling;0,877;0,088;1;S
+117O;5;Innsetting eller bytte av defibrillator, dagkirurgisk behandling;3,131;0,313;1;S
+119;5;Inngrep for åreknuter;0,803;-0,023;8;S
+119O;5;Inngrep for åreknuter, dagkirurgisk behandling;0,324;0,032;1;S
+120;5;Operasjoner på sirkulasjonsorganene ITAD;1,397;-0,04;12;S
+120O;5;Operasjoner på sirkulasjonsorganene ITAD, dagkirurgisk behandling;0,506;0,051;1;S
+121;5;Sirk.sykdom m/ AMI & kardiov komplik i live etter 4 dager;1,225;;13;M
+122;5;Sirk.sykdom m/ AMI u/kardiov komplik i live etter 4 dager;0,704;;7;M
+123;5;Akutt myokardinfarkt (AMI), liggetid < 4 dager, utskrevet død;0,497;;3;M
+124;5;Diagnostisk perkutan hjerteprosedyre m/ kompliserende hjertelidelse;0,867;;10;M
+125;5;Diagnostisk perkutan hjerteprosedyre u/ kompliserende hjertelidelse;0,531;;5;M
+125O;5;Diagnostisk perkutan hjerteprosedyre, dagmedisinsk behandling;0,193;;1;M
+126;5;Akutt & subakutt endokarditt;4,763;;47;M
+127;5;Hjertesvikt & ikke-traumatisk sjokk;1,129;;14;M
+128;5;Årebetennelse i de dype vener;0,784;;9;M
+129;5;Hjertestans uten kjent årsak;0,937;;12;M
+130;5;Sykdommer i de perifere kar m/bk;1,071;;15;M
+131;5;Sykdommer i de perifere kar u/bk;0,743;;8;M
+132;5;Antatt ateroskler hjertesykdom m/bk;0,622;;8;M
+133;5;Antatt ateroskler hjertesykdom u/bk;0,41;;5;M
+134;5;Hypertensjon;0,62;;6;M
+135;5;Hjertefeil og komplik til kunstig hjerteklaff >17år m/bk;0,986;;13;M
+136;5;Hjertefeil og komplik til kunstig hjerteklaff >17år u/bk;0,557;;7;M
+137;5;Hjertefeil og komplik til kunstig hjerteklaff 0-17 år;1,412;;16;M
+138;5;Hjertearytmier & ledningsforstyrrelser m/bk;0,747;;9;M
+139;5;Hjertearytmier & ledningsforstyrrelser u/bk;0,406;;4;M
+140;5;Angina pectoris;0,522;;6;M
+141;5;Synkope og kollaps m/bk;0,559;;6;M
+142;5;Synkope og kollaps u/bk;0,424;;4;M
+143;5;Brystsmerter;0,345;;3;M
+144;5;Sirkulasjonssykdommer ITAD m/bk;1,016;;14;M
+145;5;Sirkulasjonssykdommer ITAD u/bk;0,726;;7;M
+146;6;Reseksjonsinngrep på rectum m/bk;4,422;;30;S
+147;6;Reseksjonsinngrep på rectum u/bk;3,102;;14;S
+147O;6;Reseksjonsinngrep på rectum, dagkirurgisk behandling;1,552;0,155;1;S
+148;6;Større operasjoner på tynntarm & tykktarm m/bk;4,328;-0,125;36;S
+149;6;Større operasjoner på tynntarm & tykktarm u/bk;2,433;-0,07;14;S
+149O;6;Større operasjoner på tynntarm & tykktarm, dagkirurgisk behandling;0,826;0,083;1;S
+150;6;Operasjon for tarmadheranser m/bk;4,356;-0,125;26;S
+151;6;Operasjon for tarmadheranser u/bk;1,976;-0,057;12;S
+151O;6;Operasjon for tarmadheranser, dagkirurgisk behandling;0,308;0,031;1;S
+152;6;Mindre operasjoner på tynntarm & tykktarm m/bk;2,3;-0,066;20;S
+153;6;Mindre operasjoner på tynntarm & tykktarm u/bk;1,57;-0,045;11;S
+153O;6;Mindre operasjoner på tynntarm & tykktarm, dagkirurgisk behandling;0,524;0,052;1;S
+154A;6;Større operasjoner på spiserør, magesekk & tolvf. >17 år m/bk;6,991;-0,201;40;S
+154B;6;Andre operasjoner på spiserør, magesekk & tolvf. >17 år m/bk;5,413;-0,156;36;S
+155A;6;Større operasjoner på spiserør, magesekk & tolvf. >17 år u/bk;3,674;-0,106;24;S
+155B;6;Andre opersjoner på spiserør, magesekk & tolvf. >17 år u/bk;1,982;-0,057;12;S
+156;6;Op på spiserør, magesekk & tolvf. 0-17 år;3,601;-0,104;28;S
+156O;6;Operasjoner på spiserør, magesekk & tolvf., dagkirurgisk behandling;0,571;0,057;1;S
+157;6;Enkle tarmop & op på anus & fremlagt tarm m/bk;1,332;-0,038;16;S
+158;6;Enkle tarmop & op på anus & fremlagt tarm u/bk;0,646;-0,019;6;S
+158O;6;Enkle tarmop & op på anus & fremlagt tarm, dagkirurgisk behandling;0,214;0,021;1;S
+159;6;Brokkop ekskl inguinal & femoral >17år m/bk;1,83;-0,053;12;S
+160;6;Brokkop ekskl inguinal & femoral >17år u/bk;1,087;-0,031;6;S
+160O;6;Brokkop ekskl inguinal & femoral, dagkirurgisk behandling;0,431;0,043;1;S
+161;6;Inguinal & femoral brokkoperasjon >17år m/bk;1;-0,029;7;S
+162;6;Inguinal & femoral brokkoperasjon >17år u/bk;0,808;-0,023;4;S
+162O;6;Inguinal & femoral brokkop, dagkirurgisk behandling;0,322;0,032;1;S
+162P;6;Bilateral inguinal & femoral brokkop, dagkirurgisk behandling;0,508;0,051;1;S
+163;6;Lyskebrokkoperasjon 0-17 år;0,743;-0,021;8;S
+166N;6;Appendektomi med kompliserende hovedtilstand;1,542;-0,044;11;S
+167;6;Appendektomi uten kompliserende hovedtilstand;0,891;-0,026;4;S
+167O;6;Appendektomi, dagkirurgisk behandling;0,495;0,05;1;S
+168;3;Prosedyrer i munnhulen m/bk;2,541;-0,073;19;S
+169;3;Prosedyrer i munnhulen u/bk;1,221;-0,035;7;S
+169O;3;Prosedyrer i munnhulen, dagkirurgisk behandling;0,365;0,037;1;S
+170;6;Operasjoner på fordøyelsesorganer ITAD m/bk;3,106;-0,089;28;S
+171;6;Operasjoner på fordøyelsesorganer ITAD u/bk;1,167;-0,034;9;S
+171O;6;Operasjoner på fordøyelsesorganer ITAD, dagkirurgisk behandling;0,371;0,037;1;S
+172;6;Ondartede sykdommer i fordøyelsesorganene m/bk;1,329;;16;M
+173;6;Ondartede sykdommer i fordøyelsesorganene u/bk;0,891;;11;M
+174N;6;Komplisert magesår eller blødning i fordøyelseskanalen;1,066;;11;M
+175N;6;Ukomplisert magesår eller blødning i fordøyelseskanalen;0,662;;6;M
+179;6;Inflammatoriske tarmsykdommer;1,031;;14;M
+180;6;Gastrointestinal passasjehindring m/bk;0,808;;10;M
+181;6;Gastrointestinal passasjehindring u/bk;0,498;;6;M
+182;6;Øsofagitt, gastroenteritt & diverse >17år m/bk;0,752;;13;M
+183;6;Øsofagitt, gastroenteritt & diverse >17år u/bk;0,435;;5;M
+184A;6;Øsofagitt, gastroenteritt & diverse 0-17 år m/bk;0,808;;11;M
+184B;6;Øsofagitt, gastroenteritt & diverse 0-17 år u/bk;0,533;;5;M
+185;3;Tann/munnhulesykd. ekskl tannuttrekking >17år;0,706;;8;M
+186;3;Tann/munnhulesykd. ekskl tannuttrekking 0-17 år;0,566;;5;M
+187A;3;Tannuttrekking & restaurering;0,579;;5;M
+187O;3;Annen poliklinisk tannbehandling;0,065;;1;
+188;6;Sykdom i fordøyelsesorganene ITAD >17år m/bk;1,038;;15;M
+189;6;Sykdom i fordøyelsesorganene ITAD >17år u/bk;0,511;;7;M
+190;6;Sykdom i fordøyelsesorganene ITAD 0-17 år;0,703;;8;M
+191A;7;Transplantasjon av bukspyttkjertel, med eller uten nyretransplantasjon;10,7;;49;S
+191B;7;Op på bukspyttkj/lever & portosyst shuntop m/bk;5,857;;29;S
+192;7;Op på bukspyttkj/lever & portosyst shuntop u/bk;5,312;;15;S
+192O;7;Op på bukspyttkj/lever & portosyst shuntop, dagkirurgisk behandling;2,656;0,266;1;S
+193;7;Op på galleveier uten samtidig kolecystektomi m/bk;2,745;;29;S
+194;7;Op på galleveier uten samtidig kolecystektomi u/bk;1,753;;14;S
+195;7;Kolecystektomi m/ eksplorasjon av gallegang m/bk;4,342;;21;S
+196;7;Kolecystektomi m/ eksplorasjon av gallegang u/bk;2,086;;14;S
+197;7;Åpen kolecystektomi u/ eksplorasjon av gallegang m/bk;2,631;;24;S
+198;7;Åpen kolecystektomi u/ eksplorasjon av gallegang u/bk;2,057;;11;S
+199;7;Diagn op på lever/galleveier/bukspyttkj m/ ondartet svulst;3,699;-0,106;24;S
+200;7;Diagn op på lever/galleveier/bukspyttkj u/ ondartet svulst;3,625;-0,104;46;S
+200O;7;Diagn op på lever/galleveier/bukspyttkj, dagkirurgisk behandling;0,419;0,042;1;S
+201;7;Op på lever, galleveier & bukspyttkjertel ITAD;4,89;-0,141;35;S
+201O;7;Op på lever, galleveier & bukspyttkjertel ITAD, dagkirurgisk behandling;2,446;0,245;1;S
+202;7;Cirrhose & alkoholisk leversykdom;1,518;;20;M
+203;7;Ondartede svulster i lever/galleveier & bukspyttkjertel;1,154;;15;M
+204;7;Sykdommer i bukspyttkjertel ekskl ondartede svulster;1,362;;17;M
+205;7;Leversykdom ekskl ondartede/cirrhose/alkoholutløste m/bk;1,868;;22;M
+206;7;Leversykdom ekskl ondartede/cirrhose/alkoholutløste u/bk;0,84;;10;M
+207;7;Sykdommer i galleveiene ekskl ondartede m/bk;1,21;;15;M
+208;7;Sykdommer i galleveiene ekskl ondartede u/bk;0,616;;7;M
+209C;8;Utskifting av hofteleddsprotese;5,257;;28;S
+209D;8;Innsetting av hofteleddsprotese m/bk;3,514;;17;S
+209E;8;Innsetting av hofteleddsprotese u/bk;2,939;;10;S
+209F;8;Utskifting av protese i kne eller ankel;4,31;;35;S
+209G;8;Innsetting av protese i kne eller ankel;2,784;;17;S
+209O;8;Store leddingrep på underekstremitet, ikke reoperasjon, dagkirurgisk behandling;1,564;0,156;1;S
+210A;8;Større op på bekken/hofte/femur pga traume >17år m/bk;4,244;-0,122;19;S
+210N;8;Op på bekken/hofte/femur ekskl proteseop >17år m/bk;2,208;-0,064;19;S
+211A;8;Større op på bekken/hofte/femur pga traume >17år u/bk;3,377;-0,097;19;S
+211N;8;Op på bekken/hofte/femur ekskl proteseop >17år u/bk;1,563;-0,045;19;S
+212;8;Op på bekken/hofte/femur ekskl proteseop 0-17 år;2,731;-0,079;14;S
+212O;8;Op på bekken/hofte/femur ekskl hofteledd, dagkirurgisk behandling;0,636;0,064;1;S
+213;8;Amputasjoner pga traume eller sykd i bevegelsesapparatet;3,244;-0,093;30;S
+213O;8;Amputasjoner pga traume eller sykd i bevegelsesapparatet, dagkirurgisk behandling;0,29;0,029;1;S
+214A;8;Kombinert fremre/ bakre spondylodese;5,554;;28;S
+214B;8;Fremre eller bakre spondylodese m/bk;5,028;;33;S
+214C;8;Operasjoner på kolumna ekskl. spondylodese m/bk;2,389;-0,069;17;S
+215B;8;Fremre eller bakre spondylodese u/bk;3,073;;9;S
+215C;8;Operasjoner på kolumna ekskl. spondylodese u/bk;1,657;-0,048;7;S
+215O;8;Operasjoner på kolumna ekskl. spondylodese, dagkirurgisk behandling;0,495;0,05;1;S
+216;8;Biopsier fra skjelett-muskelsystemet & bindevevet;2,622;-0,075;28;S
+216O;8;Biopsier fra skjelett-muskelsystemet & bindevevet, dagkirurgisk behandling;0,406;0,041;1;S
+217;8;Sårrev & hudtranspl ekskl hånd pga traume/sykd i HDG 8;5,304;-0,153;53;S
+217O;8;Sårrev & hudtranspl ekskl hånd pga traume/sykd i HDG 8, dagkirurgisk behandling;0,297;0,03;1;S
+218;8;Op på humerus & kne/legg/fot ekskl kneleddsop >17 år m/bk;3,023;-0,087;21;S
+219;8;Op på humerus & kne/legg/fot ekskl kneleddsop >17 år u/bk;1,936;-0,056;11;S
+220;8;Op på humerus & kne/legg/fot ekskl kneleddsop 0-17 år;1,255;-0,036;7;S
+220O;8;Op på humerus & kne/legg/fot, dagkirugisk behandling;0,547;0,055;1;S
+221;8;Operasjoner på kneledd ekskl proteseop m/bk;2,355;-0,068;25;S
+222;8;Operasjoner på kneledd ekskl proteseop u/bk;1,081;-0,031;8;S
+222O;8;Annen operasjon på kne eller legg, dagkirurgisk behandling;0,346;0,035;1;S
+222P;8;Større operasjon på kne eller legg, dagkirurgisk behandling;0,447;0,045;1;S
+223;8;Op på humerus/albue/underarm ekskl skulderprotese m/bk;1,624;-0,047;12;S
+223O;8;Større op på humerus/albue/underarm, dagkirurgisk behandling;0,777;0,078;1;S
+224;8;Op på humerus/albue/underarm ekskl skulderprotese u/bk;1,123;-0,032;5;S
+224O;8;Op på humerus/albue/underarm ekskl skulderprotese, dagkirugisk behandling;0,594;0,059;1;S
+225;8;Operasjoner på ankel & fot;1,484;-0,043;10;S
+225O;8;Operasjoner på ankel og fot, dagkirugisk behandling;0,607;0,061;1;S
+226;8;Bløtdelsoperasjoner ITAD m/bk;1,688;-0,049;15;S
+227;8;Bløtdelsoperasjoner ITAD u/bk;0,92;-0,026;6;S
+227O;8;Bløtdelsoperasjoner ITAD, dagkirurgisk behandling;0,337;0,034;1;S
+228;8;Op på håndledd/hånd/tommel m/bk eller leddprotese håndledd/hånd;1,252;-0,036;11;S
+228O;8;Større op på håndlegg/hånd/tommel, dagkirugisk behandling;0,418;0,042;1;S
+229;8;Op på håndledd/hånd u/bk eller sårrevisjon på overekstremitet;0,824;-0,024;6;S
+229O;8;Op på håndledd/ hånd ekskl større leddop, dagkirurgisk behandling;0,327;0,033;1;S
+230;8;Lokal eksisjon & fjerning av osteosyntesmat fra hofte/femur;0,917;-0,026;9;S
+230O;8;Lokal eksisjon & fjerning av osteosyntesmat fra hofte/femur, dagkirurgisk behandling;0,307;0,031;1;S
+231;8;Lokal eksisjon & fjerning av osteosyntesmat ekskl fra hofte/femur;0,86;-0,025;11;S
+231O;8;Lokal eksisjon & fjerning av osteosyntesmat ekskl fra hofte/femur, dagkirurgisk behandling;0,254;0,025;1;S
+232;8;Artroskopi;1,506;-0,043;18;S
+232O;8;Artroskopi, dagkirurgisk behandling;0,283;0,028;1;S
+233;8;Op på skjelett-muskelsystem og bindevev ITAD m/bk;2,825;-0,081;27;S
+234;8;Op på skjelett-muskelsystem og bindevev ITAD u/bk;1,477;-0,043;8;S
+234O;8;Op på skjelett-muskelsystem og bindevev ITAD, dagkirurgisk behandling;0,515;0,052;1;S
+235;8;Lårbeinsbrudd;0,87;;14;M
+236;8;Brudd på hofte & bekken;0,744;;14;M
+237;8;Forstuving & luksasjon av hofte, bekken & lår;0,512;;7;M
+238;8;Osteomyelitt;2,859;;35;M
+239;8;Patologiske brudd & ondartede svulster i HDG 8;1,414;;15;M
+240N;8;Vaskulitter og systemiske bindevevssykdommer m/bk;1,464;;21;M
+241N;8;Vaskulitter og systemiske bindevevssykdommer u/bk;1,078;;21;M
+242A;8;Infektiøs artritt og bursitt;3,657;;40;M
+242B;8;Spesifikke inflammatoriske ledd- og ryggsykdommer m/bk;0,983;;21;M
+242C;8;Spesifikke inflammatoriske ledd- og ryggsykdommer u/bk;0,62;;21;M
+242D;8;Annen artritt;0,77;;10;M
+242E;8;Artroser m/bk;0,618;;12;M
+242F;8;Artroser u/bk;0,51;;11;M
+243;8;Rygglidelser, traumatiske tilstander & symptomer i ryggen;0,745;;10;M
+244;8;Andre beinsykdommer m/bk;0,86;;11;M
+245;8;Andre beinsykdommer u/bk;0,671;;8;M
+247;8;Uspesifikke tilst & sympt fra muskel-skjelettsyst/bindevev ITAD;0,527;;9;M
+248;8;Tilstander i muskler, sener, seneskjeder, fascie & bursa ITAD;0,717;;9;M
+249;8;Komplik/følgetilst/etterbehandling av tilstander i HDG 8;0,997;;17;M
+250;8;Brudd/forstuving/luksasjon av u.arm, hånd, fot >17 år m/bk;0,591;;8;M
+251;8;Brudd/forstuving/luksasjon av u.arm, hånd, fot >17 år u/bk;0,366;;4;M
+252;8;Brudd/forstuving/luksasjon av u.arm, hånd fot 0-17 år;0,42;;2;M
+253;8;Brudd/forstuving/luks av o.arm/u.ekstr ekskl fot >17 år m/bk;0,676;;9;M
+254;8;Brudd/forstuving/luks av o.arm/u.ekstr ekskl fot >17 år u/bk;0,463;;5;M
+255;8;Brudd/forstuving/luks av o.arm/u.ekstr ekskl fot 0-17 år;0,44;;4;M
+256;8;Sykdom i muskel-skjelettsystemet og bindevev ITAD;0,858;;12;M
+257;30;Total mastektomi ved ondartet svulst m/bk;1,437;-0,041;6;S
+258;30;Total mastektomi ved ondartet svulst u/bk;1,21;-0,035;5;S
+258O;30;Total mastektomi ved ondartet svulst, dagkirurgisk behandling;0,551;0,055;1;S
+259;30;Annen mammaoperasjon ved ondartet svulst m/bk;1,031;-0,03;6;S
+260;30;Annen mammaoperasjon ved ondartet svulst u/bk;0,848;-0,024;3;S
+260O;30;Subtotal mastektomi ved ondartet svulst, dagkirurgisk behandling;0,393;0,039;1;S
+261;30;Mammaop ved godartede sykd ekskl biopsi/lokal eksisjon;0,973;-0,028;4;S
+261O;30;Mammaop ved godartede sykd ekskl biopsi/lokal eksisjon, dagkirurgisk behandling;0,518;0,052;1;S
+262;30;Mammabiopsi & lokal eksisjon ved godartede sykdommer;0,839;-0,024;3;S
+262O;30;Mammabiopsi & lokal eksisjon ved godartede sykdommer, dagkirurgisk behandling;0,222;0,022;1;S
+263;9;Hudtransplant og/eller revisjoner ved sår/cellulitt m/bk;5,814;-0,167;73;S
+264;9;Hudtransplant og/eller revisjoner ved sår/cellulitt u/bk;2,107;-0,061;26;S
+265;9;Hudtranspl og/eller revisjoner, ekskl sår/cellulitt m/bk;2,354;-0,068;34;S
+266;9;Hudtranspl og/eller revisjoner, ekskl sår/cellulitt u/bk;1,112;-0,032;11;S
+266O;9;Hudtranspl og/eller revisjoner, ekskl sår/cellulitt dagkirurgisk behandling;0,291;0,029;1;S
+267;9;Perianale inngrep & operasjoner for sakralcyste;0,517;-0,015;5;S
+267O;9;Perianale inngrep & operasjoner for sakralcyste, dagkirurgisk behandling;0,225;0,023;1;S
+268;9;Plastiske op på hud og underhud;1,119;-0,032;28;S
+268O;9;Plastiske op på hud og underhud, dagkirurgisk behandling;0,409;0,041;1;S
+269;9;Op på hud og underhud ITAD m/bk;2,333;-0,067;28;S
+270;9;Op på hud og underhud ITAD u/bk;0,924;-0,027;9;S
+270O;9;Op på hud og underhud ITAD, dagkirurgisk behandling;0,238;0,024;1;S
+271;9;Kroniske sår i huden;1,356;;19;M
+272;9;Alvorlig hudsykdom m/bk;1,552;;18;M
+273;9;Alvorlig hudsykdom u/bk;1,552;;18;M
+274;30;Ondartet sykdom i bryst m/bk;1,244;;15;M
+275;30;Ondartet sykdom i bryst u/bk;0,709;;9;M
+276;30;Godartet sykdom i bryst;0,555;;8;M
+277;9;Infeksjoner i hud og underhud >17 år m/bk;1,223;;14;M
+278;9;Infeksjoner i hud og underhud >17 år u/bk;0,779;;8;M
+279;9;Infeksjoner i hud og underhud 0-17 år;0,989;;7;M
+280;9;Skade av hud og underhud >17 år m/bk;0,587;;8;M
+281;9;Skade av hud og underhud >17 år u/bk;0,395;;4;M
+282;9;Skade av hud og underhud 0-17 år;0,448;;2;M
+283;9;Lettere hudsykdom m/bk;1,35;;17;M
+284;9;Lettere hudsykdom u/bk;0,967;;14;M
+285;10;Amputasjoner av underekstr pga sykdom i HDG 10;3,953;-0,114;61;S
+285O;10;Amputasjoner av underekstr pga sykdom i HDG 10, dagkirurgisk behandling;0,102;0,01;1;S
+286;10;Operasjoner på binyrer & hypofyse;2,491;;13;S
+286O;10;Operasjoner på binyrer & hypofyse, dagkirurgisk behandling;1,246;0,125;1;S
+288A;10;Gastrointestinale operasjoner for adipositas;1,125;;6;S
+288B;10;Andre operasjoner for adipositas;1,357;-0,039;5;S
+288O;10;Gastrointestinale operasjoner for adipositas, dagkirurgisk behandling;0,679;0,068;1;S
+288P;10;Andre operasjoner for adipositas, dagkirurgisk behandling;0,672;0,067;1;S
+289;10;Operasjoner på biskjoldbruskkjertelen;1,534;-0,044;5;S
+289O;10;Operasjoner på biskjoldbruskkjertelen, dagkirurgisk behandling;0,663;0,066;1;S
+290;10;Operasjoner på skjoldbruskkjertelen;1,612;-0,046;6;S
+290O;10;Operasjoner på skjoldbruskkjertelen, dagkirurgisk behandling;0,937;0,094;1;S
+292;10;Op ved sykdommer i HDG 10 ITAD m/bk;3,3;-0,095;58;S
+293;10;Op ved sykdommer i HDG 10 ITAD u/bk;1,284;-0,037;8;S
+293O;10;Op ved sykdommer i HDG 10 ITAD, dagkirurgisk behandling;0,036;0,004;1;S
+294;10;Diabetes >35 år;0,892;;11;M
+295;10;Diabetes < 36 år;1,518;;16;M
+296;10;Ernærings- & stoffskiftesykdommer ITAD >17 år m/bk;0,894;;12;M
+297;10;Ernærings- & stoffskiftesykdommer ITAD >17 år u/bk;0,518;;7;M
+298;10;Ernærings- & stoffskiftesykdommer ITAD 0-17 år;0,803;;10;M
+299;10;Medfødte stoffskiftesykdommer;0,973;;8;M
+300;10;Indresekretoriske sykdommer m/bk;1,213;;14;M
+301;10;Indresekretoriske sykdommer u/bk;0,86;;22;M
+302;11;Nyretransplantasjon;11,694;;29;S
+303;11;Nyre/ureterop & større blæreop pga ondartet svulst;3,255;;21;S
+304;11;Nyre/ureterop & større blæreop ekskl onda svulst m/bk;3,007;-0,087;27;S
+305;11;Nyre/ureterop & større blæreop ekskl onda svulst u/bk;2,362;-0,068;13;S
+305O;11;Nyre/ureterop & større blæreop ekskl onda svulst, dagkirurgisk behandling;0,558;0,056;1;S
+308;11;Operasjoner på urinblæren ITAD m/bk;1,456;-0,042;13;S
+309;11;Operasjoner på urinblæren ITAD u/bk;0,908;-0,026;5;S
+309O;11;Mindre operasjoner på urinblære ITAD, dagkirurgisk behandling;0,366;0,037;1;S
+310;11;Transurethrale operasjoner ekskl på prostata m/bk;0,958;-0,028;8;S
+311;11;Transurethrale operasjoner ekskl på prostata u/bk;0,755;-0,022;5;S
+311O;11;Transurethrale operasjoner ekskl på prostata, dagkirurgisk behandling;0,314;0,031;1;S
+312;11;Operasjoner på urinrør >17 år m/bk;1,138;-0,033;7;S
+313;11;Operasjoner på urinrør >17 år u/bk;0,584;-0,017;5;S
+314;11;Operasjoner på urinrør 0-17 år;0,982;-0,028;8;S
+314O;11;Operasjoner på urinrør, dagkirurgisk behandling;0,215;0,022;1;S
+315;11;Operasjoner på nyrer & urinveier ITAD;1,963;-0,057;15;S
+315O;11;Operasjoner på nyrer & urinveier ITAD, dagkirurgisk behandling;0,558;0,056;1;S
+316;11;Nyresvikt;1,514;;16;M
+317;11;Dialysebehandling;0,08;;10;M
+317O;11;Dialysebehandling, dagmedisinsk behandling;0,08;;1;M
+318;11;Svulster i nyrer & urinveier m/bk;1,527;;16;M
+319;11;Svulster i nyrer & urinveier u/bk;0,718;;8;M
+320;11;Infeksjoner i nyrer & urinveier >17 år m/bk;1,089;;12;M
+321;11;Infeksjoner i nyrer & urinveier >17 år u/bk;0,759;;7;M
+322;11;Infeksjoner i nyrer & urinveier 0-17 år;1,179;;7;M
+323;11;Stein i urinveiene m/bk og/eller ESWL behandling;0,811;;9;M
+323O;11;Stein i urinveiene og/eller ESWL behandling, dagmedisinsk behandling;0,175;;1;M
+324;11;Stein i urinveiene u/bk;0,445;;4;M
+325;11;Symptomer fra nyrer & urinveier >17 år m/bk;0,641;;7;M
+326;11;Symptomer fra nyrer & urinveier >17 år u/bk;0,449;;5;M
+327;11;Symptomer fra nyrer & urinveier 0-17 år;0,556;;5;M
+329N;11;Urethrastriktur;0,411;;5;M
+331;11;Sykdom i nyrer & urinveier ITAD >17 år m/bk;1,095;;15;M
+332;11;Sykdom i nyrer & urinveier ITAD >17 år u/bk;0,704;;8;M
+333;11;Sykdom i nyrer & urinveier ITAD 0-17 år;0,907;;10;M
+334;12;Større operasjoner i det mannlige bekken m/bk;2,042;-0,059;16;S
+335;12;Større operasjoner i det mannlige bekken u/bk;1,686;-0,049;6;S
+335O;12;Større operasjoner i det mannlige bekken, dagkirurgisk behandling;0,685;0,069;1;S
+336;12;Transurethral prostatectomi m/bk;1,03;-0,03;8;S
+337;12;Transurethral prostatectomi u/bk;0,863;-0,025;5;S
+337O;12;Transurethral prostatectomi, dagkirurgisk behandling;0,302;0,03;1;S
+338;12;Op på skrotalinnhold ved ondartede sykdommer;1,021;-0,029;7;S
+339;12;Op på skrotalinnhold ved godartede sykd >17 år;0,807;-0,023;6;S
+340;12;Op på skrotalinnhold ved godartede sykd 0-17 år;0,66;-0,019;3;S
+340O;12;Op på skrotalinnhold ved godartede sykd, dagkirurgisk behandling;0,33;0,033;1;S
+341;12;Operasjoner på penis;1,178;-0,034;9;S
+341O;12;Operasjoner på penis, dagkirugisk behandling;0,273;0,027;1;S
+342;12;Omskjæring >17 år;0,516;-0,015;4;S
+343;12;Omskjæring 0-17 år;0,554;-0,016;3;S
+343O;12;Omskjæring, dagkirurgisk behandling;0,199;0,02;1;S
+344;12;Op på mannlige kjønnsorg ved ondartet svulst ITAD;1,284;-0,037;9;S
+345;12;Op på mannlige kjønnsorg ekskl ondartet svulst ITAD;0,703;-0,02;8;S
+345O;12;Op på mannlige kjønnsorg ekskl ondartet svulst ITAD, dagkirurgisk behandling;0,274;0,027;1;S
+346;12;Ondartede svulst i mannlige kjønnsorganer m/bk;1,197;;15;M
+347;12;Ondartede svulst i mannlige kjønnsorganer u/bk;0,815;;13;M
+348;12;Godartet hypertrofi av prostata m/bk;0,573;;7;M
+349;12;Godartet hypertrofi av prostata u/bk;0,329;;3;M
+350;12;Inflammasjon i mannlige kjønnsorganer;0,642;;8;M
+351;12;Sterilisering av menn;0;;1;S
+351O;12;Sterilisering av menn, dagkirurgisk behandling;0;;1;S
+352;12;Sykdommer i mannlige kjønnsorganer  ITAD;0,433;;5;M
+353;13;Eksentrasjon av bekkenet, radikal hysterektomi & vulvektomi;3,782;-0,109;15;S
+353O;13;Eksentrasjon av bekkenet, radikal hysterektomi & vulvektomi, dagkirurgisk behandling;2,003;0,2;1;S
+354;13;Op på uterus/adn pga ikke ovar/adn malign sykd m/bk;3,098;-0,089;16;S
+355;13;Op på uterus/adn pga ikke ovar/adn malign sykd u/bk;2,033;-0,059;6;S
+355O;13;Op på uterus/adn pga ikke ovar/adn malign sykd, dagkirurgisk behandling;0,703;0,07;1;S
+356;13;Rekonstruktive gynekologiske inngrep;1,586;-0,046;4;S
+356O;13;Rekonstruktive gynekologiske inngrep, dagkirurgisk behandling;0,755;0,076;1;S
+357;13;Op på uterus/adn ved ovar/adn malign sykdom;2,912;-0,084;15;S
+357O;13;Op på uterus/adn ved ovar/adn malign sykdom, dagkirurgisk behandling;0,741;0,074;1;S
+358;13;Op på uterus/adn ved godartede sykd m/bk;2,071;-0,06;10;S
+359;13;Op på uterus/adn ved godartede sykd u/bk;1,301;-0,037;5;S
+359O;13;Op på uterus/adn ved godartede sykd i ovar/adn, dagkirurgisk behandling;0,434;0,043;1;S
+360;13;Operasjoner på vagina, cervix & vulva ekskl vulvektomi;0,878;-0,025;12;S
+360O;13;Operasjoner på vagina, cervix & vulva ekskl vulvektomi, dagkirurgisk behandling;0,237;0,024;1;S
+361;13;Gynekologisk laparoskopi & sterilisering via laparotomi;0,93;-0,027;5;S
+361O;13;Gynekologisk laparoskopi & sterilisering via laparotomi, dagkirurgisk behandling;0,378;0,038;1;S
+362;13;Sterilisering via laparoskopi eller annen endoskopisk sterilisering;0;;2;S
+362O;13;Sterilisering via laparoskopi eller annen endoskopisk sterilisering, dagkirurgisk behandling;0;;1;S
+363;13;Utskraping & konisering ved ondartet sykdom;0,866;-0,025;10;S
+364;13;Utskraping & konisering ekskl ondartet sykdom;0,506;-0,015;3;S
+364O;13;Utskraping & konisering, dagkirurgisk behandling;0,179;0,018;1;S
+365;13;Operasjoner på kvinnelige kjønnsorganer ITAD;1,882;-0,054;13;S
+365O;13;Operasjoner på kvinnelige kjønnsorganer ITAD, dagkirurgisk behandling;0,4;0,04;1;S
+366;13;Ondartede svulster i kvinnelige kjønnsorganer m/bk;1,23;;16;M
+367;13;Ondartede svulster i kvinnelige kjønnsorganer u/bk;0,82;;10;M
+368;13;Infeksjoner i kvinnelige kjønnsorganer;0,685;;7;M
+369;13;Tilstander i kvinnelige kjønnsorganer ITAD;0,538;;6;M
+370;14;Keisersnitt m/bk;1,986;;13;S
+371;14;Keisersnitt u/bk;1,312;;9;S
+371O;14;Keisersnitt, dagkirurgisk behandling;0,254;0,025;1;S
+372;14;Vaginal fødsel m/bk;0,714;;8;M
+373;14;Vaginal fødsel u/bk;0,489;;5;M
+373O;14;Vaginal fødsel, dagopphold;0,085;;1;M
+374;14;Vaginal fødsel m/sterilisering og/eller evakuering;1,008;-0,029;8;S
+375;14;Vaginal fødsel m/ op ekskl sterilisering & evakuering;1,138;-0,033;8;S
+376;14;Sykdommer etter forløsning & abort u/ operasjon;0,743;;6;M
+377N;14;Sykdommer etter forløsning & abort m/ operasjon;0,712;-0,02;7;S
+377O;14;Sykdommer etter forløsning & abort m/ operasjon, dagkirurgisk behandling;0,21;0,021;1;S
+378N;14;Operasjoner ved ekstrauterin graviditet;1,032;-0,03;3;S
+379;14;Truende abort;0,466;;10;M
+380;14;Abort uten kirurgisk inngrep & tilst etter abort;0,321;;4;M
+381;14;Spontan el medik utløst abort inkl revisjon;0,426;-0,012;3;S
+381O;14;Abort, dagkirurgisk behandling;0,189;0,019;1;S
+382;14;Falske rier;0,259;;6;M
+383;14;Sykdommer i svangerskapet ITAD m/bk;0,724;;12;M
+384;14;Sykdommer i svangerskapet ITAD u/bk;0,374;;7;M
+385A;15;Nyfødt, døde 0-2 d. gml eller overf. til annen inst. 0-5 d. etter fødsel;1,042;;5;
+385B;15;Oppfølging av neonatalproblemer eller forsinket neonatalproblem, fødselsvekt over 1000 g;1,385;;18;
+385C;15;Oppfølging av nyfødte med fødselsvekt under 1000 g;7,626;;67;
+386N;15;Nyfødt, fødselsvekt under 1000 g;24,872;;136;
+387N;15;Nyfødt, fødselsvekt 1000-1499 g;16,292;;79;
+388A;15;Nyfødt, fødselsvekt 1500-2499g eller annen immaturitet, med multiple problemer;8,64;;70;
+388B;15;Nyfødt, fødselsvekt 1500-2499g eller annen immaturitet, uten multiple problemer;3,365;;21;
+388C;15;Alvorlig respirasjonsproblem hos nyfødt med lav fødselsvekt (<2500g);9,845;;46;
+389A;15;Nyfødt, fødselsvekt minst 1500 g, med større operasjon;8,669;;50;
+389B;15;Nyfødt, fødselsvekt minst 2500 g, med multiple problemer;3,584;;19;
+389C;15;Alvorlig respirasjonsproblem hos nyfødt uten lav fødselsvekt (>2499g);3,141;;15;
+390;15;Nyfødt, fødselsvekt minst 2500 g, med annet signifikant problem;0,923;;8;
+391;15;Frisk nyfødt;0,454;;5;
+391O;15;Frisk nyfødt, dagopphold;0,11;;1;
+392;16;Op på milten pga sykdom i HDG 16 >17 år;2,302;-0,066;13;S
+393;16;Op på milten pga sykdom i HDG 16 0-17 år;3,146;-0,091;7;S
+393O;16;Op på milten pga sykdom i HDG 16, dagkirurgisk behandling;1,151;0,115;1;S
+394;16;Op pga sykdom i blod/bloddannende organer ITAD;1,597;-0,046;54;S
+394O;16;Op pga sykdom i blod/bloddannende organer ITAD, dagkirurgisk behandling;0,282;0,028;1;S
+395;16;Sykdommer i røde blodlegemer >17 år;0,8;;10;M
+396;16;Sykdommer i røde blodlegemer 0-17 år;1,143;;7;M
+397;16;Koagulasjonsforstyrrelser;0,936;;10;M
+398;16;Retikuloendoteliale & immunologiske sykd ITAD m/bk;1,617;;17;M
+399;16;Retikuloendoteliale & immunologiske sykd ITAD u/bk;0,975;;10;M
+400;17;Større operasjoner ved lymfom & leukemi;3,221;-0,093;27;S
+401;17;Op ved lymfom & ikke-akutt leukemi ITAD m/bk;4,424;-0,127;50;S
+402;17;Op ved lymfom & ikke-akutt leukemi ITAD u/bk;1,479;-0,043;12;S
+402O;17;Op ved lymfom & ikke-akutt leukemi ITAD, dagkirurgisk behandling;0,383;0,038;1;S
+403;17;Lymfom & ikke-akutt leukemi m/bk;2,072;;23;M
+404;17;Lymfom & ikke-akutt leukemi u/bk;1,399;;12;M
+405;17;Akutt leukemi 0-17 år;2,779;;19;M
+406;17;Større op ved sykdommer i HDG 17 ekskl lymfom & leukemi m/bk;3,751;-0,108;32;S
+407;17;Større op ved sykdommer i HDG 17 ekskl lymfom & leukemi u/bk;2,66;-0,077;16;S
+407O;17;Større op ved sykdommer i HDG 17 ekskl lymfom & leukemi, dagkirurgisk behandling;0,569;0,057;1;S
+408;17;Andre op ved sykdommer i HDG 17 ekskl lymfom & leukemi;1,855;-0,053;17;S
+408O;17;Op ved myeloprolif sykd eller udiff ondartet sykdom, dagkirurgisk behandling;0,382;0,038;1;S
+410X;40;Medikamentell kreftbehandling av innlagte pasienter, inntil 2 overnattinger;0,57;;2;M
+411N;17;Observasjon eller behandling knyttet til tidligere eller mistenkt kreftsykdom;0,845;;11;M
+413;17;Sykdommer i HDG 17 ITAD m/bk;1,867;;19;M
+414;17;Sykdommer i HDG 17 ITAD u/bk;1,09;;12;M
+415;18;Op ved sykdommer i HDG 18;4,633;-0,133;44;S
+415O;18;Op ved sykdommer i HDG 18, dagkirurgisk behandling;0,377;0,038;1;S
+416N;18;Sepsis ved sydommer i HDG 18 >17 år;2,061;;21;M
+417N;18;Sepsis ved sydommer i HDG 18 0-17 år;2,521;;15;M
+418;18;Postop & posttraumatiske infeksjoner tilhørende HDG 18;1,013;;16;M
+419;18;Feber av ukjent årsak >17 år m/bk;0,896;;11;M
+420;18;Feber av ukjent årsak >17 år u/bk;0,637;;7;M
+421;18;Virussykdommer >17 år;0,817;;10;M
+422;18;Virussykdommer og feber av ukjent årsak 0-17 år;0,766;;6;M
+423;18;Sykdommer i HDG 18 ITAD;1,392;;18;M
+424N;19;Operasjoner på pasienter med sykdom i HDG19;1,741;-0,05;14;S
+424O;19;Operasjoner på pasienter med sykdom i HDG19, dagkirurgisk behandling;0,479;0,048;1;S
+426A;19;Bipolare lidelser < 60 år;0,519;;11;M
+426B;19;Bipolare lidelser >59 år;0,519;;11;M
+426C;19;Andre forstyrrelser i stemningsleie < 60 år;0,519;;9;M
+426D;19;Andre forstyrrelser i stemningsleie >59 år;0,519;;15;M
+427A;19;Angstlidelse;0,519;;6;M
+427B;19;Varige personlighetsforstyrrelser;0,519;;11;M
+427C;19;Akutt stressreaksjon;0,519;;9;M
+427D;19;Andre nevroser;0,519;;15;M
+428N;19;Personlighetsforstyrrelser;0,519;;7;M
+429A;19;Organiske betingede mentale forstyrrelser m/bk;0,936;;12;M
+429B;19;Organiske betingede mentale forstyrrelser u/bk;0,641;;7;M
+430A;19;Schizofreni <30 år;0,519;;2;M
+430B;19;Schizofreni 30-59 år;0,519;;7;M
+430C;19;Schizofreni >59 år;0,519;;6;M
+430D;19;Kroniske ikke-schizofrene psykoser;0,519;;9;M
+430E;19;Kortvarige ikke-schizofrene psykoser;0,519;;10;M
+430F;19;Andre psykoser;0,519;;7;M
+431A;19;Mental retardasjon;0,519;;9;M
+431B;19;Nevropsykiatriske forstyrrelser;0,519;;9;M
+431C;19;Andre mentale forstyrrelser hos barn;0,519;;4;M
+432A;19;Spiseforstyrrelser;2,122;;33;M
+432B;19;Andre spesifiserte mentale forstyrrelser;0,519;;5;M
+432C;19;Andre uspesifiserte mentale forstyrrelser;0,517;;4;M
+436A;19;Andre mentale forstyrrelser som skyldes misbruk m/bk;0,656;;7;M
+436B;19;Andre mentale forstyrrelser som skyldes misbruk u/bk;0,401;;4;M
+436C;19;Psykose som skyldes misbruk;0,519;;4;M
+439;21;Hudtransplantasjon etter skade;4,168;-0,12;36;S
+439O;21;Hudtransplantasjon etter skade, dagkirurgisk behandling;0,406;0,041;1;S
+441A;21;Håndkirurgiske inngrep etter skade;1,062;-0,031;9;S
+441B;21;Store håndkirurgiske inngrep etter skade;3,906;-0,112;16;S
+441O;21;Håndkirurgiske inngrep etter skade, dagkirurgisk behandling;0,367;0,037;1;S
+442;21;Operasjoner etter skade ITAD m/bk;4,542;-0,131;51;S
+442O;21;Større operasjoner for behandlingskomplikasjon, dagkirurgisk behandling;1,272;0,127;1;S
+443;21;Operasjoner etter skade ITAD u/bk;1,614;-0,046;13;S
+443O;21;Andre større op etter skader, dagkirurgisk behandling;0,436;0,044;1;S
+444;21;Traume >17 år m/bk;0,953;;13;M
+445;21;Traume >17 år u/bk;0,613;;8;M
+446;21;Traume 0-17 år;0,373;;3;M
+447;21;Allergiske reaksjoner >17 år;0,442;;3;M
+448;21;Allergiske reaksjoner 0-17 år;0,419;;8;M
+449;21;Forgiftning inkludert toksisk effekt av legemiddel >17 m/bk;0,692;;7;M
+450;21;Forgiftning inkludert toksisk effekt av legemiddel >17 u/bk;0,416;;3;M
+451;21;Forgiftning inkludert toksisk effekt av legemiddel 0-17 år;0,477;;3;M
+452A;21;Komplikasjoner ved kirurgisk behandling m/bk;1,429;-0,041;17;S
+452B;21;Komplikasjoner ved annen behandling m/bk;0,99;;13;M
+453A;21;Komplikasjoner ved kirurgisk behandling u/bk;1,074;-0,031;8;S
+453B;21;Komplikasjoner ved annen behandling u/bk;0,543;;7;M
+454;21;Sykdommer i HDG 21 ITAD m/bk;1,317;;11;M
+455;21;Sykdommer i HDG 21 ITAD u/bk;0,39;;5;M
+456;22;Forbrenninger, overført til annen akuttenhet, liggetid < 6 dager;0,543;;3;
+457;22;Omfattende forbrenninger uten operativ behandling;4,88;;23;M
+458;22;Mindre omfattende forbrenninger med hudtransplantasjon;3,384;-0,097;31;S
+458O;22;Mindre omfattende forbrenninger med hudtransplantasjon, dagkirurgisk behandling;0,468;0,047;1;S
+459;22;Mindre omfattende forbrenninger med revisjon/annen operasjon;2,637;-0,076;20;S
+459O;22;Mindre omfattende forbrenninger med revisjon/annen op, dagkirurgisk behandling;0,411;0,041;1;S
+460;22;Mindre omfattende forbrenninger uten operativ behandling;0,995;;13;M
+461;23;Operasjoner på pasienter m/diagnose i HDG 23;1,525;-0,044;17;S
+461O;23;Operasjoner på pasienter m/diagnose i HDG 23, dagkirurgisk behandling;0,435;0,044;1;S
+462A;23;Rehabilitering, kompleks;0,15;;46;M
+462B;23;Rehabilitering, vanlig;0,12;;26;M
+462C;23;Rehabilitering, annen;0,42;;20;M
+463;23;Symptomer og funn m/bk;0,812;;10;M
+464;23;Symptomer og funn u/bk;0,703;;10;M
+465;23;Etterbehandling m/ondartet sykdom som bidiagnose;1,706;;22;M
+466;23;Etterbehandling u/ondartet sykdom som bidiagnose;0,903;;14;M
+467;23;Påvirkninger på helsetilstanden ITAD;0,483;;6;M
+468;99;Større op uten sammenheng med hoveddiagnosen;4,596;-0,132;35;S
+468O;99;Større op uten sammenheng med hoveddiagnosen, dagkirurgisk behandling;0,994;0,099;1;S
+470;99;Ikke grupperbar pga manglende opplysninger;0;;35;
+470P;99;Umulig dagkirurgisk behandling;0;;0;
+471N;8;Bilaterale eller flere store leddproteseoperasjoner i ekstremiteter;4,82;;37;S
+472;22;Omfattende forbrenninger med operativ behandling;2,713;-0,078;44;S
+472O;22;Omfattende forbrenninger med operativ behandling, dagkirurgisk behandling;0,414;0,041;1;S
+473;17;Akutt leukemi  >17 år;4,13;;34;M
+475A;4;Sykdommer i åndedrettsorganer med ventilasjonsstøtte;4,571;;33;M
+475B;4;Sykdommer i åndedrettsorganer med PEEP support;2,318;;19;M
+475O;4;Sykdommer i åndedrettsorganer med ventilasjonsstøtte, dagmedisinsk behandling;0,087;;1;M
+477;99;Mindre op uten sammenheng med hoveddiagnosen;2,151;-0,062;23;S
+477O;99;Mindre op uten sammenheng med hoveddiagnosen, dagkirurgisk behandling;0,364;0,036;1;S
+478;5;Karkirurgisk operasjon ITAD m/bk;1,946;-0,056;15;S
+479;5;Karkirurgisk operasjon ITAD u/bk;1,667;-0,048;7;S
+479O;5;Karkirurgisk operasjon ITAD, dagkirurgisk behandling;0,621;0,062;1;S
+480;7;Levertransplantasjon;26,368;;66;S
+481A;17;Annen stamcelletransplantasjon;6,128;;42;S
+481B;17;Allogen stamcelletransplantasjon >17 år;35,477;;112;S
+481C;17;Allogen stamcelletransplantasjon 0-17 år;35,088;;84;S
+481O;17;Annen stamcelletransplantasjon, dagkirurgisk behandling;3,063;0,306;1;S
+481P;17;Allogen stamcelletransplantasjon, dagkirurgisk behandling;17,738;1,774;1;S
+482;3;Tracheostomi eller vevstransplantasjon ved sykdommer i ansikt, munnhule eller hals;11,703;;52;S
+482O;3;Tracheostomi eller vevstransplantasjon ved sykdommer i ansikt, munnhule eller hals, dagkirurgisk behandling;6,218;0,622;1;S
+483;40;Tracheostomi ekskl for sykd i ansikt, munnhule eller hals;34,267;;105;S
+483B;40;Invasiv sirkulasjonsstøtte;13,646;;35;S
+484;21;Kraniotomi ved signifikant multitraume;24,505;;52;S
+485;21;Større op hofte/lårbensop & replantasjoner ved HDG 21;4,394;;30;S
+486;21;Operasjoner ved signifikant multitraume ITAD;7,45;-0,214;30;S
+486O;21;Operasjoner ved signifikant multitraume ITAD, dagkirurgisk behandling;1,269;0,127;1;S
+487;21;Signifikant multitraume ITAD;2,303;;30;M
+489;18;HIV m/ betydelig HIV relatert sykdom;3,219;;44;M
+490;18;HIV med eller uten bidiagnose;1,338;;19;M
+491;8;Proteseop & replantasjon i skulder/albue/håndledd;3,984;;14;S
+491O;8;Proteseop og replantasjon i skulder/albue/håndledd, dagkirurgisk behandling;3,972;0,397;1;S
+493;7;Laparoskopisk kolecystektomi u/ eksplor av gallegang m/bk;2,105;-0,061;18;S
+494;7;Laparoskopisk kolecystektomi u/ eksplor av gallegang u/bk;1,218;-0,035;8;S
+494O;7;Laparoskopisk kolecystektomi u/ eksplor av gallegang, dagkirurgisk behandling;0,647;0,065;1;S
+495;4;Lungetransplantasjon;21,777;;72;S
+501A;30;Rekonstruksjon av bryst m/bk;4,037;-0,116;12;S
+501B;30;Rekonstruksjon av bryst u/bk;1,938;-0,056;7;S
+501O;30;Rekonstruksjon av bryst, dagkirurgisk behandling;1,163;0,116;1;S
+502;30;Mastektomi med rekonstruksjon av bryst v/ondartet svulst;2,902;-0,084;10;S
+509;30;Andre operasjoner på bryst;1,027;-0,03;4;S
+509O;30;Andre operasjoner på bryst, dagkirurgisk behandling;0,353;0,035;1;S
+520;3;Obstruktivt søvnapnesyndrom (OSAS);0,243;;3;M
+521;3;Operativ korreksjon av obstruktivt søvnapnesyndrom (OSAS);0,354;-0,01;2;S
+521O;3;Operativ korreksjon av obstruktivt søvnapnesyndrom (OSAS), dagkirurgisk behandling;0,234;0,023;1;S
+570;1;Innsetting eller bytte av nevrologisk stimuleringsutstyr;4,907;-0,141;9;S
+570O;1;Innsetting eller bytte av nevrologisk stimuleringsutstyr, dagkirurgisk behandling;4,17;0,417;1;S
+701O;3;Poliklinisk endoskopi av øvre luftveier;0,026;;0;
+702O;4;Endoskopi av nedre luftveier;0,068;;0;
+703O;6;Endoskopisk innlegging av stent i magetarmkanalen;0,282;;0;
+704O;6;Terapeutisk enteroskopi;0,065;;0;
+706O;6;Terapeutisk endoskopi av øvre magetarmkanal;0,064;;0;
+707O;6;Terapeutisk rektoskopi;0,064;;0;
+707P;6;Poliklinisk behandling av hemoroider;0,028;;0;
+709O;6;Enteroskopi;0,046;;0;
+710O;6;Koloskopi;0,064;;0;
+711O;6;Poliklinisk endoskopi av øvre magetarmkanal;0,047;;0;
+712O;6;Poliklinisk sigmoidoskopi;0,049;;0;
+713O;7;Innlegging av stent i gallegang ved ERCP;0,226;;0;
+714O;7;Terapeutisk endoskopi av gallegang;0,139;;0;
+715O;7;Endoskopi av gallegang;0,179;;0;
+716O;11;Terapeutisk endoskopi av urinveiene;0,096;;0;
+717O;11;Endoskopi av øvre urinveier;0,036;;0;
+718O;11;Endoskopi av nedre urinveier;0,035;;0;
+719O;13;Hysteroskopi og salpingoskopi;0,037;;0;
+720O;6;Kombinert gastrointestinal endoskopi;0,113;;0;
+801H;1;Poliklinisk behandling av nevrologiske lidelser med infusjon av særskilte legemidler;0,344;;0;
+801J;1;Poliklinisk kontakt med påfyll av baklofen ved ITB-behandling av dystoni og spastisitet;0,064;;0;
+801R;1;Lokal smertebehandling;0,065;;0;
+801T;1;Justering av implantert infusjonsutstyr eller shunt;0,026;;0;
+801U;1;Nevropsykologisk undersøkelse;0,061;;0;
+801W;1;Poliklinisk behandling av tilstander i nervesystemet med lokal injeksjon av botulinumtoksin;0,107;;0;
+802P;2;Annen poliklinisk utredning og behandling av øyetilstander med spesifiserte tiltak;0,028;;0;
+802U;2;Poliklinisk behandling av AMD og makulaødem med lokal medikamentinjeksjon eller fotodynamisk metode;0,09;;0;
+803N;3;Annen poliklinisk utredning og behandling av ØNH-tilstander med spesifiserte tiltak;0,032;;0;
+803R;3;Diagnostisk intervensjon ved søvnapné;0,03;;0;
+803T;3;Tannimplantatbehandling;0,23;;0;
+803U;3;Hørselsundersøkelser og hørselsforbedrende tiltak;0,024;;0;
+804P;4;Lokale intervensjoner i toraks;0,072;;0;
+804R;4;Lungefunksjonsundersøkelse;0,057;;0;
+805P;5;Elektrokonvertering av hjertearytmi;0,078;;0;
+806H;6;Poliklinisk behandling av mage-tarmlidelser med infusjon av særskilte legemidler;0,446;;0;
+806P;6;Mindre gastroenterologisk abdominal prosedyre;0,035;;0;
+806R;6;Fysiologisk gastrointestinal undersøkelse;0,05;;0;
+806S;6;Mindre invasiv gastrointestinal biopsi;0,047;;0;
+807P;7;Gastrointestinal biopsi for lever- og galleveistilstand;0,052;;0;
+808H;8;Polikl behandling av revmatologiske lidelser med infusjon av særskilte legemidler;0,38;;0;
+808I;8;Ikke-kirurgisk behandling av Dupuytrens kontraktur;0,13;;0;
+808U;8;Muskel- og skjelettbiopsi;0,058;;0;
+808W;8;Lukket reposisjon av brudd og luksasjon eller leddmobilisering;0,044;;0;
+808Y;8;Ortopedisk bandasjering;0,031;;0;
+809H;9;Poliklinisk behandling av hudlidelser med infusjon av særskilte legemidler;0,416;;0;
+809J;9;Eksisjon eller destruksjon av hudlesjon;0,041;;0;
+809P;9;Fotodynamisk behandling av hudlidelse;0,072;;0;
+809R;9;Annen lysbehandling;0,004;;0;
+809S;9;Basal sårbehandling;0,027;;0;
+809T;9;Mindre hudprosedyre;0,036;;0;
+810R;10;Registrering av hormonprofil;0,035;;0;
+811P;11;Punksjon av nyre eller retroperitoneum;0,099;;0;
+811R;11;Polikliniske urologiske tiltak, hovedsakelig diagnostiske;0,033;;0;
+811S;11;Mindre prosedyre på nedre urinveier;0,035;;0;
+812P;12;Mindre prosedyrer på mannlige kjønnsorgan;0,031;;0;
+813R;13;Assistert befruktning;0,13;;0;
+813S;13;Gynekologisk biopsi;0,029;;0;
+813T;13;Annen poliklinisk gynekologisk prosedyre;0,032;;0;
+814P;14;Annen helsehjelp ifm spontanabort og komplikasjoner etter abort;0,034;;0;
+814R;14;Andre forløsningsprosedyrer;0,037;;0;
+814S;14;Medikamentell svangerskapsavbrytelse;0,038;;0;
+816P;16;Transfusjon av andre blodkomponenter;0,094;;0;
+816R;16;Transfusjon av fullblod eller røde blodlegemer;0,074;;0;
+817S;17;Fullblods tapping, eller uttak av beinmarg;0,036;;0;
+823S;40;Allergologisk provokasjonstest;0,06;;0;
+823U;40;Hyperbar oksygenbehandling;0,16;;0;
+850A;40;Poliklinisk kontakt for ordinær planlegging av stråleterapi;0,068;;0;
+850B;40;Poliklinisk kontakt for kompleks planlegging av stråleterapi;0,141;;0;
+850C;40;Poliklinisk kontakt for simulering og annen enklere planlegging av stråleterapi;0,043;;0;
+851A;1;Poliklinisk ekstern strålebehandling ved svulst i sentralnervesystemet;0,044;;0;
+851C;2;Poliklinisk ekstern strålebehandling ved svulst i øre, nese, hals, øye og ansikt;0,044;;0;
+851D;4;Poliklinisk ekstern strålebehandling ved lungekreft;0,044;;0;
+851F;6;Poliklinisk ekstern strålebehandling ved kreft i fordøyelsesorganer;0,044;;0;
+851J;9;Poliklinisk ekstern strålebehandling ved hudkreft;0,044;;0;
+851K;30;Poliklinisk ekstern strålebehandling ved brystkreft;0,044;;0;
+851N;12;Poliklinisk ekstern strålebehandling ved svulst i mannlige kjønnsorganer;0,044;;0;
+851R;17;Poliklinisk ekstern strålebehandling ved kreft i bloddannende organer og lymfatisk vev;0,044;;0;
+851X;40;Poliklinisk ekstern strålebehandling ved andre tilstander;0,044;;0;
+852N;12;Brakyterapi ved prostatakreft;1,417;;0;S
+852X;40;Poliklinisk brakyterapi ved svulst;0,622;;0;
+856D;4;Poliklinisk medikamentell behandling av lungekreft;0,257;;0;
+856F;6;Poliklinisk medikamentell behandling av kreft i fordøyelsesorganer;0,213;;0;
+856G;7;Poliklinisk medikamentell behandling av kreft i lever, galleveier og bukspyttkjertel;0,2;;0;
+856J;9;Poliklinisk medikamentell behandling av malignt melanom;1,354;;0;
+856K;30;Poliklinisk medikamentell behandling av brystkreft;0,222;;0;
+856M;11;Poliklinisk medikamentell behandling av kreft i nyre og urinveier;0,197;;0;
+856N;12;Poliklinisk medikamentell behandling av svulst i mannlige kjønnsorganer;0,22;;0;
+856O;13;Poliklinisk medikamentell behandling av svulst i kvinnelige kjønnsorganer;0,21;;0;
+856R;17;Poliklinisk medikamentell behandling av kreft i bloddannende organer og lymfatisk vev;0,262;;0;
+856X;40;Poliklinisk medikamentell behandling av andre kreftformer;0,205;;0;
+862B;23;Dagrehabilitering;0,12;;0;
+862O;23;Poliklinisk rehabilitering;0,024;;0;
+877O;40;Andre polikliniske kontakter for gjennomføring av middels omfattende prosedyrer;0,043;;0;
+901A;1;Poliklinisk konsultasjon vedrørende hodepine;0,053;;0;
+901B;1;Poliklinisk konsultasjon vedrørende epilepsi og andre krampetilstander;0,049;;0;
+901C;1;Poliklinisk konsultasjon vedr sykdom i perifere nerver;0,043;;0;
+901D;1;Poliklinisk konsultasjon vedr MS, degenerative og visse andre nevr lidelser;0,049;;0;
+901E;1;Annen poliklinisk konsultasjon vedr smerterelaterte tilstander;0,047;;0;
+901O;1;Poliklinisk konsultasjon vedr andre sykdommer i nervesystemet;0,06;;0;
+902O;2;Poliklinisk konsultasjon vedrørende andre øyesykdommer;0,025;;0;
+903A;3;Poliklinisk konsultasjon vedr betennelsestilstander i ØNH-regionen;0,032;;0;
+903B;3;Poliklinisk konsultasjon vedr sykdommer og skader i kjeve, tenner eller munnhule;0,034;;0;
+903C;3;Poliklinisk konsultasjon vedr søvnapne;0,03;;0;
+903O;3;Poliklinisk konsultasjon vedr andre sykdommer i øre-nese-hals;0,026;;0;
+904A;4;Poliklinisk konsultasjon vedr astma og bronkitt;0,047;;0;
+904B;4;Poliklinisk konsultasjon vedr KOLS;0,054;;0;
+904C;4;Poliklinisk konsultasjon vedr svulst i lunger, bronkier eller mediastinum;0,06;;0;
+904D;4;Poliklinisk konsultasjon vedr infeksjon i nedre luftveier;0,042;;0;
+904O;4;Poliklinisk konsultasjon vedr andre sykdommer i nedre luftveier/ lunge;0,054;;0;
+905A;5;Pol konsultasjon vedr atrieflimmer og andre rytme- eller ledningsforstyrrelser;0,04;;0;
+905B;5;Poliklinisk konsultasjon vedr hypertensjon;0,042;;0;
+905C;5;Pol konsultasjon vedr angina pectoris og iskemisk hjertesykdom, unntatt AMI;0,058;;0;
+905D;5;Poliklinisk konsultasjon vedr hjertesvikt;0,043;;0;
+905E;5;Poliklinisk konsultasjon vedrørende sykdom i perifere blodkar;0,031;;0;
+905O;5;Poliklinisk konsultasjon vedrørende andre kretsløpsykdommer;0,039;;0;
+906A;6;Poliklinisk konsultasjon vedr svulst i fordøyelseskanalen;0,061;;0;
+906B;6;Poliklinisk konsultasjon vedr inflammatorisk tarmsykdom;0,047;;0;
+906C;6;Poliklinisk konsultasjon vedr smerte i mageregionen;0,045;;0;
+906O;6;Poliklinisk konsultasjon vedrørende andre fordøyelsessykdommer;0,038;;0;
+907A;7;Poliklinisk konsultasjon vedr hepatitt og andre ikke-maligne leverlidelser;0,038;;0;
+907B;7;Poliklinisk konsultasjon vedr galleveislidelser;0,033;;0;
+907O;7;Poliklinisk konsultasjon vedrørende andre sykdommer i lever og galleveier;0,059;;0;
+908A;8;Pol kons vedr brudd, dislokasjon eller bløtdelsskade i armer, ben eller bekken;0,025;;0;
+908B;8;Poliklinisk konsultasjon vedrørende artrose;0,027;;0;
+908C;8;Poliklinisk konsultasjon vedr inflammatorisk leddsykdom;0,025;;0;
+908D;8;Poliklinisk konsultasjon vedr systemiske bindevevssykdommer;0,034;;0;
+908E;8;Poliklinisk konsultasjon vedr tendinitt, myositt og bursitt;0,032;;0;
+908F;8;Poliklinisk konsultasjon vedr lidelser og skader i rygg og nakke;0,049;;0;
+908O;8;Poliklinisk konsultasjon vedrørende andre sykdommer i bevegelsesapparatet;0,022;;0;
+908R;8;Ortopedisk diagnostisk ultralyd;0,04;;0;
+909A;9;Poliklinisk konsultasjon vedrørende mindre hudskader;0,03;;0;
+909B;9;Poliklinisk konsultasjon vedrørende kroniske sår;0,029;;0;
+909C;9;Poliklinisk konsultasjon vedrørende svulster i hud og underhud;0,036;;0;
+909D;9;Poliklinisk konsultasjon vedr psoriasis og andre papuloskvamøse lidelser;0,02;;0;
+909E;9;Poliklinisk konsultasjon vedr eksem og dermatitt;0,024;;0;
+909O;9;Poliklinisk konsultasjon vedr andre sykdommer i hud og underhud;0,025;;0;
+910A;10;Poliklinisk konsultasjon vedrørende diabetes mellitus;0,035;;0;
+910B;10;Poliklinisk konsultasjon vedrørende sykdom i skjoldbruskkjertelen;0,035;;0;
+910C;10;Poliklinisk konsultasjon vedrørende fedme og overvekt;0,043;;0;
+910O;10;Poliklinisk konsultasjon vedr andre endokrine/ernærings-/ stoffskiftesykdommer;0,044;;0;
+911A;11;Poliklinisk konsultasjon vedrørende nyresvikt;0,039;;0;
+911B;11;Poliklinisk konsultasjon vedrørende svulst i urinveiene;0,04;;0;
+911C;11;Poliklinisk konsultasjon vedr oppfølging av nyretransplanterte;0,039;;0;
+911O;11;Poliklinisk konsultasjon vedr andre sykdommer i nyre og urinveier;0,034;;0;
+912A;12;Poliklinisk konsultasjon vedr ondartet svulst i mannlige kjønnsorgan;0,047;;0;
+912O;12;Poliklinisk konsultasjon vedr andre sykdommer i mannlige kjønnsorganer;0,033;;0;
+913A;13;Poliklinisk konsultasjon vedr ondartet svulst i kvinnelige kjønnsorganer;0,039;;0;
+913B;40;Poliklinisk konsultasjon vedrørende infertilitet;0,025;;0;
+913O;13;Poliklinisk konsultasjon vedr andre sykdommer i kvinnelige kjønnsorganer;0,028;;0;
+914O;14;Poliklinisk konsultasjon vedrørende svangerskap, fødsel og barseltid;0,02;;0;
+914P;14;Obstetrisk diagnostisk tiltak, inkludert screening av gravide;0,022;;0;
+914Q;14;Fosterdiagnostiske undersøkelser;0,027;;0;
+915O;15;Poliklinisk konsultasjon vedrørende perinatale tilstander uten signifikant prosedyre;0,026;;0;
+916O;16;Poliklinisk konsultasjon vedr sykdommer ved bloddannelse eller i immunsystemet;0,047;;0;
+917A;17;Pol kons vedr lymfom, leukemi, myelomatose og visse andre benmargssykdommer;0,05;;0;
+917O;17;Poliklinisk konsultasjon vedr myeloproliferative tilstander eller udifferensierte svulster;0,037;;0;
+918O;18;Poliklinisk konsultasjon vedrørende infeksjons- og parasittsykdommer uten signifikant prosedyre;0,03;;0;
+919O;19;Poliklinisk konsultasjon vedrørende mentale tilstander uten signifikant prosedyre;0,034;;0;
+921O;21;Poliklinisk konsultasjon vedr skader/ forgiftninger/ skadelige medikamentvirkninger;0,041;;0;
+922O;22;Poliklinisk konsultasjon vedr brannskader uten signifikant prosedyre;0,022;;0;
+923O;23;Pol kons vedr faktorer som har betydning for helsetilstanden/ kontakt med helsetjenesten;0,017;;0;
+930A;30;Poliklinisk konsultasjon vedr ondartet svulst i bryst;0,057;;0;
+930O;30;Poliklinisk konsultasjon vedrørende sykdommer i bryst;0,034;;0;
+959W;23;Palliativ dagbehandling i regi av palliativt senter;0,138;;0;
+980A;1;Innleggelse uten overnatting for ØH-relaterte tilstander i nervesystemet;0,121;;0;
+980C;3;Innleggelse uten overnatting for ØH-relaterte øre-nese-hals-tilstander;0,164;;0;
+980D;4;Innleggelse uten overnatting for ØH-relaterte tilstander i nedre luftveier;0,156;;0;
+980E;5;Innleggelse uten overnatting for ØH-relaterte hjerte- og kartilstander;0,156;;0;
+980F;6;Innleggelse uten overnatting for ØH-relaterte tilstander i fordøyelsessystemet;0,148;;0;
+980H;8;Innleggelse uten overnatting for ØH-relaterte muskel- og skjelettilstander;0,114;;0;
+980T;19;Innleggelse uten overnatting for ØH-relaterte rusmiddelfremkalte og psykiatri tilstander som krever somatisk behandling;0,151;;0;
+980U;21;Innleggelse uten overnatting for skader, forgiftninger og utilsiktede medikamentvirkninger;0,175;;0;
+980X;40;Innleggelse uten overnatting for andre ØH-relaterte tilstander;0,131;;0;
+981X;40;Innleggelse uten overnatting for andre tilstander;0,12;;0;
+996O;23;Behandlingstiltak rettet mot en gruppe pasienter;0,017;;0;
+997O;23;Tverrfaglig utredning;0,107;;0;
+998O;23;Grupperettet pasientopplæring;0,023;;0;
