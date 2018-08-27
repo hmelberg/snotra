@@ -1,7 +1,7 @@
 # Snotra - Health registry research using Pandas and Python
 Snotra is a tool that extends and builds on the Pandas library to make it easier to analyze data on hospital events, prescriptions and similar types of health data.
 
-Snotra is also a Norse Goddess associated with the Norse word for clever. Although the library is related to health research, the Norse term is in no way connected to snot.
+Snotra is also a Norse goddess associated with the Norse word for clever. Although the library is related to health research, the Norse term is in no way connected to snot.
 
 ### Examples
 - **Count the number of unique persons with a diagnosis in event data**
@@ -39,13 +39,23 @@ Snotra is also a Norse Goddess associated with the Norse word for clever. Althou
     cci = rr.charlson(df=df, cols=['icd1', 'icd2'], sep=',')
     ```
 
- ### License
- MIT
- 
+## Installation
+   - We recommend using 'rr' as an abbreviation for registry research
+    
+    ```python
+    pip install snotra as rr
+    ```
+    
  ### Requirements
  - Python 3.6 
  - Pandas
+
+ ### License
+ MIT
  
+ ### Disclaimer
+ Snotra is currently under development and not ready for production. Much remains to be tested and corrected, use at your own risk - and contributions are welcome!
+  
  
  ### Features
  - **Easy and efficient notation and methods to deal with medical codes:** Medical data often use special code systems to indicate diagnoses, pharmaceuticals and medical procedures. We integrated these tools and allow the use of different types of notation (star, hyphen, colon) to make it easy to select or count the relevant patients.
