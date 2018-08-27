@@ -1,8 +1,9 @@
 import os
 import uuid
+import pandas as pd
 
-from snotra.internal import to_df, fix_args, get_some_id, listify
-from snotra.core import get_rows, expand_codes
+from .internal import to_df, fix_args, get_some_id, listify
+from .core import get_rows, expand_codes
 
 
 def events2person(df, agg):
@@ -15,69 +16,6 @@ def events2person(df, agg):
     ibd: k50 or k51 in icd
     """
     pass
-
-
-def persons_with(df,
-                 codes,
-                 cols,
-                 pid='pid',
-                 sep=None,
-                 merge=True,
-                 first_date=None,
-                 last_date=None,
-                 group=False,
-                 _fix=True):
-    """
-    Determine whether people have received a code
-
-    Args:
-        codes (list or dict): codes to mark for
-            codes to search for
-                - if list: each code will represent a column
-                - if dict: the codes in each item will be aggregated to one indicator
-            cols (str or list of str): Column(s) with the codes
-            pid (str): colum with the person identifier
-            first_date (str): use only codes after a given date
-                the string either represents a date (same for all individuals)
-                or the name of a column with dates (may be different for different individuals)
-            last_date (str): only use codes after a given date
-                the string either represents a date (same for all individuals)
-                or the name of a column with dates (may be different for different individuals)
-
-    Returns:
-        Series or Dataframe
-
-
-    Examples:
-        fracture = persons_with(df=df, codes='S72*', cols='icdmain')
-        fracture = persons_with(df=df, codes={'frac':'S72*'}, cols='icdmain')
-
-    Todo:
-        - function may check if pid_index is unique, in which it does not have to aggregate
-        - this may apply in general? functions that work on event data may then also work on person level data
-        - allow user to input person level dataframe source?
-    """
-    sub = df
-
-    if _fix:
-        df, cols = to_df(df=df, cols=cols)
-        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=merge, group=group)
-        rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
-        sub = df[rows]
-
-    df_persons = sub.groupby(pid)[cols].apply(lambda s: pd.unique(s.values.ravel()).tolist()).astype(str)
-
-    # alternative approach, also good, and avoids creaintg personal dataframe
-    # but ... regeis is fast since it stopw when it finds one true code!
-    #    c=df.icdbi.str.split(', ', expand=True).to_sparse()
-    #    c.isin(['S720', 'I10']).any(axis=1).any(level=0)
-
-    persondf = pd.DataFrame(index=df[pid].unique().tolist())
-    for name, codes in codes.items():
-        codes_regex = '|'.join(codes)
-        persondf[name] = df_persons.str.contains(codes_regex, na=False)
-
-    return persondf
 
 
 def get_uuid(df, codes, cols, uuid='uuid', sep=None):

@@ -1,5 +1,6 @@
-from snotra.internal import listify, to_df, fix_args
-from snotra.core import get_rows, count_codes
+import pandas as pd
+from .internal import listify, to_df, fix_args
+from .core import get_rows, count_codes
 
 
 def find_spikes(df, codes=None, cols=None, persons=False, pid='pid', sep=None, groups=None,

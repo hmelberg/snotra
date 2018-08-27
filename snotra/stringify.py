@@ -1,8 +1,11 @@
-import re
-from itertools import zip_longest, chain
 
-from snotra.internal import listify, expand_cols, fix_args, to_df
-from snotra.core import get_rows, count_codes, extract_codes
+import pandas as pd
+import re
+from itertools import chain
+from itertools import zip_longest
+
+from .internal import listify, expand_cols, fix_args, to_df
+from .core import get_rows, count_codes, extract_codes
 
 
 def stringify_durations(df,
@@ -670,10 +673,11 @@ def stringify_time(df,
         codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:4]
 
     # fix formatting of input (make list out of a string input and so on)
-    codes, cols, old_codes, replace = fix_args(df=df, codes=codes, cols=cols, sep=sep)
+    codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep)
+
 
     # get the rows that contain the relevant codes
-    rows = get_rows(df=df, codes=codes, cols=cols, sep=sep)
+    rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep)
     subset = df[rows]  # maybe use .copy to avoid warnings?
 
     # find position of each event (number of steps from overall min_date)
@@ -681,7 +685,7 @@ def stringify_time(df,
 
     # create series with only the relevant codes for each person and position
     code_series = extract_codes(df=subset.set_index([pid, 'position']),
-                                codes=replace,
+                                codes=codes,
                                 cols=cols,
                                 sep=sep,
                                 new_sep=',',

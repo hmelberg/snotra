@@ -1,6 +1,7 @@
-from internal import *
-from core import *
-from stringify import *
+import pandas as pd
+
+from .core import *
+from .stringify import *
 
 # %% monkeypatch to the functions become methods on the dataframe
 # could use decorators/pandas_flavor
@@ -15,7 +16,7 @@ frame_methods = [sample_persons, first_event, get_pids, unique_codes,
                  expand_codes, get_rows, count_persons, stringify,
                  extract_codes, count_codes, label, use_expression]
 
-# probably a horrible way of doing something horible!
+# probably a horrible way of doing something horrible!
 for method in frame_methods:
     setattr(pd.DataFrame, getattr(method, "__name__"), method)
 

@@ -9,18 +9,16 @@ import numpy as np
 import pandas as pd
 import re
 
-# %%
-from snotra.delete import persons_with, read_code2text, stringify
-from snotra.find import find_spikes
-from snotra.internal import listify, sniff_sep, get_some_id, fix_cols, fix_codes, fix_args, to_df, get_allcodes, expand_cols, \
-    expand_star, expand_hyphen, format_codes, expand_regex, reverse_dict
 
 # %%
+from .internal import listify, sniff_sep, get_some_id, fix_cols, fix_codes, fix_args, to_df, get_allcodes, expand_cols, \
+    expand_star, expand_hyphen, format_codes, expand_regex, reverse_dict, persons_with
 
+# %%
 
 def incidence(df, codes=None, cols=None, sep=None, pid='pid',
               date='indate', min_events=1, within_period=None,
-              groupby='cohort', update_cohort=True, _fix=True):
+              groupby='cohort', update_cohort=True, codebook=None,_fix=True):
     """
     The number of new patients each year who have one or more of the codes
 
@@ -478,7 +476,7 @@ def get_rows(df,
     """
     # if an expression is used as input
     if isinstance(codes, str) and codes.count(' ') > 1:
-        b = use_expression(df, codes, cols=cols, sep=sep, out='rows', codebook=codebook, pid=pid)
+        b = use_expression(df, codes, cols=cols, sep=sep, out='rows', codebook=codebook)
 
     # if a list of codes is used as input
     else:
@@ -536,7 +534,8 @@ def select_persons(df,
                    codes,
                    cols,
                    pid='pid',
-                   sep=None):
+                   sep=None,
+                   codebook=None):
     """
     Returns a dataframe with all events for people who have the given codes
     example
@@ -1118,9 +1117,8 @@ def label(df, labels=None, read=True, path=None):
 
 # %%
 
-def count_codes(df, codes=None, cols=None, sep=None, strip=True,
-                ignore_case=False, normalize=False, ascending=False, _fix=True,
-                merge=False, group=False, dropna=True):
+def count_codes(df, codes=None, cols=None, sep=None, normalize=False,
+                ascending=False, _fix=True, merge=False, group=False, dropna=True):
     """
     Count frequency of values in multiple columns or columns with seperators
 
@@ -1272,7 +1270,7 @@ def get_codes(dikt, text):
 
 
 # %%
-def sankey_format(df, labels, normalize=False, dropna=False, threshold=0.01):
+def sankey_format(df, labels=None, normalize=False, dropna=False, threshold=0.01):
     """
 
     labels=dict(bio_codes.values())
@@ -1283,6 +1281,7 @@ def sankey_format(df, labels, normalize=False, dropna=False, threshold=0.01):
 
     %store t4
     """
+    a=df
     a = a.apply(lambda row: ' '.join(row))
     a = a.str.split(expand=True)
 
@@ -1395,17 +1394,17 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
         mtumor  	,
         hiv  	]
 
-    disease_cod e s={}
+    disease_codes={}
     for i, disease in enumerate(diseases):
-        all_cod e s=[]
-        disease_s t r=disease_labels[i]
+        all_codes=[]
+        disease_str=disease_labels[i]
         for code in disease:
             expanded_codes = expand_hyphen(code)
             all_codes.extend(expanded_codes)
         disease_codes[disease_str] = all_codes
 
     expanded_disease_codes = {}
-    no_dot_disease_cod e s={}
+    no_dot_disease_codes={}
 
     if not dot_notation:
         for disease, codes in disease_codes.items():
@@ -1418,12 +1417,12 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
     for disease, codes in disease_codes.items():
         expanded_disease_codes[disease] = expand_codes(df=df, codes=codes, cols=cols, sep=sep, codebook=all_codes)
 
-    codeli s t=[]
+    codelist=[]
     for disease in disease_labels:
         codes = expanded_disease_codes[disease]
         codelist.extend(codes)
 
-    rows = get_rows(df=d f,codes=codelist, cols=cols, sep=sep)
+    rows = get_rows(df=df,codes=codelist, cols=cols, sep=sep)
 
     subset = df[rows]
 

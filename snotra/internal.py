@@ -1,6 +1,9 @@
+
+import numpy as np
+import pandas as pd
 import re
 
-from snotra.core import expand_codes, count_codes, get_rows, unique_codes
+from .core import expand_codes, count_codes, get_rows, unique_codes
 
 
 def listify(string_or_list):
@@ -316,43 +319,6 @@ def expand_star(expr, cols=None, full_list=None, sep=None):
     return expanded
 
 
-def single_columns(df, cols=None, sep=',', n=100, check_all=False):
-    """
-    Identify columns that do not have seperators i.e. single values in cells
-
-    Args:
-        cols (list of strings): columns to be examined for seperators,
-        default: all columns
-
-        sep (string): seperator that may be used to distinguish values in cells
-        n (int): check only a subsample (head and tail) of n observations
-        check_all (bool): check all observations
-
-    Returns:
-        list
-
-    """
-
-    if not cols:
-        cols = list(df.columns)
-
-    single_value_columns = []
-    multiple_value_columns = []
-
-    for col in cols:
-        if (df[col].head(100).str.contains(sep).any()) or (df[col].tail(100).str.contains(sep).any()):
-            multiple_value_columns.append(col)
-        else:
-            single_value_columns.append(col)
-
-    if check_all:
-        for col in single_value_columns:
-            if df[col].str.contains(sep).any():
-                multipe_value_columns.append(col)
-                single_value_columns.remove(col)
-    return single_value_columns
-
-
 def expand_hyphen(expr):
     """
     Example: Expands ('b01A-b04A') to ['b01A' ,'b02A', 'b03A', 'b04A']
@@ -380,7 +346,7 @@ def expand_hyphen(expr):
     """
 
     exprs = listify(expr)
-    all_cod e s=[]
+    all_codes=[]
 
     for expr in exprs:
         if '-' in expr:
@@ -399,13 +365,13 @@ def expand_hyphen(expr):
                 decimals = len(lower_str.split('.')[1])
                 multiplier = 10 * decimals
             else:
-                multiplie r =1
+                multiplier =1
 
-            no_dec_lower = int(lower_nu m *multiplier)
+            no_dec_lower = int(lower_num * multiplier)
             no_dec_upper = int((upper_num) * multiplier) + 1
 
             if '.' in lower_str:
-                codes = [lower.replace(lower_str, str(nu m /multiplier).zfill(length)) for num in range(no_dec_lower, no_dec_upper)]
+                codes = [lower.replace(lower_str, str(num /multiplier).zfill(length)) for num in range(no_dec_lower, no_dec_upper)]
             else:
                 codes = [lower.replace(lower_str, str(num).zfill(length)) for num in range(no_dec_lower, no_dec_upper)]
 
@@ -566,9 +532,72 @@ def expand_replace(df, replace, cols, sep=None, strip=True):
         if endswith:
             ending_codes = {code: text for code in codes if code.endswith(endswith)}
         if startswith and endswith:
-            start_and_end_codes = {starting_code: starting_code[x] for x in starting_code if x in ending_code}
+            start_and_end_codes = {starting_codes: starting_codes[x] for x in starting_codes if x in ending_codes}
 
         replace.update({**starting_codes, **ending_codes, **start_and_end_codes})
 
         del replace[starcode]
     return replace
+
+
+def persons_with(df,
+                 codes,
+                 cols,
+                 pid='pid',
+                 sep=None,
+                 merge=True,
+                 first_date=None,
+                 last_date=None,
+                 group=False,
+                 _fix=True):
+    """
+    Determine whether people have received a code
+
+    Args:
+        codes (list or dict): codes to mark for
+            codes to search for
+                - if list: each code will represent a column
+                - if dict: the codes in each item will be aggregated to one indicator
+            cols (str or list of str): Column(s) with the codes
+            pid (str): colum with the person identifier
+            first_date (str): use only codes after a given date
+                the string either represents a date (same for all individuals)
+                or the name of a column with dates (may be different for different individuals)
+            last_date (str): only use codes after a given date
+                the string either represents a date (same for all individuals)
+                or the name of a column with dates (may be different for different individuals)
+
+    Returns:
+        Series or Dataframe
+
+
+    Examples:
+        fracture = persons_with(df=df, codes='S72*', cols='icdmain')
+        fracture = persons_with(df=df, codes={'frac':'S72*'}, cols='icdmain')
+
+    Todo:
+        - function may check if pid_index is unique, in which it does not have to aggregate
+        - this may apply in general? functions that work on event data may then also work on person level data
+        - allow user to input person level dataframe source?
+    """
+    sub = df
+
+    if _fix:
+        df, cols = to_df(df=df, cols=cols)
+        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=merge, group=group)
+        rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
+        sub = df[rows]
+
+    df_persons = sub.groupby(pid)[cols].apply(lambda s: pd.unique(s.values.ravel()).tolist()).astype(str)
+
+    # alternative approach, also good, and avoids creaintg personal dataframe
+    # but ... regeis is fast since it stopw when it finds one true code!
+    #    c=df.icdbi.str.split(', ', expand=True).to_sparse()
+    #    c.isin(['S720', 'I10']).any(axis=1).any(level=0)
+
+    persondf = pd.DataFrame(index=df[pid].unique().tolist())
+    for name, codes in codes.items():
+        codes_regex = '|'.join(codes)
+        persondf[name] = df_persons.str.contains(codes_regex, na=False)
+
+    return persondf
