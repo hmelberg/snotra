@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import re
 
-from .core import expand_codes, count_codes, get_rows, unique_codes
+#from .core import expand_codes, count_codes, get_rows, unique_codes
 
 
 def listify(string_or_list):
