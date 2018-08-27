@@ -12,6 +12,15 @@ import re
 from itertools import zip_longest, chain
 
 
+# structure
+#
+# core api (key functions/methods
+# internal functions/methods
+# stringify
+#
+#
+
+
 
 ##
 ## Core API
@@ -244,15 +253,15 @@ def sample_persons(df, pid='pid', n=None, frac=0.1):
 
 
 # %%
-def get_ids(df, codes, cols, groupby, pid='pid', out=None, sep=None):
+def get_ids(df, codes, cols, groups, pid='pid', out=None, sep=None):
     codes = listify(codes)
     groupby = listify(groupby)
 
     codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep)
 
     rows_with_codes = get_rows(df=df, codes=codes, cols=cols, sep=sep)
-    # grouped_ids = df[rows_with_codes].groupby([pid, groupby]).count()
-    grouped_ids = df[rows_with_codes].groupby(groupby)[pid].unique()
+    # grouped_ids = df[rows_with_codes].groupby([pid, groups]).count()
+    grouped_ids = df[rows_with_codes].groupby(groups)[pid].unique()
     grouped_ids = grouped_ids.apply(set)
 
     return grouped_ids
@@ -1379,27 +1388,27 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
         pulmonary,
         tissue,
         ulcer,
-        liver  ,
-        diabetes 	,
-        hemiplegia  	,
-        renal  	,
-        dorgan  ,
-        tur	,
-        sliver   ,
-        mtumor  	,
-        hiv  	]
+        liver,
+        diabetes,
+        hemiplegia,
+        renal,
+        dorgan,
+        tumor	,
+        sliver,
+        mtumor,
+        hiv]
 
-    disease_cod e s={}
+    disease_codes = {}
     for i, disease in enumerate(diseases):
-        all_cod e s=[]
-        disease_s t r=disease_labels[i]
+        all_codes = []
+        disease_str = disease_labels[i]
         for code in disease:
             expanded_codes = expand_hyphen(code)
             all_codes.extend(expanded_codes)
         disease_codes[disease_str] = all_codes
 
     expanded_disease_codes = {}
-    no_dot_disease_cod e s={}
+    no_dot_disease_codes = {}
 
     if not dot_notation:
         for disease, codes in disease_codes.items():
@@ -1412,12 +1421,12 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
     for disease, codes in disease_codes.items():
         expanded_disease_codes[disease] = expand_codes(df=df, codes=codes, cols=cols, sep=sep, codebook=all_codes)
 
-    codeli s t=[]
+    codelist = []
     for disease in disease_labels:
         codes = expanded_disease_codes[disease]
         codelist.extend(codes)
 
-    rows = get_rows(df=d f,codes=codelist, cols=cols, sep=sep)
+    rows = get_rows(df=df,codes=codelist, cols=cols, sep=sep)
 
     subset = df[rows]
 
@@ -1428,8 +1437,8 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
         charlson_df[disease] = charlson_df[disease] * point
 
     age_points=df.groupby(pid)[age].min().sub(40).div(10).astype(int)
-    age_points[age_poin ts<0 ]=0
-    age_points[age_point s> 4 ]= 4
+    age_points[age_points < 0 ] = 0
+    age_points[age_points > 4 ] = 4
 
     disease_points = charlson_df.sum(axis=1).fillna(0)
     charlson_index = age_points.add(disease_points, fill_value=0)
@@ -1881,13 +1890,13 @@ def expand_hyphen(expr):
                 decimals = len(lower_str.split('.')[1])
                 multiplier = 10 * decimals
             else:
-                multiplier =1
+                multiplier = 1
 
             no_dec_lower = int(lower_num * multiplier)
             no_dec_upper = int((upper_num) * multiplier) + 1
 
             if '.' in lower_str:
-                codes = [lower.replace(lower_str, str(num /multiplier).zfill(length)) for num in range(no_dec_lower, no_dec_upper)]
+                codes = [lower.replace(lower_str, str(num / multiplier).zfill(length)) for num in range(no_dec_lower, no_dec_upper)]
             else:
                 codes = [lower.replace(lower_str, str(num).zfill(length)) for num in range(no_dec_lower, no_dec_upper)]
 
