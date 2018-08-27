@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='snotra',
-    version='0.0.6',
+    version='0.0.7',
     packages=['snotra', ],
     license='MIT',
     include_package_data=True,

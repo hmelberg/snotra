@@ -1436,9 +1436,9 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
     for disease, point in points.items():
         charlson_df[disease] = charlson_df[disease] * point
 
-    age_points=df.groupby(pid)[age].min().sub(40).div(10).astype(int)
-    age_points[age_points < 0 ] = 0
-    age_points[age_points > 4 ] = 4
+    age_points = df.groupby(pid)[age].min().sub(40).div(10).astype(int)
+    age_points[age_points < 0] = 0
+    age_points[age_points > 4] = 4
 
     disease_points = charlson_df.sum(axis=1).fillna(0)
     charlson_index = age_points.add(disease_points, fill_value=0)
