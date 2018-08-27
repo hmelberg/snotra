@@ -2,7 +2,7 @@ import os
 import uuid
 import pandas as pd
 
-from .internal import to_df, fix_args, get_some_id, listify
+from snotra import listify, get_some_id, fix_args, to_df, get_allcodes
 from .core import get_rows, expand_codes
 
 
@@ -355,3 +355,73 @@ def stringify(df,
         return events_by_id
     elif out == 'df':
         return all_events
+
+
+def subset(df, codes, cols, sep):
+    allcodes = get_allcodes(codes)
+    rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep)
+    subset = df[rows].set_index('pid')
+    return subset
+
+
+def reverse_dict_old(dikt):
+    """
+    takes a dict and return a new dict with old values as key and old keys as values (in a list)
+
+    example
+
+    reverse_dict({'AB04a':'b', 'AB04b': 'b', 'AB04c':'b', 'CC04x': 'c'})
+
+    will return
+        {'b': ['AB04a', 'AB04b', 'AB04c'], 'c': 'CC04x'}
+    """
+
+    new_dikt = {}
+    for k, v in dikt.items():
+        if v in new_dikt:
+            new_dikt[v].append(k)
+        else:
+            new_dikt[v] = [k]
+    return new_dikt
+
+
+def expand_replace(df, replace, cols, sep=None, strip=True):
+    """
+    Takes a dictionary of shorthand codes and replacements, and returns a dictionary with all the codes expanded
+
+    Example:
+        expand_replace(df=df, replace={'AB04*':'b'}, col='atc')
+
+        May return
+            {'AB04a':'b', 'AB04b': 'b', 'AB04c':'b'}
+
+    """
+    # may use regex instead, but this may also be slower to use later?
+    cols = listify(cols)
+    codes = list(replace.keys())
+
+    codes = expand_codes(df=df, codes=codes, cols=cols, sep=None)
+
+    unexpanded = {code: text for code, text in replace.items() if '*' in code}
+
+    for starcode, text in unexpanded.items():
+
+        startswith, endswith = starcode.split('*')
+
+        # starting_codes  = ending_codes = start_and_end_codes = {}
+        starting_codes = {}
+        ending_codes = {}
+        start_and_end_codes = {}
+        # may be unnecessary to do this (and it may link the dictionaries in unwanted ways?)
+
+        if startswith:
+            starting_codes = {code: text for code in codes if code.startswith(startswith)}
+        if endswith:
+            ending_codes = {code: text for code in codes if code.endswith(endswith)}
+        if startswith and endswith:
+            start_and_end_codes = {starting_codes: starting_codes[x] for x in starting_codes if x in ending_codes}
+
+        replace.update({**starting_codes, **ending_codes, **start_and_end_codes})
+
+        del replace[starcode]
+    return replace

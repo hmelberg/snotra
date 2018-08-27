@@ -5,20 +5,24 @@ Created on Thu Feb 22 17:17:33 2018
 @author: hmelberg
 """
 
+
 import numpy as np
 import pandas as pd
 import re
+from itertools import zip_longest, chain
 
 
-# %%
-from .internal import listify, sniff_sep, get_some_id, fix_cols, fix_codes, fix_args, to_df, get_allcodes, expand_cols, \
-    expand_star, expand_hyphen, format_codes, expand_regex, reverse_dict, persons_with
+
+##
+## Core API
+##
+
 
 # %%
 
 def incidence(df, codes=None, cols=None, sep=None, pid='pid',
               date='indate', min_events=1, within_period=None,
-              groupby='cohort', update_cohort=True, codebook=None,_fix=True):
+              groupby='cohort', update_cohort=True, codebook=None, _fix=True):
     """
     The number of new patients each year who have one or more of the codes
 
@@ -239,7 +243,6 @@ def sample_persons(df, pid='pid', n=None, frac=0.1):
     return new_sample
 
 
-
 # %%
 def get_ids(df, codes, cols, groupby, pid='pid', out=None, sep=None):
     codes = listify(codes)
@@ -260,7 +263,6 @@ def unique_codes(df,
                  cols=None,
                  sep=None,
                  strip=True,
-                 name=None,
                  _sniffsep=True,
                  _fix=True):
     """
@@ -319,7 +321,6 @@ def unique_codes(df,
     return unique_terms
 
 
-
 # %%
 def expand_codes(df=None,
                  codes=None,
@@ -350,8 +351,8 @@ def expand_codes(df=None,
     Returns
         List of codes
 
-    Example
-        get all atc codes that are related to steroids in the atc column:
+    Examples
+        get all atc codes that are related to steroids in the atc column.
             codes= ['H02*', 'J01*', 'L04AB02', 'L04AB04']
             codes=expand_codes(df=df, codes=['H02*'], cols='atc')
             codes=expand_codes(df=df, codes=['K25*'], cols='icdmain', sep=',', codebook=codebook)
@@ -458,7 +459,6 @@ def expand_codes(df=None,
     return all_new_codes
 
 
-
 # %%
 def get_rows(df,
              codes,
@@ -553,7 +553,6 @@ def select_persons(df,
     df = df[df[pid].isin(pids)]
 
     return pids
-
 
 
 # %%
@@ -834,7 +833,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
 
 
 # %%
-def search_text(df, text, cols=['text'], select=None, raw=False, regex=False, logic=True, has_underscore=False):
+def search_text(df, text, cols='text', select=None, raw=False, regex=False, logic=True, has_underscore=False):
     """
     Searches column(s) in a dataframe for ocurrences of words or phrases
 
@@ -939,7 +938,6 @@ def search_text(df, text, cols=['text'], select=None, raw=False, regex=False, lo
     return df
 
 
-
 # %%
 def first_event(df, codes, cols=None, pid='pid', date='in_date', sep=None):
     """
@@ -976,7 +974,6 @@ def first_event(df, codes, cols=None, pid='pid', date='in_date', sep=None):
     first_date = subdf[[pid, date]].groupby(pid, sort=False)[date].min()
 
     return first_date
-
 
 
 # %%
@@ -1281,7 +1278,7 @@ def sankey_format(df, labels=None, normalize=False, dropna=False, threshold=0.01
 
     %store t4
     """
-    a=df
+    a = df
     a = a.apply(lambda row: ' '.join(row))
     a = a.str.split(expand=True)
 
@@ -1308,8 +1305,6 @@ def sankey_format(df, labels=None, normalize=False, dropna=False, threshold=0.01
 
     # a.groupby(1)[2].value_counts()
     return t1
-
-
 
 
 # %%
@@ -1383,32 +1378,32 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
         dementia,
         pulmonary,
         tissue,
-        ulcer  ,
-        liver  	,
+        ulcer,
+        liver  ,
         diabetes 	,
         hemiplegia  	,
         renal  	,
         dorgan  ,
-        tumr	,
+        tur	,
         sliver   ,
         mtumor  	,
         hiv  	]
 
-    disease_codes={}
+    disease_cod e s={}
     for i, disease in enumerate(diseases):
-        all_codes=[]
-        disease_str=disease_labels[i]
+        all_cod e s=[]
+        disease_s t r=disease_labels[i]
         for code in disease:
             expanded_codes = expand_hyphen(code)
             all_codes.extend(expanded_codes)
         disease_codes[disease_str] = all_codes
 
     expanded_disease_codes = {}
-    no_dot_disease_codes={}
+    no_dot_disease_cod e s={}
 
     if not dot_notation:
         for disease, codes in disease_codes.items():
-            new_codes = [code.replace('. ','') for code in codes]
+            new_codes = [code.replace('.  ','') for code in codes]
             no_dot_disease_codes[disease] = new_codes
         disease_codes = no_dot_disease_codes
 
@@ -1417,12 +1412,12 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
     for disease, codes in disease_codes.items():
         expanded_disease_codes[disease] = expand_codes(df=df, codes=codes, cols=cols, sep=sep, codebook=all_codes)
 
-    codelist=[]
+    codeli s t=[]
     for disease in disease_labels:
         codes = expanded_disease_codes[disease]
         codelist.extend(codes)
 
-    rows = get_rows(df=df,codes=codelist, cols=cols, sep=sep)
+    rows = get_rows(df=d f,codes=codelist, cols=cols, sep=sep)
 
     subset = df[rows]
 
@@ -1432,9 +1427,9 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
     for disease, point in points.items():
         charlson_df[disease] = charlson_df[disease] * point
 
-    age_poin t s=df.groupby(pid)[age].min().sub(40).div(10).astype(int)
-    age_points[age_poin t s< 0 ]=0
-    age_points[age_poin t s> 4 ]=4
+    age_points=df.groupby(pid)[age].min().sub(40).div(10).astype(int)
+    age_points[age_poin ts<0 ]=0
+    age_points[age_point s> 4 ]= 4
 
     disease_points = charlson_df.sum(axis=1).fillna(0)
     charlson_index = age_points.add(disease_points, fill_value=0)
@@ -1442,7 +1437,7 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
     # make truly missing egual to nans and not zero
     # truly missing = no age available and no icd has been recorded (all nans)
 
-    age_nans = age_points[age_poin t s> 0 ]=0
+    age_nans = age_points[age_points > 0] = 0
     icd_nans = df[cols].notnull().sum(axis=1).sum(level=0)
     icd_nans[icd_nans == 0] = np.nan
     icd_nans[icd_nans > 0] = 0
@@ -1450,10 +1445,6 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
     charlson_with_nans = charlson_index + age_nans + icd_nans
 
     return charlson_with_nans
-
-
-# %%
-
 
 # %%
 # def validate(df, cols=None, pid='pid', codebook=None, infer_types=True, infer_rulebook=True, rulebook=None, force_change=False, log=True):
@@ -1532,3 +1523,1286 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
 
 
 
+
+##
+## Maily helper functions
+##
+
+
+def listify(string_or_list):
+    """
+    return a list if the input is a string, if not: returns the input as it was
+
+    Args:
+        string_or_list (str or any):
+
+    Returns:
+        A list if the input is a string, if not: returns the input as it was
+
+    Note:
+        - allows user to use a string as an argument instead of single lists
+        - cols='icd10' is allowed instead of cols=['icd10']
+        - cols='icd10' is transformed to cols=['icd10'] by this function
+
+    """
+    if isinstance(string_or_list, str):
+        string_or_list = [string_or_list]
+    return string_or_list
+
+
+def sniff_sep(df, cols=None, possible_seps=[',', ';', '|'], n=1000, sure=False, each_col=False):
+    """
+    Sniff whether column(s) cells have mulitple values with a seperator
+
+    Args:
+        df: dataframe or series
+        cols (str or list of str): name of columns to be checked
+        possible_seps (list of str): list of potential seperators to check for
+        n (int, default = 1000): number of rows from tail and head to check
+        sure (bool, default False): Set to True to check all rows
+        each_col (bool, default False): Set to True to get a dict with the seperator (and whether it exists) for each column
+
+    Return:
+        Str, None or dict (of str or None)
+        Returns the seperator if it is found, or None if no seperator is found
+        If each_col is True, returns a dict with the sep (or None) for each column
+
+    """
+
+    cols = listify(cols)
+
+    df = stringify_cols(df=df, cols=cols)
+
+    # fix args depending on whether a series or df is input and if cols is specified
+    if isinstance(df, pd.Series):
+        df = pd.DataFrame(df)
+        cols = list(df.columns)
+    else:
+        if not cols:
+            cols = list(df.columns)
+
+    sep_col = {}
+    for col in cols:
+        if sure:
+            n = len(df.dropna())
+
+        if n < 1000:
+            n = len(df.dronna())
+
+        search_head = df[col].dropna().head(n).str.cat()
+        search_tail = df[col].dropna().head(n).str.cat()
+
+        # check for existence of all seps
+        for sep in possible_seps:
+            if (sep in search_head) or (sep in search_tail):
+                sniffed_sep = sep
+                break
+            else:
+                sniffed_sep = None
+        # don't check more columnsif found sep in one
+        if sniffed_sep and not each_col:
+            break
+
+        # go on to check each col if each_col is specified
+        if each_col:
+            sep_col[col] = sniffed_sep
+
+    if each_col:
+        sniffed_sep = sep_col
+
+    return sniffed_sep
+
+
+def get_some_id(df,
+                codes,
+                cols,
+                xid,
+                sep=None):
+    """
+    help function for all get functions that gets ids based on certain filtering criteria
+
+    x is the column with the info to be collected (pid, uuid, event_id)
+
+
+    """
+
+    codes = listify(codes)
+    cols = listify(cols)
+
+    cols = expand_cols(df=df, cols=cols)
+
+    expanded_codes = expand_codes(df=df,
+                                  codes=codes,
+                                  cols=cols,
+                                  sep=sep)
+
+    # if compound words in a cell
+    if sep:
+        expanded_codes_regex = '|'.join(expanded_codes)
+        b = np.full(len(df), False)
+        for col in cols:
+            a = df[col].str.contains(expanded_codes_regex, na=False).values
+            b = b | a
+    # if single value cells only
+    else:
+        b = df[cols].isin(expanded_codes).any(axis=1).values
+
+    pids = set(df[b][xid].unique())
+
+    return pids
+
+
+def fix_cols(df, cols):
+    if not cols:
+        cols = list(df.columns)
+
+    cols = expand_cols(df=df, cols=cols)
+    return cols
+
+
+def fix_codes(df, codes=None, cols=None, sep=None, merge=False, group=False):
+    if not codes:
+        codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:5]
+
+    codes = format_codes(codes=codes, merge=merge)
+    codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep, merge=merge, group=group)
+    return codes
+
+
+def fix_args(df, codes=None, cols=None, sep=None, merge=False, group=False, _sniffsep=True):
+    # Use all columns if no column is specified
+    # Series if converted to df (with pid column, assumed to be in the index)
+    if not cols:
+        cols = list(df.columns)
+    else:
+        cols = expand_cols(df=df, cols=cols)
+
+    if _sniffsep:
+        sep = sniff_sep(df=df, cols=cols)
+
+    if not codes:
+        codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False).index[:5]
+        codes = list(codes)
+
+    codes = format_codes(codes=codes, merge=merge)
+    codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep, merge=merge, group=group)
+    codes = format_codes(codes=codes, merge=merge)
+
+    # useful to have full codelist (of codes only, after expansion)
+    full_codelist = set()
+    for name, codelist in codes.items():
+        full_codelist.update(set(codelist))
+    allcodes = list(full_codelist)
+
+    return codes, cols, allcodes, sep
+
+
+def to_df(df, cols=None):
+    if isinstance(df, pd.Series):
+        df = df.to_frame()
+        cols = list(df.columns)
+        df['pid'] = df.index.values
+    return df, cols
+
+
+def get_allcodes(codes):
+    """
+    Return a list of only codes from the input
+
+    Used when codes is a dict to extract codes only
+    """
+    if isinstance(codes, dict):
+        allcodes = set()
+        for name, codelist in codes.items():
+            allcodes.update(set(codelist))
+        allcodes = list(allcodes)
+    else:
+        allcodes = listify(codes)
+    return allcodes
+
+
+def get_mask(df,
+             codes,
+             cols,
+             sep=None):
+    codes = listify(codes)
+    cols = listify(cols)
+
+    cols = expand_cols(df=df, cols=cols)
+
+    expanded_codes = expand_codes(df=df,
+                                  codes=codes,
+                                  cols=cols,
+                                  sep=sep)
+
+    # if compound words in a cell
+    if sep:
+        expanded_codes_regex = '|'.join(expanded_codes)
+        b = pd.DataFrame()
+        for col in cols:
+            b[col] = df[col].str.contains(expanded_codes_regex, na=False).values
+
+    # if single value cells only
+    else:
+        b = df[cols].isin(expanded_codes)
+
+    return b
+
+
+def expand_cols(df, cols, star=True, hyphen=True, colon=True, regex=None):
+    """
+    Expand columns with special notation to their full column names
+
+    """
+
+    cols = listify(cols)
+
+    allcols = list(df.columns)
+
+    if hyphen:
+        cols = expand_hyphen(expr=cols)
+    if star:
+        cols = expand_star(expr=cols, full_list=allcols)
+    if colon:
+        cols = expand_colon(expr=cols, full_list=allcols)
+    if regex:
+        cols = list(df.columns(df.columns.str.contains(regex)))
+
+    return cols
+
+
+def expand_colon(expr, full_list):
+    """
+    Expand expressions with colon notation to a list of complete columns names
+
+    expr (str or list): Expression (or list of expressions) to be expanded
+    full_list (list or array) : The list to slice from
+    """
+    exprs = listify(expr)
+    expanded = []
+
+    for expr in exprs:
+        if ':' in expr:
+            startstr, endstr = expr.split(':')
+            startpos = full_list.index(startstr)
+            endpos = full_list.index(endstr) + 1
+            my_slice = full_list[startpos:endpos]
+        else:
+            my_slice = [expr]
+
+        expanded.extend(my_slice)
+    return expanded
+
+
+def expand_star(expr, cols=None, full_list=None, sep=None):
+    """
+    Expand expressions with star notation to all matching expressions
+
+    """
+
+    exprs = listify(expr)
+
+    if isinstance(full_list, pd.Series):
+        pass
+    elif isinstance(full_list, list):
+        unique_series = pd.Series(full_list)
+    elif isinstance(full_list, set):
+        unique_series = pd.Series(list(full_list))
+    else:
+        unique = unique_codes(df=df, cols=cols, sep=sep)
+        unique_series = pd.Series(list(unique))
+
+    expanded = []
+
+    for expr in exprs:
+        if '*' in expr:
+            startstr, endstr = expr.split('*')
+            if startstr:
+                add_expr = list(unique_series[unique_series.str.startswith(startstr)])
+            if endstr:
+                add_expr = list(unique_series[unique_series.str.endswith(endstr)])
+            if startstr and endstr:
+                # col with single letter not included, start means one or more of something
+                # beginning is not also end (here!)
+                start_and_end = (unique_series.str.startswith(startstr)
+                                 &
+                                 unique_series.str.endswith(endstr))
+                add_expr = list(unique_series[start_and_end])
+        else:
+            add_expr = [expr]
+
+        expanded.extend(add_expr)
+    return expanded
+
+
+def expand_hyphen(expr):
+    """
+    Example: Expands ('b01A-b04A') to ['b01A' ,'b02A', 'b03A', 'b04A']
+
+    Args:
+        code
+
+    Returns:
+        List
+
+
+    Examples:
+        expand_hyphen('b01.1*-b09.9*')
+        expand_hyphen('n02.2-n02.7')
+        expand_hyphen('c00*-c260')
+        expand_hyphen('b01-b09')
+        expand_hyphen('b001.1*-b009.9*')
+        expand_hyphen(['b001.1*-b009.9*', 'c11-c15'])
+
+    Note:
+        decimal expression also works: expr = 'n02.2-n02.7'
+        expr = 'b01*-b09*'
+        expr = 'C00*-C26*'
+
+    """
+
+    exprs = listify(expr)
+    all_codes=[]
+
+    for expr in exprs:
+        if '-' in expr:
+            lower, upper = expr.split('-')
+            lower_str = re.search("[-+]?\d*\.\d+|\d+", lower).group()
+            upper_str = re.search("[-+]?\d*\.\d+|\d+", upper).group()
+
+            lower_num = float(lower_str)
+            upper_num = float(upper_str)
+
+            # leading_nulls = len(lower_str) - len(lower_str.lstrip('0'))
+            length = len(lower_str)
+
+            # must use integers in a loop, not floats
+            if '.' in lower_str:
+                decimals = len(lower_str.split('.')[1])
+                multiplier = 10 * decimals
+            else:
+                multiplier =1
+
+            no_dec_lower = int(lower_num * multiplier)
+            no_dec_upper = int((upper_num) * multiplier) + 1
+
+            if '.' in lower_str:
+                codes = [lower.replace(lower_str, str(num /multiplier).zfill(length)) for num in range(no_dec_lower, no_dec_upper)]
+            else:
+                codes = [lower.replace(lower_str, str(num).zfill(length)) for num in range(no_dec_lower, no_dec_upper)]
+
+
+        else:
+            codes = [expr]
+        all_codes.extend(codes)
+    return all_codes
+
+
+def stringify_cols(df, cols):
+    """
+    Stringify some cols - useful since many methods erquire code column to be a string
+    """
+
+    for col in cols:
+        df[col] = df[col].astype(str)
+    return df
+
+
+def format_codes(codes, merge=True):
+    """
+    Makes sure that the codes has the desired format: a dict with strings as
+    keys (name) and a list of codes as values)
+
+    Background: For several functions the user is allower to use strings
+    when there is only one element in the list, and a list when there is
+    no code replacement or aggregations, or a dict. To avoid (even more) mess
+    the input is standardised as soon as possible in a function.
+
+    Examples:
+            codes = '4AB02'
+            codes='4AB*'
+            codes = ['4AB02', '4AB04', '4AC*']
+            codes = ['4AB02', '4AB04']
+            codes = {'tumor' : 'a4*', 'diabetes': ['d3*', 'd5-d9']}
+            codes = 'S72*'
+            codes = ['K50*', 'K51*']
+
+            format_codes(codes, merge=False)
+
+    TODO: test for correctness of input, not just reformat (is the key a str?)
+    """
+    codes = listify(codes)
+
+    # treeatment of pure lists depends on whether special classes should be treated as one merged group or separate codes
+    # exmple xounting of Z51* could mean count the total number of codes with Z51 OR a shorthand for saying "count all codes starting with Z51 separately
+    # The option "merged, enables the user to switch between these two interpretations
+
+    if isinstance(codes, list):
+        if merge:
+            codes = {'_'.join(codes): codes}
+        else:
+            codes = {code: [code] for code in codes}
+
+    elif isinstance(codes, dict):
+        new_codes = {}
+        for name, codelist in codes.items():
+            if isinstance(codelist, str):
+                codelist = [codelist]
+            new_codes[name] = codelist
+        codes = new_codes
+
+    return codes
+
+
+def expand_regex(expr, full_list):
+    exprs = listify(expr)
+
+    expanded = []
+
+    if isinstance(full_list, pd.Series):
+        pass
+    elif isinstance(full_list, list):
+        unique_series = pd.Series(full_list)
+    elif isinstance(full_list, set):
+        unique_series = pd.Series(list(full_list))
+
+    for expr in exprs:
+        match = unique_series.str.contains(expr)
+        expanded.extend(unique_series[match])
+    return expanded
+
+
+def reverse_dict(dikt):
+    new_dict = {}
+    for name, codelist in dikt.items():
+        codelist = listify(codelist)
+        new_dict.update({code: name for code in codelist})
+    return new_dict
+
+
+def persons_with(df,
+                 codes,
+                 cols,
+                 pid='pid',
+                 sep=None,
+                 merge=True,
+                 first_date=None,
+                 last_date=None,
+                 group=False,
+                 _fix=True):
+    """
+    Determine whether people have received a code
+
+    Args:
+        codes (list or dict): codes to mark for
+            codes to search for
+                - if list: each code will represent a column
+                - if dict: the codes in each item will be aggregated to one indicator
+            cols (str or list of str): Column(s) with the codes
+            pid (str): colum with the person identifier
+            first_date (str): use only codes after a given date
+                the string either represents a date (same for all individuals)
+                or the name of a column with dates (may be different for different individuals)
+            last_date (str): only use codes after a given date
+                the string either represents a date (same for all individuals)
+                or the name of a column with dates (may be different for different individuals)
+
+    Returns:
+        Series or Dataframe
+
+
+    Examples:
+        fracture = persons_with(df=df, codes='S72*', cols='icdmain')
+        fracture = persons_with(df=df, codes={'frac':'S72*'}, cols='icdmain')
+
+    Todo:
+        - function may check if pid_index is unique, in which it does not have to aggregate
+        - this may apply in general? functions that work on event data may then also work on person level data
+        - allow user to input person level dataframe source?
+    """
+    sub = df
+
+    if _fix:
+        df, cols = to_df(df=df, cols=cols)
+        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=merge, group=group)
+        rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
+        sub = df[rows]
+
+    df_persons = sub.groupby(pid)[cols].apply(lambda s: pd.unique(s.values.ravel()).tolist()).astype(str)
+
+    # alternative approach, also good, and avoids creaintg personal dataframe
+    # but ... regeis is fast since it stopw when it finds one true code!
+    #    c=df.icdbi.str.split(', ', expand=True).to_sparse()
+    #    c.isin(['S720', 'I10']).any(axis=1).any(level=0)
+
+    persondf = pd.DataFrame(index=df[pid].unique().tolist())
+    for name, codes in codes.items():
+        codes_regex = '|'.join(codes)
+        persondf[name] = df_persons.str.contains(codes_regex, na=False)
+
+    return persondf
+
+
+##
+## stringify functions
+##
+
+def stringify_durations(df,
+                        codes=None,
+                        cols=None,
+                        pid='pid',
+                        step=120,
+                        sep=None,
+
+                        event_start='in_date',
+                        event_end=None,
+                        event_duration='ddd',
+
+                        first_date=None,
+                        last_date=None,
+                        censored_date=None,
+
+                        na_rep='-',
+                        time_rep=',',
+
+                        merge=True,
+                        info=None,
+                        report=True):
+    """
+    codes={
+        'L04A*' : 'i',
+        'L04AB*' : 'a',
+                'H02*' : 'c'}
+    pr=pr.set_index('pid_index')
+    pr['first_date'] = pr.groupby('pid')['date'].min()
+    events=stringify_durations(df=pr, codes=codes, start='date', first_date='first_date', dataset_end_date="01-01-2018")
+    events=stringify_durations(df=df, codes=codes, col='ncmpalt', start='start_date', first_date='first', dataset_end_date="01-01-2018")
+
+    df2.columns
+
+    eventstr_duration = stringify_durations(df=pr, codes=codes, cols='atc',
+                                           event_duration='ddd',
+                                        event_start='date', step=120)
+    """
+    # drop rows with missing observations in required variables
+
+    if report:
+        obs = len(df)
+        npid = df[pid].nunique()
+        rows = get_rows(df=df, codes=codes, cols=cols, sep=sep)
+        code_obs = len(df[rows])
+        code_npid = df[rows][pid].nunique()
+
+    df = df.dropna(subset=[pid, event_start])
+
+    if event_end:
+        df = df.dropna(subset=[event_end])
+    elif event_duration:
+        df = df.dropna(subset=[event_duration])
+        if df[event_duration].min() < 0:
+            print('Error: The specified duration column contains negative values')
+    else:
+        print('Error: Either event_end or event_duration has to be specified.')
+
+    # find default min and max dates
+    # will be used as starting points for the string
+    # if first_date and last_date are not specified
+    min_date = df[event_start].min()
+    max_date = df[event_start].max()
+
+    # drop rows outside specified time period of interest
+    if first_date:
+        if first_date in df.columns:
+            df = df[df[event_start] >= df[first_date]]
+        elif isinstance(first_date, dict):
+            pass
+        else:
+            # if first_date is not a column name, it is assumed to be a date
+            try:
+                min_date = pd.to_datetime(first_date)
+                df = df[df[event_start] >= min_date]
+            except:
+                print(
+                    'Error: The first_date argument has to be on of: None, a dict, a column name or a string that represents a date')
+
+    if last_date:
+        if last_date in df.columns:
+            df = df[df[event_start] >= df[last_date]]
+        elif isinstance(last_date, dict):
+            pass
+        else:
+            try:
+                max_date = pd.to_datetime(last_date)
+                df = df[df[event_start] <= max_date]
+            except:
+                print(
+                    'Error: The last_date argument has to be on of: None, a dict, a column name or a string the represents a date')
+
+    # note an individual min date cannot be before overall specified min date
+    # should raise error if user tries this
+    # same with max: individual cannot be larger than overall
+
+    max_length_days = (max_date - min_date).days
+    max_length_steps = int(max_length_days / step)
+
+    # if codes are not specified, use the five most common codes
+    if not codes:
+        cols = expand_cols(listify(cols))
+        codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:4]
+
+    # fix formatting of input (make list out of a string input and so on)
+    codes, cols, old_codes, replace = fix_args(df=df, codes=codes, cols=cols, sep=sep)
+
+    # get the rows that contain the relevant codes
+    rows = get_rows(df=df, codes=codes, cols=cols, sep=sep)
+    subset = df[rows].copy()  # maybe use .copy to avoid warnings? but takes time and memory
+    if report:
+        sub_obs = len(subset)
+        sub_npid = subset[pid].nunique()
+
+    subset = subset.sort_values([pid, event_start])
+    subset = subset.set_index(pid, drop=False)
+    subset.index.name = 'pid_index'
+
+    # find start and end position of each event (number of steps from overall min_date)
+    # to do: do not use those column names (may overwrite original names), use uuid names?
+    subset['start_position'] = (subset[event_start] - min_date).dt.days.div(step).astype(int)
+
+    if event_end:
+        subset['end_position'] = (subset[event_end] - min_date).dt.days.div(step).astype(int)
+    elif event_duration:
+        subset['end_date'] = subset[event_start] + pd.to_timedelta(subset[event_duration].astype(int), unit='D')
+        subset['end_position'] = (subset['end_date'] - min_date).dt.days.div(step).astype(int)
+
+    # to do: may allow duration dict?
+    # for instance: some drugs last 15 days, some drugs last 25 days . all specified in a dict
+
+    # create series with only the relevant codes for each person and position
+    code_series = extract_codes(df=subset.set_index([pid, 'start_position', 'end_position']),
+                                codes=replace,
+                                cols=cols,
+                                sep=sep,
+                                new_sep=',',
+                                merge=True,
+                                out='text')
+
+    # May need to unstack if two events in same row
+    # for now: Just foce it to be 1
+    if code_series.apply(len).max() > 1:
+        code_series = code_series.str[0]
+
+    # base further aggregation on the new extracted series with its col and codes
+    col = code_series.name
+    codes = code_series.name.split(', ')
+
+    # drop duplicates (same type of even in same period for same individual)
+    code_series = code_series.reset_index().drop_duplicates().set_index(pid, drop=False)
+
+    ## make dict with string start and end positions for each individual
+    # explanation:
+    # the string is first made marking events in positions using calendar time
+    # but often we want the end result to be strings that start at specified
+    # individual dates, and not the same calendar date for all
+    # for instance it is often useful to start the string at the date the
+    # person receives a diagnosis
+    # same with end of string: strings may end when a patient dies
+    # user can specify start and end dates by pointing to columns with dates
+    # or they may specify an overall start and end date
+    # if individual dates are specified, the long string based on calendar
+    # time is sliced to include only the relevant events
+
+    if first_date:
+        # if a column is specified
+        if first_date in subset.columns:
+            start_date = subset.groupby(pid)[first_date].first().dropna().to_dict()
+        # do nothing if a dict mapping pids to last_dates is already specified
+        elif isinstance(first_date, dict):
+            pass
+        # if a single overall date is specified
+        else:
+            date = pd.to_datetime(first_date)
+            start_date = {pid: date for pid in subset[pid].unique()}
+        # convert start date to start position in string
+        string_start_position = {pid: int((date - min_date).days / step)
+                                 for pid, date in start_date.items()}
+
+    if last_date:
+        if last_date in subset:
+            end_date = subset.groupby(pid)[last_date].first().dropna().to_dict()
+        # do nothing if a dict mapping pids to last_dates is already specified
+        elif isinstance(last_date, dict):
+            pass
+        else:
+            date = pd.to_datetime(last_date)
+            end_date = {pid: date for pid in subset[pid].unique()}
+        # convert date to position in string
+        string_end_position = {pid: (date - min_date).dt.days.div(step).astype(int)
+                               for pid, date in end_date.items()}
+
+        # takes dataframe for an individual and makes a string with the events
+
+    def make_string(events):
+        # get pid of individual (required to find correct start and end point)
+        person = events[pid].iloc[0]
+
+        # make a list of maximal length with no events
+        event_list = ['-'] * (max_length_steps + 1)
+
+        from_to_positions = tuple(zip(events['start_position'].tolist(), events['end_position'].tolist()))
+
+        # loop over all events the individual has and put code in correct pos.
+        for pos in from_to_positions:
+            event_list[pos[0]:pos[1]] = code
+        event_string = "".join(event_list)
+
+        # slice to correct start and end of string (if specified)
+        if first_date:
+            event_string = event_string[string_start_position[person]:]
+        if last_date:
+            max_position = int((max_date - min_date).days / step)
+            event_string = event_string[:-(max_position - string_end_position[person])]
+        return event_string
+
+    # new dataframe to store each string for each individual for each code
+    string_df = pd.DataFrame(index=code_series[pid].unique())
+
+    # loop over each code, aggregate strong for each individual, store in df
+    for code in codes:
+        code_df = code_series[code_series[col].isin([code])]
+        code_df.index.name = 'pid_index'  # avoid future error from pandas pid in both col and index
+        stringified = code_df.groupby(pid, sort=False).apply(make_string)
+        string_df[code] = stringified
+
+    if merge:
+        string_df = interleave_strings(string_df)
+
+    if report:
+        final_obs = len(subset)
+        final_npid = len(string_df)
+        print(f"""
+                                     events,  unique ids
+              Original dataframe     {obs}, {npid} 
+              Filter codes           {code_obs}, {code_npid}
+              Filter missing         {sub_obs}, {sub_npid}
+              Final result:          {final_obs}, {final_npid}""")
+    return string_df
+
+
+def interleave_strings(df, cols=None, sep=" ", nan='-', agg=False):
+    """
+    Interleaves strings in two or more columns
+
+    parameters
+        cols : list of columns with strings to be interleaved
+        nan : value to be used in place of missing values
+        sep : seperator to be used between time periods
+        agg : numeric, used to indicate aggregation of time scale
+                default is 1
+
+    background
+        to identify treatment patters, first stringify each treatment,
+        then aggregate the different treatments to one string
+        each "cell" in the string (separated by sep) represent one time unit
+        the time unit can be further aggregated to reduce the level of detail
+
+    example output (one such row for each person)
+        a---s, a---, ai-s, a---, ----
+
+        Interpretation: A person with event a and s in first time perod, then a only in second,
+        the a, i and s in the third, a only in fourth and no events in the last
+
+    purpose
+        examine typical treatment patterns and correlations
+        use regex or other string operations on this to get statistcs
+        (time on first line of treatment, number of switches, stops)
+
+    """
+    # if cols is not specified, use all columns in dataframe
+    if not cols:
+        cols = list(df.columns)
+
+    if agg:
+        for col in cols:
+            df[col] = df[col].fillna('-')
+            # find event symbol, imply check if all are missing, no events
+            try:
+                char = df[col].str.cat().strip('-')[0]
+            except:
+                df[col] = (col.str.len() / agg) * '-'
+
+            missing = '-' * len(cols)
+
+            def aggregator(text, agg):
+                missing = '-' * agg
+                units = (text[i:i + agg] for i in range(0, len(text), agg))
+                new_aggregated = ('-' if unit == missing else char for unit in units)
+                new_str = "".join(new_aggregated)
+                return new_str
+        df[col] = df[col].apply(aggregator, agg=agg)
+
+    if sep:
+        interleaved = df[cols].fillna('-').apply(
+            (lambda x: ",".join(
+                "".join(i)
+                for i in zip_longest(*x, fillvalue='-'))),
+            axis=1)
+    else:
+        interleaved = df[cols].fillna('-').apply(
+            (lambda x: "".join(chain(*zip_longest(*x, fillvalue='-')))),
+            axis=1)
+
+    return interleaved
+
+
+def overlay_strings(df, cols=None, sep=",", nan='-', collisions='x', interleaved=False):
+    """
+    overlays strings from two or more columns
+
+    note
+        most useful when aggregating a string for events that usually do not happen in the same time frame
+
+    parameters
+        cols : list of columns with strings to be interleaved
+        nan : value to be used in place of missing values
+        collisions: value to be usef if ther is a collision between events in a position
+
+
+    background
+        to identify treatment patters, first stringify each treatment,
+        then aggregate the different treatments to one string
+        each "cell" in the string (separated by sep) represent one time unit
+        the time unit can be further aggregated to reduce the level of detail
+
+    example output (one such row for each person)
+        asaaa--s--aa-s-a
+
+        Interpretation: A person with event a and s in first time perod, then a only in second,
+        the a, i and s in the third, a only in fourth and no events in the last
+
+    purpose
+        examine typical treatment patterns and correlations
+        use regex or other string operations on this to get statistcs
+        (time on first line of treatment, number of switches, stops)
+
+    todo
+        more advanced handeling of collisions
+            - special symbols for different types of collisions
+            - warnings (and keep/give info on amount and type of collisions)
+
+    """
+    # if cols is not specified, use all columns in dataframe
+    if not cols:
+        cols = list(df.columns)
+
+    interleaved = df[cols].fillna('-').apply(
+        (lambda x: "".join(chain(*zip_longest(*x, fillvalue='-')))),
+        axis=1)
+    step_length = len(cols)
+
+    def event_or_collision(events):
+        try:
+            char = events.strip('-')[0]
+        except:
+            char = '-'
+        n = len(set(events).remove('-'))
+        if n > 1:
+            char = 'x'
+        return char
+
+    def overlay_individuals(events):
+
+        units = (events[i:i + step_length] for i in range(0, len(events), step_length))
+
+        new_aggregated = (event_or_collision(unit) for unit in units)
+        new_str = "".join(new_aggregated)
+        return new_str
+
+    interleaved.apply(overlay_individuals)
+
+    return interleaved
+
+
+def shorten(events, agg=3, missing='-'):
+    """
+    create a new and shorter string with a longer time step
+
+    parameters
+        events: (str) string of events that will be aggregated
+        agg: (int) the level of aggregation (2=double the step_length, 3=triple)
+    """
+    try:
+        char = events.strip('-')[0]
+    except:
+        char = '-'
+    units = (events[i:i + agg] for i in range(0, len(events), agg))
+    new_aggregated = ('-' if unit == missing else char for unit in units)
+    new_str = "".join(new_aggregated)
+    return new_str
+
+
+def shorten_interleaved(text, agg=3, sep=',', missing='-'):
+    """
+    text="a-si,a--i,a-s-,--si,---i,--s-"
+
+    shorten_interleaved(c, agg=2)
+    """
+    units = text.split(sep)
+    ncodes = len(units[0])
+    nunits = len(units)
+
+    unitlist = [units[i:i + agg] for i in range(0, nunits, agg)]
+    charlist = ["".join(aggunit) for aggunit in unitlist]
+    unique_char = ["".join(set(chain(chars))) for chars in charlist]
+    new_str = ",".join(unique_char)
+    # ordered or sorted?
+    # delete last if it is not full ie. not as many timee units in it as the others?
+    # shortcut for all
+    return new_str
+
+
+def stringify_order(df, codes=None, cols=None, pid='pid', event_start='in_date', sep=None, keep_repeats=True,
+                    only_unique=False, _fix=True):
+    """
+
+    examples
+
+    codes={
+        '4AB01': 'e',
+        '4AB02' : 'i',
+        '4AB04' : 'a',
+        '4AB05' : 'x',
+        '4AB06' : 'g'}
+    medcodes=read_code2text()
+    df['diagnosis_date']=df[df.icdmain.fillna('').str.contains('K50|K51')].groupby('pid')['start_date'].min()
+    df.columns
+    df.start_date
+
+    bio_codes= {
+     '4AA23': ('n', 'Natalizumab'),
+     '4AA33': ('v', 'Vedolizumab'),
+     '4AB02': ('i', 'Infliximab'),
+     '4AB04': ('a', 'Adalimumab'),
+     '4AB06': ('g', 'Golimumab'),
+     '4AC05': ('u', 'Ustekinumab')}
+
+    bio_codes= {'L04AA23': 'n',
+     'L04AA33': 'v',
+     'L04AB02': 'i',
+     'L04AB04': 'a',
+     'L04AB06': 'g',
+     'L04AC05': 'u'}
+
+    bio_codes={
+        'e' : '4AB01',
+        'i' : '4AB02',
+        'a' : '4AB04'}
+
+    a=stringify_order(
+            df=df,
+            codes=bio_codes,
+            cols='ncmpalt',
+            pid='pid',
+            event_start='start_date',
+            sep=',',
+            keep_repeats=True,
+            only_unique=False
+            )
+
+    codes={
+        'L04AB01': 'e',
+        'L04AB02' : 'i',
+        'L04AB04' : 'a',
+        'L04AB05' : 'x',
+        'L04AB06' : 'g'}
+
+    bio_rows=get_rows(df=pr, codes=list(codes.keys()), cols='atc')
+    pr['first_bio']=pr[bio_rows].groupby('pid')['date'].min()
+
+    a=stringify_order(
+            df=pr,
+            codes=codes,
+            cols='atc',
+            pid='pid',
+            event_date='date',
+            sep=','
+            )
+    """
+
+    # fix formatting of input
+    if _fix:
+        df, cols = to_df(df=df, cols=cols)
+        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep)
+
+    # get the rows with the relevant columns
+    rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
+    subset = df[rows].sort_values(by=[pid, event_start]).set_index('pid')
+
+    # extract relevant codes and aggregate for each person
+    code_series = extract_codes(df=subset, codes=codes, cols=cols, sep=sep, new_sep='', merge=True, out='text',
+                                _fix=False)
+    #    if isinstance(code_series, pd.DataFrame):
+    #        code_series = pd.Series(code_series)
+    string_df = code_series.groupby(level=0).apply(lambda codes: codes.str.cat())
+
+    # eliminate repeats in string
+    if not keep_repeats:
+        string_df = string_df.str.replace(r'([a-z])\1+', r'\1')
+
+    if only_unique:
+        def uniqify(text):
+            while re.search(r'([a-z])(.*)\1', text):
+                text = re.sub(r'([a-z])(.*)\1', r'\1\2', text)
+            return text
+
+        string_df = string_df.apply(uniqify)
+    return string_df
+
+
+def del_repeats(str_series):
+    """
+    deletes consecutively repeated characters from the strings in a series
+
+    del_repeats(a)
+    """
+    no_repeats = str_series.str.replace(r'([a-z])\1+', r'\1')
+    return no_repeats
+
+
+def del_singles(text):
+    """
+    Deletes single characters from string
+    todo: how to deal with first and last position ... delete it too?
+
+    b=del_singles(a)
+    (.)\1{2,}
+
+    lookahead \b(?:([a-z])(?!\1))+\b
+    lookback ....
+
+
+    no_singles = str_series.str.replace(r'(.)((?<!\1)&(?!\1))', r'')
+    """
+    # text with only one character are by definition singles
+    if len(text) < 2:
+        no_singles = ''
+    else:
+        no_singles = "".join([letter for n, letter in enumerate(text[1:-1], start=1) if
+                              ((text[n - 1] == letter) or (text[n + 1] == letter))])
+        # long textx may not have any singles, so check before continue
+        if len(no_singles) < 1:
+            no_singles = ''
+        else:
+            if text[0] == no_singles[0]:
+                no_singles = text[0] + no_singles
+            if text[-1] == no_singles[-1]:
+                no_singles = no_singles + text[-1]
+
+    return no_singles
+
+
+def stringify_time(df,
+                   codes=None,
+                   cols=None,
+                   pid='pid',
+                   step=90,
+
+                   event_start='in_date',
+                   event_end=None,
+
+                   first_date=None,
+                   last_date=None,
+
+                   censored_date=None,
+
+                   sep=None,
+                   merge=True,
+                   meta=None):
+    """
+    Creates a string for each individual describing events at position in time
+
+    Args:
+        df: dataframe
+        codes: codes to be used to mark an event
+        cols: columns with the event codes
+        pid: column with the personal identification number
+        event_date: column containing the date for the event
+        sep: the seperator used between events if a column has multiple events in a cell
+        keep_repeats: identical events after each other are reduced to one (if true)
+        only_unique: deletes all events that have occurred previously for the individual (if true)
+
+    Returns:
+        series with a string that describes the events for each individual
+
+    Example:
+        codes={
+        '4AB01': 'e',
+        '4AB02' : 'i',
+        '4AB04' : 'a',
+        '4AB05' : 'x',
+        '4AB06' : 'g'}
+
+    df['diagnosis_date']=df[df.icdmain.fillna('').str.contains('K50|K51')].groupby('pid')['start_date'].min()
+
+    a=stringify_order_date(
+            df=df,
+            codes=codes,
+            cols='ncmpalt',
+            pid='pid',
+            event_date='start_date',
+            first_date='diagnosis_date',
+            step=90,
+            sep=',',
+            )
+
+    codes={
+        'L04AB01': 'e',
+        'L04AB02' : 'i',
+        'L04AB04' : 'a',
+        'L04AB05' : 'x',
+        'L04AB06' : 'g'}
+
+    bio_rows=get_rows(df=pr, codes=list(codes.keys()), cols='atc')
+    pr['first_bio']=pr[bio_rows].groupby('pid')['date'].min()
+
+    a=stringify_order_date(
+            df=pr,
+            codes=codes,
+            cols='atc',
+            pid='pid',
+            event_date='date',
+            first_date='first_bio',
+            step=90,
+            sep=','
+            )
+
+    """
+
+    # drop rows with missing observations in required variables
+    df = df.dropna(subset=[pid, event_start])
+
+    # find default min and max dates to be used if not user specified
+    min_date = df[event_start].min()
+    max_date = df[event_start].max()
+
+    # drop rows outside time period of interest
+    if first_date:
+        if first_date in df.columns:
+            df = df[df[event_start] >= df[first_date]]
+        else:
+            min_date = pd.to_datetime(first_date)
+            df = df[df[event_start] >= min_date]
+
+    if last_date:
+        if last_date in df.columns:
+            df = df[df[event_start] >= df[last_date]]
+        else:
+            max_date = pd.to_datetime(last_date)
+            df = df[df[event_start] <= max_date]
+
+    # note an individual min date cannot be before overall specified min date
+    # should raise error if user tries this
+    # same with max: individual cannot be larger than overall
+
+    max_length_days = (max_date - min_date).days
+    max_length_steps = int(max_length_days / step)
+
+    # if codes are not specified, use the five most common codes
+    if not codes:
+        cols = expand_cols(listify(cols))
+        codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:4]
+
+    # fix formatting of input (make list out of a string input and so on)
+    codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep)
+
+
+    # get the rows that contain the relevant codes
+    rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep)
+    subset = df[rows]  # maybe use .copy to avoid warnings?
+
+    # find position of each event (number of steps from overall min_date)
+    subset['position'] = (subset[event_start] - min_date).dt.days.div(step).astype(int)
+
+    # create series with only the relevant codes for each person and position
+    code_series = extract_codes(df=subset.set_index([pid, 'position']),
+                                codes=codes,
+                                cols=cols,
+                                sep=sep,
+                                new_sep=',',
+                                merge=True,
+                                out='text')
+
+    # base further aggregation on the new extracted series with its col and codes
+    col = code_series.name
+    codes = code_series.name.split(', ')
+
+    # drop duplicates (same type of even in same period for same individual)
+    code_series = code_series.reset_index().drop_duplicates().set_index(pid, drop=False)
+
+    ## make dict with string start end end positions for each individual
+    # explanation:
+    # the string is first made marking events in positions using calendar time
+    # but often we want the end result to be strings that start at specified
+    # individual dates, and not the same calendar date for all
+    # for instance it is often useful to start the string at the date the
+    # person receives a diagnosis
+    # same with end of string: strings may end when a patient dies
+    # user can specify start and end dates by pointing to columns with dates
+    # or they may specify an overall start and end date
+    # if individual dates are specified, the long string based on calendar
+    # time is sliced to include only the relevant events
+
+    if first_date:
+        # if a column is specified
+        if first_date in subset.columns:
+            start_date = subset.groupby(pid)[first_date].first().dropna().to_dict()
+        # if a single overall date is specified
+        else:
+            date = pd.to_datetime(first_date)
+            start_date = {pid: date for pid in subset[pid].unique()}
+        # convert start date to start position in string
+        start_position = {pid: int((date - min_date).days / step)
+                          for pid, date in start_date.items()}
+
+    if last_date:
+        if last_date in subset:
+            end_date = subset.groupby(pid)[last_date].first().dropna().to_dict()
+        else:
+            date = pd.to_datetime(last_date)
+            end_date = {pid: date for pid in subset[pid].unique()}
+        # convert date to position in string
+        end_position = {pid: (date - min_date).dt.days.div(step).astype(int)
+                        for pid, date in end_date.items()}
+
+    # takes dataframe for an individual and makes a string with the events
+    def make_string(events):
+        # get pid of individual (required to find correct start and end point)
+        person = events[pid].iloc[0]
+
+        # make a list of maximal length with no events
+        event_list = ['-'] * (max_length_steps + 1)
+
+        # loop over all events the individual has and put code in correct pos.
+        for pos in events['position'].values:
+            event_list[pos] = code
+
+        event_string = "".join(event_list)
+
+        # slice to correct start and end of string (if specified)
+        if first_date:
+            event_string = event_string[start_position[person]:]
+        if last_date:
+            event_string = event_string[:-(max_position - end_position[person])]
+        return event_string
+
+    # new dataframe to store each string for each individual for each code
+    string_df = pd.DataFrame(index=code_series[pid].unique())
+
+    # loop over each code, aggregate strong for each individual, store in df
+    for code in codes:
+        code_df = code_series[code_series[col].isin([code])]
+        stringified = code_df.groupby(pid, sort=False).apply(make_string)
+        string_df[code] = stringified
+
+    if merge:
+        string_df = interleave_strings(string_df)
+    return string_df

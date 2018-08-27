@@ -1,7 +1,6 @@
 import pandas as pd
 
 from .core import *
-from .stringify import *
 
 # %% monkeypatch to the functions become methods on the dataframe
 # could use decorators/pandas_flavor
