@@ -508,7 +508,7 @@ def get_rows(df,
 # %%
 def get_pids(df,
              codes,
-             cols,
+             cols=None,
              pid='pid',
              sep=None,
              codebook=None):
@@ -545,7 +545,7 @@ def get_pids(df,
 # %%
 def select_persons(df,
                    codes,
-                   cols,
+                   cols=None,
                    pid='pid',
                    sep=None,
                    codebook=None):
@@ -644,7 +644,7 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
 
     # if an expression instead of a codelist is used as input
     if isinstance(codes, str) and codes.count(' ') > 1:
-        persons = use_expression(df, codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
+        persons = use_expression(df, expr=codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
         if normalize:
             counted = persons.sum() / len(persons)
         else:
@@ -654,7 +654,7 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
     # if codes is a codelist (not an expression)
     else:
         if _fix:
-            # expands and reformats columns and codes input
+            # expands and formats columns and codes input
             df, cols = _to_df(df=df, cols=cols)
             codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep, group=group, merge=merge)
             rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
@@ -706,7 +706,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
     Args:
         df (dataframe): Dataframe with events
 
-        codes (string, list or dict): The codes for the disease
+        expr (string, list or dict): The codes for the disease
 
         cols (string, list): Name of columns where codes are located
 
@@ -795,7 +795,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
 
         for n, (word, cols) in enumerate(word_cols):
             # added n to number conditions and avoid name conflicts if same condition (but different column)
-            worddict = {'___' + word + f'_{n}'.replace('*', '___'): [word]}
+            worddict = {'___' + word.replace('*', '___') + f'_{n}': [word]}
 
             # allow star etc notation in col also?
             # cols=_expand_cols(df=df, cols=cols)
@@ -833,7 +833,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
         if not codebook:
             codebook = unique_codes(df=df, cols=cols, sep=sep)
 
-            # must avoid * since eval does not like in in var names, replace * with three ___
+        # must avoid * since eval does not like in in var names, replace * with three ___
         # same with column names starting with digit, sp add three (___) to all words
         worddict = {'___' + word.replace('*', '___'): [word] for word in words}
         coldf = pd.DataFrame(index=df.index)
@@ -1682,12 +1682,12 @@ def _sniff_sep(df, cols=None, possible_seps=[',', ';', '|'], n=1000, sure=False,
 def _get_some_id(df,
                  codes,
                  cols,
-                 xid,
+                 some_id,
                  sep=None):
     """
     help function for all get functions that gets ids based on certain filtering criteria
 
-    x is the column with the info to be collected (pid, uuid, event_id)
+    some_id is the column with the info to be collected (pid, uuid, event_id)
 
 
     """
@@ -1713,7 +1713,7 @@ def _get_some_id(df,
     else:
         b = df[cols].isin(expanded_codes).any(axis=1).values
 
-    pids = set(df[b][xid].unique())
+    pids = set(df[b][some_id].unique())
 
     return pids
 
@@ -1785,34 +1785,6 @@ def _get_allcodes(codes):
     else:
         allcodes = _listify(codes)
     return allcodes
-
-
-def _get_mask(df,
-              codes,
-              cols,
-              sep=None):
-    codes = _listify(codes)
-    cols = _listify(cols)
-
-    cols = _expand_cols(df=df, cols=cols)
-
-    expanded_codes = expand_codes(df=df,
-                                  codes=codes,
-                                  cols=cols,
-                                  sep=sep)
-
-    # if compound words in a cell
-    if sep:
-        expanded_codes_regex = '|'.join(expanded_codes)
-        b = pd.DataFrame()
-        for col in cols:
-            b[col] = df[col].str.contains(expanded_codes_regex, na=False).values
-
-    # if single value cells only
-    else:
-        b = df[cols].isin(expanded_codes)
-
-    return b
 
 
 def _expand_cols(df, cols, star=True, hyphen=True, colon=True, regex=None):

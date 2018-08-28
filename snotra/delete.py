@@ -3,6 +3,7 @@ import uuid
 import pandas as pd
 
 from snotra import _listify, _get_some_id, _fix_args, _to_df, _get_allcodes, expand_codes, get_rows
+from snotra.core import _listify, _expand_cols
 from .core import get_rows, expand_codes
 
 
@@ -439,3 +440,46 @@ def get_ids(df, codes, cols, groups, pid='pid', out=None, sep=None):
     grouped_ids = grouped_ids.apply(set)
 
     return grouped_ids
+
+
+def _get_mask(df,
+              codes,
+              cols,
+              sep=None):
+    """
+    A dataframe of one column for each code with true and false depending on whether the row has the code(s)
+
+    Args:
+
+        df (dataframe): dataframe
+        codes (str or list of str): the desired codes
+        cols (str or list of str: name of column(s) with the codes
+        sep (str): separator between codes in a cell
+
+    Returns:
+
+        dataframe
+
+    """
+    codes = _listify(codes)
+    cols = _listify(cols)
+
+    cols = _expand_cols(df=df, cols=cols)
+
+    expanded_codes = expand_codes(df=df,
+                                  codes=codes,
+                                  cols=cols,
+                                  sep=sep)
+
+    # if compound words in a cell
+    if sep:
+        expanded_codes_regex = '|'.join(expanded_codes)
+        b = pd.DataFrame()
+        for col in cols:
+            b[col] = df[col].str.contains(expanded_codes_regex, na=False).values
+
+    # if single value cells only
+    else:
+        b = df[cols].isin(expanded_codes)
+
+    return b
