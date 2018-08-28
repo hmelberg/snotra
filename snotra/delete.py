@@ -2,7 +2,7 @@ import os
 import uuid
 import pandas as pd
 
-from snotra import listify, get_some_id, fix_args, to_df, get_allcodes
+from snotra import _listify, _get_some_id, _fix_args, _to_df, _get_allcodes, expand_codes, get_rows
 from .core import get_rows, expand_codes
 
 
@@ -23,7 +23,7 @@ def get_uuid(df, codes, cols, uuid='uuid', sep=None):
     Returns a set pids who have the given codes in the cols
     """
 
-    uuids = get_some_id(df=df, codes=codes, some_id=uuid, sep=sep)
+    uuids = _get_some_id(df=df, codes=codes, some_id=uuid, sep=sep)
 
     return uuids
 
@@ -283,8 +283,8 @@ def events(df,
     """
 
     if _fix:
-        df, cols = to_df(df, cols)
-        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep)
+        df, cols = _to_df(df, cols)
+        codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep)
 
     with_codes = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
 
@@ -311,8 +311,8 @@ def stringify(df,
               new_sep=None,
               single_value_columns=None,
               out='series'):
-    codes = listify(codes)
-    cols = listify(cols)
+    codes = _listify(codes)
+    cols = _listify(cols)
 
     single_cols = infer_single_value_columns(df=df,
                                              cols=cols,
@@ -358,7 +358,7 @@ def stringify(df,
 
 
 def subset(df, codes, cols, sep):
-    allcodes = get_allcodes(codes)
+    allcodes = _get_allcodes(codes)
     rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep)
     subset = df[rows].set_index('pid')
     return subset
@@ -370,7 +370,7 @@ def reverse_dict_old(dikt):
 
     example
 
-    reverse_dict({'AB04a':'b', 'AB04b': 'b', 'AB04c':'b', 'CC04x': 'c'})
+    _reverse_dict({'AB04a':'b', 'AB04b': 'b', 'AB04c':'b', 'CC04x': 'c'})
 
     will return
         {'b': ['AB04a', 'AB04b', 'AB04c'], 'c': 'CC04x'}
@@ -397,7 +397,7 @@ def expand_replace(df, replace, cols, sep=None, strip=True):
 
     """
     # may use regex instead, but this may also be slower to use later?
-    cols = listify(cols)
+    cols = _listify(cols)
     codes = list(replace.keys())
 
     codes = expand_codes(df=df, codes=codes, cols=cols, sep=None)
@@ -425,3 +425,17 @@ def expand_replace(df, replace, cols, sep=None, strip=True):
 
         del replace[starcode]
     return replace
+
+
+def get_ids(df, codes, cols, groups, pid='pid', out=None, sep=None):
+    codes = _listify(codes)
+    groupby = _listify(groupby)
+
+    codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep)
+
+    rows_with_codes = get_rows(df=df, codes=codes, cols=cols, sep=sep)
+    # grouped_ids = df[rows_with_codes].groupby([pid, groups]).count()
+    grouped_ids = df[rows_with_codes].groupby(groups)[pid].unique()
+    grouped_ids = grouped_ids.apply(set)
+
+    return grouped_ids

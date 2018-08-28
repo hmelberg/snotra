@@ -1,6 +1,6 @@
 import pandas as pd
 
-from snotra import listify, to_df, fix_args, get_rows, count_codes
+from snotra import _listify, _to_df, _fix_args, get_rows, count_codes
 
 
 def single_columns(df, cols=None, sep=',', n=100, check_all=False):
@@ -58,11 +58,11 @@ def find_spikes(df, codes=None, cols=None, persons=False, pid='pid', sep=None, g
     divide_by='pid'
     """
     sub = df
-    groups = listify(groups)
+    groups = _listify(groups)
 
     if _fix:
-        sub, cols = to_df(sub, cols)
-        codes, cols, allcodes, sep = fix_args(df=sub, codes=codes, cols=cols, sep=sep, merge=False, group=False)
+        sub, cols = _to_df(sub, cols)
+        codes, cols, allcodes, sep = _fix_args(df=sub, codes=codes, cols=cols, sep=sep, merge=False, group=False)
         rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
         sub = sub[rows]
 
@@ -121,11 +121,11 @@ def find_changes(df, codes=None, cols=None, sep=None, groups=None, interact=Fals
 
     """
     sub = df
-    groups = listify(groups)
+    groups = _listify(groups)
 
     if _fix:
-        df, cols = to_df(df, cols)
-        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=False, group=False)
+        df, cols = _to_df(df, cols)
+        codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=False, group=False)
         rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
         sub = df[rows]
 

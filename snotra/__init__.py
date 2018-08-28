@@ -9,11 +9,11 @@ from .core import *
 # (must change when method names change)
 
 series_methods = [sample_persons, count_persons, unique_codes, extract_codes,
-                  count_codes, label, use_expression]
+                  count_codes, label, use_expression, select_persons]
 
 frame_methods = [sample_persons, first_event, get_pids, unique_codes,
                  expand_codes, get_rows, count_persons, extract_codes,
-                 count_codes, label, use_expression]
+                 count_codes, label, use_expression, select_persons]
 
 # probably a horrible way of doing something horrible!
 for method in frame_methods:

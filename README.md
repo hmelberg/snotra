@@ -23,9 +23,9 @@ Snotra is also a Norse goddess associated with the Norse word for clever. Althou
 - **Select all events for some persons using codelists or logical expressions**
 
     ```python
-      df.select_persons(codes=['K50*', 'K51*'])
+      df.select_persons(codes=['K50*', 'K51*'], cols='icd')
 
-      df.select_persons(codes='K50 or K51 and not K52')
+      df.select_persons(codes='K50 or K51 and not K52', cols='icd')
 
     ```
 
@@ -52,6 +52,9 @@ Snotra is also a Norse goddess associated with the Norse word for clever. Althou
 
  ### License
  MIT
+ 
+ ## Documentation
+ Draft overview of methods and functions [doc](doc/docs.md)
  
  ### Disclaimer
  Snotra is currently under development and not ready for production. Much remains to be tested and corrected, use at your own risk - and contributions are welcome!

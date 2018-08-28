@@ -37,7 +37,7 @@ def incidence(df, codes=None, cols=None, sep=None, pid='pid',
 
 
     Args:
-        df (dataframe): Dataframe with events, dates and medical codes
+        df (dataframe): Dataframe with unique personal ids, events, dates and medical codes
 
         codes (string, list or dict): The codes for the disease
 
@@ -50,7 +50,8 @@ def incidence(df, codes=None, cols=None, sep=None, pid='pid',
 
         min_events (int): Number of events with the codes required for inclusion
 
-        within_period (int): The number of events have to occurr within a period (measured in days) before the person is included
+        within_period (int): The number of events have to occur within a period
+            (measured in days) before the person is included
             For instance: min_events=2 and within_period=365 means
             that a person has to have two events within one year
             in order to be included in the calculation of incidence.
@@ -61,7 +62,8 @@ def incidence(df, codes=None, cols=None, sep=None, pid='pid',
         update_cohort (bool): The cohort a person is assigned to might change
             as the criteria (min_events and within_period) change. If update
             is True, the cohort will be automatically updated to reflect this.
-            Exampple: A person may have her first event in 2011 and initially
+
+            Example: A person may have her first event in 2011 and initially
             be assigned to the 2011 cohort, but have no other events for two
             years. Then in 2014 the person may have five events. If the
             criteria for inclusion is two event in one year, the updated cohort
@@ -71,27 +73,30 @@ def incidence(df, codes=None, cols=None, sep=None, pid='pid',
             Series (For instance, number of new patients every year)
 
         Examples:
-            df['cohort']=df.groupby('pid').start_date.min().dt.year
+            >>> df['cohort']=df.groupby('pid').start_date.min().dt.year
 
-            incidence(df, codes=['K50*', 'K51*'], cols=['icdmain', 'icdbi'], sep=',', pid='pid', date='start_date')
+            >>> incidence(df, codes=['K50*', 'K51*'], cols=['icdmain', 'icdbi'], sep=',', pid='pid', date='start_date')
 
-            incidence(df, codes={'cd':'K50*', 'uc':'K51*'}, cols=['icdmain', 'icdbi'], sep=',', pid='pid', date='start_date')
+            >>> incidence(df, codes={'cd':'K50*', 'uc':'K51*'}, cols=['icdmain', 'icdbi'], sep=',', pid='pid', date='start_date')
+    Note
+        The function may seem overly complex, but sometimes it is most sensible to
+        demand more than one codes wihtin a defined time period before a patients is
+        counted as a true patient within a category.
+
+        Note also that many of the arguments do not apply is an expression is used instead of a codelist
 
         todo:
             make cohort variable redundant ... already have date!
             make it possible to do monthly, quarterly etc incidence?
+            enable expressions? ... but does it make sense? and does it fit? redundant?
 
     """
     sub = df
     incidence_list = []
     namelist = []
 
-    # if an expression instead of a codelist is used as input
-    if isinstance(codes, str) and codes.count(' ') > 1:
-        b = use_expression(df, codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
-
     if _fix:
-        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=True, group=False)
+        codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=True, group=False)
         rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
         sub = df[rows]
 
@@ -147,7 +152,7 @@ def make_cohort(df, codes=None, cols=None, sep=None, pid='pid',
 
         codes (string, list or dict): The codes for the disease
 
-        cols (string, list): Name of cols where codes are located
+        cols (string, list): Name of columns where codes are located
 
         pid (str): Name of column with the personal identification number
 
@@ -156,7 +161,7 @@ def make_cohort(df, codes=None, cols=None, sep=None, pid='pid',
 
         min_events (int): Number of events with the codes required for inclusion
 
-        within_period (int): The number of events have to occurr within a period (measured in days) before the person is included
+        within_period (int): The number of events have to ocurr within a period (measured in days) before the person is included
             For instance: min_events=2 and within_period=365 means
             that a person has to have two events within one year
             in order to be included in the calculation of incidence.
@@ -180,7 +185,7 @@ def make_cohort(df, codes=None, cols=None, sep=None, pid='pid',
     sub = df
 
     if _fix:
-        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=True, group=False)
+        codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=True, group=False)
         rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
         sub = df[rows]
 
@@ -215,7 +220,7 @@ def make_cohort(df, codes=None, cols=None, sep=None, pid='pid',
 # %%
 def sample_persons(df, pid='pid', n=None, frac=0.1):
     """
-    Picks some (randomly selected) individuals and ALL their observations
+    Pick some randomly selected individuals and ALL their observations
 
 
     Args:
@@ -253,21 +258,6 @@ def sample_persons(df, pid='pid', n=None, frac=0.1):
 
 
 # %%
-def get_ids(df, codes, cols, groups, pid='pid', out=None, sep=None):
-    codes = listify(codes)
-    groupby = listify(groupby)
-
-    codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep)
-
-    rows_with_codes = get_rows(df=df, codes=codes, cols=cols, sep=sep)
-    # grouped_ids = df[rows_with_codes].groupby([pid, groups]).count()
-    grouped_ids = df[rows_with_codes].groupby(groups)[pid].unique()
-    grouped_ids = grouped_ids.apply(set)
-
-    return grouped_ids
-
-
-# %%
 def unique_codes(df,
                  cols=None,
                  sep=None,
@@ -275,7 +265,7 @@ def unique_codes(df,
                  _sniffsep=True,
                  _fix=True):
     """
-    Get set of unique values from column(s) with multiple valules in cells
+    Get set of unique values from column(s) with with multiple values in cells
 
     Args:
         df (dataframe)
@@ -292,27 +282,26 @@ def unique_codes(df,
         - In large dataframes this function may take some time
 
 
-    Examples
+    Examples:
+        - get all unique codes in the icd column of df (separator will be sniffed)
+        >>> df.icd.unique_codes()
 
-        to get all unique values in all columns that start with 'drg':
-            drg_codes=unique_codes(df=df, cols=['drg*'])
-            ncmp = unique_codes(df=df, cols=['ncmpalt'], sep=',')
+        - all unique codes from all columns starting with 'icd'
+        >>> df.unique_codes(cols='icd*')
 
-        all unique atc codes from a column with many comma separated codes
-             atc_codes==unique_codes(df=ibd, cols=['atc'], sep=',')
 
     worry
         numeric columns/content
     """
     if _fix:
-        df, cols = to_df(df=df, cols=cols)
-        cols = fix_cols(df=df, cols=cols)
+        df, cols = _to_df(df=df, cols=cols)
+        cols = _fix_cols(df=df, cols=cols)
 
     unique_terms = set(pd.unique(df[cols].values.ravel('K')))
     # unique_terms={str(term) for term in unique_terms}
 
     if _sniffsep and not sep:
-        sep = sniff_sep(df, cols)
+        sep = _sniff_sep(df, cols)
 
     if sep:
         compound_terms = {term for term in unique_terms if sep in str(term)}
@@ -346,7 +335,7 @@ def expand_codes(df=None,
                  merge=False,
                  group=False):
     """
-    Expand list of codes with hyphens and star notation to full codes
+    Expand list of codes with star, hyphen and colon notation to full codes
 
     Args:
         codes (str or list of str): a list of codes some of which may need to be expanded to full codes
@@ -357,48 +346,39 @@ def expand_codes(df=None,
         expand_hyphen (bool, default: False): If True, codes with hyphens are not expanded
         expand_star (bool, default: False): If True, codes with start are not expanded
 
+
     Returns
         List of codes
 
     Examples
-        get all atc codes that are related to steroids in the atc column.
-            codes= ['H02*', 'J01*', 'L04AB02', 'L04AB04']
-            codes=expand_codes(df=df, codes=['H02*'], cols='atc')
-            codes=expand_codes(df=df, codes=['K25*'], cols='icdmain', sep=',', codebook=codebook)
-            codes=expand_codes(df=df, codes=['K25*-K28*'], cols='icdmain', sep=',', codebook=codebook, merge=True)
-            codes=expand_codes(df=df, codes=['K25*-K28*'], cols='icdmain', sep=',', codebook=codebook, merge=False)
-            codes=expand_codes(df=df, codes=['K25*-K28*'], cols='icdmain', sep=',', codebook=codebook, merge=False, group=True)
-            codes=expand_codes(df=df, codes=['K25*-K28*'], cols='icdmain', sep=',', codebook=codebook, merge=True, group=True)
-            codes=expand_codes(df=df, codes=['K25*-K28*'], cols='icdmain', sep=',', codebook=codebook, merge=False, group=True)
-            codes=expand_codes(df=df, codes=['K25*-K28*'], cols='icdmain', sep=',', codebook=codebook, merge=False, group=False)
+
+        >>> codes = expand_codes(df=df, codes=['H02*'], cols='atc')
+        >>> codes = expand_codes(df=df, codes=['K25*'], cols='icdmain', sep=',', codebook=codebook)
+        >>> codes = expand_codes(df=df, codes=['K25*-K28*'], cols='icdmain', sep=',', codebook=codebook, merge=True)
 
 
-            codes=expand_codes(df=df, codes=['K50*', 'K51*'], cols='icdmain', sep=',', codebook=codebook, merge=False, group=True)
-            codes=expand_codes(df=df, codes=['K50*', 'K51*'], cols='icdmain', sep=',', codebook=codebook, merge=False, group=False)
-            codes=expand_codes(df=df, codes=['K50*', 'K51*'], cols='icdmain', sep=',', codebook=codebook, merge=True, group=False)
-            codes=expand_codes(df=df, codes=['K50*', 'K51*'], cols='icdmain', sep=',', codebook=codebook, merge=True, group=True)
+        >>> codes = expand_codes(df=df, codes=['K50*', 'K51*'], cols='icdmain', sep=',', codebook=codebook, merge=False, group=True)
+        >>> codes = expand_codes(df=df, codes=['K50*', 'K51*'], cols='icdmain', sep=',', codebook=codebook, merge=False, group=False)
 
+        >>> ulcer = ['K25*-K28*']
+        >>> liver = 'B18* K70.0-K70.3 K70.9 K71.3-K71.5 K71.7 K73* K74* K76.0 K76.2-K76.4 K76.8 K76.9 Z94.4'.split()
+        >>> diabetes =	['E10.0', 'E10.l', 'E10.6', 'E10.8', 'E10.9', 'E11.0', 'E11.1', 'E11.6', 'E11.8', 'E11.9', 'E12.0', 'E12.1', 'El2.6', 'E12.8', 'El2.9', 'E13.0', 'E13.1', 'E13.6', 'E13.8', 'E13.9', 'E14.0', 'E14.1', 'E14.6', 'E14.8', 'E14.9']
+        >>> hemiplegia = ['G04.1', 'G11.4', 'G80.1', 'G80.2', 'G81*', 'G82*', 'G83.0-G83.4', 'G83.9']
 
-        codebook = df.icdmain.unique_codes(sep=',')
+        >>> expand_codes(df=df, codes=ulcer, cols='icdmain', sep=',')
 
-        ulcer = 	['K25*-K28*']
-        liver = 	'B18* K70.0-K70.3 K70.9 K71.3-K71.5 K71.7 K73* K74* K76.0 K76.2-K76.4 K76.8 K76.9 Z94.4'.split()
-        diabetes =	['E10.0', 'E10.l', 'E10.6', 'E10.8', 'E10.9', 'E11.0', 'E11.1', 'E11.6', 'E11.8', 'E11.9', 'E12.0', 'E12.1', 'El2.6', 'E12.8', 'El2.9', 'E13.0', 'E13.1', 'E13.6', 'E13.8', 'E13.9', 'E14.0', 'E14.1', 'E14.6', 'E14.8', 'E14.9']
-        hemiplegia = 	 ['G04.1', 'G11.4', 'G80.1', 'G80.2', 'G81*', 'G82*', 'G83.0-G83.4', 'G83.9']
-
-        expand_codes(df=df, codes=ulcer, cols='icdmain', sep=',')
     Note:
         Only codes that actually exist in the cols or the codebook are returned
 
     """
 
-    codes = listify(codes)
+    codes = _listify(codes)
 
     if codebook:
         unique_words = set(codebook)
     else:
-        cols = listify(cols)
-        cols = expand_cols(df=df, cols=cols)
+        cols = _listify(cols)
+        cols = _expand_cols(df=df, cols=cols)
         unique_words = set(unique_codes(df=df, cols=cols, sep=sep))
 
     # if input is not a list of codes, but a dict with categories and codes,
@@ -410,7 +390,7 @@ def expand_codes(df=None,
     else:
         alist = False
 
-    codes = format_codes(codes=codes, merge=merge)
+    codes = _format_codes(codes=codes, merge=merge)
 
     all_new_codes = {}
 
@@ -437,7 +417,7 @@ def expand_codes(df=None,
         # maybe introduce a notation for regex inside the codebook?, like re:
         # (so the regex is not done on all codes)
         if regex:
-            codelist = expand_regex(codelist, full_list=unique_words)
+            codelist = _expand_regex(codelist, full_list=unique_words)
 
         # eliminate codes that have been created by the expansion, but that do not
         # exist in the data. For instance, the hyphen expansion may create this.
@@ -478,39 +458,51 @@ def get_rows(df,
     """
     Returns a boolean array that is true for the rows where column(s) contain the code(s)
 
-    example
-        get all drg codes starting with 'D':
+    Args:
+        df (dataframe): Dataframe with events, dates and medical codes
 
-        d_codes = get_rows(df=df, codes='D*', cols=['drg'])
+        codes (string, list or dict): The codes for the disease
+
+        cols (string, list): Name of columns where codes are located
+
+        pid (str): Name of column with the personal identification number
+
+        codebook (list): User specified list of all possible or allowed codes
+
+
+    Examples:
+        - get all drg codes starting with 'D':
+
+        >>> d_codes = get_rows(df=df, codes='D*', cols=['drg'])
     """
     # if an expression is used as input
     if isinstance(codes, str) and codes.count(' ') > 1:
-        b = use_expression(df, codes, cols=cols, sep=sep, out='rows', codebook=codebook)
+        rows = use_expression(df, codes, cols=cols, sep=sep, out='rows', codebook=codebook)
 
     # if a list of codes is used as input
     else:
         if _fix:
-            df, cols = to_df(df)
-            cols = fix_cols(df=df, cols=cols)
-            codes = fix_codes(df=df, codes=codes, cols=cols, sep=sep)
+            df, cols = _to_df(df)
+            cols = _fix_cols(df=df, cols=cols)
+            codes = _fix_codes(df=df, codes=codes, cols=cols, sep=sep)
 
-        listify(codes)
+        _listify(codes)
 
-        allcodes = get_allcodes(codes)
+        allcodes = _get_allcodes(codes)
 
         if len(allcodes) == 0:  # if no relevant codes --> a column with all false
-            b = np.full(len(df), False)
+            rows = np.full(len(df), False)
         elif sep:
             allcodes_regex = '|'.join(allcodes)
-            b = np.full(len(df), False)
+            rows = np.full(len(df), False)
             for col in cols:
-                a = df[col].astype(str).str.contains(allcodes_regex, na=False).values
-                b = b | a
+                new_rows = df[col].astype(str).str.contains(allcodes_regex, na=False).values
+                rows = rows | new_rows
         # if single value cells only
         else:
-            b = df[cols].isin(allcodes).any(axis=1).values
+            rows = df[cols].isin(allcodes).any(axis=1).values
 
-    return b
+    return rows
 
 
 # %%
@@ -521,20 +513,32 @@ def get_pids(df,
              sep=None,
              codebook=None):
     """
-    Returns a set pids who have the given codes in the cols
+    Returns the set pids who have the given codes in the cols
 
-    example
+    Args:
+        df (dataframe): Dataframe with events
 
-        get pids for all individuals who have icd codes starting with 'C509':
+        codes (string, list or dict): The codes for the disease
 
-        c509 = get_pids(df=df, codes='C509', cols=['icdmain', 'icdbi'], pid='pid')
+        cols (string, list): Name of columns where codes are located
+
+        pid (str): Name of column with the personal identification number
+
+        codebook (list): User specified list of all possible or allowed codes
+
+    Examples:
+
+        >>> get pids for all individuals who have icd codes starting with 'C509':
+
+        >>> c509 = get_pids(df=df, codes='C509', cols=['icdmain', 'icdbi'], pid='pid')
     """
+
     # if an expression instead of a codelist is used as input
     if isinstance(codes, str) and codes.count(' ') > 1:
         selection = use_expression(df, codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
         pids = df[selection][pid]
     else:
-        pids = get_some_id(df=df, codes=codes, some_id=pid, sep=sep)
+        pids = _get_some_id(df=df, codes=codes, some_id=pid, sep=sep)
     return pids
 
 
@@ -547,21 +551,34 @@ def select_persons(df,
                    codebook=None):
     """
     Returns a dataframe with all events for people who have the given codes
-    example
 
-        c509 = get_pids(df=df, codes='C509', cols=['icdmain', 'icdbi'], pid='pid')
+    Args:
+        df (dataframe): Dataframe with events
+
+        codes (string, list or dict): The codes for the disease
+
+        cols (string, list): Name of columns where codes are located
+
+        pid (str): Name of column with the personal identification number
+
+        codebook (list): User specified list of all possible or allowed codes
+
+    Examples:
+
+        >>> df.select_persons(codes='C509', cols=['icdmain', 'icdbi'])
+
     """
-    # if an expression ('K50 and not K51') is used as input
+    # if an expression is used as input (eg 'K50 and not K51')
     if isinstance(codes, str) and codes.count(' ') > 1:
         selection = use_expression(df, codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
         pids = df[selection]
     # if an list of codes - ['K50', 'K51'] is used as input
     else:
-        pids = get_some_id(df=df, codes=codes, some_id=pid, sep=sep)
+        pids = _get_some_id(df=df, codes=codes, some_id=pid, sep=sep)
 
     df = df[df[pid].isin(pids)]
 
-    return pids
+    return df
 
 
 # %%
@@ -606,28 +623,21 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
             any of the specified codes
 
     Examples
-        rr.count_persons(df=npr, codes='4AB04', cols='ncmp')
+        >>> df.atc.count_persons(codes='4AB04')
 
-        count_persons(df=df, codes=['4AB*', '4AC*'], cols='ncmp', sep=',', pid='pid')
+        >>> df.atc.count_persons(codes='4AB04', dropna=False, normalize=True)
 
-        count_persons(df=df, codes=['4AB*', '4AC*'], cols='ncmp', sep=',', pid='pid', group=True)
-        count_persons(df=df, codes=['4AB*', '4AC*'], cols='ncmp', sep=',', pid='pid', group=True, merge=True)
+        >>> df.atc.count_persons(codes=['4AB*', '4AC*'])
 
+        >>> df.atc.count_persons(codes=['4AB*', '4AC*'], group=True)
+        >>> df.atc.count_persons(codes=['4AB*', '4AC*'], group=True, merge=True)
 
+        >>> df.count_persons(codes={'adaliamumab':'4AB04'}, cols='ncmp', sep=',', pid='pid')
 
-        count_persons(df=df, codes='4AB*', cols='ncmp', sep=',', pid='pid')
-        count_persons(df=df, codes='4AB04', cols='ncmp', sep=',', pid='pid')
+        >>> df.count_persons(codes='4AB04', cols='ncmp', groupby=['disease', 'cohort'])
 
-        count_persons(df=df, codes={'adaliamumab':'4AB04'}, cols='ncmp', sep=',', pid='pid')
-        count_persons(df=df, codes={'adaliamumab':'4AB04'}, cols='ncmp', sep=',', pid='pid')
+        >>> df.groupby(['disease', 'cohort']).apply(count_persons, cols='ncmp', codes='4AB04', sep=',')
 
-        npr.count_persons(codes='4AB04', cols='ncmp', groupby=['disease', 'cohort'], sep=',') # works
-
-        npr.groupby(['disease', 'cohort']).apply(count_persons, cols='ncmp', codes='4AB04', sep=',') # works. BIT GET DIFFERENT RESULTS WITH MULTIPLE GROUPBYS!!
-
-
-        # Counts number of persons for all codes
-        count_persons(df=df.ncmp, sep=',', pid='pid') # not work, well it only takes 5 most common .. ajould it take all?
     """
 
     subset = df
@@ -641,12 +651,12 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
             counted = persons.sum()
 
 
-    # codes is a codelist, not an expression
+    # if codes is a codelist (not an expression)
     else:
         if _fix:
             # expands and reformats columns and codes input
-            df, cols = to_df(df=df, cols=cols)
-            codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep, group=group, merge=merge)
+            df, cols = _to_df(df=df, cols=cols)
+            codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep, group=group, merge=merge)
             rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
             if not dropna:
                 persons = df[pid].nunique()
@@ -690,51 +700,65 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
 # %%
 def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=False, logic=True, codebook=None,
                    pid='pid', _fix=True):
-    # better name_ maybe eval_persons (person_eval, person_count, person, person ...)
     """
-    expr = 'K52* and not (K50 or K51)'
-    expr = 'K52* in icd and not (K50 or K51) in ncmp'
+    Returns a series with the index and the boolean value for whether the expression is true or not
 
-    expr = 'K52* in icd and not 4AB04 in ncmp or atc'
+    Args:
+        df (dataframe): Dataframe with events
 
-    expr = 'in icdmain or icdbi: (k50 or k51) and in ncmp: 4AB04 and 4AB02)'
+        codes (string, list or dict): The codes for the disease
 
-    expr = '(K50 in:icdmain1,icdmain2 or K51 in:icdmain1,icdmain2) and (4AB04 in:ncmp or 4AB02 in:ncmp)'
+        cols (string, list): Name of columns where codes are located
 
-    expr = 'k50 or k51 in icdmain or icdbi and (4AB04 and 4AB02) in ncmp'
-    expr = 'k50==icdmain
-    expr = 'K51* and 4AB04'
+        pid (str): Name of column with the personal identification number
 
-    expr='4AB02 in:ncmp and not 4AB02 in:ncsp'
+        codebook (list): User specified list of all possible or allowed codes
 
-    expands   ... columns connected by logical operators should get expressions in front
-    abode_expr = 'K51* in icdmain and K51* in icdbi ...'
+    Examples:
 
-    expr = 'icd==K50 and age==40'
+        expr = 'K52* and not (K50 or K51)'
+        expr = 'K52* in icd and not (K50 or K51) in ncmp'
 
-    1. pick out every code expression nd expand it? (only star expansion, hyphen would work too? key is to avoud codebook or full lookup )
-    2. get codebook (if needed)
-    2. use extract coe on each expression
+        expr = 'K52* in icd and not 4AB04 in ncmp or atc'
 
-    2. execute logic
-    3. return series (bool)
+        expr = 'in icdmain or icdbi: (k50 or k51) and in ncmp: 4AB04 and 4AB02)'
 
-    get_rows_expression(df=npr, expr=expr, cols='icd', sep=',',
-                        out='rows', raw=False, regex=False, logic=True,
-                        codebook=None, pid='pid', _fix=True):
+        expr = '(K50 in:icdmain1,icdmain2 or K51 in:icdmain1,icdmain2) and (4AB04 in:ncmp or 4AB02 in:ncmp)'
+
+        expr = 'k50 or k51 in icdmain or icdbi and (4AB04 and 4AB02) in ncmp'
+        expr = 'k50==icdmain
+        expr = 'K51* and 4AB04'
+
+        expr='4AB02 in:ncmp and not 4AB02 in:ncsp'
+
+        expands   ... columns connected by logical operators should get expressions in front
+        abode_expr = 'K51* in icdmain and K51* in icdbi ...'
+
+        expr = 'icd==K50 and age==40'
+
+    Note:
+        Coding logic:
+        - pick out every code expression and expand it? (only star expansion, hyphen would work too? key is to avoud codebook or full lookup )
+        - get codebook (if needed)
+        - use extract code on each expression
+        - execute logic
+        - return series (bool)
+
+    Examples:
+    >>> get_rows_expression(df=npr, expr=expr, cols='icd', sep=',', out='rows'):
 
 
     """
-    cols = listify(cols)
+    cols = _listify(cols)
     skipwords = {'and', 'or', 'not'}
     # split_at = {'=', '>', '<'} # what about '>=' '!' '!=' etc
-    # well, just use quert to deal with all this. eg if want to examine age>40
+    # well, just use query to deal with all this. eg if want to examine age>40
     # also additional groupbys ... need to think harder/rewrite/clean up, for now: allow some slightly more complex stuff
 
     if _fix:
-        df, cols = to_df(df, cols)
+        df, cols = _to_df(df, cols)
         if not sep and not ' in:' in expr:
-            sep = sniff_sep(df=df, cols=cols)
+            sep = _sniff_sep(df=df, cols=cols)
         df = df.set_index(pid, drop=False)  # maybe use "if index.name !='pid_index' since indexing may take time
 
     # one procedure for expressions with multiple columns (using " in:")
@@ -747,7 +771,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
         word_cols = list(zip(words[0::2], words[1::2]))
         # BUG SOLVED same code in two cols will create problems with dict, better use a
         # list of tuples, not a dict? YES or give name as combination of code and col?
-        # remeber, automatic unpacking of tuples so naming works
+        # remember, automatic unpacking of tuples so naming works
 
         del_cols = [col for word, col in word_cols]
 
@@ -761,7 +785,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
         # potential problem: empty codebooks?
         new_codebook = {}
         for word, cols in word_cols:
-            sep = sniff_sep(df=df, cols=cols)
+            sep = _sniff_sep(df=df, cols=cols)
             name = "".join(cols)
             if not codebook:
                 if name not in new_codebook:
@@ -774,7 +798,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
             worddict = {'___' + word + f'_{n}'.replace('*', '___'): [word]}
 
             # allow star etc notation in col also?
-            # cols=expand_cols(df=df, cols=cols)
+            # cols=_expand_cols(df=df, cols=cols)
             codes = expand_codes(df=df, codes=worddict, cols=cols, sep=sep, codebook=new_codebook[''.join(cols)],
                                  merge=True, group=True)
 
@@ -815,7 +839,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
         coldf = pd.DataFrame(index=df.index)
 
         # allow star etc notation in col also?
-        # cols=expand_cols(df=df, cols=cols)
+        # cols=_expand_cols(df=df, cols=cols)
         codes = expand_codes(df=df, codes=worddict, cols=cols, sep=sep, codebook=codebook)
 
         for name, codelist in codes.items():
@@ -844,7 +868,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
 # %%
 def search_text(df, text, cols='text', select=None, raw=False, regex=False, logic=True, has_underscore=False):
     """
-    Searches column(s) in a dataframe for ocurrences of words or phrases
+    Searches column(s) in a dataframe for occurrences of words or phrases
 
     Can be used to search for occurrences codes that are associated with certain words in the text description.
 
@@ -855,7 +879,7 @@ def search_text(df, text, cols='text', select=None, raw=False, regex=False, logi
         raw (bool): if True, searches for the raw textstring without modifications
         regex (bool): If True, use regex when searching
         logic (bool): If True, use logical operators in the search (and, or, not in the string)
-        underscore (bool): Set to true if the text contains underscores that are important (If set to true, it becomes to search for phrases i.e. two or more words right after each other
+        has_underscore (bool): Set to true if the text contains underscores that are important (If set to true, it becomes to search for phrases i.e. two or more words right after each other
 
     Returns:
         A dataframe with the rows that satisfy the search conditions (contain/not contain the words/phrases the user specified)
@@ -872,14 +896,14 @@ def search_text(df, text, cols='text', select=None, raw=False, regex=False, logi
         0.5 Identify phrases and substitute space in phrases with underscores to the phrase is considered to be one word
         1. find all whole words
         2. select search methode depending on input (search for raw text, search using regex, search using logical operators etc)
-        3. replace all hele ord med ord==1, men ikke and or not (evnt rereplace if have done it)
-        4. create str. contains bool col for rhvert ord
-        5. kjør pd eval
+        3. replace all terms with '{term}==1, but not replace ogical operator terms
+        4. create str.contains bool col for every term
+        5. run pd eval
     """
 
-    cols = listify(cols)
+    cols = _listify(cols)
 
-    df, cols = to_df(df, cols)
+    df, cols = _to_df(df, cols)
 
     # make it a df with text as col if input is a series, or it is used as a method used on a series object
     if isinstance(df, pd.Series):
@@ -948,15 +972,25 @@ def search_text(df, text, cols='text', select=None, raw=False, regex=False, logi
 
 
 # %%
-def first_event(df, codes, cols=None, pid='pid', date='in_date', sep=None):
+def first_event(df, codes, cols=None, pid='pid', date='in_date', sep=None, codebook=None):
     """
-        Returns time of the first observation for the person based on certain
+    Returns time of the first observation with any of the codes for the person
 
-        Args:
-            codes (str or list of str or dict):
-                codes marking the event of interest. Star notation is ok.
-            pid (string): Patient identifier
-            date (string): name of column indicatinf the date of the event
+
+
+    Args:
+        df (dataframe): Dataframe with events
+
+        codes (string, list or dict): The codes for the disease
+
+        cols (string, list): Name of columns where codes are located
+
+        sep (string, default: None): Separator between codes in same cell (if exist)
+            (If None, the function will infer the separator)
+
+        pid (str, default: 'pid'): Name of column with the personal identification number
+
+        codebook (list): User specified list of all possible or allowed codes
 
         Returns:
             Pandas series
@@ -970,11 +1004,11 @@ def first_event(df, codes, cols=None, pid='pid', date='in_date', sep=None):
             Date of first registered event with an ibd code for each individual:
                 first_event(df=df, codes=['k50*','k51*'], cols='icd', date='date')
     """
-    codes = listify(codes)
-    cols = listify(cols)
-
-    cols = expand_cols(df=df, cols=cols)
-    codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep)
+    codes = _listify(codes)
+    cols = _listify(cols)
+    sep = _sniff_sep(df=df, cols=cols)
+    cols = _expand_cols(df=df, cols=cols)
+    codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep, codebook=codebook)
 
     rows_with_codes = get_rows(df=df, codes=codes, cols=cols, sep=sep, _fix=False)
     subdf = df[rows_with_codes]
@@ -992,26 +1026,47 @@ def extract_codes(df, codes, cols=None, sep=None, new_sep=',', na_rep='',
     """
     Produce one or more columns with only selected codes
 
-    Can produce a set of dummy columns for codes and code groups.
-    Can also produce a merged column with only extracted codes.
-    Accept star notation.
-    Also accepts both single value columns and columns with compund codes and seperators
+    Args:
+        df (dataframe): Dataframe with events
 
-    out can be: 'text', 'category', 'bool' or 'int'
+        codes (string, list or dict): The codes for the disease
 
-    example
+        cols (string, list): Name of columns where codes are located
+
+        sep (string, default: None): Separator between codes in same cell (if exist)
+            (If None, the function will infer the separator)
+
+        pid (str, default: 'pid'): Name of column with the personal identification number
+
+        codebook (list): User specified list of all possible or allowed codes
+
+        merge (bool): Content of all columns is merged to one series # only if out='text'?
+
+        group (bool): Star an othernotation remain a single group, not split into indivdiual codes
+
+        out (string, ['text', 'category', 'bool' or 'int']): Datatype of output column(s)
+
+    Notes:
+        Can produce a set of dummy columns for codes and code groups.
+        Can also produce a merged column with only extracted codes.
+        Accept star notation.
+        Also accepts both single value columns and columns with compund codes and seperators
+
+
+    Example:
     to create three dummy columns, based on codes in icdmain column:
 
-    extract_codes(df=df,
-              codes={'fracture' : 'S72*', 'cd': 'K50*', 'uc': 'K51*'},
-              cols=['icdmain', 'icdbi'],
-              merge=False,
-              out='text')
-    np: problem with extract rows if dataframe is empty (none of the requested codes)
+    >>> extract_codes(df=df,
+    >>>          codes={'fracture' : 'S72*', 'cd': 'K50*', 'uc': 'K51*'},
+    >>>          cols=['icdmain', 'icdbi'],
+    >>>          merge=False,
+    >>>          out='text')
+
+    nb: problem with extract rows if dataframe is empty (none of the requested codes)
     """
     if _fix:
-        df, cols = to_df(df=df, cols=cols)
-        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep, group=group, merge=merge)
+        df, cols = _to_df(df=df, cols=cols)
+        codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep, group=group, merge=merge)
 
     subset = pd.DataFrame(index=df.index)
 
@@ -1054,7 +1109,8 @@ def years_in_row(df, year_col='year', groupby=None, info_bank=None, out='pct'):
     """
     average years in row patients are observed, for different start years
 
-    years = years_in_row(df, year_col='aar', out='pct')
+    Example:
+        >>> years = years_in_row(df, year_col='aar', out='pct')
     """
     years = df[year_col].unique()
     min_year = min(years)
@@ -1084,7 +1140,8 @@ def years_apart(df, pid='pid', year='year'):
     """
     pct of patients with observations that are x years apart
 
-    years_apart(df=df[ibd])
+    Example:
+        >>> years_apart(df=df[ibd])
 
     """
     a = df.groupby(pid)[year].unique()
@@ -1157,7 +1214,7 @@ def count_codes(df, codes=None, cols=None, sep=None, normalize=False,
     more examples
     -------------
 
-    count_codes(df, codes='K51*', cols='icd', sep=',')
+    df.count_codes(codes='K51*', cols='icd', sep=',')
     count_codes(df, codes='K51*', cols='icdm', sep=',', group=True)
     count_codes(df, codes='Z51*', cols=['icd', 'icdbi'], sep=',')
     count_codes(df, codes='Z51*', cols=['icdmain', 'icdbi'], sep=',', group=True)
@@ -1182,15 +1239,15 @@ def count_codes(df, codes=None, cols=None, sep=None, normalize=False,
     sub = df
 
     if _fix:
-        sub, cols = to_df(df=sub, cols=cols)
-        cols = fix_cols(df=sub, cols=cols)
+        sub, cols = _to_df(df=sub, cols=cols)
+        cols = _fix_cols(df=sub, cols=cols)
         if not sep:
-            sep = sniff_sep(df=sub, cols=cols)
+            sep = _sniff_sep(df=sub, cols=cols)
 
         if codes:
-            codes = format_codes(codes=codes, merge=merge)
+            codes = _format_codes(codes=codes, merge=merge)
             codes = expand_codes(df=sub, codes=codes, cols=cols, sep=sep, merge=merge, group=group)
-            allcodes = get_allcodes(codes)
+            allcodes = _get_allcodes(codes)
             if dropna:
                 rows = get_rows(df=sub, codes=allcodes, cols=cols, sep=sep, _fix=False)
                 sub = sub[rows]
@@ -1210,14 +1267,14 @@ def count_codes(df, codes=None, cols=None, sep=None, normalize=False,
         code_count = sub[cols].apply(pd.Series.value_counts).sum(axis=1)
 
     if codes:
-        allcodes = get_allcodes(codes)
+        allcodes = _get_allcodes(codes)
         not_included_n = code_count[~code_count.isin(allcodes)].sum()
         code_count = code_count[allcodes]
         if not dropna:
             code_count['na'] = not_included_n
 
     if isinstance(codes, dict):
-        code_count = code_count.rename(index=reverse_dict(codes)).sum(level=0)
+        code_count = code_count.rename(index=_reverse_dict(codes)).sum(level=0)
 
     if normalize:
         code_n = code_count.sum()
@@ -1243,7 +1300,7 @@ def lookup_codes(dikt, codes):
 
     """
 
-    codes = listify(codes)
+    codes = _listify(codes)
     codes = [code.upper().strip('*') for code in codes]
     codes = tuple(codes)
 
@@ -1266,7 +1323,7 @@ def get_codes(dikt, text):
 
     """
 
-    text = listify(text)
+    text = _listify(text)
     text = [txt.upper().strip('*') for txt in text]
     # codes = " ".join(codes)
 
@@ -1278,6 +1335,7 @@ def get_codes(dikt, text):
 # %%
 def sankey_format(df, labels=None, normalize=False, dropna=False, threshold=0.01):
     """
+    Format the dataframe so it is easy fo create a holoviews sankey figure
 
     labels=dict(bio_codes.values())
     import holoviews as hv
@@ -1285,7 +1343,6 @@ def sankey_format(df, labels=None, normalize=False, dropna=False, threshold=0.01
     hv.extension('bokeh')
     t4=t1.copy()
 
-    %store t4
     """
     a = df
     a = a.apply(lambda row: ' '.join(row))
@@ -1538,7 +1595,7 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
 ##
 
 
-def listify(string_or_list):
+def _listify(string_or_list):
     """
     return a list if the input is a string, if not: returns the input as it was
 
@@ -1559,7 +1616,7 @@ def listify(string_or_list):
     return string_or_list
 
 
-def sniff_sep(df, cols=None, possible_seps=[',', ';', '|'], n=1000, sure=False, each_col=False):
+def _sniff_sep(df, cols=None, possible_seps=[',', ';', '|'], n=1000, sure=False, each_col=False):
     """
     Sniff whether column(s) cells have mulitple values with a seperator
 
@@ -1578,9 +1635,9 @@ def sniff_sep(df, cols=None, possible_seps=[',', ';', '|'], n=1000, sure=False, 
 
     """
 
-    cols = listify(cols)
+    cols = _listify(cols)
 
-    df = stringify_cols(df=df, cols=cols)
+    df = _stringify_cols(df=df, cols=cols)
 
     # fix args depending on whether a series or df is input and if cols is specified
     if isinstance(df, pd.Series):
@@ -1622,11 +1679,11 @@ def sniff_sep(df, cols=None, possible_seps=[',', ';', '|'], n=1000, sure=False, 
     return sniffed_sep
 
 
-def get_some_id(df,
-                codes,
-                cols,
-                xid,
-                sep=None):
+def _get_some_id(df,
+                 codes,
+                 cols,
+                 xid,
+                 sep=None):
     """
     help function for all get functions that gets ids based on certain filtering criteria
 
@@ -1635,10 +1692,10 @@ def get_some_id(df,
 
     """
 
-    codes = listify(codes)
-    cols = listify(cols)
+    codes = _listify(codes)
+    cols = _listify(cols)
 
-    cols = expand_cols(df=df, cols=cols)
+    cols = _expand_cols(df=df, cols=cols)
 
     expanded_codes = expand_codes(df=df,
                                   codes=codes,
@@ -1661,41 +1718,41 @@ def get_some_id(df,
     return pids
 
 
-def fix_cols(df, cols):
+def _fix_cols(df, cols):
     if not cols:
         cols = list(df.columns)
 
-    cols = expand_cols(df=df, cols=cols)
+    cols = _expand_cols(df=df, cols=cols)
     return cols
 
 
-def fix_codes(df, codes=None, cols=None, sep=None, merge=False, group=False):
+def _fix_codes(df, codes=None, cols=None, sep=None, merge=False, group=False):
     if not codes:
         codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:5]
 
-    codes = format_codes(codes=codes, merge=merge)
+    codes = _format_codes(codes=codes, merge=merge)
     codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep, merge=merge, group=group)
     return codes
 
 
-def fix_args(df, codes=None, cols=None, sep=None, merge=False, group=False, _sniffsep=True):
+def _fix_args(df, codes=None, cols=None, sep=None, merge=False, group=False, _sniffsep=True):
     # Use all columns if no column is specified
     # Series if converted to df (with pid column, assumed to be in the index)
     if not cols:
         cols = list(df.columns)
     else:
-        cols = expand_cols(df=df, cols=cols)
+        cols = _expand_cols(df=df, cols=cols)
 
     if _sniffsep:
-        sep = sniff_sep(df=df, cols=cols)
+        sep = _sniff_sep(df=df, cols=cols)
 
     if not codes:
         codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False).index[:5]
         codes = list(codes)
 
-    codes = format_codes(codes=codes, merge=merge)
+    codes = _format_codes(codes=codes, merge=merge)
     codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep, merge=merge, group=group)
-    codes = format_codes(codes=codes, merge=merge)
+    codes = _format_codes(codes=codes, merge=merge)
 
     # useful to have full codelist (of codes only, after expansion)
     full_codelist = set()
@@ -1706,7 +1763,7 @@ def fix_args(df, codes=None, cols=None, sep=None, merge=False, group=False, _sni
     return codes, cols, allcodes, sep
 
 
-def to_df(df, cols=None):
+def _to_df(df, cols=None):
     if isinstance(df, pd.Series):
         df = df.to_frame()
         cols = list(df.columns)
@@ -1714,7 +1771,7 @@ def to_df(df, cols=None):
     return df, cols
 
 
-def get_allcodes(codes):
+def _get_allcodes(codes):
     """
     Return a list of only codes from the input
 
@@ -1726,18 +1783,18 @@ def get_allcodes(codes):
             allcodes.update(set(codelist))
         allcodes = list(allcodes)
     else:
-        allcodes = listify(codes)
+        allcodes = _listify(codes)
     return allcodes
 
 
-def get_mask(df,
-             codes,
-             cols,
-             sep=None):
-    codes = listify(codes)
-    cols = listify(cols)
+def _get_mask(df,
+              codes,
+              cols,
+              sep=None):
+    codes = _listify(codes)
+    cols = _listify(cols)
 
-    cols = expand_cols(df=df, cols=cols)
+    cols = _expand_cols(df=df, cols=cols)
 
     expanded_codes = expand_codes(df=df,
                                   codes=codes,
@@ -1758,13 +1815,13 @@ def get_mask(df,
     return b
 
 
-def expand_cols(df, cols, star=True, hyphen=True, colon=True, regex=None):
+def _expand_cols(df, cols, star=True, hyphen=True, colon=True, regex=None):
     """
     Expand columns with special notation to their full column names
 
     """
 
-    cols = listify(cols)
+    cols = _listify(cols)
 
     allcols = list(df.columns)
 
@@ -1787,7 +1844,7 @@ def expand_colon(expr, full_list):
     expr (str or list): Expression (or list of expressions) to be expanded
     full_list (list or array) : The list to slice from
     """
-    exprs = listify(expr)
+    exprs = _listify(expr)
     expanded = []
 
     for expr in exprs:
@@ -1809,7 +1866,7 @@ def expand_star(expr, cols=None, full_list=None, sep=None):
 
     """
 
-    exprs = listify(expr)
+    exprs = _listify(expr)
 
     if isinstance(full_list, pd.Series):
         pass
@@ -1870,7 +1927,7 @@ def expand_hyphen(expr):
 
     """
 
-    exprs = listify(expr)
+    exprs = _listify(expr)
     all_codes=[]
 
     for expr in exprs:
@@ -1907,7 +1964,7 @@ def expand_hyphen(expr):
     return all_codes
 
 
-def stringify_cols(df, cols):
+def _stringify_cols(df, cols):
     """
     Stringify some cols - useful since many methods erquire code column to be a string
     """
@@ -1917,7 +1974,7 @@ def stringify_cols(df, cols):
     return df
 
 
-def format_codes(codes, merge=True):
+def _format_codes(codes, merge=True):
     """
     Makes sure that the codes has the desired format: a dict with strings as
     keys (name) and a list of codes as values)
@@ -1936,11 +1993,11 @@ def format_codes(codes, merge=True):
             codes = 'S72*'
             codes = ['K50*', 'K51*']
 
-            format_codes(codes, merge=False)
+            _format_codes(codes, merge=False)
 
     TODO: test for correctness of input, not just reformat (is the key a str?)
     """
-    codes = listify(codes)
+    codes = _listify(codes)
 
     # treeatment of pure lists depends on whether special classes should be treated as one merged group or separate codes
     # exmple xounting of Z51* could mean count the total number of codes with Z51 OR a shorthand for saying "count all codes starting with Z51 separately
@@ -1963,8 +2020,8 @@ def format_codes(codes, merge=True):
     return codes
 
 
-def expand_regex(expr, full_list):
-    exprs = listify(expr)
+def _expand_regex(expr, full_list):
+    exprs = _listify(expr)
 
     expanded = []
 
@@ -1981,10 +2038,10 @@ def expand_regex(expr, full_list):
     return expanded
 
 
-def reverse_dict(dikt):
+def _reverse_dict(dikt):
     new_dict = {}
     for name, codelist in dikt.items():
-        codelist = listify(codelist)
+        codelist = _listify(codelist)
         new_dict.update({code: name for code in codelist})
     return new_dict
 
@@ -2032,8 +2089,8 @@ def persons_with(df,
     sub = df
 
     if _fix:
-        df, cols = to_df(df=df, cols=cols)
-        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=merge, group=group)
+        df, cols = _to_df(df=df, cols=cols)
+        codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep, merge=merge, group=group)
         rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
         sub = df[rows]
 
@@ -2078,20 +2135,44 @@ def stringify_durations(df,
                         info=None,
                         report=True):
     """
-    codes={
-        'L04A*' : 'i',
-        'L04AB*' : 'a',
-                'H02*' : 'c'}
-    pr=pr.set_index('pid_index')
-    pr['first_date'] = pr.groupby('pid')['date'].min()
-    events=stringify_durations(df=pr, codes=codes, start='date', first_date='first_date', dataset_end_date="01-01-2018")
-    events=stringify_durations(df=df, codes=codes, col='ncmpalt', start='start_date', first_date='first', dataset_end_date="01-01-2018")
+    Creates a string for each individual describing the time duration selected code events (example: a-, ad, --, a)
 
-    df2.columns
+    Args:
+        df: dataframe
+        codes: codes to be used to mark an event
+        cols: columns with the event codes
+        pid: column with the personal identification number
+        event_start: column containing the date for the event
+        sep: the separator used between events if a column has multiple events in a cell
+        keep_repeats: identical events after each other are reduced to one (if true)
+        only_unique: deletes all events that have occurred previously for the individual (if true)
 
-    eventstr_duration = stringify_durations(df=pr, codes=codes, cols='atc',
-                                           event_duration='ddd',
-                                        event_start='date', step=120)
+    Returns:
+        series with a string that describes the events for each individual
+    Example:
+    >>> codes={'L04A*' : 'i', 'L04AB*' : 'a', 'H02*' : 'c'}
+    >>> pr=pr.set_index('pid_index')
+    >>> pr['first_date'] = pr.groupby('pid')['date'].min()
+    >>> events=stringify_durations(df=df, codes=codes, col='ncmpalt', start='start_date', first_date='first', dataset_end_date="01-01-2018")
+
+
+    background
+        to identify treatment patters, first stringify each treatment,
+        then aggregate the different treatments to one string
+        each "cell" in the string (separated by sep) represent one time unit
+        the time unit can be further aggregated to reduce the level of detail
+
+    example output (one such row for each person)
+        a---s, a---, ai-s, a---, ----
+
+        Interpretation: A person with event a and s in first time perod, then a only in second,
+        the a, i and s in the third, a only in fourth and no events in the last
+
+    purpose
+        examine typical treatment patterns and correlations
+        use regex or other string operations on this to get statistcs
+        (time on first line of treatment, number of switches, stops)
+
     """
     # drop rows with missing observations in required variables
 
@@ -2156,11 +2237,11 @@ def stringify_durations(df,
 
     # if codes are not specified, use the five most common codes
     if not codes:
-        cols = expand_cols(listify(cols))
+        cols = _expand_cols(_listify(cols))
         codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:4]
 
     # fix formatting of input (make list out of a string input and so on)
-    codes, cols, old_codes, replace = fix_args(df=df, codes=codes, cols=cols, sep=sep)
+    codes, cols, old_codes, replace = _fix_args(df=df, codes=codes, cols=cols, sep=sep)
 
     # get the rows that contain the relevant codes
     rows = get_rows(df=df, codes=codes, cols=cols, sep=sep)
@@ -2373,7 +2454,7 @@ def overlay_strings(df, cols=None, sep=",", nan='-', collisions='x', interleaved
     parameters
         cols : list of columns with strings to be interleaved
         nan : value to be used in place of missing values
-        collisions: value to be usef if ther is a collision between events in a position
+        collisions: value to be used if there is a collision between events in a position
 
 
     background
@@ -2394,7 +2475,7 @@ def overlay_strings(df, cols=None, sep=",", nan='-', collisions='x', interleaved
         (time on first line of treatment, number of switches, stops)
 
     todo
-        more advanced handeling of collisions
+        more advanced handling of collisions
             - special symbols for different types of collisions
             - warnings (and keep/give info on amount and type of collisions)
 
@@ -2472,75 +2553,61 @@ def shorten_interleaved(text, agg=3, sep=',', missing='-'):
 def stringify_order(df, codes=None, cols=None, pid='pid', event_start='in_date', sep=None, keep_repeats=True,
                     only_unique=False, _fix=True):
     """
+    Creates a string for each individual describing selected code events in the order they occurred
 
-    examples
+    Args:
+        df: dataframe
+        codes: codes to be used to mark an event
+        cols: columns with the event codes
+        pid: column with the personal identification number
+        event_start: column containing the date for the event
+        sep: the separator used between events if a column has multiple events in a cell
+        keep_repeats: identical events after each other are reduced to one (if true)
+        only_unique: deletes all events that have occurred previously for the individual (if true)
 
-    codes={
-        '4AB01': 'e',
-        '4AB02' : 'i',
-        '4AB04' : 'a',
-        '4AB05' : 'x',
-        '4AB06' : 'g'}
-    medcodes=read_code2text()
-    df['diagnosis_date']=df[df.icdmain.fillna('').str.contains('K50|K51')].groupby('pid')['start_date'].min()
-    df.columns
-    df.start_date
+    Returns:
+        series with a string that describes the events for each individual
 
-    bio_codes= {
-     '4AA23': ('n', 'Natalizumab'),
-     '4AA33': ('v', 'Vedolizumab'),
-     '4AB02': ('i', 'Infliximab'),
-     '4AB04': ('a', 'Adalimumab'),
-     '4AB06': ('g', 'Golimumab'),
-     '4AC05': ('u', 'Ustekinumab')}
 
-    bio_codes= {'L04AA23': 'n',
-     'L04AA33': 'v',
-     'L04AB02': 'i',
-     'L04AB04': 'a',
-     'L04AB06': 'g',
-     'L04AC05': 'u'}
 
-    bio_codes={
-        'e' : '4AB01',
-        'i' : '4AB02',
-        'a' : '4AB04'}
+    Examples:
 
-    a=stringify_order(
-            df=df,
-            codes=bio_codes,
-            cols='ncmpalt',
-            pid='pid',
-            event_start='start_date',
-            sep=',',
-            keep_repeats=True,
-            only_unique=False
-            )
+    >>> codes={'4AB01': 'e', '4AB02' : 'i', '4AB04' : 'a', '4AB05' : 'x', '4AB06' : 'g'}
 
-    codes={
-        'L04AB01': 'e',
-        'L04AB02' : 'i',
-        'L04AB04' : 'a',
-        'L04AB05' : 'x',
-        'L04AB06' : 'g'}
+    >>> bio_codes= {'L04AA23': 'n', 'L04AA33': 'v', 'L04AB02': 'i', 'L04AB04': 'a','L04AB06': 'g', 'L04AC05': 'u'}
 
-    bio_rows=get_rows(df=pr, codes=list(codes.keys()), cols='atc')
-    pr['first_bio']=pr[bio_rows].groupby('pid')['date'].min()
+    >>> bio_codes={'e' : '4AB01', 'i' : '4AB02', 'a' : '4AB04'}
 
-    a=stringify_order(
-            df=pr,
-            codes=codes,
-            cols='atc',
-            pid='pid',
-            event_date='date',
-            sep=','
-            )
+    >>> a=stringify_order(df=df, codes=bio_codes, cols='ncmpalt', pid='pid', event_start='start_date', sep=',', keep_repeats=True, only_unique=False)
+
+
+    >>> bio_rows=get_rows(df=pr, codes=list(codes.keys()), cols='atc')
+    >>> pr['first_bio']=pr[bio_rows].groupby('pid')['date'].min()
+
+    >>> stringify_order(df=pr, codes=codes, cols='atc', pid='pid', event_date='date', sep=',')
+
+    background
+        to identify treatment patters, first stringify each treatment,
+        then aggregate the different treatments to one string
+        each "cell" in the string (separated by sep) represent one time unit
+        the time unit can be further aggregated to reduce the level of detail
+
+    example output (one such row for each person)
+        a---s, a---, ai-s, a---, ----
+
+        Interpretation: A person with event a and s in first time perod, then a only in second,
+        the a, i and s in the third, a only in fourth and no events in the last
+
+    purpose
+        examine typical treatment patterns and correlations
+        use regex or other string operations on this to get statistcs
+        (time on first line of treatment, number of switches, stops)
     """
 
     # fix formatting of input
     if _fix:
-        df, cols = to_df(df=df, cols=cols)
-        codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep)
+        df, cols = _to_df(df=df, cols=cols)
+        codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep)
 
     # get the rows with the relevant columns
     rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
@@ -2571,7 +2638,6 @@ def del_repeats(str_series):
     """
     deletes consecutively repeated characters from the strings in a series
 
-    del_repeats(a)
     """
     no_repeats = str_series.str.replace(r'([a-z])\1+', r'\1')
     return no_repeats
@@ -2582,14 +2648,6 @@ def del_singles(text):
     Deletes single characters from string
     todo: how to deal with first and last position ... delete it too?
 
-    b=del_singles(a)
-    (.)\1{2,}
-
-    lookahead \b(?:([a-z])(?!\1))+\b
-    lookback ....
-
-
-    no_singles = str_series.str.replace(r'(.)((?<!\1)&(?!\1))', r'')
     """
     # text with only one character are by definition singles
     if len(text) < 2:
@@ -2634,7 +2692,7 @@ def stringify_time(df,
         codes: codes to be used to mark an event
         cols: columns with the event codes
         pid: column with the personal identification number
-        event_date: column containing the date for the event
+        event_start: column containing the date for the event
         sep: the seperator used between events if a column has multiple events in a cell
         keep_repeats: identical events after each other are reduced to one (if true)
         only_unique: deletes all events that have occurred previously for the individual (if true)
@@ -2643,47 +2701,28 @@ def stringify_time(df,
         series with a string that describes the events for each individual
 
     Example:
-        codes={
-        '4AB01': 'e',
-        '4AB02' : 'i',
-        '4AB04' : 'a',
-        '4AB05' : 'x',
-        '4AB06' : 'g'}
+        codes={'4AB01': 'e', '4AB02' : 'i', '4AB04' : 'a','4AB05' : 'x', '4AB06' : 'g'}
 
     df['diagnosis_date']=df[df.icdmain.fillna('').str.contains('K50|K51')].groupby('pid')['start_date'].min()
 
-    a=stringify_order_date(
-            df=df,
-            codes=codes,
-            cols='ncmpalt',
-            pid='pid',
-            event_date='start_date',
-            first_date='diagnosis_date',
-            step=90,
-            sep=',',
-            )
+    stringify_time(df=df,  codes=codes, cols='ncmpalt', pid='pid', event_date='start_date', first_date='diagnosis_date', step=90, sep=',',)
 
-    codes={
-        'L04AB01': 'e',
-        'L04AB02' : 'i',
-        'L04AB04' : 'a',
-        'L04AB05' : 'x',
-        'L04AB06' : 'g'}
+    background
+        to identify treatment patters, first stringify each treatment,
+        then aggregate the different treatments to one string
+        each "cell" in the string (separated by sep) represent one time unit
+        the time unit can be further aggregated to reduce the level of detail
 
-    bio_rows=get_rows(df=pr, codes=list(codes.keys()), cols='atc')
-    pr['first_bio']=pr[bio_rows].groupby('pid')['date'].min()
+    example output (one such row for each person)
+        a---s, a---, ai-s, a---, ----
 
-    a=stringify_order_date(
-            df=pr,
-            codes=codes,
-            cols='atc',
-            pid='pid',
-            event_date='date',
-            first_date='first_bio',
-            step=90,
-            sep=','
-            )
+        Interpretation: A person with event a and s in first time perod, then a only in second,
+        the a, i and s in the third, a only in fourth and no events in the last
 
+    purpose
+        examine typical treatment patterns and correlations
+        use regex or other string operations on this to get statistcs
+        (time on first line of treatment, number of switches, stops)
     """
 
     # drop rows with missing observations in required variables
@@ -2717,11 +2756,11 @@ def stringify_time(df,
 
     # if codes are not specified, use the five most common codes
     if not codes:
-        cols = expand_cols(listify(cols))
+        cols = _expand_cols(_listify(cols))
         codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:4]
 
     # fix formatting of input (make list out of a string input and so on)
-    codes, cols, allcodes, sep = fix_args(df=df, codes=codes, cols=cols, sep=sep)
+    codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep)
 
 
     # get the rows that contain the relevant codes
