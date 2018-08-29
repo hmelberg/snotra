@@ -548,7 +548,8 @@ def select_persons(df,
                    cols=None,
                    pid='pid',
                    sep=None,
-                   codebook=None):
+                   codebook=None,
+                   _fix=True):
     """
     Returns a dataframe with all events for people who have the given codes
 
@@ -568,10 +569,17 @@ def select_persons(df,
         >>> df.select_persons(codes='C509', cols=['icdmain', 'icdbi'])
 
     """
+    if _fix:
+        df, cols = _to_df(df=df, cols=cols)
+        if cols:
+            cols = _expand_cols(df=df, cols=cols)
+            if not sep:
+                sep = _sniff_sep(df=df, cols=cols)
+
     # if an expression is used as input (eg 'K50 and not K51')
     if isinstance(codes, str) and codes.count(' ') > 1:
         selection = use_expression(df, codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
-        pids = df[selection]
+        pids = df[selection][pid].values
     # if an list of codes - ['K50', 'K51'] is used as input
     else:
         pids = _get_some_id(df=df, codes=codes, some_id=pid, sep=sep)
@@ -641,6 +649,8 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
     """
 
     subset = df
+    df, cols = _to_df(df=df, cols=cols)
+    cols = _expand_cols(df=df, cols=cols)
 
     # if an expression instead of a codelist is used as input
     if isinstance(codes, str) and codes.count(' ') > 1:
@@ -1680,9 +1690,9 @@ def _sniff_sep(df, cols=None, possible_seps=[',', ';', '|'], n=1000, sure=False,
 
 
 def _get_some_id(df,
-                 codes,
-                 cols,
-                 some_id,
+                 codes=None,
+                 cols=None,
+                 some_id='pid',
                  sep=None):
     """
     help function for all get functions that gets ids based on certain filtering criteria
