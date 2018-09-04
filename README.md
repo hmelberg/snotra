@@ -23,9 +23,9 @@ Why Snotra? Snotra is a Norse goddess associated with wisdom. Although the libra
 - **Select all events for some persons using codelists or logical expressions**
 
     ```python
-      df.select_persons(codes=['K50*', 'K51*'], cols='icd')
+    df.select_persons(codes=['K50*', 'K51*'], cols='icd')
 
-      df.select_persons(codes='K50 or K51 and not K52', cols='icd')
+    df.select_persons(codes='(K50 or K51) and not K52', cols='icd')
 
     ```
 
@@ -35,7 +35,7 @@ Why Snotra? Snotra is a Norse goddess associated with wisdom. Although the libra
     ```
 - **Calculate Charlson Comorbidity Index***
     ```python
-    cci = rr.charlson(df=df, cols=['icd1', 'icd2'], sep=',')
+    cci = sa.charlson(df=df, cols=['icd1', 'icd2'], sep=',')
     ```
 
 ## Installation

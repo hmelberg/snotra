@@ -486,7 +486,7 @@ def get_rows(df,
             cols = _fix_cols(df=df, cols=cols)
             codes = _fix_codes(df=df, codes=codes, cols=cols, sep=sep)
 
-        _listify(codes)
+        codes = _listify(codes)
 
         allcodes = _get_allcodes(codes)
 
@@ -565,7 +565,8 @@ def select_persons(df,
         codebook (list): User specified list of all possible or allowed codes
 
     Examples:
-
+        >>> df.select_persons(codes='K51 and not K50')
+        >>> df.select_persons(codes='(K50 in: icd or K51 in: icd) and 4AB04 in atc')
         >>> df.select_persons(codes='C509', cols=['icdmain', 'icdbi'])
 
     """
@@ -648,13 +649,13 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
 
     """
 
-    subset = df
-    df, cols = _to_df(df=df, cols=cols)
-    cols = _expand_cols(df=df, cols=cols)
+    sub = df
+    sub, cols = _to_df(df=sub, cols=cols)
+    cols = _expand_cols(df=sub, cols=cols)
 
     # if an expression instead of a codelist is used as input
     if isinstance(codes, str) and codes.count(' ') > 1:
-        persons = use_expression(df, expr=codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
+        persons = use_expression(df=sub, expr=codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
         if normalize:
             counted = persons.sum() / len(persons)
         else:
@@ -665,15 +666,14 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
     else:
         if _fix:
             # expands and formats columns and codes input
-            df, cols = _to_df(df=df, cols=cols)
-            codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep, group=group, merge=merge)
-            rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
+            codes, cols, allcodes, sep = _fix_args(df=sub, codes=codes, cols=cols, sep=sep, group=group, merge=merge)
+            rows = get_rows(df=sub, codes=allcodes, cols=cols, sep=sep, _fix=False)
             if not dropna:
                 persons = df[pid].nunique()
-            subset = df[rows].set_index(pid, drop=False)
+            sub = sub[rows].set_index(pid, drop=False)
 
         # make a df with the extracted codes
-        code_df = extract_codes(df=df, codes=codes, cols=cols, sep=sep, _fix=False, series=False)
+        code_df = extract_codes(df=sub, codes=codes, cols=cols, sep=sep, _fix=False, series=False)
 
         labels = list(code_df.columns)
 
@@ -681,7 +681,7 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
 
         if groupby:
             code_df = code_df.any(level=0)
-            sub_plevel = subset.groupby(pid)[groupby].first()
+            sub_plevel = sub.groupby(pid)[groupby].first()
             code_df = pd.concat([code_df, sub_plevel], axis=1)  # outer vs inner problem?
 
             code_df = code_df.set_index(groupby)
@@ -1948,7 +1948,7 @@ def expand_hyphen(expr):
 
 def _stringify_cols(df, cols):
     """
-    Stringify some cols - useful since many methods erquire code column to be a string
+    Stringify some cols - useful since many methods require code column to be a string
     """
 
     for col in cols:
@@ -2554,7 +2554,7 @@ def stringify_order(df, codes=None, cols=None, pid='pid', event_start='in_date',
 
     Examples:
 
-    >>> codes={'4AB01': 'e', '4AB02' : 'i', '4AB04' : 'a', '4AB05' : 'x', '4AB06' : 'g'}
+    >>> codes={'e': '4AB01', 'i': '4AB02', 'a': '4AB04', 'x': '4AB05' , 'g': '4AB06'}
 
     >>> bio_codes= {'L04AA23': 'n', 'L04AA33': 'v', 'L04AB02': 'i', 'L04AB04': 'a','L04AB06': 'g', 'L04AC05': 'u'}
 
@@ -2590,6 +2590,8 @@ def stringify_order(df, codes=None, cols=None, pid='pid', event_start='in_date',
     if _fix:
         df, cols = _to_df(df=df, cols=cols)
         codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep)
+    else:
+        allcodes=_get_allcodes(codes)
 
     # get the rows with the relevant columns
     rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
@@ -2746,7 +2748,7 @@ def stringify_time(df,
 
 
     # get the rows that contain the relevant codes
-    rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep)
+    rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
     subset = df[rows]  # maybe use .copy to avoid warnings?
 
     # find position of each event (number of steps from overall min_date)
@@ -2759,7 +2761,8 @@ def stringify_time(df,
                                 sep=sep,
                                 new_sep=',',
                                 merge=True,
-                                out='text')
+                                out='text',
+                                _fix=False)
 
     # base further aggregation on the new extracted series with its col and codes
     col = code_series.name
@@ -2827,7 +2830,7 @@ def stringify_time(df,
     # new dataframe to store each string for each individual for each code
     string_df = pd.DataFrame(index=code_series[pid].unique())
 
-    # loop over each code, aggregate strong for each individual, store in df
+    # loop over each code, create aggregate string for each individual, store in df
     for code in codes:
         code_df = code_series[code_series[col].isin([code])]
         stringified = code_df.groupby(pid, sort=False).apply(make_string)
