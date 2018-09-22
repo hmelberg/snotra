@@ -68,22 +68,16 @@ def read_codebooks_csv(path=None,
     # if no books specified, read all books that are discovered (or only last version ot it?)
     # code to find the books
     import os
+    import glob
+
+
     if not path:
-        path = os.path.abspath(rr.__file__)
+        path = os.path.abspath(sa.__file__)
 
-        path = path.replace('__init__.py', 'codebooks\\atc_2015_eng.csv')
-        path = path.replace('__init__.py', 'codebooks\\icd10cm_order_2017.txt')
+        path = path.replace('__init__.py', 'codebooks/')
 
-    atc = pd.read_csv(path, sep=';')
-    atc.text = atc.text.str.strip()
+    codebooks=glob(path)
 
-    atc.to_csv(path, sep=';')
-
-    from io import StringIO
-    a = StringIO()
-
-    with open(path, 'r') as file:
-        in_memory_file = file.read()
 
     # enable file specific reding of files, keywords and values relvant for reading a particular file is in info[filname]
     # if nothing is specified, used same arguments for all files

@@ -1,6 +1,10 @@
 import pandas as pd
+import os
 
 from .core import *
+
+# todo: make a proper config file
+_PATH = os.path.abspath(core.__file__)
 
 # %% monkeypatch to the functions become methods on the dataframe
 # could use decorators/pandas_flavor

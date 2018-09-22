@@ -1170,7 +1170,65 @@ def years_apart(df, pid='pid', year='year'):
 
 
 # %%
-def label(df, labels=None, read=True, path=None):
+def read_codebooks(file=None, must_contain=None, sep=';'):
+    """
+    Reads a codebook (in csv format)
+
+    file (str): The filname (including the path) to be read
+                If no file is specified, all available codebooks in the
+                codebook folder will be read
+
+    must_contain (list): List of terms that the filename must contain
+                in order to be read
+
+    filename may/should contain (in this order, separated by underscore):
+        name (atc, icd)
+        version (9, 10)
+        year (2017)
+        language (no, eng, ger)
+        country?
+
+    it may also contain other terms that you want to select on later
+
+    example: icd_9_2017_eng.csv
+
+
+    codebook = read_codebooks()
+
+
+    # must deal with integer vs. regular codes problem
+    """
+    # todo: make a prober config file
+    from snotra import _PATH
+
+    import glob
+
+    if not file:
+        path = _PATH.replace('core.py', 'codebooks/')
+        file = glob.glob(path + '*.csv')
+
+    files = _listify(file)
+
+    books = []
+
+    for codebook in files:
+        if must_contain:
+            must_contain = set(must_contain)
+            nameset = set(codebook.split('_'))
+            if len(must_contain) == len(nameset & must_contain):
+                df = pd.read_csv(codebook, sep=sep)
+                df['source'] = codebook.split('\\')[-1]
+                books.extend([df])
+        else:
+            df = pd.read_csv(codebook, sep=sep)
+            df['source'] = codebook.split('\\')[-1]
+            books.extend([df])
+    books = pd.concat(books, ignore_index=True, axis=0)
+    return books
+
+
+# %%
+def label(df, labels=None, file=None):
     """
     Translate codes in index to text labels based on content of the dict labels
 
@@ -1179,13 +1237,21 @@ def label(df, labels=None, read=True, path=None):
         read (bool): read and use internal dictionary if no dictionary is provided
     """
     if not labels:
-        # making life easier for myself
-        try:
-            labels = read_code2text()
-        except:
-            labels = read_code2text(path)
+        codebooks = read_codebooks()
+        labels = labels_from_codebooks(codebooks)
     df = df.rename(index=labels)
     return df
+
+
+# %%
+def labels_from_codebooks(codebook, code='code', text='text', only_valid_codes=False):
+    """
+    makes a dictionary of code to labels based on two columns in the codebook
+
+    """
+    # must deal with integer vs. regular codes problem
+    codedikt = codebook[['code', 'text']].set_index('code').to_dict()['text']
+    return codedikt
 
 
 # %%
