@@ -591,9 +591,55 @@ def select_persons(df,
 
 
 # %%
+def _count_persons_all_codes(df, cols=None, pid='pid', sep=None,
+                             normalize=False, dropna=True, length=None, groupby=None):
+    """
+    heper functions called from count_persons when no codes are specified
+
+    #todo: deal with dropna
+    """
+
+    sub = df
+    cols = _expand_cols(df=sub, cols=cols)
+
+    if normalize:
+        sum_persons = sub[pid].nunique()
+
+    if not sep:
+        sep = _sniff_sep(df=sub, cols=cols)
+
+    # codes=unique_codes(df=sub, cols=cols, sep=sep)
+    # reduce length of codes to the desired level of detail, specified by length
+    # this works if coode columns have single values
+    if length:
+        for col in cols:
+            sub[col] = sub[col].str[0:length]
+    # special (easy) case if only one column
+    sub = sub.set_index(pid)
+
+    # special (easy) case if alll for single valued columns
+    allcounted = None
+    for col in cols:
+        counted = sub[col].reset_index().groupby(col)[pid].nunique()
+        if not allcounted:
+            allcounted = counted
+        else:
+            allcounted = allcounted + counted
+
+    if normalize:
+        counted = counted / sum_persons
+    else:
+        counted = counted.astype(int)
+
+    counted = counted.sort_values(ascending=False)
+
+    return counted
+
+
+# %%
 def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
                   normalize=False, dropna=True, group=False, merge=False,
-                  groupby=None, codebook=None, _fix=True):
+                  length=None, groupby=None, codebook=None, _fix=True):
     """
     Counts number of individuals who are registered with given codes
 
@@ -630,6 +676,12 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
         normalize (bool, default: False): If True, converts to pct
         dropna (bool, default True): Include counts of how many did not get
             any of the specified codes
+        length (int): If specified, will only use the number of characters
+            from each code as specified by the length parameter (useful to
+            count codes at different levels of granularity. For example,
+            sometimes oe wants to look at how many people get detailed codes,
+            other times the researcher wants to know only how many get general
+            atc codes, say the first four characters of the atc)
 
     Examples
         >>> df.atc.count_persons(codes='4AB04')
@@ -653,6 +705,9 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
     sub, cols = _to_df(df=sub, cols=cols)
     cols = _expand_cols(df=sub, cols=cols)
 
+    if normalize:
+        sum_persons = sub[pid].nunique()
+
     # if an expression instead of a codelist is used as input
     if isinstance(codes, str) and codes.count(' ') > 1:
         persons = use_expression(df=sub, expr=codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
@@ -661,24 +716,33 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
         else:
             counted = persons.sum()
 
-
     # if codes is a codelist (not an expression)
     else:
         if _fix:
-            # expands and formats columns and codes input
-            codes, cols, allcodes, sep = _fix_args(df=sub, codes=codes, cols=cols, sep=sep, group=group, merge=merge)
-            rows = get_rows(df=sub, codes=allcodes, cols=cols, sep=sep, _fix=False)
-            if not dropna:
-                persons = df[pid].nunique()
-            sub = sub[rows].set_index(pid, drop=False)
+            # if no codes are specified, all rows and all codes are included, save time by  adding a shortcut for this
+            if not codes:
+                counted = _count_persons_all_codes(df=sub, cols=cols, pid=pid, sep=sep,
+                                                   normalize=normalize, dropna=dropna, length=length, groupby=groupby)
+                return counted
+            # if some codes are specified, expand and format these, and reduce the df to the relevant codes
+            else:
+                # expands and formats columns and codes input
+                codes, cols, allcodes, sep = _fix_args(df=sub, codes=codes, cols=cols, sep=sep, group=group,
+                                                       merge=merge)
+                rows = get_rows(df=sub, codes=allcodes, cols=cols, sep=sep, _fix=False)
+                if not dropna:
+                    sum_persons = df[pid].nunique()
+                sub = sub[rows].set_index(pid, drop=False)  # unsure if this is necessary, may drop it. Requred if method on a series? well not as long as we add pid column and recreate a series as a df
 
         # make a df with the extracted codes
+
         code_df = extract_codes(df=sub, codes=codes, cols=cols, sep=sep, _fix=False, series=False)
 
         labels = list(code_df.columns)
 
         counted = pd.Series(index=labels)
 
+        # maybe delete groupby option, can be done outside df.groupby. apply ...
         if groupby:
             code_df = code_df.any(level=0)
             sub_plevel = sub.groupby(pid)[groupby].first()
@@ -697,7 +761,7 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
             counted['NaN'] = nan_persons
 
         if normalize:
-            counted = counted / counted.sum()
+            counted = counted / sum_persons
         else:
             counted = counted.astype(int)
 
