@@ -1164,7 +1164,8 @@ def extract_codes(df, codes, cols=None, sep=None, new_sep=',', na_rep='',
 
     if (merge) and (len(codes) > 1):
         headline = ', '.join(new_codes)
-        merged = subset.iloc[:, 0].str.cat(subset.iloc[:, 1:].T.values, sep=new_sep, na_rep=na_rep)
+        # double check: used to be T.values, but when upgraded pndas and python to 3.7 this gave errors
+        merged = subset.iloc[:, 0].str.cat(subset.iloc[:, 1:].values, sep=new_sep, na_rep=na_rep)
         merged = merged.str.strip(',')
         subset = merged
         subset.name = headline
@@ -1904,6 +1905,21 @@ def _fix_args(df, codes=None, cols=None, sep=None, merge=False, group=False, _sn
 
 
 def _to_df(df, cols=None):
+    """
+    Transforms the series to a dataframe and sets cols if not cols is provided
+
+    Assumes pid is in the index of the series
+
+    (Useful to allow series as input, allows monkey patching to make function a method on a series)
+
+
+    Args:
+        df: series or dataframe
+
+    Returns:
+        dataframe with series values and pid as columns
+
+    """
     if isinstance(df, pd.Series):
         df = df.to_frame()
         cols = list(df.columns)
@@ -2489,8 +2505,8 @@ def stringify_durations(df,
               Final result:          {final_obs}, {final_npid}""")
     return string_df
 
-
-def interleave_strings(df, cols=None, sep=" ", nan='-', agg=False):
+#%%
+def interleave_strings(df, cols=None, time_sep="|", no_event=' ', agg=False):
     """
     Interleaves strings in two or more columns
 
@@ -2525,36 +2541,34 @@ def interleave_strings(df, cols=None, sep=" ", nan='-', agg=False):
 
     if agg:
         for col in cols:
-            df[col] = df[col].fillna('-')
+            df[col] = df[col].fillna(no_event)
             # find event symbol, imply check if all are missing, no events
             try:
-                char = df[col].str.cat().strip('-')[0]
+                char = df[col].str.cat().strip().str.strip('-')[0] #improvable?
             except:
-                df[col] = (col.str.len() / agg) * '-'
-
-            missing = '-' * len(cols)
+                df[col] = (col.str.len() / agg) * no_event
 
             def aggregator(text, agg):
-                missing = '-' * agg
+                missing = no_event * agg
                 units = (text[i:i + agg] for i in range(0, len(text), agg))
-                new_aggregated = ('-' if unit == missing else char for unit in units)
+                new_aggregated = (no_event if unit == missing else char for unit in units)
                 new_str = "".join(new_aggregated)
                 return new_str
         df[col] = df[col].apply(aggregator, agg=agg)
 
-    if sep:
-        interleaved = df[cols].fillna('-').apply(
-            (lambda x: ",".join(
+    if time_sep:
+        interleaved = df[cols].fillna(no_event).apply(
+            (lambda x: time_sep.join(
                 "".join(i)
-                for i in zip_longest(*x, fillvalue='-'))),
+                for i in zip_longest(*x, fillvalue=no_event))),
             axis=1)
     else:
         interleaved = df[cols].fillna('-').apply(
-            (lambda x: "".join(chain(*zip_longest(*x, fillvalue='-')))),
+            (lambda x: "".join(chain(*zip_longest(*x, fillvalue=no_event)))),
             axis=1)
 
     return interleaved
-
+#%%
 
 def overlay_strings(df, cols=None, sep=",", nan='-', collisions='x', interleaved=False):
     """
@@ -2624,38 +2638,43 @@ def overlay_strings(df, cols=None, sep=",", nan='-', collisions='x', interleaved
     return interleaved
 
 
-def shorten(events, agg=3, missing='-'):
+def shorten(events, agg=3, no_event=' '):
     """
     create a new and shorter string with a longer time step
 
     parameters
         events: (str) string of events that will be aggregated
         agg: (int) the level of aggregation (2=double the step_length, 3=triple)
+    hint:
+    if the string is interleaved of many events, or has time seperator, use shorten_interleaved
     """
     try:
-        char = events.strip('-')[0]
+        char = events.strip(no_event)[0]
     except:
-        char = '-'
+        char = no_event
     units = (events[i:i + agg] for i in range(0, len(events), agg))
-    new_aggregated = ('-' if unit == missing else char for unit in units)
+    new_aggregated = (no_event if unit == no_event else char for unit in units)
     new_str = "".join(new_aggregated)
     return new_str
 
 
-def shorten_interleaved(text, agg=3, sep=',', missing='-'):
+def shorten_interleaved(text, agg=3, time_sep=',', no_event=' '):
     """
     text="a-si,a--i,a-s-,--si,---i,--s-"
 
     shorten_interleaved(c, agg=2)
+
+    the original string must have a distinction between time_sep and no_event_sep
+    (if not, could try to infer)
     """
-    units = text.split(sep)
+    units = text.split(time_sep)
     ncodes = len(units[0])
     nunits = len(units)
 
     unitlist = [units[i:i + agg] for i in range(0, nunits, agg)]
     charlist = ["".join(aggunit) for aggunit in unitlist]
     unique_char = ["".join(set(chain(chars))) for chars in charlist]
-    new_str = ",".join(unique_char)
+    new_str = time_sep.join(unique_char)
     # ordered or sorted?
     # delete last if it is not full ie. not as many timee units in it as the others?
     # shortcut for all
@@ -2781,21 +2800,25 @@ def del_singles(text):
     return no_singles
 
 
+# %%
 def stringify_time(df,
                    codes=None,
                    cols=None,
                    pid='pid',
+                   sep=None,
                    step=90,
 
-                   event_start='in_date',
-                   event_end=None,
+                   event_start='date',
+                   nfirst=None,
 
                    first_date=None,
                    last_date=None,
 
                    censored_date=None,
 
-                   sep=None,
+                   time_sep='|',
+                   no_event=' ',
+
                    merge=True,
                    meta=None):
     """
@@ -2815,11 +2838,15 @@ def stringify_time(df,
         series with a string that describes the events for each individual
 
     Example:
-        codes={'4AB01': 'e', '4AB02' : 'i', '4AB04' : 'a','4AB05' : 'x', '4AB06' : 'g'}
+        codes={'i': '4AB02', 'a':'4AB04'}
+        codes={'i': ['4AB02','L04AB02'], 'a': ['4AB04', 'L04AB04']}
 
-    df['diagnosis_date']=df[df.icdmain.fillna('').str.contains('K50|K51')].groupby('pid')['start_date'].min()
 
-    stringify_time(df=df,  codes=codes, cols='ncmpalt', pid='pid', event_date='start_date', first_date='diagnosis_date', step=90, sep=',',)
+        df['diagnosis_date']=df[df.icdmain.fillna('').str.contains('K50|K51')].groupby('pid')['start_date'].min()
+
+    a=stringify_time(df=mdf,  codes=codes, cols='codes', pid='pid', event_start='date',
+    first_date='first_ibd', step=90, sep=',', no_event=' ', time_sep=' ')
+
 
     background
         to identify treatment patters, first stringify each treatment,
@@ -2871,15 +2898,15 @@ def stringify_time(df,
     # if codes are not specified, use the five most common codes
     if not codes:
         cols = _expand_cols(_listify(cols))
-        codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:4]
+        if not nfirst: nfirst = 5
+        codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:nfirst]
 
     # fix formatting of input (make list out of a string input and so on)
     codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep)
 
-
     # get the rows that contain the relevant codes
     rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
-    subset = df[rows]  # maybe use .copy to avoid warnings?
+    subset = df[rows].copy()  # maybe use .copy to avoid warnings?
 
     # find position of each event (number of steps from overall min_date)
     subset['position'] = (subset[event_start] - min_date).dt.days.div(step).astype(int)
@@ -2900,6 +2927,7 @@ def stringify_time(df,
 
     # drop duplicates (same type of even in same period for same individual)
     code_series = code_series.reset_index().drop_duplicates().set_index(pid, drop=False)
+    code_series.index.name = 'pid_index'
 
     ## make dict with string start end end positions for each individual
     # explanation:
@@ -2942,7 +2970,7 @@ def stringify_time(df,
         person = events[pid].iloc[0]
 
         # make a list of maximal length with no events
-        event_list = ['-'] * (max_length_steps + 1)
+        event_list = [no_event] * (max_length_steps + 1)
 
         # loop over all events the individual has and put code in correct pos.
         for pos in events['position'].values:
@@ -2954,18 +2982,18 @@ def stringify_time(df,
         if first_date:
             event_string = event_string[start_position[person]:]
         if last_date:
-            event_string = event_string[:-(max_position - end_position[person])]
+            event_string = event_string[:-(max_length_steps - end_position[person])]
         return event_string
 
     # new dataframe to store each string for each individual for each code
     string_df = pd.DataFrame(index=code_series[pid].unique())
 
-    # loop over each code, create aggregate string for each individual, store in df
+    # loop over each code, aggregate strong for each individual, store in df
     for code in codes:
         code_df = code_series[code_series[col].isin([code])]
         stringified = code_df.groupby(pid, sort=False).apply(make_string)
         string_df[code] = stringified
 
     if merge:
-        string_df = interleave_strings(string_df)
+        string_df = interleave_strings(string_df, no_event=no_event, time_sep=time_sep)
     return string_df
