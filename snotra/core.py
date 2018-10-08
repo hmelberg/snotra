@@ -2236,11 +2236,10 @@ def persons_with(df,
 
     return persondf
 
-
+#%%
 ##
 ## stringify functions
 ##
-
 def stringify_durations(df,
                         codes=None,
                         cols=None,
@@ -2256,12 +2255,14 @@ def stringify_durations(df,
                         last_date=None,
                         censored_date=None,
 
-                        na_rep='-',
-                        time_rep=',',
+                        ncodes=None,
+
+                        no_event='-',
+                        time_sep='|',
 
                         merge=True,
                         info=None,
-                        report=True):
+                        report=False):
     """
     Creates a string for each individual describing the time duration selected code events (example: a-, ad, --, a)
 
@@ -2278,6 +2279,12 @@ def stringify_durations(df,
     Returns:
         series with a string that describes the events for each individual
     Example:
+
+    >>> codes={'i' : ['4AB02', 'L04AB02'], 'a': ['4AB04','L04AB04']}
+    >>> events=stringify_durations(df=mdf, codes=codes, cols='codes',
+    event_start='date', first_date='first_ibd', sep=',')
+
+
     >>> codes={'L04A*' : 'i', 'L04AB*' : 'a', 'H02*' : 'c'}
     >>> pr=pr.set_index('pid_index')
     >>> pr['first_date'] = pr.groupby('pid')['date'].min()
@@ -2307,18 +2314,24 @@ def stringify_durations(df,
     if report:
         obs = len(df)
         npid = df[pid].nunique()
-        rows = get_rows(df=df, codes=codes, cols=cols, sep=sep)
+        if isinstance(codes, dict):
+            allcodes = _get_allcodes(codes)
+        elif isinstance(codes, str):
+            allcodes = _listify(codes)
+        # todo: also possible notational codes! better eliminate this?
+        rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep)
         code_obs = len(df[rows])
         code_npid = df[rows][pid].nunique()
 
-    df = df.dropna(subset=[pid, event_start])
+    df = df.dropna(subset=[pid, event_start])  # also drop if codes is missing
 
     if event_end:
         df = df.dropna(subset=[event_end])
     elif event_duration:
         df = df.dropna(subset=[event_duration])
         if df[event_duration].min() < 0:
-            print('Error: The specified duration column contains negative values')
+            print('Error: The specified duration column contains negative values. They are dropped')
+            df = df[df[event_duration] >= 0]
     else:
         print('Error: Either event_end or event_duration has to be specified.')
 
@@ -2366,21 +2379,22 @@ def stringify_durations(df,
     # if codes are not specified, use the five most common codes
     if not codes:
         cols = _expand_cols(_listify(cols))
-        codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:4]
+        if not ncodes: ncodes = 4
+        codes = count_codes(df=df, cols=cols, sep=sep).sort_values(ascending=False)[:ncodes]
 
     # fix formatting of input (make list out of a string input and so on)
-    codes, cols, old_codes, replace = _fix_args(df=df, codes=codes, cols=cols, sep=sep)
+    codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep)
 
     # get the rows that contain the relevant codes
-    rows = get_rows(df=df, codes=codes, cols=cols, sep=sep)
+    rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
     subset = df[rows].copy()  # maybe use .copy to avoid warnings? but takes time and memory
+    subset = subset.set_index(pid, drop=False)
+    subset.index.name = 'pid_index'
+    subset = subset.sort_values([pid, event_start])
+
     if report:
         sub_obs = len(subset)
         sub_npid = subset[pid].nunique()
-
-    subset = subset.sort_values([pid, event_start])
-    subset = subset.set_index(pid, drop=False)
-    subset.index.name = 'pid_index'
 
     # find start and end position of each event (number of steps from overall min_date)
     # to do: do not use those column names (may overwrite original names), use uuid names?
@@ -2397,12 +2411,13 @@ def stringify_durations(df,
 
     # create series with only the relevant codes for each person and position
     code_series = extract_codes(df=subset.set_index([pid, 'start_position', 'end_position']),
-                                codes=replace,
+                                codes=codes,
                                 cols=cols,
                                 sep=sep,
                                 new_sep=',',
                                 merge=True,
-                                out='text')
+                                out='text',
+                                _fix=False)
 
     # May need to unstack if two events in same row
     # for now: Just foce it to be 1
@@ -2415,7 +2430,7 @@ def stringify_durations(df,
 
     # drop duplicates (same type of even in same period for same individual)
     code_series = code_series.reset_index().drop_duplicates().set_index(pid, drop=False)
-
+    code_series.index.name = 'pid_index'
     ## make dict with string start and end positions for each individual
     # explanation:
     # the string is first made marking events in positions using calendar time
@@ -2461,10 +2476,10 @@ def stringify_durations(df,
 
     def make_string(events):
         # get pid of individual (required to find correct start and end point)
-        person = events[pid].iloc[0]
+        person = events.index[0]
 
         # make a list of maximal length with no events
-        event_list = ['-'] * (max_length_steps + 1)
+        event_list = [no_event] * (max_length_steps + 1)
 
         from_to_positions = tuple(zip(events['start_position'].tolist(), events['end_position'].tolist()))
 
@@ -2483,16 +2498,16 @@ def stringify_durations(df,
 
     # new dataframe to store each string for each individual for each code
     string_df = pd.DataFrame(index=code_series[pid].unique())
-
+    string_df.index.name = 'pid_index'
+    # code_df.index.name = 'pid_index'  # avoid future error from pandas pid in both col and index
     # loop over each code, aggregate strong for each individual, store in df
     for code in codes:
         code_df = code_series[code_series[col].isin([code])]
-        code_df.index.name = 'pid_index'  # avoid future error from pandas pid in both col and index
         stringified = code_df.groupby(pid, sort=False).apply(make_string)
         string_df[code] = stringified
 
     if merge:
-        string_df = interleave_strings(string_df)
+        string_df = interleave_strings(string_df, no_event=no_event, time_sep=time_sep)
 
     if report:
         final_obs = len(subset)
@@ -2504,7 +2519,6 @@ def stringify_durations(df,
               Filter missing         {sub_obs}, {sub_npid}
               Final result:          {final_obs}, {final_npid}""")
     return string_df
-
 #%%
 def interleave_strings(df, cols=None, time_sep="|", no_event=' ', agg=False):
     """
