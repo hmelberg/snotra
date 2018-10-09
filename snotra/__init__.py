@@ -17,7 +17,7 @@ series_methods = [sample_persons, count_persons, unique_codes, extract_codes,
 
 frame_methods = [sample_persons, first_event, get_pids, unique_codes,
                  expand_codes, get_rows, count_persons, extract_codes,
-                 count_codes, label, use_expression, select_persons]
+                 count_codes, label, use_expression, select_persons, count_p]
 
 # probably a horrible way of doing something horrible!
 for method in frame_methods:

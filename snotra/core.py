@@ -1,30 +1,41 @@
 # -*- coding: utf-8 -*-
 """
+Created on Tue Oct  9 17:26:40 2018
+
+@author: hmelberg
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Thu Feb 22 17:17:33 2018
 
 @author: hmelberg
 """
 
-
 import numpy as np
 import pandas as pd
 import re
+import ast
 from itertools import zip_longest, chain
 
+from itertools import product
+from functools import lru_cache
 
-# structure
+# project structure
 #
 # core api (key functions/methods
 # internal functions/methods
 # stringify
+# count_person complex expressions with temporal structure
 #
-#
-
 
 
 ##
 ## Core API
 ##
+
+# todos:
+# expand_codes should immediately return same dict/list/string, if it does not habe notation
 
 
 # %%
@@ -486,7 +497,7 @@ def get_rows(df,
             cols = _fix_cols(df=df, cols=cols)
             codes = _fix_codes(df=df, codes=codes, cols=cols, sep=sep)
 
-        codes = _listify(codes)
+        _listify(codes)
 
         allcodes = _get_allcodes(codes)
 
@@ -508,7 +519,7 @@ def get_rows(df,
 # %%
 def get_pids(df,
              codes,
-             cols=None,
+             cols,
              pid='pid',
              sep=None,
              codebook=None):
@@ -545,11 +556,10 @@ def get_pids(df,
 # %%
 def select_persons(df,
                    codes,
-                   cols=None,
+                   cols,
                    pid='pid',
                    sep=None,
-                   codebook=None,
-                   _fix=True):
+                   codebook=None):
     """
     Returns a dataframe with all events for people who have the given codes
 
@@ -565,22 +575,14 @@ def select_persons(df,
         codebook (list): User specified list of all possible or allowed codes
 
     Examples:
-        >>> df.select_persons(codes='K51 and not K50')
-        >>> df.select_persons(codes='(K50 in: icd or K51 in: icd) and 4AB04 in atc')
+
         >>> df.select_persons(codes='C509', cols=['icdmain', 'icdbi'])
 
     """
-    if _fix:
-        df, cols = _to_df(df=df, cols=cols)
-        if cols:
-            cols = _expand_cols(df=df, cols=cols)
-            if not sep:
-                sep = _sniff_sep(df=df, cols=cols)
-
     # if an expression is used as input (eg 'K50 and not K51')
     if isinstance(codes, str) and codes.count(' ') > 1:
         selection = use_expression(df, codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
-        pids = df[selection][pid].values
+        pids = df[selection]
     # if an list of codes - ['K50', 'K51'] is used as input
     else:
         pids = _get_some_id(df=df, codes=codes, some_id=pid, sep=sep)
@@ -591,55 +593,9 @@ def select_persons(df,
 
 
 # %%
-def _count_persons_all_codes(df, cols=None, pid='pid', sep=None,
-                             normalize=False, dropna=True, length=None, groupby=None):
-    """
-    heper functions called from count_persons when no codes are specified
-
-    #todo: deal with dropna
-    """
-
-    sub = df
-    cols = _expand_cols(df=sub, cols=cols)
-
-    if normalize:
-        sum_persons = sub[pid].nunique()
-
-    if not sep:
-        sep = _sniff_sep(df=sub, cols=cols)
-
-    # codes=unique_codes(df=sub, cols=cols, sep=sep)
-    # reduce length of codes to the desired level of detail, specified by length
-    # this works if coode columns have single values
-    if length:
-        for col in cols:
-            sub[col] = sub[col].str[0:length]
-    # special (easy) case if only one column
-    sub = sub.set_index(pid)
-
-    # special (easy) case if alll for single valued columns
-    allcounted = None
-    for col in cols:
-        counted = sub[col].reset_index().groupby(col)[pid].nunique()
-        if not allcounted:
-            allcounted = counted
-        else:
-            allcounted = allcounted + counted
-
-    if normalize:
-        counted = counted / sum_persons
-    else:
-        counted = counted.astype(int)
-
-    counted = counted.sort_values(ascending=False)
-
-    return counted
-
-
-# %%
 def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
                   normalize=False, dropna=True, group=False, merge=False,
-                  length=None, groupby=None, codebook=None, _fix=True):
+                  groupby=None, codebook=None, _fix=True):
     """
     Counts number of individuals who are registered with given codes
 
@@ -676,12 +632,6 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
         normalize (bool, default: False): If True, converts to pct
         dropna (bool, default True): Include counts of how many did not get
             any of the specified codes
-        length (int): If specified, will only use the number of characters
-            from each code as specified by the length parameter (useful to
-            count codes at different levels of granularity. For example,
-            sometimes oe wants to look at how many people get detailed codes,
-            other times the researcher wants to know only how many get general
-            atc codes, say the first four characters of the atc)
 
     Examples
         >>> df.atc.count_persons(codes='4AB04')
@@ -701,51 +651,38 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
 
     """
 
-    sub = df
-    sub, cols = _to_df(df=sub, cols=cols)
-    cols = _expand_cols(df=sub, cols=cols)
-
-    if normalize:
-        sum_persons = sub[pid].nunique()
+    subset = df
 
     # if an expression instead of a codelist is used as input
     if isinstance(codes, str) and codes.count(' ') > 1:
-        persons = use_expression(df=sub, expr=codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
+        persons = use_expression(df, codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
         if normalize:
             counted = persons.sum() / len(persons)
         else:
             counted = persons.sum()
 
+
     # if codes is a codelist (not an expression)
     else:
         if _fix:
-            # if no codes are specified, all rows and all codes are included, save time by  adding a shortcut for this
-            if not codes:
-                counted = _count_persons_all_codes(df=sub, cols=cols, pid=pid, sep=sep,
-                                                   normalize=normalize, dropna=dropna, length=length, groupby=groupby)
-                return counted
-            # if some codes are specified, expand and format these, and reduce the df to the relevant codes
-            else:
-                # expands and formats columns and codes input
-                codes, cols, allcodes, sep = _fix_args(df=sub, codes=codes, cols=cols, sep=sep, group=group,
-                                                       merge=merge)
-                rows = get_rows(df=sub, codes=allcodes, cols=cols, sep=sep, _fix=False)
-                if not dropna:
-                    sum_persons = df[pid].nunique()
-                sub = sub[rows].set_index(pid, drop=False)  # unsure if this is necessary, may drop it. Requred if method on a series? well not as long as we add pid column and recreate a series as a df
+            # expands and reformats columns and codes input
+            df, cols = _to_df(df=df, cols=cols)
+            codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep, group=group, merge=merge)
+            rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
+            if not dropna:
+                persons = df[pid].nunique()
+            subset = df[rows].set_index(pid, drop=False)
 
         # make a df with the extracted codes
-
-        code_df = extract_codes(df=sub, codes=codes, cols=cols, sep=sep, _fix=False, series=False)
+        code_df = extract_codes(df=df, codes=codes, cols=cols, sep=sep, _fix=False, series=False)
 
         labels = list(code_df.columns)
 
         counted = pd.Series(index=labels)
 
-        # maybe delete groupby option, can be done outside df.groupby. apply ...
         if groupby:
             code_df = code_df.any(level=0)
-            sub_plevel = sub.groupby(pid)[groupby].first()
+            sub_plevel = subset.groupby(pid)[groupby].first()
             code_df = pd.concat([code_df, sub_plevel], axis=1)  # outer vs inner problem?
 
             code_df = code_df.set_index(groupby)
@@ -761,7 +698,7 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
             counted['NaN'] = nan_persons
 
         if normalize:
-            counted = counted / sum_persons
+            counted = counted / counted.sum()
         else:
             counted = counted.astype(int)
 
@@ -780,7 +717,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
     Args:
         df (dataframe): Dataframe with events
 
-        expr (string, list or dict): The codes for the disease
+        codes (string, list or dict): The codes for the disease
 
         cols (string, list): Name of columns where codes are located
 
@@ -869,7 +806,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
 
         for n, (word, cols) in enumerate(word_cols):
             # added n to number conditions and avoid name conflicts if same condition (but different column)
-            worddict = {'___' + word.replace('*', '___') + f'_{n}': [word]}
+            worddict = {'___' + word + f'_{n}'.replace('*', '___'): [word]}
 
             # allow star etc notation in col also?
             # cols=_expand_cols(df=df, cols=cols)
@@ -907,7 +844,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
         if not codebook:
             codebook = unique_codes(df=df, cols=cols, sep=sep)
 
-        # must avoid * since eval does not like in in var names, replace * with three ___
+            # must avoid * since eval does not like in in var names, replace * with three ___
         # same with column names starting with digit, sp add three (___) to all words
         worddict = {'___' + word.replace('*', '___'): [word] for word in words}
         coldf = pd.DataFrame(index=df.index)
@@ -1164,8 +1101,8 @@ def extract_codes(df, codes, cols=None, sep=None, new_sep=',', na_rep='',
 
     if (merge) and (len(codes) > 1):
         headline = ', '.join(new_codes)
-        # double check: used to be T.values, but when upgraded pndas and python to 3.7 this gave errors
-        merged = subset.iloc[:, 0].str.cat(subset.iloc[:, 1:].values, sep=new_sep, na_rep=na_rep)
+        merged = subset.iloc[:, 0].str.cat(subset.iloc[:, 1:].values, sep=new_sep,
+                                           na_rep=na_rep)  # strange .T.values seemed to work previouslyi but it should not have
         merged = merged.str.strip(',')
         subset = merged
         subset.name = headline
@@ -1235,65 +1172,7 @@ def years_apart(df, pid='pid', year='year'):
 
 
 # %%
-def read_codebooks(file=None, must_contain=None, sep=';'):
-    """
-    Reads a codebook (in csv format)
-
-    file (str): The filname (including the path) to be read
-                If no file is specified, all available codebooks in the
-                codebook folder will be read
-
-    must_contain (list): List of terms that the filename must contain
-                in order to be read
-
-    filename may/should contain (in this order, separated by underscore):
-        name (atc, icd)
-        version (9, 10)
-        year (2017)
-        language (no, eng, ger)
-        country?
-
-    it may also contain other terms that you want to select on later
-
-    example: icd_9_2017_eng.csv
-
-
-    codebook = read_codebooks()
-
-
-    # must deal with integer vs. regular codes problem
-    """
-    # todo: make a prober config file
-    from snotra import _PATH
-
-    import glob
-
-    if not file:
-        path = _PATH.replace('core.py', 'codebooks/')
-        file = glob.glob(path + '*.csv')
-
-    files = _listify(file)
-
-    books = []
-
-    for codebook in files:
-        if must_contain:
-            must_contain = set(must_contain)
-            nameset = set(codebook.split('_'))
-            if len(must_contain) == len(nameset & must_contain):
-                df = pd.read_csv(codebook, sep=sep)
-                df['source'] = codebook.split('\\')[-1]
-                books.extend([df])
-        else:
-            df = pd.read_csv(codebook, sep=sep)
-            df['source'] = codebook.split('\\')[-1]
-            books.extend([df])
-    books = pd.concat(books, ignore_index=True, axis=0)
-    return books
-
-
-# %%
-def label(df, labels=None, file=None):
+def label(df, labels=None, read=True, path=None):
     """
     Translate codes in index to text labels based on content of the dict labels
 
@@ -1302,21 +1181,13 @@ def label(df, labels=None, file=None):
         read (bool): read and use internal dictionary if no dictionary is provided
     """
     if not labels:
-        codebooks = read_codebooks()
-        labels = labels_from_codebooks(codebooks)
+        # making life easier for myself
+        try:
+            labels = read_code2text()
+        except:
+            labels = read_code2text(path)
     df = df.rename(index=labels)
     return df
-
-
-# %%
-def labels_from_codebooks(codebook, code='code', text='text', only_valid_codes=False):
-    """
-    makes a dictionary of code to labels based on two columns in the codebook
-
-    """
-    # must deal with integer vs. regular codes problem
-    codedikt = codebook[['code', 'text']].set_index('code').to_dict()['text']
-    return codedikt
 
 
 # %%
@@ -1591,7 +1462,7 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
         hemiplegia,
         renal,
         dorgan,
-        tumor	,
+        tumor,
         sliver,
         mtumor,
         hiv]
@@ -1610,7 +1481,7 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
 
     if not dot_notation:
         for disease, codes in disease_codes.items():
-            new_codes = [code.replace('.  ','') for code in codes]
+            new_codes = [code.replace('.  ', '') for code in codes]
             no_dot_disease_codes[disease] = new_codes
         disease_codes = no_dot_disease_codes
 
@@ -1624,7 +1495,7 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
         codes = expanded_disease_codes[disease]
         codelist.extend(codes)
 
-    rows = get_rows(df=df,codes=codelist, cols=cols, sep=sep)
+    rows = get_rows(df=df, codes=codelist, cols=cols, sep=sep)
 
     subset = df[rows]
 
@@ -1652,6 +1523,7 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
     charlson_with_nans = charlson_index + age_nans + icd_nans
 
     return charlson_with_nans
+
 
 # %%
 # def validate(df, cols=None, pid='pid', codebook=None, infer_types=True, infer_rulebook=True, rulebook=None, force_change=False, log=True):
@@ -1726,9 +1598,6 @@ def charlson(df, cols='icd', pid='pid', age='age', sep=None, dot_notation=False)
 #
 #            if force:
 #                df.loc[col, pid] = df.loc[col, pid].value_counts()[0]
-
-
-
 
 
 ##
@@ -1821,14 +1690,14 @@ def _sniff_sep(df, cols=None, possible_seps=[',', ';', '|'], n=1000, sure=False,
 
 
 def _get_some_id(df,
-                 codes=None,
-                 cols=None,
-                 some_id='pid',
+                 codes,
+                 cols,
+                 xid,
                  sep=None):
     """
     help function for all get functions that gets ids based on certain filtering criteria
 
-    some_id is the column with the info to be collected (pid, uuid, event_id)
+    x is the column with the info to be collected (pid, uuid, event_id)
 
 
     """
@@ -1854,7 +1723,7 @@ def _get_some_id(df,
     else:
         b = df[cols].isin(expanded_codes).any(axis=1).values
 
-    pids = set(df[b][some_id].unique())
+    pids = set(df[b][xid].unique())
 
     return pids
 
@@ -1884,7 +1753,7 @@ def _fix_args(df, codes=None, cols=None, sep=None, merge=False, group=False, _sn
     else:
         cols = _expand_cols(df=df, cols=cols)
 
-    if _sniffsep:
+    if (_sniffsep) & (not sep):
         sep = _sniff_sep(df=df, cols=cols)
 
     if not codes:
@@ -1905,21 +1774,6 @@ def _fix_args(df, codes=None, cols=None, sep=None, merge=False, group=False, _sn
 
 
 def _to_df(df, cols=None):
-    """
-    Transforms the series to a dataframe and sets cols if not cols is provided
-
-    Assumes pid is in the index of the series
-
-    (Useful to allow series as input, allows monkey patching to make function a method on a series)
-
-
-    Args:
-        df: series or dataframe
-
-    Returns:
-        dataframe with series values and pid as columns
-
-    """
     if isinstance(df, pd.Series):
         df = df.to_frame()
         cols = list(df.columns)
@@ -1941,6 +1795,34 @@ def _get_allcodes(codes):
     else:
         allcodes = _listify(codes)
     return allcodes
+
+
+def _get_mask(df,
+              codes,
+              cols,
+              sep=None):
+    codes = _listify(codes)
+    cols = _listify(cols)
+
+    cols = _expand_cols(df=df, cols=cols)
+
+    expanded_codes = expand_codes(df=df,
+                                  codes=codes,
+                                  cols=cols,
+                                  sep=sep)
+
+    # if compound words in a cell
+    if sep:
+        expanded_codes_regex = '|'.join(expanded_codes)
+        b = pd.DataFrame()
+        for col in cols:
+            b[col] = df[col].str.contains(expanded_codes_regex, na=False).values
+
+    # if single value cells only
+    else:
+        b = df[cols].isin(expanded_codes)
+
+    return b
 
 
 def _expand_cols(df, cols, star=True, hyphen=True, colon=True, regex=None):
@@ -2056,7 +1938,7 @@ def expand_hyphen(expr):
     """
 
     exprs = _listify(expr)
-    all_codes=[]
+    all_codes = []
 
     for expr in exprs:
         if '-' in expr:
@@ -2081,7 +1963,8 @@ def expand_hyphen(expr):
             no_dec_upper = int((upper_num) * multiplier) + 1
 
             if '.' in lower_str:
-                codes = [lower.replace(lower_str, str(num / multiplier).zfill(length)) for num in range(no_dec_lower, no_dec_upper)]
+                codes = [lower.replace(lower_str, str(num / multiplier).zfill(length)) for num in
+                         range(no_dec_lower, no_dec_upper)]
             else:
                 codes = [lower.replace(lower_str, str(num).zfill(length)) for num in range(no_dec_lower, no_dec_upper)]
 
@@ -2094,7 +1977,7 @@ def expand_hyphen(expr):
 
 def _stringify_cols(df, cols):
     """
-    Stringify some cols - useful since many methods require code column to be a string
+    Stringify some cols - useful since many methods erquire code column to be a string
     """
 
     for col in cols:
@@ -2236,10 +2119,11 @@ def persons_with(df,
 
     return persondf
 
-#%%
+
 ##
 ## stringify functions
 ##
+# %%
 def stringify_durations(df,
                         codes=None,
                         cols=None,
@@ -2519,7 +2403,9 @@ def stringify_durations(df,
               Filter missing         {sub_obs}, {sub_npid}
               Final result:          {final_obs}, {final_npid}""")
     return string_df
-#%%
+
+
+# %%
 def interleave_strings(df, cols=None, time_sep="|", no_event=' ', agg=False):
     """
     Interleaves strings in two or more columns
@@ -2558,7 +2444,7 @@ def interleave_strings(df, cols=None, time_sep="|", no_event=' ', agg=False):
             df[col] = df[col].fillna(no_event)
             # find event symbol, imply check if all are missing, no events
             try:
-                char = df[col].str.cat().strip().str.strip('-')[0] #improvable?
+                char = df[col].str.cat().strip().str.strip('-')[0]  # improvable?
             except:
                 df[col] = (col.str.len() / agg) * no_event
 
@@ -2582,8 +2468,20 @@ def interleave_strings(df, cols=None, time_sep="|", no_event=' ', agg=False):
             axis=1)
 
     return interleaved
-#%%
 
+
+# %%
+def left_justify(s, fill=' '):
+    """
+    after stringify, to make events at same time be in same position
+    and no, not as crucial as left-pad!
+    """
+    nmax = s.apply(len).max()
+    s = s.str.pad(width=nmax, side='right', fillchar=fill)
+    return s
+
+
+# %%
 def overlay_strings(df, cols=None, sep=",", nan='-', collisions='x', interleaved=False):
     """
     overlays strings from two or more columns
@@ -2659,8 +2557,6 @@ def shorten(events, agg=3, no_event=' '):
     parameters
         events: (str) string of events that will be aggregated
         agg: (int) the level of aggregation (2=double the step_length, 3=triple)
-    hint:
-    if the string is interleaved of many events, or has time seperator, use shorten_interleaved
     """
     try:
         char = events.strip(no_event)[0]
@@ -2695,7 +2591,9 @@ def shorten_interleaved(text, agg=3, time_sep=',', no_event=' '):
     return new_str
 
 
-def stringify_order(df, codes=None, cols=None, pid='pid', event_start='in_date', sep=None, keep_repeats=True,
+# %%
+def stringify_order(df, codes=None, cols=None, pid='pid', event_start='date',
+                    sep=None, time_sep='', first_date=None, last_date=None, period=None, keep_repeats=True,
                     only_unique=False, _fix=True):
     """
     Creates a string for each individual describing selected code events in the order they occurred
@@ -2717,19 +2615,35 @@ def stringify_order(df, codes=None, cols=None, pid='pid', event_start='in_date',
 
     Examples:
 
-    >>> codes={'e': '4AB01', 'i': '4AB02', 'a': '4AB04', 'x': '4AB05' , 'g': '4AB06'}
+    >>> codes={'4AB01': 'e', '4AB02' : 'i', '4AB04' : 'a', '4AB05' : 'x', '4AB06' : 'g'}
 
     >>> bio_codes= {'L04AA23': 'n', 'L04AA33': 'v', 'L04AB02': 'i', 'L04AB04': 'a','L04AB06': 'g', 'L04AC05': 'u'}
 
     >>> bio_codes={'e' : '4AB01', 'i' : '4AB02', 'a' : '4AB04'}
 
+    >>> bio_codes={'i' : '4AB02', 'a' : '4AB04'}
+
+    >>> bio_codes= {'n': ['L04AA23', '4AA23'],
+                    'v': ['L04AA33', '4AA33'],
+                    'i': ['L04AB02', '4AB02'],
+                    'a': ['L04AB04', '4AB04'],
+                    'g': ['L04AB06', '4AB06'],
+                    'u': ['L04AC05', '4AC05']}
+
+
     >>> a=stringify_order(df=df, codes=bio_codes, cols='ncmpalt', pid='pid', event_start='start_date', sep=',', keep_repeats=True, only_unique=False)
+
+    >>> a=sa.stringify_order(df=mdf, codes=bio_codes, cols='codes', pid='pid', first_date='first_ibd',
+    event_start='date', sep=',', keep_repeats=False, only_unique=False, time_sep='', period=700)
 
 
     >>> bio_rows=get_rows(df=pr, codes=list(codes.keys()), cols='atc')
     >>> pr['first_bio']=pr[bio_rows].groupby('pid')['date'].min()
 
     >>> stringify_order(df=pr, codes=codes, cols='atc', pid='pid', event_date='date', sep=',')
+
+    >>> stringify_order(df=pr, codes=bio_codes, cols='codes', pid='pid', event_date='date', sep=',')
+
 
     background
         to identify treatment patters, first stringify each treatment,
@@ -2749,23 +2663,60 @@ def stringify_order(df, codes=None, cols=None, pid='pid', event_start='in_date',
         (time on first line of treatment, number of switches, stops)
     """
 
+    df.index.name = 'pid_index'  # avoid errors, and yes, require pid to be in index (?)
+
+    df = df.dropna(subset=[pid, event_start])
+
+    if first_date:
+        df = df.dropna(subset=[first_date])
+
+        # if a column is specified
+        if first_date in df.columns:
+            include = (df[event_start] >= df[first_date])
+            # if a single overall date is specified
+        else:
+            date = pd.to_datetime(first_date)
+            include = (df[event_start] >= date)
+        df = df[include]
+
+    if last_date:
+        df = df.dropna(subset=[last_date])
+
+        if last_date in df.columns:
+            include = (df[event_start] <= df[last_date])
+        else:
+            date = pd.to_datetime(last_date)
+            include = (df[event_start] <= df[last_date])
+        df = df[include]
+
+    # period represents the days from the first_date to be included
+    # cannot specify both period and last_date(?)
+    if period:
+        if first_date:
+            end_date = df[first_date] + pd.to_timedelta(period, unit='D')
+            include = (df[event_start] <= end_date)
+        else:
+            time_after = (df[event_start] - df.groupby(pid)[event_start].min()) / np.timedelta64(1, 'D')
+            include = (time_after <= period).values  # strange need this, tries to reindex if not
+        df = df[include]
+
     # fix formatting of input
     if _fix:
         df, cols = _to_df(df=df, cols=cols)
         codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep)
-    else:
-        allcodes=_get_allcodes(codes)
 
     # get the rows with the relevant columns
     rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
-    subset = df[rows].sort_values(by=[pid, event_start]).set_index('pid')
+    subset = df[rows]  # do I need to copy?
+    subset.index.name = 'pid_index'
+    subset = subset.sort_values(by=[pid, event_start]).set_index('pid')
 
     # extract relevant codes and aggregate for each person
     code_series = extract_codes(df=subset, codes=codes, cols=cols, sep=sep, new_sep='', merge=True, out='text',
                                 _fix=False)
     #    if isinstance(code_series, pd.DataFrame):
     #        code_series = pd.Series(code_series)
-    string_df = code_series.groupby(level=0).apply(lambda codes: codes.str.cat())
+    string_df = code_series.groupby(level=0).apply(lambda codes: codes.str.cat(sep=time_sep))
 
     # eliminate repeats in string
     if not keep_repeats:
@@ -2780,6 +2731,8 @@ def stringify_order(df, codes=None, cols=None, pid='pid', event_start='in_date',
         string_df = string_df.apply(uniqify)
     return string_df
 
+
+# %%
 
 def del_repeats(str_series):
     """
@@ -2822,19 +2775,19 @@ def stringify_time(df,
                    sep=None,
                    step=90,
 
-                   event_start='date',
-                   nfirst=None,
+                   event_start='date',  # use start end
+                   nfirst=None,  # ncodes
 
                    first_date=None,
+                   # use just first, last, censored. Accept integers to indicate period/days relative to the start date
                    last_date=None,
-
                    censored_date=None,
 
                    time_sep='|',
                    no_event=' ',
 
                    merge=True,
-                   meta=None):
+                   info=None):
     """
     Creates a string for each individual describing events at position in time
 
@@ -2853,7 +2806,7 @@ def stringify_time(df,
 
     Example:
         codes={'i': '4AB02', 'a':'4AB04'}
-        codes={'i': ['4AB02','L04AB02'], 'a': ['4AB04', 'L04AB04']}
+        codes={'i': ['4AB02','L04AB02'], 'a': ['4AB04', 'L04AB04'], 'e':['4AB01']}
 
 
         df['diagnosis_date']=df[df.icdmain.fillna('').str.contains('K50|K51')].groupby('pid')['start_date'].min()
@@ -2921,12 +2874,15 @@ def stringify_time(df,
     # get the rows that contain the relevant codes
     rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
     subset = df[rows].copy()  # maybe use .copy to avoid warnings?
+    subset.index.name = 'pid_index'
 
     # find position of each event (number of steps from overall min_date)
     subset['position'] = (subset[event_start] - min_date).dt.days.div(step).astype(int)
 
+    subset = subset.sort_values(by=[pid, 'position']).set_index([pid, 'position'])
+
     # create series with only the relevant codes for each person and position
-    code_series = extract_codes(df=subset.set_index([pid, 'position']),
+    code_series = extract_codes(df=subset,
                                 codes=codes,
                                 cols=cols,
                                 sep=sep,
@@ -3011,3 +2967,1062 @@ def stringify_time(df,
     if merge:
         string_df = interleave_strings(string_df, no_event=no_event, time_sep=time_sep)
     return string_df
+
+
+# %%
+
+#
+## functions dealing with complicated and possibly time dependent expressions
+#
+
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Sep 12 15:30:16 2018
+
+@author: hmelberg_adm
+"""
+
+
+
+# ideas: optimize using arctic and/or mongodb (same type of queries ... at least existencec, but perhaps not sum/cumsum, count etc?)
+# %%
+def _get_before(splitted, n):
+    count = splitted[n].count(')')
+    for start, word in enumerate(list(reversed(splitted[:n]))):
+        adding = word.count(')')
+        subtracting = word.count('(')
+        count = count + adding - subtracting
+        print(n, count, word)
+        if count == 0:
+            return n - start
+    else:
+        print('Error: Expression has wrong number of parenthesis')
+    return
+
+
+def _get_after(splitted, n):
+    count = splitted[n].count('(')
+
+    for end, word in enumerate(splitted[n + 1:]):
+        adding = word.count('(')
+        subtracting = word.count(')')
+        count = count + adding - subtracting
+        print(n, count, word)
+        if count == 0:
+            return n + end
+    else:
+        print('Error: Expression has wrong number of parenthesis')
+    return
+
+
+# %%
+def _fix_space(expr):
+    no_space_before = r'(\s)([<=>,])'
+    no_space_after = r'([<=>,])(\s)'
+
+    expr = re.sub(no_space_before, r'\2', expr)
+    expr = re.sub(no_space_after, r'\1', expr)
+    return expr
+
+
+# %%
+def _format_expr(expr, info=None):
+    """
+
+    >>> expr = '(first 4A and first 4B) before (A and (C or D)) before (A or (B and C))'
+    >>> _format_expr(expr)
+
+    >>> expr = 'min 4 4A in atc1, atc2  and (first 4A and first 4B) before ?[3rd, 4th, 5th] B and (A and (C or D)) before (A or (B and C))'
+    >>> _format_expr(expr)
+
+    """
+    old_expr = expr
+
+    # fix string so can split on space w/o problems
+    expr = _fix_space(expr)
+
+    # insert & and in before/after/from within statements with parenthesis
+    # \((.*?) before (.*?)\)
+    splitted = expr.split()
+    new_splitted = splitted
+    for n, word in enumerate(splitted):
+        if word == 'before':
+            if ')' in splitted[n - 1]:
+                start = _get_before(splitted, n)
+                for x in range(start, n):
+                    if splitted[x] == 'and' or splitted[x] == 'or':
+                        new_splitted[x] = new_splitted[x].replace('and', '&').replace('or', '|')
+
+            if '(' in splitted[n + 1]:
+                end = _get_after(splitted, n)
+                for x in range(n, end + 1):
+                    if splitted[x] == 'and' or splitted[x] == 'or':
+                        new_splitted[x] = new_splitted[x].replace('and', '&').replace('or', '|')
+                # new_splitted[start:n] = ['&' if x=='and' else x for x in splitted[start:n]]
+
+            expr = " ".join(new_splitted)
+    # insert date variable 'in date' after days etc (hmm etc is a problem)
+
+    # insert 'in col' for variables with known cols (specified in info)
+
+    # remove 'of'
+
+    # before last 5 = before last 5th (or before -5th)
+    return expr
+
+
+# %%
+def _insert_cols(expr, info=None, function=None):
+    """
+    expr = 'max 2 of 4AB02 before 4AB04'
+    expr = 'max 2 of 4AB02 in x before 4AB04'
+
+    expr = '5th of 5th' # the code is here also a keyword ... problem - maybe of as long as we keep the of keyword ... but more difficult when we do not, at least for automatic column labeling!
+
+    expr = 'max 2 of 4AB0552 before 4AB04'
+
+    expr = 'max 2 of 4AB02 in ncmp' # should include zero ?
+    expr = 'min ?[1,2,3,4] of 4AB02 in ncmp'
+    expr = 'max ?[1,2,3,4] of 4AB02 in ncmp' # should include zero ?
+    expr = 'min 2 of days>4'
+    expr = 'min 8 of days>6'
+    expr = 'min 3 of 4AB02 in ncmp within 200 days'
+
+    insert_cols(expr, function=col_rules)
+    todo1: codes that are in option lists (?[4AB, 4AV] will not be included)
+    sol1: special col format after creating all statements from options?
+    todo2: dealing with star codes: 4AB* ... what col is that?
+    sol2: well, logically impossible (since it could be several cols) unless user gives some rules? could try to infer based on col content, but do not want to guess, so, rely on functions external, based on startswith or len, or just say: provide the col in that case
+
+    """
+    ordinal = r'^(-?\d+)(st |nd |rd |th )'  # re to find and split 3rd into 3 and rd etc
+
+    keywords = set(
+        'min max exactly before after around within days of first last days event events day between to days'.split())
+
+    skip_startswith = ['?[']  # also 1st, 2nd etc
+
+    skip_next = set('min max exactly first last in'.split())  # not within?
+
+    skip_contains = set('< = >'.split())
+
+    always_code_before = 'and or within before after'  # as well as the last
+
+    expr = _fix_space(expr)
+
+    splitted = expr.split()
+
+    new_splitted = splitted
+
+    splitted.append(
+        'and')  # add a term to solve problem with checking last term looking ahead to see if there is a col already
+
+    # identify a code that needs a col by excluding everything that is not a code with a col
+    n = 0
+
+    while n < len(splitted) - 1:
+
+        word = splitted[n]
+        if word in skip_next:
+            n = n + 2  # skip words after min, max etc
+        elif word.startswith(r'?['):
+            n = n + 1  # skip options expressions
+        elif word in keywords:
+            n = n + 1  # keywwords do not indicate codes that need col info
+        elif re.match(ordinal, word):
+            n = n + 1  # skip ordinals (1st etc) .. could be problematic if a code also has this pattern ... impose extra condtions to check? partial solution: require it to startwith, not just match
+        elif len(skip_contains & set(word)) > 0:
+            n = n + 1  # skip qualitative conditions which have cols: days>5
+        elif splitted[n + 1] == 'in':
+            n = n + 1  # skip if already have provided a col, cannot check this if last word (no problem, never is)
+        else:
+            code = word.strip().strip(')').strip('(')
+            if info:
+                cols = info.code2cols[code]
+            elif function:
+                cols = function(code)
+            else:
+                print('Error: No rules for assigning cols are given in kewords info or external')
+            new_splitted[n] = new_splitted[n].replace(code, f'{code} in {cols}')
+            n = n + 1
+    new_expr = " ".join(new_splitted)
+
+    return new_expr
+
+
+# %%
+def col_rules(code):
+    if len(code) > 5: cols = 'atc'
+    if len(code) <= 5: cols = 'icd'
+    return cols
+
+
+# %%
+
+@lru_cache()
+def _get_conditions(expr):
+    split_on = [' or ', ' and ']
+    split_rep = ' @split@ '
+    for split_word in split_on:
+        expr = expr.replace(split_word, split_rep)
+    conditions = expr.split(split_rep)
+    conditions = [condition.strip('(').strip(')') for condition in conditions]
+    return conditions
+
+
+@lru_cache()
+def _get_eval(expr):
+    conditions = _get_conditions(expr)
+    eval_text = expr
+    for n, condition in enumerate(conditions):
+        eval_text = eval_text.replace(condition, f'c{n}')
+    return eval_text
+
+
+def _parser_get_rows(df, codes, cols=None, sep=None, codebook=None, info=None):
+    # simple existence condition
+    if ' ' not in codes.strip():
+        rows = df[cols].str.contains(codes).fillna(False)  # rem: make sure if no codes in cols that all is false
+    return rows
+
+
+def _get_cols(condition, cols):
+    expr, incols, _ = condition.split(' in ')
+
+    incols = incols.strip()
+
+    if incols == '':
+        incols = cols
+
+    return incols
+
+
+def _get_options(expr):
+    """
+    Makes a list of all possible statements from an expression, all possible combination of expressions involving ?[x, y, z] that arein the expressions
+
+
+    expr = 'min ?[2,3,4] of (K50, K51) in icd inside ?[10, 20, 30] days before 4AB02 in ncmp'
+    get_options(expr)
+
+    better name: get_expressions?
+
+    """
+
+    # fix string so can split on space w/o problems
+    just_comma = [', ', ' , ', ', ']
+    expr = expr.replace('  ', ' ')
+
+    for token in just_comma:
+        expr = expr.replace(token, ',')
+
+    original = expr
+
+    alternatives = re.findall('(\[.*?\])', expr)
+
+    alt_list = [ast.literal_eval(alternative) for alternative in alternatives]
+
+    combinations = product(*alt_list)
+
+    all_expressions = []
+    for n, combination in enumerate(combinations):
+        new_expr = original
+        for i, value in enumerate(combination):
+            new_expr = new_expr.replace('?' + alternatives[i], str(value), 1)
+        all_expressions.extend([new_expr])
+
+    return all_expressions
+
+
+# %%
+
+def _insert_external(expr):
+    """
+    Replaces variables prefixed with @ in the expression with the value of the variable from the global namespace
+
+    Example:
+        x=['4AB02', '4AB04', '4AB06']
+        expr = '?@x before 4AB02'
+        insert_external(expr)
+    """
+    externals = list(re.findall(r'@(\w) ', expr))
+    for external in externals:
+        tmp = globals()[external]
+        expr = expr.replace(f'@{external} ', f'{tmp} ')
+    return expr
+
+
+# %%
+
+def count_p(df, expr, cols=None, sep=None, codebook=None, info=None, _use_caching=True):
+    """
+
+    count persons who satisfy the conditions in an expression
+
+    expr = "?['4AB02', '4AB04'] in ncmp"
+    expr = '4AB02 in ncmp and 4AB04 in ncmp'
+    expr = 'min 10 of 4AB02 in ncmp'
+    expr = 'min ?[4,5,6] of 4AB02 in ncmp'
+    expr =  'min 6 of 4AB02 in ncmp'
+    expr =  'min 10 of 4AB02 in ncmp'
+
+    expr = 'min ?[6,8] of 4AB02 in ncmp'
+    expr = '1st of 4AB02 in ncmp'
+    expr = '2nd of 4AB02 in ncmp'
+
+    expr = '4AB02 in ncmp before 4AB04 in ncmp'
+    expr = '4AB04 in ncmp before 4AB02 in ncmp'
+    expr = '4AA23 in ncmp before 4AB02 in ncmp'
+    expr = 'max 2 of 4AB02 in ncmp before 4AB04 in ncmp'
+    expr = 'max 2 of 4AB02 in ncmp' # should include zero ?
+    expr = 'min ?[1,2,3,4] of 4AB02 in ncmp'
+    expr = 'max ?[1,2,3,4] of 4AB02 in ncmp' # should include zero ?
+    expr = 'min 2 of days>4'
+    expr = 'min 8 of days>6'
+    expr = 'min 3 of 4AB02 in ncmp within 200 days'
+
+    %time count_p(df=df, expr=expr, cols=None, codebook=None, info=None, sep=',')
+    %time count_p(df=df, expr=expr, cols=None, codebook=None, info=info)
+
+
+    condition=conditions[0]
+
+    expr = '3rd of 4AB04 in ncmp before 3th of 4AB02 in ncmp'
+
+    """
+    # if no info is passed explicitly, create one temporarily
+    # use this to avoid save results of evaluations
+    # to avoid repeat evaluations of same conditions
+
+    # create storage to avoide recalculating same expressions
+
+    if not info: info = Info()
+
+    exprs = _get_options(expr)
+    who = {}
+    count = {}
+    c = []
+
+    for expr in exprs:
+        # check if it has been evaluated before
+        if expr in info.expr:
+            count[expr] = info.expr[expr]
+        # no previous result,so calculate and remember
+        else:
+            eval_text = _get_eval(expr)
+            conditions = _get_conditions(expr)
+            for i, condition in enumerate(conditions):
+                # check if it has been evaluated before
+                if condition in info.condition:
+                    cpid = info.condition[condition]
+                # if not, evaluate and save result in info
+                else:
+                    cpid = eval_condition(df=df, condition=condition, cols=cols, sep=sep, out='pid', info=info)
+                    cpid.name = f'c{i}'
+                    info.condition[condition] = cpid
+                c.extend([cpid])
+            cdf_pid = pd.concat(c, axis=1)
+            who[expr] = cdf_pid.eval(eval_text).any(level=0)
+            count[expr] = who[expr].sum()
+            if _use_caching: info.expr[expr] = count[expr]
+    return count
+
+
+# %%
+class Info():
+    def __init__(self, rows=None, cumsum=None, has_happened=None, single=None, condition=None):
+        self.rows = {}
+        self.pid = {}
+        self.cumsum = {}
+        self.has_happened = {}
+        self.interval = {}
+        self.before_l_has_happened = {}
+        self.before_r_has_happened = {}
+        self.r_exist_pid = {}
+        self.after = {}
+
+        # these are not really necessary ....
+        self.single = {}
+        self.single_pid = {}
+        self.single_rows = {}
+        self.single_interval = {}
+        self.condition = {}
+        self.expr = {}
+
+        self.x = {}
+        self.xpid = {}
+
+
+# %%
+def eval_condition(df, condition, cols=None, sep=None,
+                   codebook=None, out=None, info=None):
+    # check if it has been evaluated before
+    if not info: info = Info()
+    if condition in info.condition:
+        return info.condition[condition]
+
+    time = [' after ', ' before', ' around ']
+
+    # interval condition
+    if ' within ' in condition:
+        persons = eval_within(df, condition, cols=None, sep=None,
+                              codebook=None, out='pid', info=info)
+
+    # before, after, around condition
+    elif any(word in condition for word in time):
+        persons = eval_before_after(df, condition, cols=None, sep=None,
+                                    codebook=None, out='pid', info=info)
+
+    # single condition (not relational, not involving other columns)
+    else:
+        persons = eval_single(df=df, condition=condition, cols=cols, sep=sep,
+                              out='pid', info=info)
+
+    # save the result for later use
+    info.condition[condition] = persons
+
+    return persons
+
+
+# %%
+
+def eval_single(df, condition, cols=None, sep=None, codebook=None,
+                out='pid', info=None):
+    """
+    evaluates a single expressions (1st 4A),
+    not relational conditions (A before B, within 100 days after etc)
+
+    condition ='first 5 of 4AB02 in ncmp'
+    condition ='min 2 of days>10'
+
+    """
+    # create temporary storage to avoid recalculations
+    if not info: info = Info()
+
+    # no revaluation necessary if it it has been evaluated before
+    if out == 'pid' and (condition in info.single_pid):
+        return info.single_pid[condition]
+    elif out == 'rows' and (condition in info.single_rows):
+        return info.single_rows[condition]
+    elif out == 'interval' and (condition in info.single_interval):
+        return info.single_interval[condition]
+
+    quantity = '[>=<]'
+    freq = ['min ', 'max ', 'exactly ']
+    first_last_between = [' first ', ' last ', ' between ']
+    ordinal = r'(-?\d+)(st |nd |rd |th )'  # re to find and split 3rd into 3 and rd etc
+
+    # if it is a quantiative conditions (oxygen_level>20)
+    if re.search(quantity, condition):
+        codetext = condition
+        codes = condition.split()[-1]  # code condition always last
+        if codes in info.rows:
+            rows = info.rows[codes]
+        else:
+            # sum(glucose_level)>10
+            # if this, then may skip further processing?
+            # well: 1st sum(glucose)>20 ok makes sense, maybe
+            # but not: max 5 of sum(glucose)>20 ... well maybe
+            # first 5 of sum(glucose)>20
+            # if the modifiers does not make sense, the sum might be in the
+            # list of other modifiers i.e. first 5, 3rd etc and not a
+            # pre-modifier when finding rows (which allows skipping)
+
+            # complex quantitative expression: sum(glucose_level)>10
+            if 'sum(' in codes:
+                col, operator = codes.split(')')
+                col = col.replace('sum(', '').strip(')')
+                eval_text = f"df.groupby(df.index)['{col}'].cumsum(){operator}"
+                rows = pd.eval(eval_text, engine='python').fillna(False)  # is fillna false better than dropna here?
+            # simple quantitative expression: glucose_level)>10
+            else:
+                rows = df.eval(codes).fillna(False)
+            codecols = codes
+            info.rows[codecols] = rows
+
+    # code expression (involving a code, not a quantitative expressions
+    else:
+        codetext, incols = condition.split(' in ')
+        codes = codetext.split()[-1].strip()  # codes always last in a simple string after cutting 'in cols'
+
+        if incols.strip() == '':
+            cols = cols
+        else:
+            cols = incols
+
+        codecols = codes + ' in ' + cols  # cannot use just codes to store rows since same code may be in different columns, so need to include col in name when storing
+
+        # If conditions is about events in general, create an events column
+        if (' event ' in codes) or (' events ' in codes):
+            rows = pd.Series(True, index=df.index).fillna(False)
+            codecols = ' event '
+        # not a quantitative condition or an event conditions, so it is a code condition
+        else:
+            if codecols in info.rows:
+                rows = info.rows[codecols]
+            else:
+                rows = df[cols].str.contains(codes).fillna(False)
+                info.rows[codecols] = rows
+
+                # is there a prefix to the conditions? if not, isolated condition, just return rows
+    # if not, start preparing for calculating conditions with qualifiers
+    # todo: quite messy! refactor: one function to evluate the code/expression itself, another to evalute the qualifier?
+    if ' ' not in codetext.strip():
+        # remember answer
+        info.single_rows[codecols] = rows
+        info.rows[codecols] = rows
+
+        if out == 'pid':
+            endrows = rows.groupby(level=0).any()
+            info.single_pid[codecols] = endrows
+            info.pid[codecols] = endrows
+        else:
+            endrows = rows
+        return endrows
+
+    # calculate and remember cumsum per person
+    # use previous calculation if exist
+    if codes in info.cumsum:
+        rowscum = info.cumsum[codes]
+    else:
+        rowscum = rows.groupby(level=0).cumsum()
+        info.cumsum[codecols] = rowscum
+
+    ## if not a simple existence condition, it must be one of the conditions below
+
+    # positional condition:  5th of 4a, 3rd to 8th of 4A, (3rd, 4th, 5th) of 4A
+    # also allows: 2nd last (or even -5th last)
+    if re.match(ordinal, codetext):
+        pos_str = condition.split('of ')[0].strip().strip('(').strip(')')
+        # pos_re = ordinal.replace(' ', '[ )]|') # last condition may have ) i.e. 25th)
+        pos_re = ordinal.replace(' ', '')  # last condition may have ) i.e. 25th)
+
+        pos_nums = re.findall(pos_re, pos_str)
+        pos_nums = tuple([int(pos[0]) for pos in pos_nums])
+
+        # if the conditions includes last, need reversed cumsum
+        if ' last ' in pos_str or '-' in pos_str:
+            n_max = rowscum.groupby(level=0).max().add(1)
+            # reversed event number (by id)
+            lastrowscum = (rowscum - n_max).abs()
+            last_flag = 1
+        else:
+            last_flag = 0
+
+        # single position: 5th of 4A
+        if len(pos_nums) == 1:
+            if last_flag:
+                select = (lastrowscum == pos_nums)
+            else:
+                select = (rowscum == pos_nums)
+
+        # from-to positions: 3rd to 8th of 4A, 1st to -3rd
+        elif ' to ' in pos_str:
+            lower, upper = pos_nums
+            if lower > 0:
+                aboverows = (rowscum >= lower)
+            else:
+                aboverows = (lastrowscum >= abs(lower))
+
+            if upper > 0:
+                belowrows = (rowscum <= upper)
+            else:
+                belowrows = (lastrowscum <= abs(upper))
+
+            select = (aboverows & belowrows)
+
+        # list of positions (3rd, 5th, 7th)
+        elif pos_str.strip().startswith('('):
+            pos_num = [num for num in pos_num if num > 0]
+            neg_num = [num for num in pos_num if num < 0]
+
+            if pos_num:
+                pos_select = rowscum.isin(pos_nums)
+            if neg_num:
+                neg_select = rowscum.isin(pos_nums)
+            select = (pos_select | neg_select)
+
+
+    #  freq condition: min 5 of 4A
+    elif any(word in codetext for word in freq):
+        word, num, _, codes = codetext.split()
+        num = int(num)
+
+        if 'min' in word:
+            select = (rowscum >= num)
+        elif 'max' in word:  # doublecheck!
+            n_max = rowscum.max(level=0)
+            select = (n_max <= num)
+        elif 'exactly' in word:
+            select = (rowscum == num)
+
+
+    # first, last range conditions: first 5 of 4A
+    elif any(word in condition for word in first_last_between):
+        word, num, _, codes = codetext.split()
+        if '%' not in num:
+            num = int(num)
+            if ' first' in word:
+                select = (rowscum <= num)
+            if ' last ' in word:
+                select = (rowscum >= num)
+
+
+    # if pct condition: first 10% of 4A
+    elif '%' in codetext:
+        n_max = rowscum.groupby(level=0).max()
+        pct = float(num.split(r'%')[0]) / 100
+        pid_num = n_max * pct
+
+        # first 1% of two observations includes 1st obs
+        pid_num[pid_num < 1] = 1
+
+        if word == 'first':
+            # hmm, generalproblem: drop if pid is missing ...
+            select = (rowscum < pid_num)
+
+        if word == 'last':
+            select = (rowscum > pid_num)
+
+            # percentile condition
+    elif ' percentile ' in codetext:
+        event_num = rows.groupby(level=0).cumcount()
+        n_count = rowscum.groupby(level=0).size()
+
+        num = float(num.split(r'%')[0]) / 100
+
+        pid_num = n_count * num
+
+        if word == 'first':
+            rows = (pid_num < event_num)
+
+        if word == 'last':
+            rows = (pid_num > event_num)
+
+    # so far, have marked interval of events for expressions with qualifications
+    # (existence conditions are not intervals). example: First 5 of 4A, markes
+    # all events in the interval between the 1st and 5th of 4A
+    # if we only want to pick the 4A events in this intereval, we and it with
+    # the boolena for 4A existence (row). But sometimes we want to keep and use
+    # the interval. For instance when the qualifiers are used in before/after
+    # statements if the evaluated expression should be returned as 'exact row',
+    # 'interval row' or pid existence
+
+    # store and return results
+    if out == 'pid':
+        endrows = (rows & select)
+        endrows = endrows.any(level=0)
+        info.single_pid[codecols] = endrows
+        info.single_rows[codecols] = rows
+    elif out == 'interval':
+        endrows = select
+        info.interval[codecols] = endrows
+    elif out == 'rows':
+        endrows = (rows & select)
+        info.single_rows[codecols] = endrows
+
+    return endrows
+
+
+# %%
+def _eval_before_compound(df, expr, out='rows', info=None):
+    # todo: deal with existence reversion if there is a not before a condition
+    # (A and not B) before (C or D)
+
+    expr = expr.replace(' & ', ' and ').replace(' | ', ' or ')
+
+    eval_text = _get_eval(expr)
+    conditions = _get_conditions(expr)
+
+    c = []
+    for i, condition in enumerate(conditions):
+        crow = eval_condition(df=df, condition=condition, cols=cols, sep=sep,
+                              out='rows', info=info)
+        crow.name = f'c{i}'
+        c.extend([crow])
+    cdf_row = pd.concat(c, axis=1)
+
+    cdfbool = pd.DataFrame()
+    for col in cdf.columns:
+        cdfbool[col] = (df[col].cumsum() > 0)
+
+    eval_bool = cdfbool.eval(eval_text)
+
+    return eval_bool
+
+
+# %%
+
+
+def eval_before_after(df, condition, cols=None, sep=None, codebook=None, info=None, out='pid'):
+    # allow compound in before and after conditions. How?
+    # 0. Must use &, | not 'and', 'or'
+    # 1. replace all (space separated) & with 'and' and | with 'or'
+    # 2. end up with rows bool turned on for each in rdf and ldf (standard expression eval, row level? modified)
+    # 3. end of with c1 before c2, or c1 after c2
+    # condition = condition.replace(' & ', ' and ').replace(' | ', ' or ')
+
+    # replace conditions so multiples becomes positional
+    # example: before first 5 of 4A --> before 5th of 4A
+    # background: first 5 is not satisfied until ALL five have passed, while some other conditions are
+    # hmm, better talk about events, but point remains, some events are compound, multiple, intervals
+    # may introduce shortcuts for some easy/common evaluations later (like 4A before 4B, easier than 4st of 4A before 1st of 4B?)
+    # before and after are also different, may exploit this to create shortcuts
+
+    re.sub(r'last (-?\d+)', r'last \1st', condition)  # or use negative?
+
+    re.sub(r'first (-?\d+)', r'\1st', condition)
+    # todo: also fix percentile --> find position, not first 5 percent
+
+    left, right = re.split(' before | after | simultaneously ', condition)
+    # shortcut if ' simultaneous ' in condition: ...just a row and
+
+    # is it a simple (A before B) or a composite expressions (A & B) before (C or D)
+    # (3rd A & first 5 B) before (8th C or last D)
+    # (3rd A & 5th B) before (8th C or last D)
+
+    # check if the left side of the before expression has been calculated
+    if left in info.before_l_has_happened:
+        l_has_happened = info.before_l_has_happened[left]
+    else:
+        # is the expressions before or after a single expression (A before B)
+        # or a compound (A and B) before (C or D). compounds have parenthesis
+        if ')' in left:
+            l_has_happened = _eval_before_compound(df, expr=left, out='rows')
+            # lrows=l_has_happned # hmm, does this work, need lrows in after statements hmm
+        # else, a simple expression
+        else:
+            ltext, lcols = left.split(' in ')
+            if lcols == '': lcols = cols
+            lrows = eval_single(df=df, condition=left, cols=cols, sep=sep,
+                                codebook=codebook, info=info, out='rows')
+            lrowcum = lrows.groupby(level=0).cumsum()
+            l_has_happened = (lrowcum > 0)  # unnecessary? can logical and two series even if one is not bool?
+        info.before_l_has_happened[left] = l_has_happened
+
+    # check if the right side of the before  expression have been calculated
+    if right in info.before_r_has_happened:
+        r_has_happened = info.before_r_has_happened[left]
+    else:
+        if '(' in right:
+            r_has_happened = _eval_before_compound(df, expr=right, out='rows')
+            rrows = r_has_happned  # hmm, does this work
+            # simple
+        else:
+            rtext, rcols = right.split(' in ')
+            if rcols == '': rcols = rols
+            rrows = eval_single(df=df, condition=right, cols=cols, sep=sep,
+                                codebook=codebook, info=info, out='rows')
+            rrowcum = rrows.groupby(level=0).cumsum()
+            r_has_happened = (rrowcum > 0)  # unnecessary? can logical and two series even if one is not bool?
+        info.before_r_has_happened[right] = r_has_happened
+
+    if ' before ' in condition:
+        before = ~r_has_happened
+        if right in info.r_exist_pid:
+            r_exist_pid = info.r_exist_pid[right]
+        else:
+            r_exist_pid = r_has_happened.any(level=0)
+            info.r_exist_pid[right] = r_exist_pid
+            # final result
+        endrows = (l_has_happened & before & r_exist_pid)
+
+    elif ' after ' in condition:
+        if right in info.after:
+            after = info.after[right]
+        else:
+            after = (r_has_happened.groupby(
+                pid).cumsum() > 1)  # after means after 1 i.e. on 2 or later (so not simultaneously)
+            info.after[right] = after
+
+        endrows = _eval_before_compound(df[after], expr=left, out='rows')
+
+    # reduce to whether the condition is satisfied for each person (peronal id is in index)
+    cpid = endrows.any(level=0)
+
+    return cpid
+
+
+# %%
+def eval_within(df, condition, cols=None, sep=None, codebook=None, info=None, out='pid'):
+    """
+
+    expr= '4AB02 within 100 days after 4AB04'
+    expr= 'min 2 of 4AB02 within 100 days'
+    expr= '4AB02 within 50 to 100 days before 4AB04'
+    expr= '4AB02 within 50 to 100 days before 4AB04'
+
+    # maybe use inside on some?
+
+
+
+    expr= 'min 4 of 4AB02 in ncmp within 100 days'
+
+    expr= 'min 2 of 4AB02 within last 100 days'
+
+    expr= 'min 2 of 4AB02 within 100 days from end'
+
+    expr= 'min 2 of 4AB02 within first 100 days'
+
+    expr= 'between 2 and 5 of 4AB02 within first 100 days' # avoid and? well, just use format and replace it with to?
+
+
+    expr= 'min 2 of 4AB02 within 100 days from beginning'
+
+    expr= 'min 2 of 4AB02 within 1st of 4AB04 to 5th of 4AB04'
+    expr= 'min 2 of 4AB02 within 1st of 4AB06 to 3rd of 4AB04'
+
+    expr= 'min 2 of 4AB02 within first 20 of 4AB04'
+
+    expr= '3rd of 4AB02 within first 20 of 4AB04'
+
+    expr= 'min 2 of 4AB02 within 100 days from 5th of 4AB04'
+    expr = '3 or more of 4ab within 100 days'
+    wstart, wend
+
+    expr= 'min 4 of 4AB02 in ncmp within 100 days'
+    expr= "min 4 of ncmp=='4AB02' within 100 days"
+    expr= "at least 4 of ncmp=='4AB02' within 100 days"
+    expr= "more than 4 of ncmp=='4AB02' within 100 days" # best language
+    expr= "less than 4 of ncmp=='4AB02' within 100 days" # best language
+    expr= "between 4 and 7 of ncmp=='4AB02' within 100 days" # best language, inclusive or exclusive between
+    expr= "5 or more of ncmp=='4AB02' within 100 days" # best language
+    expr= "from 4 to 7 of ncmp=='4AB02' within 100 days" # best language
+    expr= " 4 to 7 events with 4AB02 within 100 days" # best language #events problem ... again format?
+    expr= " from 4 to 7 events with 4AB02 within 100 days" # best language #events problem ... again format?
+
+    expr= " at least 5 events with 4AB02 within 100 days" # best language #events problem ... again format?
+    expr= " no more than 5 events with 4AB02 in ncmp within 100 days" # best language #events problem ... again format?
+
+    expr= 'min 3 of days>3 within 100 days'
+
+    s.days.rolling('100D').sum()
+    s.groupby('pid').days.rolling('100D').sum()
+
+    s.asfreq('D')
+    %time count_p(df=df, expr=expr, cols=None, codebook=None, info=None)
+    %time count_p(df=df, expr=expr, cols=None, codebook=None, info=info)
+
+
+    eval_inside(expr)
+
+    """
+    left, right = condition.split(' within ')
+
+    # transform ... '4AB02 within 100 days after 4AB04'
+
+    # expr='4AB02 in ncmp within 50 to 100 days before 4AB04 in ncmp'
+    if re.match(r'\d+ to \d+ ', right):
+        lower, _, upper, unit, direction, *rightsingle = right.split()
+
+        rightsingle = " ".join(rightsingle)
+        lower = int(lower)
+        upper = int(upper)
+
+        lrows = eval_single(df=df, condition=left, cols=cols, sep=sep, codebook=codebook, info=info, out='rows')
+        rrows = eval_single(df=df, condition=rightsingle, cols=cols, sep=sep, codebook=codebook, info=info, out='rows')
+
+        pid_change = ((df.pid - df.pid.shift()) != 0)
+
+        rdates = df.date.where(rrows == 1, np.datetime64('NaT'))
+        # rdates2=np.where(rrows==1, df.date, np.datetime64('NaT'))
+        # rdates2 = pd.Series(rdates, index=df.index)
+
+        rdates[(pid_change & ~rrows)] = np.datetime64(
+            '2100-09-09')  # if not have a date assign one to avoid ffill from person above
+
+        if direction == 'after':
+            rdates = rdates.fillna(
+                method='ffill')  # hmmm must use groupby here? or can it be avoided? inseret a 999 when pid change and fill it with nan after ffill?
+
+        elif direction == 'before':
+            rdates = rdates.fillna(method='bfill')
+
+        rdates = rdates.where(rdates != np.datetime64('2100-09-09'), np.datetime64('NaT'))
+
+        # allow all time units within 5 seconds etc
+        if unit == 'days':
+            delta = (df['date'] - rdates) / np.timedelta64(1, 'D')
+        else:
+            # add s if it is not there? like 1 day, 1 second?
+            delta = (df['date'] - rdates)
+            delta = getattr(delta.dt, unit)
+
+        if direction == 'before':
+            delta = delta.abs()
+        # add directionn "around" - same as a withon before or within after
+        within = (delta >= lower) & (delta <= upper)
+        endrows = (lrows & within)
+
+    ### pure within: min 3 of 4AB02 within 100 days
+
+    # 'fewer than 3 of 4AB02 within 100 days'
+    # 'cumsum(ddd)>200 within 100 days'
+
+    # 'min 5 of ddd>200 within 100 days'
+    # 'min 5 events with ddd>200 within 100 days'
+    # 'more than 5 events with ddd>200 within 100 days'
+
+    # 'cumsum(ddd)>200 within 100 days'
+
+    # 'between 3 and 5 of 4AB02 within 100 days'
+    # '(4A and 4B) within 100 days'
+    # '(4A before 4B) within 100 days'
+
+    # pure within statements have few elements ot the right
+    elif len(right.split()) < 3:
+        if ' in ' in left:
+            word, num, _, codes, _, cols = left.split()
+            rows = get_rows(df=df, codes=codes, cols=cols)
+
+        #  'sum(days)>15 within 100 days' or 'min 5 of ddd>200 within 100 days'
+        #  expr='sum(days)>15 within 100 days'
+        elif re.search('[>=<]', left):
+            if 'sum(' in left:
+                # may want to create smaller dataframe first, if possible? focus on only some variablve, columns, rows?
+                sub = df.set_index('date')  # assume column date exist, should also drop rows with no time
+                col, operator = left.split(')')
+                col = col.replace('sum(', '').strip(')')
+                threshold, unit = right.split()
+                if unit == 'days': unit = 'D'
+                eval_text = f"(sub.groupby('pid')['{col}'].rolling('{threshold}{unit}').sum()){operator}"
+                rows = pd.eval(eval_text, engine='python')
+                cpid = rows.any(level=0)
+                return cpid
+            # 'min 5 of ddd>200 within 100 days'
+            else:
+                word, num, _, codes = left.split()
+                rows = df.eval(codes)  # so far no sumsum etc, only 4 events with sugar_level>10 within 100 days
+
+        # code expression not quantity expression
+        else:
+            word, num, _, codes = left.split()
+            cols = cols
+            rows = get_rows(df=df, codes=codes, cols=cols)
+
+        threshold, unit = right.split()
+        threshold = int(threshold)
+        num = int(num)
+
+        if word == 'max': num = num + 1
+
+        # may need to use expand cols to get the cols (not use cols expression here if it starred)
+        sub = df['date'][rows].dropna().to_frame()
+        sub['pid'] = sub.index
+        sub['shifted_date'] = sub['date'].shift(-num)
+        sub['shifted_pid'] = sub['pid'].shift(-num)
+        sub['diff_pid'] = (sub['pid'] - sub['shifted_pid'])
+        sub['same_pid'] = np.where(sub.diff_pid == 0, 1, 0)
+
+        sub = sub[sub.same_pid == 1]
+        # sub['shifted_date'] = sub['date'].groupby(level=0).shift(int(num))
+        # sub['shifted_pid'] = sub['pid'].groupby(level=0).shift(int(num))
+
+        # todo: allow for different units here, months, weeks, seconds etc
+        sub['diff_days'] = (sub['shifted_date'] - sub['date']) / np.timedelta64(1, 'D')
+
+        # sub[sub.same_pid == 1]['diff_days'].dropna()/np.datetime64(1, 'D')
+
+        if word == 'min':
+            endrows = (sub['diff_days'] <= threshold)
+            cpid = endrows.any(level=0)
+
+        elif word == 'max':
+            # n = df.index.nunique()
+            endrows = (sub['diff_days'] <= threshold)
+            cpid = ~endrows.any(level=0)
+
+        # revise max and exactly
+
+        elif word == 'exactly':
+            endrows = (sub['diff_days'] <= threshold)
+            n_max = endrows.groupby(level=0).sum()
+            endrows = n_max == threshold
+            cpid = endrows.any(level=0)
+
+    #        #todo (also need to change parsing then ...)
+    #        elif word=='between':
+    #            endrows=(sub['diff_days']<=threshold)
+    #            n_max = endrows.groupby(level=0).sum()
+    #            endrows = n_max == threshold
+    #            cpid = endrows.any(level=0)
+
+    return cpid
+
+
+# %%
+
+#    expr = '4AB02 before 4AB04'
+#
+#    expr = '4AB02 in ncmp inside 100 days after 4AB04'
+#
+#    expr = 'min 2 of 4AB02 in ncmp inside ?[100, 200] days after 4AB04 and days>?[300, 400]'
+#
+#    expr = '4AB02 in ncmp inside 50 to 100 days after 4AB04'
+#
+#    expr = '4AB02 in ncmp inside 5th to 8th of 4AB04'
+#
+#    expr = '4AB02 in ncmp inside first 5 of 4AB04'
+#
+#    expr = '4AB02 in ncmp inside first 10 events'
+#
+#    expr = '4AB02 in ncmp inside 10th event'
+#    expr = '4AB02 in ncmp before 10th event'
+#
+#    expr = '4AB02 in ncmp inside first 10% of events'
+#
+#    expr = '4AB02 in ncmp inside first 10% of 4ab04'
+#
+#    expr = '4AB02 in ncmp inside 3rd percentile of 4ab04'
+#
+#    expr = '4AB02 in ncmp inside first 10 days from first event'
+
+# %%
+
+
+##
+## unused (so far)
+##
+
+def _create_time_intervals(df, expr, cols=None, sep=None, codebook=None, info=None):
+    """
+    expr='50 to 100 days before 4AB04 in ncmp'
+
+    create_time_intervals(df=df, expr=expr)
+    """
+    original = expr
+
+    expr, cols = expr.split(' in ')
+
+    from_day, _, to_day, direction, word, *codeexpr = expr.split()
+    codeexpr = " ".join(codeexpr) + ' in ' + cols
+
+    if ' events' in codeexpr:
+        df['rdum'] = 1
+    else:
+        df['rdum'] = eval_single(df=df, condition=codeexpr, cols=cols, out='rows')
+
+    ok_times = _mark_days(df=df, from_day=from_day, direction=direction) & _mark_days(df=df, to_day=to_day,
+                                                                                      direction=direction)
+
+    return ok_times
+
+
+def _mark_days(df, from_day, direction):
+    df['last_event'] = np.where(df.rdum == 1, df['date'], np.datetime64('NaT'))
+    df['last_event'] = df['last_event'].groupby('pid').fillna(method='ffill')
+    df['event_diff'] = df['date'] - df['last_event']  # nb depends on whether we are seeking closes before or after
+    df['event_diff'] = df['event_diff'] / np.datetime64(1, 'D')
+    df['ok_dates'] = (df.event_diff < from_day)
+
+    return df['okdates']
+
+# %%
+
+
+
+
+
+
+
+
