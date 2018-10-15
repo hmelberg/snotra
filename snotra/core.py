@@ -1282,11 +1282,11 @@ def _count_persons_all_codes(df, cols=None, pid='pid', sep=None,
     """
     sub = df
     cols = _expand_cols(df=sub, cols=cols)
-     if normalize:
+    if normalize:
         sum_persons = sub[pid].nunique()
-     if not sep:
+    if not sep:
         sep = _sniff_sep(df=sub, cols=cols)
-     # codes=unique_codes(df=sub, cols=cols, sep=sep)
+    # codes=unique_codes(df=sub, cols=cols, sep=sep)
     # reduce length of codes to the desired level of detail, specified by length
     # this works if coode columns have single values
     if length:
