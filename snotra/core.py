@@ -497,7 +497,7 @@ def get_rows(df,
             cols = _fix_cols(df=df, cols=cols)
             codes = _fix_codes(df=df, codes=codes, cols=cols, sep=sep)
 
-        _listify(codes)
+        codes = _listify(codes)
 
         allcodes = _get_allcodes(codes)
 
@@ -519,7 +519,7 @@ def get_rows(df,
 # %%
 def get_pids(df,
              codes,
-             cols,
+             cols=None,
              pid='pid',
              sep=None,
              codebook=None):
@@ -556,7 +556,7 @@ def get_pids(df,
 # %%
 def select_persons(df,
                    codes,
-                   cols,
+                   cols=None,
                    pid='pid',
                    sep=None,
                    codebook=None):
@@ -575,14 +575,22 @@ def select_persons(df,
         codebook (list): User specified list of all possible or allowed codes
 
     Examples:
-
+        >>> df.select_persons(codes='K51 and not K50')
+        >>> df.select_persons(codes='(K50 in: icd or K51 in: icd) and 4AB04 in atc')
         >>> df.select_persons(codes='C509', cols=['icdmain', 'icdbi'])
 
     """
+    if _fix:
+        df, cols = _to_df(df=df, cols=cols)
+        if cols:
+            cols = _expand_cols(df=df, cols=cols)
+            if not sep:
+                sep = _sniff_sep(df=df, cols=cols)
+
     # if an expression is used as input (eg 'K50 and not K51')
     if isinstance(codes, str) and codes.count(' ') > 1:
-        selection = use_expression(df, codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
-        pids = df[selection]
+        selection = use_expression(df=df, expr=codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
+        pids = df[selection][pid].values
     # if an list of codes - ['K50', 'K51'] is used as input
     else:
         pids = _get_some_id(df=df, codes=codes, some_id=pid, sep=sep)
@@ -595,7 +603,7 @@ def select_persons(df,
 # %%
 def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
                   normalize=False, dropna=True, group=False, merge=False,
-                  groupby=None, codebook=None, _fix=True):
+                  length=None, groupby=None, codebook=None, _fix=True):
     """
     Counts number of individuals who are registered with given codes
 
@@ -632,6 +640,12 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
         normalize (bool, default: False): If True, converts to pct
         dropna (bool, default True): Include counts of how many did not get
             any of the specified codes
+        length (int): If specified, will only use the number of characters
+            from each code as specified by the length parameter (useful to
+            count codes at different levels of granularity. For example,
+            sometimes oe wants to look at how many people get detailed codes,
+            other times the researcher wants to know only how many get general
+            atc codes, say the first four characters of the atc)
 
     Examples
         >>> df.atc.count_persons(codes='4AB04')
@@ -650,12 +664,15 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
         >>> df.groupby(['disease', 'cohort']).apply(count_persons, cols='ncmp', codes='4AB04', sep=',')
 
     """
-
-    subset = df
+    sub = df
+    sub, cols = _to_df(df=sub, cols=cols)
+    cols = _expand_cols(df=sub, cols=cols)
+    if normalize:
+        sum_persons = sub[pid].nunique()
 
     # if an expression instead of a codelist is used as input
     if isinstance(codes, str) and codes.count(' ') > 1:
-        persons = use_expression(df, codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
+        persons = use_expression(df=sub, expr=codes, cols=cols, sep=sep, out='persons', codebook=codebook, pid=pid)
         if normalize:
             counted = persons.sum() / len(persons)
         else:
@@ -665,24 +682,32 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
     # if codes is a codelist (not an expression)
     else:
         if _fix:
-            # expands and reformats columns and codes input
-            df, cols = _to_df(df=df, cols=cols)
-            codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep, group=group, merge=merge)
-            rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
-            if not dropna:
-                persons = df[pid].nunique()
-            subset = df[rows].set_index(pid, drop=False)
+            if not codes:
+                counted = _count_persons_all_codes(df=sub, cols=cols, pid=pid, sep=sep,
+                                                   normalize=normalize, dropna=dropna, length=length, groupby=groupby)
+                return counted
+                # if some codes are specified, expand and format these, and reduce the df to the relevant codes
+            else:
+                # expands and formats columns and codes input
+                codes, cols, allcodes, sep = _fix_args(df=sub, codes=codes, cols=cols, sep=sep, group=group,
+                                                       merge=merge)
+                rows = get_rows(df=sub, codes=allcodes, cols=cols, sep=sep, _fix=False)
+                if not dropna:
+                    sum_persons = df[pid].nunique()
+                sub = sub[rows].set_index(pid,
+                                          drop=False)  # unsure if this is necessary, may drop it. Requred if method on a series? well not as long as we add pid column and recreate a series as a df
 
         # make a df with the extracted codes
-        code_df = extract_codes(df=df, codes=codes, cols=cols, sep=sep, _fix=False, series=False)
+        code_df = extract_codes(df=sub, codes=codes, cols=cols, sep=sep, _fix=False, series=False)
 
         labels = list(code_df.columns)
 
         counted = pd.Series(index=labels)
 
+        # maybe delete groupby option, can be done outside df.groupby. apply ...
         if groupby:
             code_df = code_df.any(level=0)
-            sub_plevel = subset.groupby(pid)[groupby].first()
+            sub_plevel = sub.groupby(pid)[groupby].first()
             code_df = pd.concat([code_df, sub_plevel], axis=1)  # outer vs inner problem?
 
             code_df = code_df.set_index(groupby)
@@ -698,7 +723,7 @@ def count_persons(df, codes=None, cols=None, pid='pid', sep=None,
             counted['NaN'] = nan_persons
 
         if normalize:
-            counted = counted / counted.sum()
+            counted = counted / sum_persons
         else:
             counted = counted.astype(int)
 
@@ -846,7 +871,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
 
             # must avoid * since eval does not like in in var names, replace * with three ___
         # same with column names starting with digit, sp add three (___) to all words
-        worddict = {'___' + word.replace('*', '___'): [word] for word in words}
+        worddict = {'___' + word.replace('*', '___') + f'_{n}': [word]}
         coldf = pd.DataFrame(index=df.index)
 
         # allow star etc notation in col also?
@@ -1172,6 +1197,51 @@ def years_apart(df, pid='pid', year='year'):
 
 
 # %%
+def read_codebooks(file=None, must_contain=None, sep=';'):
+    """
+    Reads a codebook (in csv format)
+     file (str): The filname (including the path) to be read
+                If no file is specified, all available codebooks in the
+                codebook folder will be read
+     must_contain (list): List of terms that the filename must contain
+                in order to be read
+     filename may/should contain (in this order, separated by underscore):
+        name (atc, icd)
+        version (9, 10)
+        year (2017)
+        language (no, eng, ger)
+        country?
+     it may also contain other terms that you want to select on later
+     example: icd_9_2017_eng.csv
+     codebook = read_codebooks()
+     # must deal with integer vs. regular codes problem
+    """
+    # todo: make a prober config file
+    from snotra import _PATH
+     import glob
+     if not file:
+        path = _PATH.replace('core.py', 'codebooks/')
+        file = glob.glob(path + '*.csv')
+     files = _listify(file)
+     books = []
+     for codebook in files:
+        if must_contain:
+            must_contain = set(must_contain)
+            nameset = set(codebook.split('_'))
+            if len(must_contain) == len(nameset & must_contain):
+                df = pd.read_csv(codebook, sep=sep)
+                df['source'] = codebook.split('\\')[-1]
+                books.extend([df])
+        else:
+            df = pd.read_csv(codebook, sep=sep)
+            df['source'] = codebook.split('\\')[-1]
+            books.extend([df])
+    books = pd.concat(books, ignore_index=True, axis=0)
+    return books
+
+
+
+
 def label(df, labels=None, read=True, path=None):
     """
     Translate codes in index to text labels based on content of the dict labels
@@ -1188,6 +1258,65 @@ def label(df, labels=None, read=True, path=None):
             labels = read_code2text(path)
     df = df.rename(index=labels)
     return df
+
+
+def label(df, labels=None, file=None):
+    """
+    Translate codes in index to text labels based on content of the dict labels
+    """
+    if not labels:
+        codebooks = read_codebooks()
+        labels = labels_from_codebooks(codebooks)
+    df = df.rename(index=labels)
+    return df
+
+
+def labels_from_codebooks(codebook, code='code', text='text', only_valid_codes=False):
+    """
+    makes a dictionary of code to labels based on two columns in the codebook
+     """
+    # must deal with integer vs. regular codes problem
+    codedikt = codebook[['code', 'text']].set_index('code').to_dict()['text']
+    return codedikt
+
+
+
+#%%
+
+def _count_persons_all_codes(df, cols=None, pid='pid', sep=None,
+                             normalize=False, dropna=True, length=None, groupby=None):
+    """
+    helper functions called from count_persons when no codes are specified
+     #todo: deal with dropna
+    """
+    sub = df
+    cols = _expand_cols(df=sub, cols=cols)
+     if normalize:
+        sum_persons = sub[pid].nunique()
+     if not sep:
+        sep = _sniff_sep(df=sub, cols=cols)
+     # codes=unique_codes(df=sub, cols=cols, sep=sep)
+    # reduce length of codes to the desired level of detail, specified by length
+    # this works if coode columns have single values
+    if length:
+        for col in cols:
+            sub[col] = sub[col].str[0:length]
+    # special (easy) case if only one column
+    sub = sub.set_index(pid)
+     # special (easy) case if alll for single valued columns
+    allcounted = None
+    for col in cols:
+        counted = sub[col].reset_index().groupby(col)[pid].nunique()
+        if not allcounted:
+            allcounted = counted
+        else:
+            allcounted = allcounted + counted
+     if normalize:
+        counted = counted / sum_persons
+    else:
+        counted = counted.astype(int)
+     counted = counted.sort_values(ascending=False)
+     return counted
 
 
 # %%
@@ -1692,12 +1821,12 @@ def _sniff_sep(df, cols=None, possible_seps=[',', ';', '|'], n=1000, sure=False,
 def _get_some_id(df,
                  codes,
                  cols,
-                 xid,
+                 some_id,
                  sep=None):
     """
     help function for all get functions that gets ids based on certain filtering criteria
 
-    x is the column with the info to be collected (pid, uuid, event_id)
+    some_id is the column with the info to be collected (pid, uuid, event_id)
 
 
     """
@@ -1723,7 +1852,7 @@ def _get_some_id(df,
     else:
         b = df[cols].isin(expanded_codes).any(axis=1).values
 
-    pids = set(df[b][xid].unique())
+    pids = set(df[b][some_id].unique())
 
     return pids
 
@@ -2615,8 +2744,6 @@ def stringify_order(df, codes=None, cols=None, pid='pid', event_start='date',
 
     Examples:
 
-    >>> codes={'4AB01': 'e', '4AB02' : 'i', '4AB04' : 'a', '4AB05' : 'x', '4AB06' : 'g'}
-
     >>> bio_codes= {'L04AA23': 'n', 'L04AA33': 'v', 'L04AB02': 'i', 'L04AB04': 'a','L04AB06': 'g', 'L04AC05': 'u'}
 
     >>> bio_codes={'e' : '4AB01', 'i' : '4AB02', 'a' : '4AB04'}
@@ -2704,6 +2831,8 @@ def stringify_order(df, codes=None, cols=None, pid='pid', event_start='date',
     if _fix:
         df, cols = _to_df(df=df, cols=cols)
         codes, cols, allcodes, sep = _fix_args(df=df, codes=codes, cols=cols, sep=sep)
+    else:
+        allcodes=_get_allcodes(codes)
 
     # get the rows with the relevant columns
     rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
@@ -2958,7 +3087,7 @@ def stringify_time(df,
     # new dataframe to store each string for each individual for each code
     string_df = pd.DataFrame(index=code_series[pid].unique())
 
-    # loop over each code, aggregate strong for each individual, store in df
+    # loop over each code, create aggregate string for each individual, store in df
     for code in codes:
         code_df = code_series[code_series[col].isin([code])]
         stringified = code_df.groupby(pid, sort=False).apply(make_string)

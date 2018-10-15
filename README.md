@@ -14,7 +14,7 @@ Snotra is a also a Norse goddess associated with wisdom.
   
     - Using logical expressions
     ```python
-    df.count_persons(codes='K50 or K51 and not K52', cols='icd*')
+    df.count_persons(codes='(K50 or K51) and not K52', cols='icd*')
       
     df.count_persons(codes='K50 in: icd and 4AB02 in:atc1, atc2')
     ```
