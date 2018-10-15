@@ -1197,7 +1197,7 @@ def years_apart(df, pid='pid', year='year'):
 
 
 # %%
-def read_codebooks(file=None, must_contain=None, sep=';'):
+def read_codebooks(file=None, select=None, sep=';'):
     """
     Reads a codebook (in csv format)
      file (str): The filname (including the path) to be read
@@ -1218,17 +1218,17 @@ def read_codebooks(file=None, must_contain=None, sep=';'):
     """
     # todo: make a prober config file
     from snotra import _PATH
-     import glob
-     if not file:
+    import glob
+    if not file:
         path = _PATH.replace('core.py', 'codebooks/')
         file = glob.glob(path + '*.csv')
-     files = _listify(file)
-     books = []
-     for codebook in files:
-        if must_contain:
-            must_contain = set(must_contain)
+    files = _listify(file)
+    books = []
+    for codebook in files:
+        if select:
+            select = set(select)
             nameset = set(codebook.split('_'))
-            if len(must_contain) == len(nameset & must_contain):
+            if len(select) == len(nameset & select):
                 df = pd.read_csv(codebook, sep=sep)
                 df['source'] = codebook.split('\\')[-1]
                 books.extend([df])
@@ -1239,44 +1239,35 @@ def read_codebooks(file=None, must_contain=None, sep=';'):
     books = pd.concat(books, ignore_index=True, axis=0)
     return books
 
-
-
-
-def label(df, labels=None, read=True, path=None):
-    """
-    Translate codes in index to text labels based on content of the dict labels
-
-    Args:
-        labels (dict): dictionary from codes to text
-        read (bool): read and use internal dictionary if no dictionary is provided
-    """
-    if not labels:
-        # making life easier for myself
-        try:
-            labels = read_code2text()
-        except:
-            labels = read_code2text(path)
-    df = df.rename(index=labels)
-    return df
-
-
-def label(df, labels=None, file=None):
+#%%
+def label(df, labels=None, select=None,  file=None):
     """
     Translate codes in index to text labels based on content of the dict labels
     """
     if not labels:
-        codebooks = read_codebooks()
-        labels = labels_from_codebooks(codebooks)
+        codebooks = read_codebooks(select=select, file=file)
+        labels = labels_from_codebooks(codebooks, select=select)
     df = df.rename(index=labels)
     return df
 
+#%%
 
-def labels_from_codebooks(codebook, code='code', text='text', only_valid_codes=False):
+def labels_from_codebooks(codebook, select=None, code='code', text='text', only_valid_codes=False):
     """
     makes a dictionary of code to labels based on two columns in the codebook
      """
     # must deal with integer vs. regular codes problem
-    codedikt = codebook[['code', 'text']].set_index('code').to_dict()['text']
+    if select:
+        books=[]
+        words = select.split()
+        sources = codebook['source'].unique()
+        for source in sources:
+            nameset = set(source.split('_'))
+            if len(words) == len(nameset & words):
+                books.extend(source)
+        codebook=codebook[codebook.sources.isin(books)]
+
+    codedikt = codebook[[code, text]].set_index(code).to_dict()[text]
     return codedikt
 
 
@@ -3839,8 +3830,8 @@ def eval_before_after(df, condition, cols=None, sep=None, codebook=None, info=No
             # simple
         else:
             rtext, rcols = right.split(' in ')
-            if rcols == '': rcols = rols
-            rrows = eval_single(df=df, condition=right, cols=cols, sep=sep,
+            if rcols == '': rcols = cols
+            rrows = eval_single(df=df, condition=right, cols=rcols, sep=sep,
                                 codebook=codebook, info=info, out='rows')
             rrowcum = rrows.groupby(level=0).cumsum()
             r_has_happened = (rrowcum > 0)  # unnecessary? can logical and two series even if one is not bool?
