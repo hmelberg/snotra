@@ -3,7 +3,7 @@ Snotra is a tool that extends and builds on the Pandas library to make it easier
 
 Snotra is a also a Norse goddess associated with wisdom. 
 
-### Examples
+## Examples
 - **Count the number of unique persons with a diagnosis in event data**
     - Using special notation (star, hyphen and colon)
     ```python
@@ -45,21 +45,21 @@ Snotra is a also a Norse goddess associated with wisdom.
     pip install snotra as sa
     ```
     
- ### Requirements
+ ## Requirements
  - Python 3.6 
  - Pandas
 
- ### License
+ ## License
  MIT
  
  ## Documentation
  Draft overview of methods and functions [doc](doc/docs.md)
  
- ### Disclaimer
+ ## Disclaimer
  Snotra is currently under development and not ready for production. Much remains to be tested and corrected, use at your own risk - and contributions are welcome!
   
  
- ### Features
+ ## Features
  - **Easy and efficient notation and methods to deal with medical codes:** Medical data often use special code systems to indicate diagnoses, pharmaceuticals and medical procedures. We integrated these tools and allow the use of different types of notation (star, hyphen, colon) to make it easy to select or count the relevant patients.
 
 - **Answer person level question using event level data:** Often health data contains information about events (a prescription, a hospital stay), while the questions we want answered are both at the event-level and person-level:
