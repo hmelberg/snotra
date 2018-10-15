@@ -53,7 +53,8 @@ Snotra is a also a Norse goddess associated with wisdom.
  MIT
  
  ## Documentation
- Draft overview of methods and functions [doc](doc/docs.md)
+ - See [doc](doc/docs.md) for a draft overview of methods and functions. 
+ - See [wiki](https://github.com/hmelberg/snotra/wiki) for more in depth discussions of some topics.
  
  ## Disclaimer
  Snotra is currently under development and not ready for production. Much remains to be tested and corrected, use at your own risk - and contributions are welcome!
