@@ -1302,12 +1302,12 @@ def _count_persons_all_codes(df, cols=None, pid='pid', sep=None,
             allcounted = counted
         else:
             allcounted = allcounted + counted
-     if normalize:
+    if normalize:
         counted = counted / sum_persons
     else:
         counted = counted.astype(int)
-     counted = counted.sort_values(ascending=False)
-     return counted
+    counted = counted.sort_values(ascending=False)
+    return counted
 
 
 # %%
