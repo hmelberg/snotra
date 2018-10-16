@@ -1219,22 +1219,25 @@ def read_codebooks(file=None, select=None, sep=';'):
     # todo: make a prober config file
     from snotra import _PATH
     import glob
+    import ntpath
     if not file:
         path = _PATH.replace('core.py', 'codebooks/')
         file = glob.glob(path + '*.csv')
     files = _listify(file)
     books = []
-    for codebook in files:
+    for file in files:
+        name = ntpath.basename(file)
+        name = os.path.splitext(name)[0]
         if select:
-            select = set(select)
-            nameset = set(codebook.split('_'))
-            if len(select) == len(nameset & select):
+            wanted_words = set(select.split())
+            file_words = set(name.split('_'))
+            if len(wanted_words) == len(file_words & wanted_words):
                 df = pd.read_csv(codebook, sep=sep)
-                df['source'] = codebook.split('\\')[-1]
+                df['source'] = name
                 books.extend([df])
         else:
             df = pd.read_csv(codebook, sep=sep)
-            df['source'] = codebook.split('\\')[-1]
+            df['source'] = name
             books.extend([df])
     books = pd.concat(books, ignore_index=True, axis=0)
     return books
@@ -1258,8 +1261,8 @@ def labels_from_codebooks(codebook, select=None, code='code', text='text', only_
      """
     # must deal with integer vs. regular codes problem
     if select:
-        books=[]
-        words = select.split()
+        books = []
+        words = set(select.split())
         sources = codebook['source'].unique()
         for source in sources:
             nameset = set(source.split('_'))

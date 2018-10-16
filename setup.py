@@ -9,7 +9,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='snotra',
-    version='0.0.9',
+    version='0.0.10',
     packages=['snotra', ],
     license='MIT',
     include_package_data=True,
