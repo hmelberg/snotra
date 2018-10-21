@@ -3209,11 +3209,14 @@ def _format_expr(expr, info=None):
             expr = " ".join(new_splitted)
     # insert date variable 'in date' after days etc (hmm etc is a problem)
 
+    # insert externally defined variables
+    expr = insert_external(expr)
+
     # insert 'in col' for variables with known cols (specified in info)
     expr = _insert_cols(expr=expr, infor=Info)
 
     # replace some phrases
-    replace = {' but not ':'and not'}
+    replace = {' but not ':' and not '}
     for old, new in replace.items():
         expr = expr.replace(old, new)
 
