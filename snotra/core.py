@@ -2288,9 +2288,19 @@ def stringify_durations(df,
     Example:
 
     >>> codes={'i' : ['4AB02', 'L04AB02'], 'a': ['4AB04','L04AB04']}
-    >>> events=stringify_durations(df=mdf, codes=codes, cols='codes',
-    event_start='date', first_date='first_ibd', sep=',')
+    >>> events=sa.stringify_durations(df=mdf, codes=codes, cols='codes',
+    event_start='date', first_date=None, sep=',', merge=True)
 
+    >>> codes={'i' : ['4AB02', 'L04AB02'], 'a': ['4AB04','L04AB04']}
+    >>> codes={'i' : ['L04*'], 'b': ['4AB04','L04AB04']}
+
+
+    >>> codes = {'i':'L01BB02 L04AX03 L01BA01 L04AD01 L04AD02 L04AA06'.split(),
+                 'b':'L04AB02 L04AB04 L04AB06 L04AA33 L04AC05 L04AA23'.split()}
+
+
+    >>> events=sa.stringify_durations(df=mdf, codes=codes, cols='codes',
+    event_start='date', first_date=None, sep=',', merge=False, step=100)
 
     >>> codes={'L04A*' : 'i', 'L04AB*' : 'a', 'H02*' : 'c'}
     >>> pr=pr.set_index('pid_index')
@@ -2422,21 +2432,18 @@ def stringify_durations(df,
                                 cols=cols,
                                 sep=sep,
                                 new_sep=',',
-                                merge=True,
+                                merge=False,
                                 out='text',
                                 _fix=False)
 
-    # May need to unstack if two events in same row
-    # for now: Just foce it to be 1
-    if code_series.apply(len).max() > 1:
-        code_series = code_series.str[0]
+    unique_codes = list(code_series.columns)
 
-    # base further aggregation on the new extracted series with its col and codes
-    col = code_series.name
-    codes = code_series.name.split(', ')
+    code_series = pd.melt(code_series.reset_index(),
+                          id_vars=['pid', 'start_position', 'end_position'],
+                          value_vars=unique_codes)
 
     # drop duplicates (same type of even in same period for same individual)
-    code_series = code_series.reset_index().drop_duplicates().set_index(pid, drop=False)
+    code_series = code_series.drop_duplicates().set_index(pid, drop=False)
     code_series.index.name = 'pid_index'
     ## make dict with string start and end positions for each individual
     # explanation:
@@ -2506,10 +2513,10 @@ def stringify_durations(df,
     # new dataframe to store each string for each individual for each code
     string_df = pd.DataFrame(index=code_series[pid].unique())
     string_df.index.name = 'pid_index'
-    # code_df.index.name = 'pid_index'  # avoid future error from pandas pid in both col and index
+
     # loop over each code, aggregate strong for each individual, store in df
-    for code in codes:
-        code_df = code_series[code_series[col].isin([code])]
+    for code in unique_codes:
+        code_df = code_series[code_series['value'].isin([code])] # maybe == is better (safer bco compounds + faster?)
         stringified = code_df.groupby(pid, sort=False).apply(make_string)
         string_df[code] = stringified
 
@@ -2527,7 +2534,22 @@ def stringify_durations(df,
               Final result:          {final_obs}, {final_npid}""")
     return string_df
 
-
+#%%
+def _make_binary(df, cols=None, no_event=' ', time_sep='|', pad=False):
+    if isinstance(df, pd.Series):
+        name = df[col].name
+        df=df.str.replace(no_event, '0')
+        df=df.str.replace(name, '1')
+    else:
+        # if no cols are selected, use all cols
+        if not cols:
+            cols = list(df.columns)
+        # replace event chars with 1 and no events with 0
+        for col in cols:
+            name = df[col].name
+            df[col]=df[col].str.replace(no_event, '0')
+            df[col]=df[col].str.replace(name, '1')
+    return df
 # %%
 def interleave_strings(df, cols=None, time_sep="|", no_event=' ', agg=False):
     """
@@ -2908,6 +2930,7 @@ def stringify_time(df,
 
                    time_sep='|',
                    no_event=' ',
+                   collision='*',
 
                    merge=True,
                    info=None):
@@ -2985,7 +3008,7 @@ def stringify_time(df,
     max_length_days = (max_date - min_date).days
     max_length_steps = int(max_length_days / step)
 
-    # if codes are not specified, use the five most common codes
+    # if codes or nfirst are not specified, use the five most common codes
     if not codes:
         cols = _expand_cols(_listify(cols))
         if not nfirst: nfirst = 5
@@ -3187,6 +3210,12 @@ def _format_expr(expr, info=None):
     # insert date variable 'in date' after days etc (hmm etc is a problem)
 
     # insert 'in col' for variables with known cols (specified in info)
+    expr = _insert_cols(expr=expr, infor=Info)
+
+    # replace some phrases
+    replace = {' but not ':'and not'}
+    for old, new in replace.items():
+        expr = expr.replace(old, new)
 
     # remove 'of'
 
@@ -3268,7 +3297,7 @@ def _insert_cols(expr, info=None, function=None):
                 print('Error: No rules for assigning cols are given in kewords info or external')
             new_splitted[n] = new_splitted[n].replace(code, f'{code} in {cols}')
             n = n + 1
-    new_expr = " ".join(new_splitted)
+    new_expr = " ".join(new_splitted[:-1])
 
     return new_expr
 
@@ -3420,6 +3449,8 @@ def count_p(df, expr, cols=None, sep=None, codebook=None, info=None, _use_cachin
     # create storage to avoide recalculating same expressions
 
     if not info: info = Info()
+
+    expr = _format_expr(expr, info=info)
 
     exprs = _get_options(expr)
     who = {}
