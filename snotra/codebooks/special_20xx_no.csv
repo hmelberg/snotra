@@ -1,5 +1,5 @@
-ï»¿code;long_text;text
-WL000;Utstedelse av H-resept pÃ¥ legemiddel;Utstedelse av H-resept pÃ¥ legemiddel
+code;long_text;text
+WL000;Utstedelse av H-resept på legemiddel;Utstedelse av H-resept på legemiddel
 1AC01;Behandling med legemiddel H01AC01 (Somatropin);Somatropin
 1AC03;Behandling med legemiddel H01AC03 (Mecasermin);Mecasermin
 1AC09;Behandling med legemiddel B01AC09 (Epoprostenol);Epoprostenol
@@ -24,7 +24,7 @@ WL000;Utstedelse av H-resept pÃ¥ legemiddel;Utstedelse av H-resept pÃ¥ legemidde
 1XE23;Behandling med legemiddel L01XE23 (Dabrafenib);Dabrafenib
 1XE25;Behandling med legemiddel L01XE25 (Trametinib);Trametinib
 1XE27;Behandling med legemiddel L01XE27 (Ibrutinib);Ibrutinib
-1XX01;IntravenÃ¸s trombolysebehandling ved akutt hjerneinfarkt;IntravenÃ¸s trombolysebehandling ved akutt hjerneinfarkt
+1XX01;Intravenøs trombolysebehandling ved akutt hjerneinfarkt;Intravenøs trombolysebehandling ved akutt hjerneinfarkt
 1XX46;Behandling med legemiddel L01XX46 (Olaparib);Olaparib
 1XX47;Behandling med legemiddel L01XX47 (Idelalisib);Idelalisib
 2BB01;Behandling med legemiddel B02BB01 (Fibrinogen, human);Fibrinogen, human
@@ -86,13 +86,13 @@ WL000;Utstedelse av H-resept pÃ¥ legemiddel;Utstedelse av H-resept pÃ¥ legemidde
 9AB02;Behandling med legemiddel M09AB02 (Kollagenase clostridium histolyticum);Kollagenase clostridium histolyticum
 A0093;Pasientadministrert peritonealdialyse;Pasientadministrert peritonealdialyse
 A0094;Pasientadministrert hemodialyse;Pasientadministrert hemodialyse
-A0099;Grupperettet pasientopplÃ¦ring;Grupperettet pasientopplÃ¦ring
+A0099;Grupperettet pasientopplæring;Grupperettet pasientopplæring
 B0001;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i apotek;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i apotek
 B0002;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i regi av kommunal tjeneste;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i regi av kommunal tjeneste
 B0003;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i spesialistpoliklinikk;Kontinuerlig legemiddelbehandling gjennom LAR - utlevering og inntak i spesialistpoliklinikk
 B0004;Kontinuerlig legemiddelbehandling gjennom LAR - pasientadministrert for minst 7 dager av gangen;Kontinuerlig legemiddelbehandling gjennom LAR - pasientadministrert for minst 7 dager av gangen
-B0005;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig diagnostiske formÃ¥l;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig diagnostiske formÃ¥l
-B0006;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig terapeutiske formÃ¥l;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig terapeutiske formÃ¥l
+B0005;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig diagnostiske formål;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig diagnostiske formål
+B0006;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig terapeutiske formål;Strukturerte polikliniske dagtilbud innen PHV og TSB, hovedsakelig terapeutiske formål
 17X01;Behandling med legemiddel L01XC10 (Ofatumumab);Ofatumumab
 17X02;Behandling med legemiddel J05AX68 (Elbasvir, Grazoprevir);Elbasvir, Grazoprevir
 17X03;Behandling med legemiddel J05AX69 (Sofosbuvir, Velpatasvir);Sofosbuvir, Velpatasvir
