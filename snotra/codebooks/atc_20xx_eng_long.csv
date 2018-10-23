@@ -66,7 +66,7 @@ A02AC;Calcium compounds
 A02AC01;Calcium carbonate
 A02AC02;Calcium silicate
 A02AC10;Combinations
-A02AD;Combinations and complexes of aluminium; calcium and magnesium compounds;
+A02AD;Combinations and complexes of aluminium
 A02AD01;Ordinary salt combinations
 A02AD02;Magaldrate
 A02AD03;Almagate
@@ -77,7 +77,7 @@ A02AF01;Magaldrate and antiflatulents
 A02AF02;Ordinary salt combinations and antiflatulents
 A02AG;Antacids with antispasmodics
 A02AH;Antacids with sodium bicarbonate
-A02AX;Antacids; other combinations;
+A02AX;Antacids
 A02B;Drugs for peptic ulcer and gastro-oesophageal reflux disease (gord)
 A02BA;H2-receptor antagonists
 A02BA01;Cimetidine 
@@ -104,17 +104,17 @@ A02BC07;Dexrabeprazole
 A02BC53;Lansoprazole- combinationsbinations
 A02BC54;Rabeprazole- combinationsbinations
 A02BD;Combinations for eradication of helicobacter pylori
-A02BD01;Omeprazole; amoxicillin and metronidazole;
-A02BD02;Lansoprazole; tetracycline and metronidazole;
-A02BD03;Lansoprazole; amoxicillin and metronidazole;
-A02BD04;Pantoprazole; amoxicillin and clarithromycin;
-A02BD05;Omeprazole; amoxicillin and clarithromycin;
-A02BD06;Esomeprazole; amoxicillin and clarithromycin;
-A02BD07;Lansoprazole; amoxicillin and clarithromycin;
-A02BD08;Bismuth subcitrate; tetracycline and metronidazole;
-A02BD09;Lansoprazole; clarithromycin and tinidazole;
-A02BD10;Lansoprazole; amoxicillin and levofloxacin;
-A02BD11;Pantoprazole; amoxicillin clarithromycin and metronidazole;
+A02BD01;Omeprazole
+A02BD02;Lansoprazole
+A02BD03;Lansoprazole
+A02BD04;Pantoprazole
+A02BD05;Omeprazole
+A02BD06;Esomeprazole
+A02BD07;Lansoprazole
+A02BD08;Bismuth subcitrate
+A02BD09;Lansoprazole
+A02BD10;Lansoprazole
+A02BD11;Pantoprazole
 A02BX;Other drugs for peptic ulcer and gastro-oesophageal reflux disease (gord)
 A02BX01;Carbenoxolone 
 A02BX02;Sucralfate 
@@ -135,7 +135,7 @@ A02BX77;Gefarnate- combinationsbinations with psycholeptics
 A02X;Other drugs for acid related disorders
 A03;Drugs for functional gastrointestinal disorders
 A03A;Drugs for functional gastrointestinal disorders
-A03AA;Synthetic anticholinergics; esters with tertiary amino group;
+A03AA;Synthetic anticholinergics
 A03AA01;Oxyphencyclimine 
 A03AA03;Camylofin
 A03AA04;Mebeverine 
@@ -145,7 +145,7 @@ A03AA07;Dicycloverine
 A03AA08;Dihexyverine 
 A03AA09;Difemerine
 A03AA30;Piperidolate 
-A03AB;Synthetic anticholinergics; quaternary ammonium compounds;
+A03AB;Synthetic anticholinergics
 A03AB01;Benzilone
 A03AB02;Glycopyrronium
 A03AB03;Oxyphenonium
@@ -167,7 +167,7 @@ A03AB18;Prifinium bromide
 A03AB19;Timepidium bromide 
 A03AB21;Fenpiverinium
 A03AB53;Oxyphenonium- combinationsbinations
-A03AC;Synthetic antispasmodics; amides with tertiary amines;
+A03AC;Synthetic antispasmodics
 A03AC02;Dimethylaminopropionylphenothiazine
 A03AC04;Nicofetamide
 A03AC05;Tiropramide 
@@ -195,12 +195,12 @@ A03AX13;Silicones
 A03AX14;Valethamate
 A03AX30;Trimethyldiphenylpropylamine
 A03AX58;Alverine- combinationsbinations
-A03B;Belladonna and derivatives; plain;
-A03BA;Belladonna alkaloids; tertiary amines;
+A03B;Belladonna and derivatives
+A03BA;Belladonna alkaloids
 A03BA01;Atropine 
 A03BA03;Hyoscyamine 
 A03BA04;Belladonna total alkaloids 
-A03BB;Belladonna alkaloids; semisynthetic; quaternary ammonium compounds
+A03BB;Belladonna alkaloids
 A03BB01;Butylscopolamine
 A03BB02;Methylatropine 
 A03BB03;Methylscopolamine
@@ -239,7 +239,7 @@ A03DB;Belladonna and derivatives in combination with analgesics
 A03DB04;Butylscopolamine and analgesics
 A03DC;Other antispasmodics in combination with analgesics
 A03E;Antispasmodics and anticholinergics in combination with other drugs
-A03EA;Antispasmodics; psycholeptics and analgesics in combination;
+A03EA;Antispasmodics
 A03ED;Antispasmodics in combination with other drugs
 A03F;Propulsives
 A03FA;Propulsives
@@ -285,7 +285,7 @@ A05AX;Other drugs for bile therapy
 A05AX01;Piprozolin
 A05AX02;Hymecromone
 A05AX03;Cyclobutyrol
-A05B;Liver therapy; lipotropics;
+A05B;Liver therapy
 A05BA;Liver therapy
 A05BA01;Arginine glutamate
 A05BA03;Silymarin
@@ -297,7 +297,7 @@ A05BA08;Glycyrrhizic acid
 A05C;Drugs for bile therapy and lipotropics in combination
 A06;Drugs for constipation
 A06A;Drugs for constipation
-A06AA;Softeners; emollients;
+A06AA;Softeners
 A06AA01;Liquid paraffin 
 A06AA02;Docusate sodium
 A06AA51;Liquid paraffin- combinationsbinations
@@ -350,12 +350,12 @@ A06AD65;Macrogol- combinationsbinations
 A06AG;Enemas
 A06AG01;Sodium phosphate 
 A06AG02;Bisacodyl 
-A06AG03;Dantron; incl. combinations;
+A06AG03;Dantron
 A06AG04;Glycerol
 A06AG06;Oil
 A06AG07;Sorbitol
-A06AG10;Docusate sodium; incl. combinations;
-A06AG11;Sodium lauril sulfoacetate; incl. combinations;
+A06AG10;Docusate sodium
+A06AG11;Sodium lauril sulfoacetate
 A06AG20;Combinations
 A06AH;Peripheral opioid receptor antagonist
 A06AH01;Methylnaltrexone bromide
@@ -369,7 +369,7 @@ A06AX03;Lubiprostone
 A06AX04;Linaclotide 
 A06AX05;Prucalopride 
 A06AX06;Tegaserod 
-A07;Antidiarrheals; intestinal antiinflammatory/antiinfective agents;
+A07;Antidiarrheals
 A07A;Intestinal antiinfectives
 A07AA;Antibiotics
 A07AA01;Neomycin 
@@ -431,7 +431,7 @@ A07EA04;Betamethasone
 A07EA05;Tixocortol 
 A07EA06;Budesonide
 A07EA07;Beclometasone 
-A07EB;Antiallergic agents; excl. corticosteroids;
+A07EB;Antiallergic agents
 A07EB01;Cromoglicic acid 
 A07EC;Aminosalicylic acid and similar agents
 A07EC01;Sulfasalazine
@@ -450,8 +450,8 @@ A07XA02;Ceratonia
 A07XA03;Calcium compounds
 A07XA04;Racecadotril
 A07XA51;Albumin tannate- combinationsbinations
-A08;Antiobesity preparations; excl. diet products;
-A08A;Antiobesity preparations; excl. diet products;
+A08;Antiobesity preparations
+A08A;Antiobesity preparations
 A08AA;Centrally acting antiobesity products
 A08AA01;Phentermine 
 A08AA02;Fenfluramine 
@@ -470,11 +470,11 @@ A08AB;Peripherally acting antiobesity products
 A08AB01;Orlistat
 A08AX;Other antiobesity drugs
 A08AX01;Rimonabant
-A09;Digestives; incl. enzymes;
-A09A;Digestives; incl. enzymes;
+A09;Digestives
+A09A;Digestives
 A09AA;Enzyme preparations
 A09AA01;Diastase 
-A09AA02;Multienzymes (lipase; protease etc.);
+A09AA02;Multienzymes (lipase
 A09AA03;Pepsin
 A09AA04;Tilactase
 A09AB;Acid preparations
@@ -487,7 +487,7 @@ A09AC01;Pepsin and acid preparations
 A09AC02;Multienzymes and acid preparations
 A10;Drugs used in diabetes
 A10A;Insulins and analogues
-A10AB;Insulins and analogues for injection; fast-acting;
+A10AB;Insulins and analogues for injection
 A10AB01;Insulin (human)
 A10AB02;Insulin (beef)
 A10AB03;Insulin (pork)
@@ -495,13 +495,13 @@ A10AB04;Insulin lispro
 A10AB05;Insulin aspart
 A10AB06;Insulin glulisine
 A10AB30;Combinations
-A10AC;Insulins and analogues for injection; intermediate-acting;
+A10AC;Insulins and analogues for injection
 A10AC01;Insulin (human)
 A10AC02;Insulin (beef)
 A10AC03;Insulin (pork)
 A10AC04;Insulin lispro
 A10AC30;Combinations
-A10AD;Insulins and analogues for injection; intermediate- or long-acting combined with fast-acting;
+A10AD;Insulins and analogues for injection
 A10AD01;Insulin (human)
 A10AD02;Insulin (beef)
 A10AD03;Insulin (pork)
@@ -509,7 +509,7 @@ A10AD04;Insulin lispro
 A10AD05;Insulin aspart
 A10AD06;Insulin degludec and insulin aspart
 A10AD30;Combinations
-A10AE;Insulins and analogues for injection; long-acting;
+A10AE;Insulins and analogues for injection
 A10AE01;Insulin (human)
 A10AE02;Insulin (beef)
 A10AE03;Insulin (pork)
@@ -520,7 +520,7 @@ A10AE30;Combinations
 A10AE56;Insulin degludec and liraglutide
 A10AF;Insulins and analogues for inhalation
 A10AF01;Insulin (human)
-A10B;Blood glucose lowering drugs; excl. insulins;
+A10B;Blood glucose lowering drugs
 A10BA;Biguanides
 A10BA01;Phenformin 
 A10BA02;Metformin 
@@ -589,7 +589,7 @@ A10BK;Sodium-glucose co-transporter 2 (sglt2) inhibitors
 A10BK01;Dapagliflozin 
 A10BK02;Canagliflozin
 A10BK03;Empagliflozin
-A10BX;Other blood glucose lowering drugs; excl. insulins;
+A10BX;Other blood glucose lowering drugs
 A10BX01;Guar gum
 A10BX02;Repaglinide
 A10BX03;Nateglinide
@@ -604,13 +604,13 @@ A11A;Multivitamins- combinationsbinations
 A11AA;Multivitamins with minerals
 A11AA01;Multivitamins and iron
 A11AA02;Multivitamins and calcium
-A11AA03;Multivitamins and other minerals; incl. combinations;
+A11AA03;Multivitamins and other minerals
 A11AA04;Multivitamins and trace elements
-A11AB;Multivitamins; other combinations;
-A11B;Multivitamins; plain;
-A11BA;Multivitamins; plain;
-A11C;Vitamin a and d; incl. combinations of the two;
-A11CA;Vitamin a; plain;
+A11AB;Multivitamins
+A11B;Multivitamins
+A11BA;Multivitamins
+A11C;Vitamin a and d
+A11CA;Vitamin a
 A11CA01;Retinol (vit a) 
 A11CA02;Betacarotene
 A11CB;Vitamin a and d in combination
@@ -622,20 +622,20 @@ A11CC04;Calcitriol
 A11CC05;Colecalciferol
 A11CC06;Calcifediol 
 A11CC20;Combinations
-A11D;Vitamin b1; plain and in combination with vitamin b6 and b12;
-A11DA;Vitamin b1; plain;
+A11D;Vitamin b1
+A11DA;Vitamin b1
 A11DA01;Thiamine (vit b1) 
 A11DA02;Sulbutiamine
 A11DA03;Benfotiamine
 A11DB;Vitamin b1 in combination with vitamin b6 and/or vitamin b12
-A11E;Vitamin b-complex; incl. combinations;
-A11EA;Vitamin b-complex; plain;
+A11E;Vitamin b-complex
+A11EA;Vitamin b-complex
 A11EB;Vitamin b-complex with vitamin c
 A11EC;Vitamin b-complex with minerals
 A11ED;Vitamin b-complex with anabolic steroids
-A11EX;Vitamin b-complex; other combinations;
-A11G;Ascorbic acid (vitamin c); incl. combinations;
-A11GA;Ascorbic acid (vitamin c); plain;
+A11EX;Vitamin b-complex
+A11G;Ascorbic acid (vitamin c)
+A11GA;Ascorbic acid (vitamin c)
 A11GA01;Ascorbic acid (vit c) 
 A11GB;Ascorbic acid (vitamin c)- combinationsbinations
 A11GB01;Ascorbic acid (vit c) and calcium
@@ -655,7 +655,7 @@ A11HA32;Pantethine
 A11J;Other vitamin products- combinationsbinations
 A11JA;Combinations of vitamins
 A11JB;Vitamins with minerals
-A11JC;Vitamins; other combinations;
+A11JC;Vitamins
 A12;Mineral supplements
 A12A;Calcium
 A12AA;Calcium
@@ -879,9 +879,9 @@ B02BC07;Collagen
 B02BC08;Calcium alginate
 B02BC09;Epinephrine 
 B02BC10;Combinations
-B02BC30;Fibrinogen; human;
+B02BC30;Fibrinogen
 B02BD;Blood coagulation factors
-B02BD01;Coagulation factor ix; ii; vii and x in combination
+B02BD01;Coagulation factor ix
 B02BD02;Coagulation factor viii 
 B02BD03;Factor viii inhibitor bypassing activity
 B02BD04;Coagulation factor ix 
@@ -902,7 +902,7 @@ B02BX04;Romiplostim
 B02BX05;Eltrombopag
 B03;Antianemic preparations
 B03A;Iron preparations
-B03AA;Iron bivalent; oral preparations;
+B03AA;Iron bivalent
 B03AA01;Ferrous glycine sulfate
 B03AA02;Ferrous fumarate
 B03AA03;Ferrous gluconate
@@ -914,7 +914,7 @@ B03AA08;Ferrous tartrate
 B03AA09;Ferrous aspartate
 B03AA10;Ferrous ascorbate
 B03AA11;Ferrous iodine
-B03AB;Iron trivalent; oral preparations;
+B03AB;Iron trivalent
 B03AB01;Ferric sodium citrate
 B03AB02;Saccharated iron oxide
 B03AB03;Sodium feredetate
@@ -924,17 +924,17 @@ B03AB07;Chondroitin sulfate-iron complex
 B03AB08;Ferric acetyl transferrin
 B03AB09;Ferric proteinsuccinylate
 B03AB10;Ferric maltol
-B03AC;Iron; parenteral preparations;
+B03AC;Iron
 B03AD;Iron in combination with folic acid
 B03AD01;Ferrous amino acid complex
 B03AD02;Ferrous fumarate
 B03AD03;Ferrous sulfate 
 B03AD04;Ferric oxide polymaltose complexes
 B03AE;Iron in other combinations
-B03AE01;Iron; vitamin b12 and folic acid;
-B03AE02;Iron; multivitamins and folic acid;
+B03AE01;Iron
+B03AE02;Iron
 B03AE03;Iron and multivitamins
-B03AE04;Iron; multivitamins and minerals;
+B03AE04;Iron
 B03AE10;Various combinations
 B03B;Vitamin b12 and folic acid
 B03BA;Vitamin b12 (cyanocobalamin and analogues)
@@ -1020,7 +1020,7 @@ B05XA02;Sodium bicarbonate
 B05XA03;Sodium chloride
 B05XA04;Ammonium chloride
 B05XA05;Magnesium sulfate
-B05XA06;Potassium phosphate; incl. comb. with other potassium salts;
+B05XA06;Potassium phosphate
 B05XA07;Calcium chloride 
 B05XA08;Sodium acetate
 B05XA09;Sodium phosphate 
@@ -1042,7 +1042,7 @@ B05XC;Vitamins
 B05XX;Other i.v. solution additives
 B05XX02;Trometamol
 B05Z;Hemodialytics and hemofiltrates
-B05ZA;Hemodialytics; concentrates;
+B05ZA;Hemodialytics
 B05ZB;Hemofiltrates
 B06;Other hematological agents
 B06A;Other hematological agents
@@ -1082,8 +1082,8 @@ C01AC01;G-strophanthin
 C01AC03;Cymarin
 C01AX;Other cardiac glycosides
 C01AX02;Peruvoside
-C01B;Antiarrhythmics; class i and iii;
-C01BA;Antiarrhythmics; class ia;
+C01B;Antiarrhythmics
+C01BA;Antiarrhythmics
 C01BA01;Quinidine 
 C01BA02;Procainamide 
 C01BA03;Disopyramide 
@@ -1094,18 +1094,18 @@ C01BA12;Lorajmine
 C01BA13;Hydroquinidine 
 C01BA51;Quinidine- combinationsbinations excl. psycholeptics
 C01BA71;Quinidine- combinationsbinations with psycholeptics
-C01BB;Antiarrhythmics; class ib;
+C01BB;Antiarrhythmics
 C01BB01;Lidocaine 
 C01BB02;Mexiletine 
 C01BB03;Tocainide 
 C01BB04;Aprindine 
-C01BC;Antiarrhythmics; class ic;
+C01BC;Antiarrhythmics
 C01BC03;Propafenone 
 C01BC04;Flecainide 
 C01BC07;Lorcainide 
 C01BC08;Encainide 
 C01BC09;Ethacizine
-C01BD;Antiarrhythmics; class iii;
+C01BD;Antiarrhythmics
 C01BD01;Amiodarone 
 C01BD02;Bretylium tosilate
 C01BD03;Bunaftine
@@ -1113,7 +1113,7 @@ C01BD04;Dofetilide
 C01BD05;Ibutilide 
 C01BD06;Tedisamil 
 C01BD07;Dronedarone 
-C01BG;Other antiarrhythmics; class i and iii;
+C01BG;Other antiarrhythmics
 C01BG01;Moracizine 
 C01BG07;Cibenzoline 
 C01BG11;Vernakalant
@@ -1225,12 +1225,12 @@ C01EB22;Meldonium
 C01EB23;Tiazotic acid
 C01EX;Other cardiac combination products
 C02;Antihypertensives
-C02A;Antiadrenergic agents; centrally acting;
+C02A;Antiadrenergic agents
 C02AA;Rauwolfia alkaloids
 C02AA01;Rescinnamine
 C02AA02;Reserpine
 C02AA03;Combinations of rauwolfia alkaloids
-C02AA04;Rauwolfia alkaloids; whole root;
+C02AA04;Rauwolfia alkaloids
 C02AA05;Deserpidine
 C02AA06;Methoserpidine
 C02AA07;Bietaserpine
@@ -1246,13 +1246,13 @@ C02AC02;Guanfacine
 C02AC04;Tolonidine
 C02AC05;Moxonidine
 C02AC06;Rilmenidine
-C02B;Antiadrenergic agents; ganglion-blocking;
+C02B;Antiadrenergic agents
 C02BA;Sulfonium derivatives
 C02BA01;Trimetaphan 
 C02BB;Secondary and tertiary amines
 C02BB01;Mecamylamine 
 C02BC;Bisquaternary ammonium compounds
-C02C;Antiadrenergic agents; peripherally acting;
+C02C;Antiadrenergic agents
 C02CA;Alpha-adrenoreceptor antagonists
 C02CA01;Prazosin 
 C02CA02;Indoramin 
@@ -1267,7 +1267,7 @@ C02CC04;Debrisoquine
 C02CC05;Guanoclor
 C02CC06;Guanazodine
 C02CC07;Guanoxabenz
-C02D;Arteriolar smooth muscle; agents acting on;
+C02D;Arteriolar smooth muscle
 C02DA;Thiazide derivatives
 C02DA01;Diazoxide
 C02DB;Hydrazinophthalazine derivatives
@@ -1282,7 +1282,7 @@ C02DD01;Nitroprusside
 C02DG;Guanidine derivatives
 C02DG01;Pinacidil
 C02K;Other antihypertensives
-C02KA;Alkaloids; excl. rauwolfia;
+C02KA;Alkaloids
 C02KA01;Veratrum
 C02KB;Tyrosine hydroxylase inhibitors
 C02KB01;Metirosine
@@ -1303,7 +1303,7 @@ C02LA02;Rescinnamine and diuretics
 C02LA03;Deserpidine and diuretics
 C02LA04;Methoserpidine and diuretics
 C02LA07;Bietaserpine and diuretics
-C02LA08;Rauwolfia alkaloids; whole root and diuretics;
+C02LA08;Rauwolfia alkaloids
 C02LA09;Syrosingopine and diuretics
 C02LA50;Comb. of rauwolfia alkaloids and diuretics incl. other combinations
 C02LA51;Reserpine and diuretics- combinationsbinations with other drugs
@@ -1325,7 +1325,7 @@ C02LG02;Hydralazine and diuretics
 C02LG03;Picodralazine and diuretics
 C02LG51;Dihydralazine and diuretics- combinationsbinations with other drugs
 C02LG73;Picodralazine and diuretics- combinationsbinations with psycholeptics
-C02LK;Alkaloids; excl. rauwolfia; in combination with diuretics
+C02LK;Alkaloids
 C02LK01;Veratrum and diuretics
 C02LL;Mao inhibitors and diuretics
 C02LL01;Pargyline and diuretics
@@ -1334,8 +1334,8 @@ C02LX;Other antihypertensives and diuretics
 C02LX01;Pinacidil and diuretics
 C02N;Combinations of antihypertensives in atc-gr. c02
 C03;Diuretics
-C03A;Low-ceiling diuretics; thiazides;
-C03AA;Thiazides; plain;
+C03A;Low-ceiling diuretics
+C03AA;Thiazides
 C03AA01;Bendroflumethiazide
 C03AA02;Hydroflumethiazide
 C03AA03;Hydrochlorothiazide
@@ -1361,8 +1361,8 @@ C03AH01;Chlorothiazide- combinationsbinations
 C03AH02;Hydroflumethiazide- combinationsbinations
 C03AX;Thiazides- combinationsbinations with other drugs
 C03AX01;Hydrochlorothiazide- combinationsbinations
-C03B;Low-ceiling diuretics; excl. thiazides;
-C03BA;Sulfonamides; plain;
+C03B;Low-ceiling diuretics
+C03BA;Sulfonamides
 C03BA02;Quinethazone
 C03BA03;Clopamide
 C03BA04;Chlortalidone
@@ -1389,7 +1389,7 @@ C03BK;Sulfonamides- combinationsbinations with other drugs
 C03BX;Other low-ceiling diuretics
 C03BX03;Cicletanine 
 C03C;High-ceiling diuretics
-C03CA;Sulfonamides; plain;
+C03CA;Sulfonamides
 C03CA01;Furosemide 
 C03CA02;Bumetanide
 C03CA03;Piretanide
@@ -1541,7 +1541,7 @@ C05CX02;Naftazone
 C05CX03;Hippocastani semen
 C07;Beta blocking agents
 C07A;Beta blocking agents
-C07AA;Beta blocking agents; non-selective;
+C07AA;Beta blocking agents
 C07AA01;Alprenolol 
 C07AA02;Oxprenolol 
 C07AA03;Pindolol
@@ -1556,7 +1556,7 @@ C07AA17;Bopindolol
 C07AA19;Bupranolol 
 C07AA23;Penbutolol 
 C07AA27;Cloranolol
-C07AB;Beta blocking agents; selective;
+C07AB;Beta blocking agents
 C07AB01;Practolol
 C07AB02;Metoprolol 
 C07AB03;Atenolol
@@ -1575,14 +1575,14 @@ C07AG;Alpha and beta blocking agents
 C07AG01;Labetalol 
 C07AG02;Carvedilol 
 C07B;Beta blocking agents and thiazides
-C07BA;Beta blocking agents; non-selective; and thiazides
+C07BA;Beta blocking agents
 C07BA02;Oxprenolol and thiazides
 C07BA05;Propranolol and thiazides
 C07BA06;Timolol and thiazides
 C07BA07;Sotalol and thiazides
 C07BA12;Nadolol and thiazides
 C07BA68;Metipranolol and thiazides- combinationsbinations
-C07BB;Beta blocking agents; selective; and thiazides
+C07BB;Beta blocking agents
 C07BB02;Metoprolol and thiazides
 C07BB03;Atenolol and thiazides
 C07BB04;Acebutolol and thiazides
@@ -1593,33 +1593,33 @@ C07BB52;Metoprolol and thiazides- combinationsbinations
 C07BG;Alpha and beta blocking agents and thiazides
 C07BG01;Labetalol and thiazides
 C07C;Beta blocking agents and other diuretics
-C07CA;Beta blocking agents; non-selective; and other diuretics
+C07CA;Beta blocking agents
 C07CA02;Oxprenolol and other diuretics
 C07CA03;Pindolol and other diuretics
 C07CA17;Bopindolol and other diuretics
 C07CA23;Penbutolol and other diuretics
-C07CB;Beta blocking agents; selective; and other diuretics
+C07CB;Beta blocking agents
 C07CB02;Metoprolol and other diuretics
 C07CB03;Atenolol and other diuretics
 C07CB53;Atenolol and other diuretics- combinationsbinations
 C07CG;Alpha and beta blocking agents and other diuretics
 C07CG01;Labetalol and other diuretics
-C07D;Beta blocking agents; thiazides and other diuretics;
-C07DA;Beta blocking agents; non-selective; thiazides and other diuretics
-C07DA06;Timolol; thiazides and other diuretics;
-C07DB;Beta blocking agents; selective; thiazides and other diuretics
-C07DB01;Atenolol; thiazides and other diuretics;
+C07D;Beta blocking agents
+C07DA;Beta blocking agents
+C07DA06;Timolol
+C07DB;Beta blocking agents
+C07DB01;Atenolol
 C07E;Beta blocking agents and vasodilators
-C07EA;Beta blocking agents; non-selective; and vasodilators
-C07EB;Beta blocking agents; selective; and vasodilators
-C07F;Beta blocking agents; other combinations;
+C07EA;Beta blocking agents
+C07EB;Beta blocking agents
+C07F;Beta blocking agents
 C07FB;Beta blocking agents and calcium channel blockers
 C07FB02;Metoprolol and felodipine
 C07FB03;Atenolol and nifedipine
 C07FB07;Bisoprolol and amlodipine
 C07FB12;Nebivolol and amlodipine
 C07FB13;Metoprolol and amlodipine
-C07FX;Beta blocking agents; other combinations;
+C07FX;Beta blocking agents
 C07FX01;Propranolol and other antihypertensives
 C07FX02;Sotalol and acetylsalicylic acid
 C07FX03;Metoprolol and acetylsalicylic acid
@@ -1667,8 +1667,8 @@ C08GA;Calcium channel blockers and diuretics
 C08GA01;Nifedipine and diuretics
 C08GA02;Amlodipine and diuretics
 C09;Agents acting on the renin-angiotensin system
-C09A;Ace inhibitors; plain;
-C09AA;Ace inhibitors; plain;
+C09A;Ace inhibitors
+C09AA;Ace inhibitors
 C09AA01;Captopril
 C09AA02;Enalapril 
 C09AA03;Lisinopril 
@@ -1708,11 +1708,11 @@ C09BB06;Enalapril and nitrendipine
 C09BB07;Ramipril and amlodipine
 C09BB10;Trandolapril and verapamil
 C09BB12;Delapril and manidipine
-C09BX;Ace inhibitors; other combinations;
-C09BX01;Perindopril; amlodipine and indapamide;
+C09BX;Ace inhibitors
+C09BX01;Perindopril
 C09BX02;Perindopril and bisoprolol
-C09C;Angiotensin ii antagonists; plain;
-C09CA;Angiotensin ii antagonists; plain;
+C09C;Angiotensin ii antagonists
+C09CA;Angiotensin ii antagonists
 C09CA01;Losartan 
 C09CA02;Eprosartan 
 C09CA03;Valsartan
@@ -1741,10 +1741,10 @@ C09DB05;Irbesartan and amlodipine
 C09DB06;Losartan and amlodipine
 C09DB07;Candesartan and amlodipine
 C09DB08;Valsartan and lercanidipine
-C09DX;Angiotensin ii antagonists; other combinations;
-C09DX01;Valsartan; amlodipine and hydrochlorothiazide;
+C09DX;Angiotensin ii antagonists
+C09DX01;Valsartan
 C09DX02;Valsartan and aliskiren
-C09DX03;Olmesartan medoxomil; amlodipine and hydrochlorothiazide;
+C09DX03;Olmesartan medoxomil
 C09DX04;Valsartan and sacubitril
 C09X;Other agents acting on the renin-angiotensin system
 C09XA;Renin-inhibitors
@@ -1752,9 +1752,9 @@ C09XA01;Remikiren
 C09XA02;Aliskiren 
 C09XA52;Aliskiren and hydrochlorothiazide
 C09XA53;Aliskiren and amlodipine
-C09XA54;Aliskiren; amlodipine and hydrochlorothiazide;
+C09XA54;Aliskiren
 C10;Lipid modifying agents
-C10A;Lipid modifying agents; plain;
+C10A;Lipid modifying agents
 C10AA;Hmg coa reductase inhibitors
 C10AA01;Simvastatin
 C10AA02;Lovastatin
@@ -1811,19 +1811,19 @@ C10BA03;Pravastatin and fenofibrate
 C10BA04;Simvastatin and fenofibrate
 C10BA05;Atorvastatin and ezetimibe
 C10BA06;Rosuvastatin and ezetimibe
-C10BX;Hmg coa reductase inhibitors; other combinations;
+C10BX;Hmg coa reductase inhibitors
 C10BX01;Simvastatin and acetylsalicylic acid
 C10BX02;Pravastatin and acetylsalicylic acid
 C10BX03;Atorvastatin and amlodipine
-C10BX04;Simvastatin; acetylsalicylic acid and ramipril;
+C10BX04;Simvastatin
 C10BX05;Rosuvastatin and acetylsalicylic acid
-C10BX06;Atorvastatin; acetylsalicylic acid and ramipril;
-C10BX07;Rosuvastatin; amlodipine and lisinopril;
+C10BX06;Atorvastatin
+C10BX07;Rosuvastatin
 C10BX08;Atorvastatin and acetylsalicylic acid
 C10BX09;Rosuvastatin and amlodipine
 C10BX10;Rosuvastatin and valsartan
-C10BX11;Atorvastatin; amlodipine and perindopril;
-C10BX12;Atorvastatin; acetylsalicylic acid and perindopril;
+C10BX11;Atorvastatin
+C10BX12;Atorvastatin
 D;Dermatologicals
 D01;Antifungals for dermatological use
 D01A;Antifungals for topical use
@@ -1927,8 +1927,8 @@ D03BA01;Trypsin
 D03BA02;Collagenase
 D03BA03;Bromelains
 D03BA52;Collagenase- combinationsbinations
-D04;Antipruritics; incl. antihistamines; anesthetics; etc.;
-D04A;Antipruritics; incl. antihistamines; anesthetics; etc.;
+D04;Antipruritics
+D04A;Antipruritics
 D04AA;Antihistamines for topical use
 D04AA01;Thonzylamine 
 D04AA02;Mepyramine 
@@ -2026,13 +2026,13 @@ D06BX;Other chemotherapeutics
 D06BX01;Metronidazole 
 D06BX02;Ingenol mebutate
 D06C;Antibiotics and chemotherapeutics- combinationsbinations
-D07;Corticosteroids; dermatological preparations;
-D07A;Corticosteroids; plain;
-D07AA;Corticosteroids; weak (group i);
+D07;Corticosteroids
+D07A;Corticosteroids
+D07AA;Corticosteroids
 D07AA01;Methylprednisolone 
 D07AA02;Hydrocortisone 
 D07AA03;Prednisolone 
-D07AB;Corticosteroids; moderately potent (group ii);
+D07AB;Corticosteroids
 D07AB01;Clobetasone 
 D07AB02;Hydrocortisone butyrate
 D07AB03;Flumetasone 
@@ -2047,7 +2047,7 @@ D07AB11;Hydrocortisone buteprate
 D07AB19;Dexamethasone 
 D07AB21;Clocortolone 
 D07AB30;Combinations of corticosteroids
-D07AC;Corticosteroids; potent (group iii);
+D07AC;Corticosteroids
 D07AC01;Betamethasone 
 D07AC02;Fluclorolone
 D07AC03;Desoximetasone
@@ -2068,62 +2068,62 @@ D07AC17;Fluticasone
 D07AC18;Prednicarbate
 D07AC19;Difluprednate
 D07AC21;Ulobetasol 
-D07AD;Corticosteroids; very potent (group iv);
+D07AD;Corticosteroids
 D07AD01;Clobetasol 
 D07AD02;Halcinonide
 D07B;Corticosteroids- combinationsbinations with antiseptics
-D07BA;Corticosteroids; weak- combinationsbinations with antiseptics;
+D07BA;Corticosteroids
 D07BA01;Prednisolone and antiseptics
 D07BA04;Hydrocortisone and antiseptics
-D07BB;Corticosteroids; moderately potent- combinationsbinations with antiseptics;
+D07BB;Corticosteroids
 D07BB01;Flumetasone and antiseptics
 D07BB02;Desonide and antiseptics
 D07BB03;Triamcinolone and antiseptics
 D07BB04;Hydrocortisone butyrate and antiseptics
-D07BC;Corticosteroids; potent- combinationsbinations with antiseptics;
+D07BC;Corticosteroids
 D07BC01;Betamethasone and antiseptics
 D07BC02;Fluocinolone acetonide and antiseptics
 D07BC03;Fluocortolone and antiseptics
 D07BC04;Diflucortolone and antiseptics
-D07BD;Corticosteroids; very potent- combinationsbinations with antiseptics;
+D07BD;Corticosteroids
 D07C;Corticosteroids- combinationsbinations with antibiotics
-D07CA;Corticosteroids; weak- combinationsbinations with antibiotics;
+D07CA;Corticosteroids
 D07CA01;Hydrocortisone and antibiotics
 D07CA02;Methylprednisolone and antibiotics
 D07CA03;Prednisolone and antibiotics
-D07CB;Corticosteroids; moderately potent- combinationsbinations with antibiotics;
+D07CB;Corticosteroids
 D07CB01;Triamcinolone and antibiotics
 D07CB02;Fluprednidene and antibiotics
 D07CB03;Fluorometholone and antibiotics
 D07CB04;Dexamethasone and antibiotics
 D07CB05;Flumetasone and antibiotics
-D07CC;Corticosteroids; potent- combinationsbinations with antibiotics;
+D07CC;Corticosteroids
 D07CC01;Betamethasone and antibiotics
 D07CC02;Fluocinolone acetonide and antibiotics
 D07CC03;Fludroxycortide and antibiotics
 D07CC04;Beclometasone and antibiotics
 D07CC05;Fluocinonide and antibiotics
 D07CC06;Fluocortolone and antibiotics
-D07CD;Corticosteroids; very potent- combinationsbinations with antibiotics;
+D07CD;Corticosteroids
 D07CD01;Clobetasol and antibiotics
-D07X;Corticosteroids; other combinations;
-D07XA;Corticosteroids; weak; other combinations
+D07X;Corticosteroids
+D07XA;Corticosteroids
 D07XA01;Hydrocortisone 
 D07XA02;Prednisolone 
-D07XB;Corticosteroids; moderately potent; other combinations
+D07XB;Corticosteroids
 D07XB01;Flumetasone 
 D07XB02;Triamcinolone 
 D07XB03;Fluprednidene 
 D07XB04;Fluorometholone 
 D07XB05;Dexamethasone 
 D07XB30;Combinations of corticosteroids
-D07XC;Corticosteroids; potent; other combinations
+D07XC;Corticosteroids
 D07XC01;Betamethasone 
 D07XC02;Desoximetasone
 D07XC03;Mometasone 
 D07XC04;Diflucortolone 
 D07XC05;Fluocortolone
-D07XD;Corticosteroids; very potent; other combinations
+D07XD;Corticosteroids
 D08;Antiseptics and disinfectants
 D08A;Antiseptics and disinfectants
 D08AA;Acridine derivatives
@@ -2175,7 +2175,7 @@ D08AK01;Mercuric amidochloride
 D08AK02;Phenylmercuric borate
 D08AK03;Mercuric chloride
 D08AK04;Mercurochrome
-D08AK05;Mercury; metallic;
+D08AK05;Mercury
 D08AK06;Thiomersal
 D08AK30;Mercuric iodide
 D08AL;Silver compounds
@@ -2269,7 +2269,7 @@ D11AC30;Others
 D11AE;Androgens for topical use
 D11AE01;Metandienone
 D11AF;Wart and anti-corn preparations
-D11AH;Agents for dermatitis; excluding corticosteroids;
+D11AH;Agents for dermatitis
 D11AH01;Tacrolimus 
 D11AH02;Pimecrolimus
 D11AH03;Cromoglicic acid 
@@ -2297,7 +2297,7 @@ D11AX52;Gamolenic acid- combinationsbinations
 D11AX57;Collagen- combinationsbinations
 G;Genito urinary system and sex hormones
 G01;Gynecological antiinfectives and antiseptics
-G01A;Antiinfectives and antiseptics; excl. combinations with corticosteroids;
+G01A;Antiinfectives and antiseptics
 G01AA;Antibiotics
 G01AA01;Nystatin
 G01AA02;Natamycin
@@ -2373,7 +2373,7 @@ G02AB;Ergot alkaloids
 G02AB01;Methylergometrine 
 G02AB02;Ergot alkaloids
 G02AB03;Ergometrine 
-G02AC;Ergot alkaloids and oxytocin incl. analogues; in combination;
+G02AC;Ergot alkaloids and oxytocin incl. analogues
 G02AC01;Methylergometrine and oxytocin
 G02AD;Prostaglandins
 G02AD01;Dinoprost 
@@ -2391,7 +2391,7 @@ G02BA03;Plastic iud with progestogen
 G02BB;Intravaginal contraceptives
 G02BB01;Vaginal ring with progestogen and estrogen
 G02C;Other gynecologicals
-G02CA;Sympathomimetics; labour repressants;
+G02CA;Sympathomimetics
 G02CA01;Ritodrine 
 G02CA02;Buphenine 
 G02CA03;Fenoterol 
@@ -2414,7 +2414,7 @@ G02CX03;Agni casti fructus
 G02CX04;Cimicifugae rhizoma
 G03;Sex hormones and modulators of the genital system
 G03A;Hormonal contraceptives for systemic use
-G03AA;Progestogens and estrogens; fixed combinations;
+G03AA;Progestogens and estrogens
 G03AA01;Etynodiol and ethinylestradiol
 G03AA02;Quingestanol and ethinylestradiol
 G03AA03;Lynestrenol and ethinylestradiol
@@ -2431,7 +2431,7 @@ G03AA13;Norelgestromin and ethinylestradiol
 G03AA14;Nomegestrol and ethinylestradiol
 G03AA15;Chlormadinone and ethinylestradiol
 G03AA16;Dienogest and ethinylestradiol
-G03AB;Progestogens and estrogens; sequential preparations;
+G03AB;Progestogens and estrogens
 G03AB01;Megestrol and ethinylestradiol
 G03AB02;Lynestrenol and ethinylestradiol
 G03AB03;Levonorgestrel and ethinylestradiol
@@ -2463,7 +2463,7 @@ G03BB;5-androstanon (3) derivatives
 G03BB01;Mesterolone
 G03BB02;Androstanolone
 G03C;Estrogens
-G03CA;Natural and semisynthetic estrogens; plain;
+G03CA;Natural and semisynthetic estrogens
 G03CA01;Ethinylestradiol 
 G03CA03;Estradiol 
 G03CA04;Estriol 
@@ -2472,7 +2472,7 @@ G03CA07;Estrone
 G03CA09;Promestriene
 G03CA53;Estradiol- combinationsbinations
 G03CA57;Conjugated estrogens 
-G03CB;Synthetic estrogens; plain;
+G03CB;Synthetic estrogens
 G03CB01;Dienestrol
 G03CB02;Diethylstilbestrol 
 G03CB03;Methallenestril
@@ -2513,11 +2513,11 @@ G03EA;Androgens and estrogens
 G03EA01;Methyltestosterone and estrogen
 G03EA02;Testosterone and estrogen
 G03EA03;Prasterone and estrogen
-G03EB;Androgen; progestogen and estrogen in combination;
+G03EB;Androgen
 G03EK;Androgens and female sex hormones in combination with other drugs
 G03EK01;Methyltestosterone
 G03F;Progestogens and estrogens in combination
-G03FA;Progestogens and estrogens; fixed combinations;
+G03FA;Progestogens and estrogens
 G03FA01;Norethisterone and estrogen
 G03FA02;Hydroxyprogesterone and estrogen
 G03FA03;Ethisterone and estrogen
@@ -2535,7 +2535,7 @@ G03FA14;Dydrogesterone and estrogen
 G03FA15;Dienogest and estrogen
 G03FA16;Trimegestone and estrogen
 G03FA17;Drospirenone and estrogen
-G03FB;Progestogens and estrogens; sequential preparations;
+G03FB;Progestogens and estrogens
 G03FB01;Norgestrel and estrogen
 G03FB02;Lynestrenol and estrogen
 G03FB03;Chlormadinone and estrogen
@@ -2561,12 +2561,12 @@ G03GA08;Choriogonadotropin alfa
 G03GA09;Corifollitropin alfa
 G03GA10;Follitropin delta
 G03GA30;Combinations
-G03GB;Ovulation stimulants; synthetic;
+G03GB;Ovulation stimulants
 G03GB01;Cyclofenil
 G03GB02;Clomifene 
 G03GB03;Epimestrol
 G03H;Antiandrogens
-G03HA;Antiandrogens; plain;
+G03HA;Antiandrogens
 G03HA01;Cyproterone 
 G03HB;Antiandrogens and estrogens
 G03HB01;Cyproterone and estrogen
@@ -2644,7 +2644,7 @@ G04CX;Other drugs used in benign prostatic hypertrophy
 G04CX01;Pygeum africanum cortex
 G04CX02;Serenoa repens
 G04CX03;Mepartricin
-H;Systemic hormonal prep; excluding sex hormones;
+H;Systemic hormonal prep
 H01;Pituitary and hypothalamic hormones and analogues
 H01A;Anterior pituitary lobe hormones and analogues
 H01AA;Acth
@@ -2708,7 +2708,7 @@ J01BA;Amphenicols
 J01BA01;Chloramphenicol 
 J01BA02;Thiamphenicol 
 J01BA52;Thiamphenicol- combinationsbinations
-J01C;Beta-lactam antibacterials; penicillins;
+J01C;Beta-lactam antibacterials
 J01CA;Penicillins with extended spectrum
 J01CA01;Ampicillin 
 J01CA02;Pivampicillin 
@@ -2753,7 +2753,7 @@ J01CF06;Nafcillin
 J01CG;Beta-lactamase inhibitors
 J01CG01;Sulbactam 
 J01CG02;Tazobactam 
-J01CR;Combinations of penicillins; incl. beta-lactamase inhibitors;
+J01CR;Combinations of penicillins
 J01CR01;Ampicillin and enzyme inhibitor
 J01CR02;Amoxicillin and enzyme inhibitor
 J01CR03;Ticarcillin and enzyme inhibitor
@@ -2861,7 +2861,7 @@ J01ED07;Sulfamerazine
 J01ED08;Sulfaphenazole
 J01ED09;Sulfamazone
 J01ED20;Combinations
-J01EE;Combinations of sulfonamides and trimethoprim; incl. derivatives;
+J01EE;Combinations of sulfonamides and trimethoprim
 J01EE01;Sulfamethoxazole and trimethoprim
 J01EE02;Sulfadiazine and trimethoprim
 J01EE03;Sulfametrole and trimethoprim
@@ -2869,7 +2869,7 @@ J01EE04;Sulfamoxole and trimethoprim
 J01EE05;Sulfadimidine and trimethoprim
 J01EE06;Sulfadiazine and tetroxoprim
 J01EE07;Sulfamerazine and trimethoprim
-J01F;Macrolides; lincosamides and streptogramins;
+J01F;Macrolides
 J01FA;Macrolides
 J01FA01;Erythromycin 
 J01FA02;Spiramycin 
@@ -2948,7 +2948,7 @@ J01RA03;Cefuroxime and metronidazole
 J01RA04;Spiramycin and metronidazole
 J01RA05;Levofloxacin and ornidazole
 J01RA06;Cefepime and amikacin
-J01RA07;Azithromycin; fluconazole and secnidazole;
+J01RA07;Azithromycin
 J01RA08;Tetracycline and oleandomycin
 J01RA09;Ofloxacin and ornidazole
 J01RA10;Ciprofloxacin and metronidazole
@@ -3040,8 +3040,8 @@ J04AM01;Streptomycin and isoniazid
 J04AM02;Rifampicin and isoniazid
 J04AM03;Ethambutol and isoniazid
 J04AM04;Thioacetazone and isoniazid
-J04AM05;Rifampicin; pyrazinamide and isoniazid;
-J04AM06;Rifampicin; pyrazinamide; ethambutol and isoniazid
+J04AM05;Rifampicin
+J04AM06;Rifampicin
 J04B;Drugs for treatment of lepra
 J04BA;Drugs for treatment of lepra
 J04BA01;Clofazimine
@@ -3111,22 +3111,22 @@ J05AR;Antivirals for treatment of hiv infections- combinationsbinations
 J05AR01;Zidovudine and lamivudine
 J05AR02;Lamivudine and abacavir
 J05AR03;Tenofovir disoproxil and emtricitabine
-J05AR04;Zidovudine; lamivudine and abacavir;
-J05AR05;Zidovudine; lamivudine and nevirapine;
-J05AR06;Emtricitabine; tenofovir disoproxil and efavirenz;
-J05AR07;Stavudine; lamivudine and nevirapine;
-J05AR08;Emtricitabine; tenofovir disoproxil and rilpivirine;
-J05AR09;Emtricitabine; tenofovir disoproxil; elvitegravir and cobicistat
+J05AR04;Zidovudine
+J05AR05;Zidovudine
+J05AR06;Emtricitabine
+J05AR07;Stavudine
+J05AR08;Emtricitabine
+J05AR09;Emtricitabine
 J05AR10;Lopinavir and ritonavir
-J05AR11;Lamivudine; tenofovir disoproxil and efavirenz;
+J05AR11;Lamivudine
 J05AR12;Lamivudine and tenofovir disoproxil
-J05AR13;Lamivudine; abacavir and dolutegravir;
+J05AR13;Lamivudine
 J05AR14;Darunavir and cobicistat
 J05AR15;Atazanavir and cobicistat
 J05AR16;Lamivudine and raltegravir
 J05AR17;Emtricitabine and tenofoviralafenamide
-J05AR18;Emtricitabine; tenofovir alafenamide; elvitegravir and cobicistat
-J05AR19;Emtricitabine; tenofoviralafenamide and rilpivirine;
+J05AR18;Emtricitabine
+J05AR19;Emtricitabine
 J05AX;Other antivirals
 J05AX01;Moroxydine
 J05AX02;Lysozyme 
@@ -3143,8 +3143,8 @@ J05AX14;Daclatasvir
 J05AX15;Sofosbuvir
 J05AX16;Dasabuvir 
 J05AX65;Sofosbuvir and ledipasvir
-J05AX66;Dasabuvir; ombitasvir; paritaprevir and ritonavir
-J05AX67;Ombitasvir; paritaprevir and ritonavir;
+J05AX66;Dasabuvir
+J05AX67;Ombitasvir
 J05AX68;Elbasvir and grazoprevir
 J06;Immune sera and immunoglobulins
 J06A;Immune sera
@@ -3156,9 +3156,9 @@ J06AA04;Botulinum antitoxin
 J06AA05;Gas-gangrene sera
 J06AA06;Rabies serum
 J06B;Immunoglobulins
-J06BA;Immunoglobulins; normal human;
-J06BA01;Immunoglobulins; normal human; for extravascular adm.
-J06BA02;Immunoglobulins; normal human; for intravascular adm.
+J06BA;Immunoglobulins
+J06BA01;Immunoglobulins
+J06BA02;Immunoglobulins
 J06BB;Specific immunoglobulins
 J06BB01;Anti-d (rh) immunoglobulin
 J06BB02;Tetanus immunoglobulin 
@@ -3171,7 +3171,7 @@ J06BB08;Staphylococcus immunoglobulin
 J06BB09;Cytomegalovirus immunoglobulin
 J06BB10;Diphtheria immunoglobulin
 J06BB11;Hepatitis a immunoglobulin
-J06BB12;Encephalitis; tick borne immunoglobulin;
+J06BB12;Encephalitis
 J06BB13;Pertussis immunoglobulin
 J06BB14;Measles immunoglobulin
 J06BB15;Mumps immunoglobulin
@@ -3190,97 +3190,97 @@ J07AC01;Anthrax antigen
 J07AD;Brucellosis vaccines
 J07AD01;Brucella antigen
 J07AE;Cholera vaccines
-J07AE01;Cholera; inactivated; whole cell
-J07AE02;Cholera; live attenuated;
-J07AE51;Cholera- combinationsbinations with typhoid vaccine; inactivated; whole cell
+J07AE01;Cholera
+J07AE02;Cholera
+J07AE51;Cholera- combinationsbinations with typhoid vaccine
 J07AF;Diphtheria vaccines
 J07AF01;Diphtheria toxoid 
 J07AG;Hemophilus influenzae b vaccines
-J07AG01;Hemophilus influenzae b; purified antigen conjugated;
+J07AG01;Hemophilus influenzae b
 J07AG51;Hemophilus influenzae b- combinationsbinations with toxoids
 J07AG52;Hemophilus influenzae b- combinationsbinations with pertussis and toxoids
-J07AG53;Hemophilus influenzae b- combinationsbinations with meningococcus c; conjugated;
+J07AG53;Hemophilus influenzae b- combinationsbinations with meningococcus c
 J07AH;Meningococcal vaccines
-J07AH01;Meningococcus a; purified polysaccharides antigen;
+J07AH01;Meningococcus a
 J07AH02;Other meningococcal monovalent purified polysaccharides antigen
-J07AH03;Meningococcus a;c; bivalent purified polysaccharides antigen
-J07AH04;Meningococcus a;c;y;w-135; tetravalent purified polysaccharides antigen
+J07AH03;Meningococcus a
+J07AH04;Meningococcus a
 J07AH05;Other meningococcal polyvalent purified polysaccharides antigen
-J07AH06;Meningococcus b; outer membrane vesicle vaccine;
-J07AH07;Meningococcus c; purified polysaccharides antigen conjugated;
-J07AH08;Meningococcus a;c;y;w-135; tetravalent purified polysaccharides antigen conjugated
-J07AH09;Meningococcus b; multicomponent vaccine;
-J07AH10;Meningococcus a; purified polysaccharides antigen conjugated;
+J07AH06;Meningococcus b
+J07AH07;Meningococcus c
+J07AH08;Meningococcus a
+J07AH09;Meningococcus b
+J07AH10;Meningococcus a
 J07AJ;Pertussis vaccines
-J07AJ01;Pertussis; inactivated; whole cell
-J07AJ02;Pertussis; purified antigen;
-J07AJ51;Pertussis; inactivated; whole cell- combinationsbinations with toxoids
-J07AJ52;Pertussis; purified antigen- combinationsbinations with toxoids;
+J07AJ01;Pertussis
+J07AJ02;Pertussis
+J07AJ51;Pertussis
+J07AJ52;Pertussis
 J07AK;Plague vaccines
-J07AK01;Plague; inactivated; whole cell
+J07AK01;Plague
 J07AL;Pneumococcal vaccines
-J07AL01;Pneumococcus; purified polysaccharides antigen;
-J07AL02;Pneumococcus; purified polysaccharides antigen conjugated ;
-J07AL52;Pneumococcus purified polysaccharides antigen and haemophilus influenzae; conjugated;
+J07AL01;Pneumococcus
+J07AL02;Pneumococcus
+J07AL52;Pneumococcus purified polysaccharides antigen and haemophilus influenzae
 J07AM;Tetanus vaccines
 J07AM01;Tetanus toxoid 
 J07AM51;Tetanus toxoid- combinationsbinations with diphtheria toxoid
 J07AM52;Tetanus toxoid- combinationsbinations with tetanus immunoglobulin
 J07AN;Tuberculosis vaccines
-J07AN01;Tuberculosis; live attenuated;
+J07AN01;Tuberculosis
 J07AP;Typhoid vaccines
-J07AP01;Typhoid; oral; live attenuated
-J07AP02;Typhoid; inactivated; whole cell
-J07AP03;Typhoid; purified polysaccharide antigen;
+J07AP01;Typhoid
+J07AP02;Typhoid
+J07AP03;Typhoid
 J07AP10;Typhoid- combinationsbinations with paratyphi types
 J07AR;Typhus (exanthematicus) vaccines
-J07AR01;Typhus exanthematicus; inactivated; whole cell
+J07AR01;Typhus exanthematicus
 J07AX;Other bacterial vaccines
 J07B;Viral vaccines
 J07BA;Encephalitis vaccines
-J07BA01;Encephalitis; tick borne; inactivated; whole virus;
-J07BA02;Encephalitis; japanese; inactivated; whole virus;
-J07BA03;Encephalitis; japanese; live attenuated
+J07BA01;Encephalitis
+J07BA02;Encephalitis
+J07BA03;Encephalitis
 J07BB;Influenza vaccines
-J07BB01;Influenza; inactivated; whole virus 
-J07BB02;Influenza; inactivated; split virus or surface antigen
-J07BB03;Influenza; live attenuated;
+J07BB01;Influenza
+J07BB02;Influenza
+J07BB03;Influenza
 J07BC;Hepatitis vaccines
-J07BC01;Hepatitis b; purified antigen;
-J07BC02;Hepatitis a; inactivated; whole virus
+J07BC01;Hepatitis b
+J07BC02;Hepatitis a
 J07BC20;Combinations
 J07BD;Measles vaccines
-J07BD01;Measles; live attenuated;
-J07BD51;Measles- combinationsbinations with mumps; live attenuated;
-J07BD52;Measles- combinationsbinations with mumps and rubella; live attenuated;
-J07BD53;Measles- combinationsbinations with rubella; live attenuated;
-J07BD54;Measles- combinationsbinations with mumps; rubella and varicella; live attenuated
+J07BD01;Measles
+J07BD51;Measles- combinationsbinations with mumps
+J07BD52;Measles- combinationsbinations with mumps and rubella
+J07BD53;Measles- combinationsbinations with rubella
+J07BD54;Measles- combinationsbinations with mumps
 J07BE;Mumps vaccines
-J07BE01;Mumps; live attenuated;
+J07BE01;Mumps
 J07BF;Poliomyelitis vaccines
-J07BF01;Poliomyelitis oral; monovalent live attenuated;
-J07BF02;Poliomyelitis oral; trivalent; live attenuated
-J07BF03;Poliomyelitis; trivalent; inactivated; whole virus;
-J07BF04;Poliomyelitis oral; bivalent live attenuated;
+J07BF01;Poliomyelitis oral
+J07BF02;Poliomyelitis oral
+J07BF03;Poliomyelitis
+J07BF04;Poliomyelitis oral
 J07BG;Rabies vaccines
-J07BG01;Rabies; inactivated; whole virus
+J07BG01;Rabies
 J07BH;Rota virus diarrhea vaccines
-J07BH01;Rota virus; live attenuated;
-J07BH02;Rota virus; pentavalent; live; reassorted;
+J07BH01;Rota virus
+J07BH02;Rota virus
 J07BJ;Rubella vaccines
-J07BJ01;Rubella; live attenuated;
-J07BJ51;Rubella- combinationsbinations with mumps; live attenuated;
+J07BJ01;Rubella
+J07BJ51;Rubella- combinationsbinations with mumps
 J07BK;Varicella zoster vaccines
-J07BK01;Varicella; live attenuated;
-J07BK02;Zoster; live attenuated;
+J07BK01;Varicella
+J07BK02;Zoster
 J07BL;Yellow fever vaccines
-J07BL01;Yellow fever; live attenuated;
+J07BL01;Yellow fever
 J07BM;Papillomavirus vaccines
-J07BM01;Papillomavirus (human types 6;11;16; 18);
-J07BM02;Papillomavirus (human types 16; 18);
-J07BM03;Papillomavirus (human types 6;11;16;18;31;33;45;52; 58)
+J07BM01;Papillomavirus (human types 6
+J07BM02;Papillomavirus (human types 16
+J07BM03;Papillomavirus (human types 6
 J07BX;Other viral vaccines
-J07BX01;Smallpox; live attenuated;
+J07BX01;Smallpox
 J07C;Bacterial and viral vaccines- combinationsbined
 J07CA;Bacterial and viral vaccines- combinationsbined
 J07CA01;Diphtheria-poliomyelitis-tetanus
@@ -3671,7 +3671,7 @@ L04AX05;Pirfenidone
 L04AX06;Pomalidomide
 M;Musculo-skeletal system
 M01;Antiinflammatory and antirheumatic products
-M01A;Antiinflammatory and antirheumatic products; non-steroids;
+M01A;Antiinflammatory and antirheumatic products
 M01AA;Butylpyrazolidines
 M01AA01;Phenylbutazone 
 M01AA02;Mofebutazone
@@ -3740,7 +3740,7 @@ M01AH03;Valdecoxib
 M01AH04;Parecoxib 
 M01AH05;Etoricoxib
 M01AH06;Lumiracoxib
-M01AX;Other antiinflammatory and antirheumatic agents; non-steroids;
+M01AX;Other antiinflammatory and antirheumatic agents
 M01AX01;Nabumetone
 M01AX02;Niflumic acid
 M01AX04;Azapropazone
@@ -3756,7 +3756,7 @@ M01AX22;Morniflumate
 M01AX23;Tenidap 
 M01AX24;Oxaceprol
 M01AX25;Chondroitin sulfate 
-M01AX26;Avocado and soyabean oil; unsaponifiables;
+M01AX26;Avocado and soyabean oil
 M01AX68;Feprazone- combinationsbinations
 M01B;Antiinflammatory/antirheumatic agents in combination
 M01BA;Antiinflammatory/antirheumatic agents in combination with corticosteroids
@@ -3779,7 +3779,7 @@ M01CC02;Bucillamine
 M01CX;Other specific antirheumatic agents
 M02;Topical products for joint and muscular pain
 M02A;Topical products for joint and muscular pain
-M02AA;Antiinflammatory preparations; non-steroids for topical use;
+M02AA;Antiinflammatory preparations
 M02AA01;Phenylbutazone 
 M02AA02;Mofebutazone
 M02AA03;Clofezone
@@ -3818,7 +3818,7 @@ M02AX05;Idrocilamide
 M02AX06;Tolperisone 
 M02AX10;Various
 M03;Muscle relaxants
-M03A;Muscle relaxants; peripherally acting agents;
+M03A;Muscle relaxants
 M03AA;Curare alkaloids
 M03AA01;Alcuronium
 M03AA02;Tubocurarine 
@@ -3837,9 +3837,9 @@ M03AC08;Fazadinium bromide
 M03AC09;Rocuronium bromide
 M03AC10;Mivacurium chloride
 M03AC11;Cisatracurium
-M03AX;Other muscle relaxants; peripherally acting agents;
+M03AX;Other muscle relaxants
 M03AX01;Botulinum toxin 
-M03B;Muscle relaxants; centrally acting agents;
+M03B;Muscle relaxants
 M03BA;Carbamic acid esters
 M03BA01;Phenprobamate
 M03BA02;Carisoprodol
@@ -3852,14 +3852,14 @@ M03BA53;Methocarbamol- combinationsbinations excl. psycholeptics
 M03BA71;Phenprobamate- combinationsbinations with psycholeptics
 M03BA72;Carisoprodol- combinationsbinations with psycholeptics
 M03BA73;Methocarbamol- combinationsbinations with psycholeptics
-M03BB;Oxazol; thiazine; and triazine derivatives
+M03BB;Oxazol
 M03BB02;Chlormezanone
 M03BB03;Chlorzoxazone
 M03BB52;Chlormezanone- combinationsbinations excl. psycholeptics
 M03BB53;Chlorzoxazone- combinationsbinations excl. psycholeptics
 M03BB72;Chlormezanone- combinationsbinations with psycholeptics
 M03BB73;Chlorzoxazone- combinationsbinations with psycholeptics
-M03BC;Ethers; chemically close to antihistamines;
+M03BC;Ethers
 M03BC01;Orphenadrine (citrate)
 M03BC51;Orphenadrine- combinationsbinations
 M03BX;Other centrally acting agents
@@ -3874,7 +3874,7 @@ M03BX08;Cyclobenzaprine
 M03BX09;Eperisone 
 M03BX30;Fenyramidol 
 M03BX55;Thiocolchicoside- combinationsbinations
-M03C;Muscle relaxants; directly acting agents;
+M03C;Muscle relaxants
 M03CA;Dantrolene and derivatives
 M03CA01;Dantrolene 
 M04;Antigout preparations
@@ -3908,14 +3908,14 @@ M05BA06;Ibandronic acid
 M05BA07;Risedronic acid 
 M05BA08;Zoledronic acid 
 M05BB;Bisphosphonates- combinationsbinations
-M05BB01;Etidronic acid and calcium; sequential;
-M05BB02;Risedronic acid and calcium; sequential;
+M05BB01;Etidronic acid and calcium
+M05BB02;Risedronic acid and calcium
 M05BB03;Alendronic acid and colecalciferol
-M05BB04;Risedronic acid; calcium and colecalciferol; sequential
-M05BB05;Alendronic acid; calcium and colecalciferol; sequential
-M05BB06;Alendronic acid and alfacalcidol; sequential;
+M05BB04;Risedronic acid
+M05BB05;Alendronic acid
+M05BB06;Alendronic acid and alfacalcidol
 M05BB07;Risedronic acid and colecalciferol
-M05BB08;Zoledronic acid; calcium and clecalciferol; sequential
+M05BB08;Zoledronic acid
 M05BC;Bone morphogenetic proteins
 M05BC01;Dibotermin alfa
 M05BC02;Eptotermin alfa
@@ -3938,13 +3938,13 @@ M09AB03;Bromelains
 M09AB52;Trypsin- combinationsbinations
 M09AX;Other drugs for disorders of the musculo-skeletal system
 M09AX01;Hyaluronic acid 
-M09AX02;Chondrocytes; autologous;
+M09AX02;Chondrocytes
 M09AX03;Ataluren
 M09AX04;Drisapersen 
 M09AX05;Aceneuramic acid
 N;Nervous system
 N01;Anesthetics
-N01A;Anesthetics; general;
+N01A;Anesthetics
 N01AA;Ethers
 N01AA01;Diethyl ether
 N01AA02;Vinyl ether
@@ -3956,7 +3956,7 @@ N01AB05;Trichloroethylene
 N01AB06;Isoflurane
 N01AB07;Desflurane
 N01AB08;Sevoflurane
-N01AF;Barbiturates; plain;
+N01AF;Barbiturates
 N01AF01;Methohexital 
 N01AF02;Hexobarbital
 N01AF03;Thiopental 
@@ -3981,7 +3981,7 @@ N01AX13;Nitrous oxide
 N01AX14;Esketamine
 N01AX15;Xenon 
 N01AX63;Nitrous oxide- combinationsbinations
-N01B;Anesthetics; local;
+N01B;Anesthetics
 N01BA;Esters of aminobenzoic acid
 N01BA01;Metabutethamine
 N01BA02;Procaine 
@@ -4241,7 +4241,7 @@ N04B;Dopaminergic agents
 N04BA;Dopa and dopa derivatives
 N04BA01;Levodopa
 N04BA02;Levodopa and decarboxylase inhibitor
-N04BA03;Levodopa; decarboxylase inhibitor and comt inhibitor;
+N04BA03;Levodopa
 N04BA04;Melevodopa
 N04BA05;Melevodopa and decarboxylase inhibitor
 N04BA06;Etilevodopa and decarboxylase inhibitor
@@ -4317,7 +4317,7 @@ N05AG;Diphenylbutylpiperidine derivatives
 N05AG01;Fluspirilene
 N05AG02;Pimozide
 N05AG03;Penfluridol
-N05AH;Diazepines; oxazepines and thiazepines;
+N05AH;Diazepines
 N05AH01;Loxapine 
 N05AH02;Clozapine
 N05AH03;Olanzapine 
@@ -4390,7 +4390,7 @@ N05BX02;Gedocarnil
 N05BX03;Etifoxine 
 N05BX04;Fabomotizole
 N05C;Hypnotics and sedatives
-N05CA;Barbiturates; plain;
+N05CA;Barbiturates
 N05CA01;Pentobarbital 
 N05CA02;Amobarbital 
 N05CA03;Butobarbital
@@ -4462,7 +4462,7 @@ N05CM13;Valnoctamide
 N05CM15;Methylpentynol
 N05CM16;Niaprazine
 N05CM18;Dexmedetomidine 
-N05CX;Hypnotics and sedatives in combination; excl. barbiturates;
+N05CX;Hypnotics and sedatives in combination
 N05CX01;Meprobamate- combinationsbinations
 N05CX02;Methaqualone- combinationsbinations
 N05CX03;Methylpentynol- combinationsbinations
@@ -4503,7 +4503,7 @@ N06AB07;Alaproclate
 N06AB08;Fluvoxamine 
 N06AB09;Etoperidone
 N06AB10;Escitalopram 
-N06AF;Monoamine oxidase inhibitors; non-selective;
+N06AF;Monoamine oxidase inhibitors
 N06AF01;Isocarboxazid
 N06AF02;Nialamide
 N06AF03;Phenelzine 
@@ -4539,7 +4539,7 @@ N06AX23;Desvenlafaxine
 N06AX24;Vilazodone 
 N06AX25;Hyperici herba
 N06AX26;Vortioxetine 
-N06B;Psychostimulants; agents used for adhd and nootropics;
+N06B;Psychostimulants
 N06BA;Centrally acting sympathomimetics
 N06BA01;Amfetamine 
 N06BA02;Dexamfetamine 
@@ -4592,7 +4592,7 @@ N06DA03;Rivastigmine
 N06DA04;Galantamine 
 N06DA05;Ipidacrine
 N06DA52;Donepezil and memantine
-N06DA53;Donepezil; memantine and ginkgo folium;
+N06DA53;Donepezil
 N06DX;Other anti-dementia drugs
 N06DX01;Memantine 
 N06DX02;Ginkgo folium
@@ -4665,7 +4665,7 @@ P01BA;Aminoquinolines
 P01BB;Biguanides
 P01BC;Methanolquinolines
 P01BD;Diaminopyrimidines
-P01BE;Artemisinin and derivatives; plain;
+P01BE;Artemisinin and derivatives
 P01BF;Artemisinin and derivatives- combinationsbinations
 P01BX;Other antimalarials
 P01C;Agents against leishmaniasis and trypanosomiasis
@@ -4689,19 +4689,19 @@ P02CX;Other antinematodals
 P02D;Anticestodals
 P02DA;Salicylic acid derivatives
 P02DX;Other anticestodals
-P03;Ectoparasiticides; incl. scabicides; insecticides and repellents
-P03A;Ectoparasiticides; incl. scabicides;
+P03;Ectoparasiticides
+P03A;Ectoparasiticides
 P03AA;Sulfur containing products
 P03AB;Chlorine containing products
-P03AC;Pyrethrines; incl. synthetic compounds;
-P03AX;Other ectoparasiticides; incl. scabicides;
+P03AC;Pyrethrines
+P03AX;Other ectoparasiticides
 P03B;Insecticides and repellents
 P03BA;Pyrethrines
 P03BX;Other insecticides and repellents
 R;Respiratory system
 R01;Nasal preparations
 R01A;Decongestants and other nasal preparations for topical use
-R01AA;Sympathomimetics; plain;
+R01AA;Sympathomimetics
 R01AA02;Cyclopentamine
 R01AA03;Ephedrine 
 R01AA04;Phenylephrine 
@@ -4724,7 +4724,7 @@ R01AB05;Ephedrine
 R01AB06;Xylometazoline 
 R01AB07;Oxymetazoline 
 R01AB08;Tuaminoheptane
-R01AC;Antiallergic agents; excl. corticosteroids;
+R01AC;Antiallergic agents
 R01AC01;Cromoglicic acid 
 R01AC02;Levocabastine 
 R01AC03;Azelastine 
@@ -4798,7 +4798,7 @@ R02AB02;Tyrothricin
 R02AB03;Fusafungine
 R02AB04;Bacitracin 
 R02AB30;Gramicidin 
-R02AD;Anesthetics; local;
+R02AD;Anesthetics
 R02AD01;Benzocaine
 R02AD02;Lidocaine 
 R02AD03;Cocaine 
@@ -4807,7 +4807,7 @@ R02AX;Other throat preparetions
 R02AX01;Flurbiprofen 
 R02AX02;Ibuprofen 
 R03;Drugs for obstructive airway diseases
-R03A;Adrenergics; inhalants;
+R03A;Adrenergics
 R03AA;Alpha- and beta-adrenoreceptor agonists
 R03AA01;Epinephrine 
 R03AB;Non-selective beta-adrenoreceptor agonists
@@ -4833,7 +4833,7 @@ R03AC17;Bitolterol
 R03AC18;Indacaterol 
 R03AC19;Olodaterol 
 R03AH;Combinations of adrenergics
-R03AK;Adrenergics in combination with corticosteroids or other drugs; excl. anticholinergics;
+R03AK;Adrenergics in combination with corticosteroids or other drugs
 R03AK01;Epinephrine and other drugs for obstructive airway diseases
 R03AK02;Isoprenaline and other drugs for obstructive airway diseases
 R03AK04;Salbutamol and sodium cromoglicate
@@ -4854,7 +4854,7 @@ R03AL04;Indacaterol and glycopyrronium bromide
 R03AL05;Formoterol and aclidinium bromide
 R03AL06;Olodaterol and tiotropium bromide
 R03AL07;Formoterol and glycopyrronium bromide
-R03B;Other drugs for obstructive airway diseases; inhalants;
+R03B;Other drugs for obstructive airway diseases
 R03BA;Glucocorticoids
 R03BA01;Beclometasone 
 R03BA02;Budesonide
@@ -4874,10 +4874,10 @@ R03BB05;Aclidinium bromide
 R03BB06;Glycopyrronium bromide
 R03BB07;Umeclidinium bromide
 R03BB54;Tiotropium bromide- combinationsbinations
-R03BC;Antiallergic agents; excl. corticosteroids;
+R03BC;Antiallergic agents
 R03BC01;Cromoglicic acid 
 R03BC03;Nedocromil 
-R03BX;Other drugs for obstructive airway diseases; inhalants;
+R03BX;Other drugs for obstructive airway diseases
 R03BX01;Fenspiride 
 R03C;Adrenergics for systemic use
 R03CA;Alpha- and beta-adrenoreceptor agonists
@@ -4946,7 +4946,7 @@ R03DX07;Roflumilast
 R03DX08;Reslizumab
 R03DX09;Mepolizumab
 R05;Cough and cold preparations
-R05C;Expectorants; excl. combinations with cough suppressants;
+R05C;Expectorants
 R05CA;Expectorants
 R05CA01;Tyloxapol
 R05CA02;Potassium iodide
@@ -4977,7 +4977,7 @@ R05CB13;Dornase alfa (desoxyribonuclease)
 R05CB14;Neltenexine
 R05CB15;Erdosteine
 R05CB16;Mannitol
-R05D;Cough suppressants; excl. combinations with expectorants;
+R05D;Cough suppressants
 R05DA;Opium alkaloids and derivatives
 R05DA01;Ethylmorphine 
 R05DA03;Hydrocodone 
@@ -5209,7 +5209,7 @@ S01AX15;Propamidine
 S01AX16;Picloxydine
 S01AX18;Povidone-iodine
 S01B;Antiinflammatory agents
-S01BA;Corticosteroids; plain;
+S01BA;Corticosteroids
 S01BA01;Dexamethasone 
 S01BA02;Hydrocortisone 
 S01BA03;Cortisone 
@@ -5230,7 +5230,7 @@ S01BB01;Hydrocortisone and mydriatics
 S01BB02;Prednisolone and mydriatics
 S01BB03;Fluorometholone and mydriatics
 S01BB04;Betamethasone and mydriatics
-S01BC;Antiinflammatory agents; non-steroids;
+S01BC;Antiinflammatory agents
 S01BC01;Indometacin 
 S01BC02;Oxyphenbutazone 
 S01BC03;Diclofenac 
@@ -5261,7 +5261,7 @@ S01CB02;Prednisolone
 S01CB03;Hydrocortisone 
 S01CB04;Betamethasone 
 S01CB05;Fluorometholone 
-S01CC;Antiinflammatory agents; non-steroids and antiinfectives in combination;
+S01CC;Antiinflammatory agents
 S01CC01;Diclofenac and antiinfectives
 S01CC02;Indometacin and antiinfectives
 S01E;Antiglaucoma preparations and miotics
@@ -5387,7 +5387,7 @@ S01X;Other ophthalmologicals
 S01XA;Other ophthalmologicals
 S01XA01;Guaiazulen 
 S01XA02;Retinol 
-S01XA03;Sodium chloride; hypertonic;
+S01XA03;Sodium chloride
 S01XA04;Potassium iodide
 S01XA05;Sodium edetate
 S01XA06;Ethylmorphine 
@@ -5401,7 +5401,7 @@ S01XA13;Alteplase
 S01XA14;Heparin 
 S01XA15;Ascorbic acid
 S01XA18;Ciclosporin
-S01XA19;Limbal stems cells; autologous;
+S01XA19;Limbal stems cells
 S01XA20;Artificial tears and other indifferent preparations
 S01XA21;Mercaptamine
 S01XA22;Ocriplasmin
@@ -5627,18 +5627,18 @@ V06DB;Fat/carbohydrates/proteins/minerals/vitamins- combinationsbinations
 V06DC;Carbohydrates
 V06DC01;Glucose 
 V06DC02;Fructose 
-V06DD;Amino acids; incl. combinations with polypeptides;
+V06DD;Amino acids
 V06DE;Amino acids/carbohydrates/minerals/vitamins- combinationsbinations
 V06DF;Milk substitutes
 V06DX;Other combinations of nutrients
 V07;All other non-therapeutic products
 V07A;All other non-therapeutic products
 V07AA;Plasters
-V07AB;Solvents and diluting agents; incl. irrigating solutions;
-V07AC;Blood transfusion; auxiliary products;
-V07AD;Blood tests; auxiliary products;
+V07AB;Solvents and diluting agents
+V07AC;Blood transfusion
+V07AD;Blood tests
 V07AN;Incontinence equipment
-V07AR;Sensitivity tests; discs and tablets;
+V07AR;Sensitivity tests
 V07AS;Stomi equipment
 V07AT;Cosmetics
 V07AV;Technical disinfectants
@@ -5646,8 +5646,8 @@ V07AX;Washing agents etc.
 V07AY;Other non-therapeutic auxiliary products
 V07AZ;Chemicals and reagents for analysis
 V08;Contrast media
-V08A;X-ray contrast media; iodinated;
-V08AA;Watersoluble; nephrotropic; high osmolar x-ray contrast media
+V08A;X-ray contrast media
+V08AA;Watersoluble
 V08AA01;Diatrizoic acid 
 V08AA02;Metrizoic acid 
 V08AA03;Iodamide 
@@ -5658,7 +5658,7 @@ V08AA07;Acetrizoic acid
 V08AA08;Iocarmic acid 
 V08AA09;Methiodal
 V08AA10;Diodone 
-V08AB;Watersoluble; nephrotropic; low osmolar x-ray contrast media
+V08AB;Watersoluble
 V08AB01;Metrizamide
 V08AB02;Iohexol
 V08AB03;Ioxaglic acid 
@@ -5671,7 +5671,7 @@ V08AB09;Iodixanol
 V08AB10;Iomeprol
 V08AB11;Iobitridol
 V08AB12;Ioxilan
-V08AC;Watersoluble; hepatotropic x-ray contrast media;
+V08AC;Watersoluble
 V08AC01;Iodoxamic acid 
 V08AC02;Iotroxic acid 
 V08AC03;Ioglycamic acid
@@ -5687,7 +5687,7 @@ V08AD01;Ethyl esters of iodised fatty acids
 V08AD02;Iopydol
 V08AD03;Propyliodone
 V08AD04;Iofendylate
-V08B;X-ray contrast media; non-iodinated;
+V08B;X-ray contrast media
 V08BA;Barium sulfate containing x-ray contrast media
 V08BA01;Barium sulfate with suspending agents
 V08BA02;Barium sulfate without suspending agents
@@ -5707,7 +5707,7 @@ V08CA11;Gadofosveset
 V08CB;Superparamagnetic contrast media
 V08CB01;Ferumoxsil
 V08CB02;Ferristene
-V08CB03;Iron oxide; nanoparticles;
+V08CB03;Iron oxide
 V08CX;Other magnetic resonance imaging contrast media
 V08CX01;Perflubron
 V08D;Ultrasound contrast media
@@ -5759,7 +5759,7 @@ V09DA02;Technetium (99mtc) etifenin
 V09DA03;Technetium (99mtc) lidofenin
 V09DA04;Technetium (99mtc) mebrofenin
 V09DA05;Technetium (99mtc) galtifenin
-V09DB;Technetium (99mtc); particles and colloids;
+V09DB;Technetium (99mtc)
 V09DB01;Technetium (99mtc) nanocolloid
 V09DB02;Technetium (99mtc) microcolloid
 V09DB03;Technetium (99mtc) millimicrospheres
@@ -5770,11 +5770,11 @@ V09DB07;Technetium (99mtc) phytate
 V09DX;Other hepatic and reticulo endothelial system diagnostic radiopharmaceuticals
 V09DX01;Selenium (75se) tauroselcholic acid
 V09E;Respiratory system
-V09EA;Technetium (99mtc); inhalants;
+V09EA;Technetium (99mtc)
 V09EA01;Technetium (99mtc) pentetic acid
 V09EA02;Technetium (99mtc) technegas
 V09EA03;Technetium (99mtc) nanocolloid
-V09EB;Technetium (99mtc); particles for injection;
+V09EB;Technetium (99mtc)
 V09EB01;Technetium (99mtc) macrosalb
 V09EB02;Technetium (99mtc) microspheres
 V09EX;Other respiratory system diagnostic radiopharmaceuticals
