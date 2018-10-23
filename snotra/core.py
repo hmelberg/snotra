@@ -16,6 +16,12 @@ import numpy as np
 import pandas as pd
 import re
 import ast
+
+# needed in read_codebooks()
+import glob
+import ntpath
+import os
+
 from itertools import zip_longest, chain
 
 from itertools import product
@@ -1086,7 +1092,8 @@ def extract_codes(df, codes, cols=None, sep=None, new_sep=',', na_rep='',
         Can produce a set of dummy columns for codes and code groups.
         Can also produce a merged column with only extracted codes.
         Accept star notation.
-        Also accepts both single value columns and columns with compund codes and seperators
+        Also accepts both single value columns and columns with compound codes and separators
+        Repeat events in same rows are only extracted once
 
 
     Example:
@@ -1197,7 +1204,7 @@ def years_apart(df, pid='pid', year='year'):
 
 
 # %%
-def read_codebooks(file=None, select=None, sep=';'):
+def read_codebooks(file=None, select=None, sep=';', encoding='latin-1'):
     """
     Reads a codebook (in csv format)
      file (str): The filname (including the path) to be read
@@ -1220,6 +1227,7 @@ def read_codebooks(file=None, select=None, sep=';'):
     from snotra import _PATH
     import glob
     import ntpath
+    import os
     if not file:
         path = _PATH.replace('core.py', 'codebooks/')
         file = glob.glob(path + '*.csv')
@@ -1232,14 +1240,14 @@ def read_codebooks(file=None, select=None, sep=';'):
             wanted_words = set(select.split())
             file_words = set(name.split('_'))
             if len(wanted_words) == len(file_words & wanted_words):
-                df = pd.read_csv(codebook, sep=sep)
+                df = pd.read_csv(file, sep=sep, encoding=encoding)
                 df['source'] = name
                 books.extend([df])
         else:
-            df = pd.read_csv(codebook, sep=sep)
+            df = pd.read_csv(file, sep=sep, encoding=encoding)
             df['source'] = name
             books.extend([df])
-    books = pd.concat(books, ignore_index=True, axis=0)
+    books = pd.concat(books, ignore_index=True, axis=0, sort=False)
     return books
 
 #%%
@@ -1249,7 +1257,7 @@ def label(df, labels=None, select=None,  file=None):
     """
     if not labels:
         codebooks = read_codebooks(select=select, file=file)
-        labels = labels_from_codebooks(codebooks, select=select)
+        labels = labels_from_codebooks(codebook=codebooks, select=select)
     df = df.rename(index=labels)
     return df
 
@@ -1267,8 +1275,8 @@ def labels_from_codebooks(codebook, select=None, code='code', text='text', only_
         for source in sources:
             nameset = set(source.split('_'))
             if len(words) == len(nameset & words):
-                books.extend(source)
-        codebook=codebook[codebook.sources.isin(books)]
+                books.append(source)
+        codebook=codebook[codebook.source.isin(books)]
 
     codedikt = codebook[[code, text]].set_index(code).to_dict()[text]
     return codedikt
@@ -3551,6 +3559,8 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
 
     condition ='first 5 of 4AB02 in ncmp'
     condition ='min 2 of days>10'
+    condition = 'ddd[4AB02].sum()>30'
+    condition = 'ddd[4AB02 in icd].sum()>30'
 
     """
     # create temporary storage to avoid recalculations
@@ -3568,6 +3578,8 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
     freq = ['min ', 'max ', 'exactly ']
     first_last_between = [' first ', ' last ', ' between ']
     ordinal = r'(-?\d+)(st |nd |rd |th )'  # re to find and split 3rd into 3 and rd etc
+
+    #any selection filters?
 
     # if it is a quantiative conditions (oxygen_level>20)
     if re.search(quantity, condition):
