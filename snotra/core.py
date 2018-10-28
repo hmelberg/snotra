@@ -3568,7 +3568,6 @@ def eval_condition(df, condition, cols=None, sep=None,
 
 
 # %%
-
 def eval_single(df, condition, cols=None, sep=None, codebook=None,
                 out='pid', info=None):
     """
@@ -3577,14 +3576,22 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
 
     condition ='first 5 of 4AB02 in ncmp'
     condition ='min 2 of days>10'
-    condition = 'ddd[4AB02].sum()>30'
-    condition = 'ddd[4AB02 in icd].sum()>30'
+    condition ='ddd>10'
+    condition ='ddd[4AB02 in codes]>10'
+    condition ='ddd[4AB02 in codes].cumsum()>50'
+    condition ='sum(ddd[4AB02 in codes])>50'
+
+    a=eval_single(df=npr, condition=condition, sep=',')
+
+    todo: info bank problems after allowing code selections?
 
     """
     # create temporary storage to avoid recalculations
     if not info: info = Info()
 
-    # no revaluation necessary if it it has been evaluated before
+    original_condition = condition
+
+    # no re-evaluation necessary if it it has been evaluated before
     if out == 'pid' and (condition in info.single_pid):
         return info.single_pid[condition]
     elif out == 'rows' and (condition in info.single_rows):
@@ -3592,19 +3599,69 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
     elif out == 'interval' and (condition in info.single_interval):
         return info.single_interval[condition]
 
-    quantity = '[>=<]'
+    quantity = r'[>=<]'  # better to use term comparison
     freq = ['min ', 'max ', 'exactly ']
     first_last_between = [' first ', ' last ', ' between ']
     ordinal = r'(-?\d+)(st |nd |rd |th )'  # re to find and split 3rd into 3 and rd etc
 
-    #any selection filters?
+    # is it a functional expression? ddd.cumsum()>10
+    # expr="ddd[4AB02 in codes].cumsum()>10"
+    # condition=expr
+    row_selection = ''
 
-    # if it is a quantiative conditions (oxygen_level>20)
-    if re.search(quantity, condition):
+    # select sub df if specifiec by [] after a code
+    if ('[' in condition) and (']' in condition):
+        row_query = condition.split('[')[-1].split(']')[0]
+        row_selection = row_query
+        # check if evaluated before
+        if row_query in info.single_rows:
+            rows = info.single_rows[row_query]
+        else:
+            condition = condition.replace(f'[{row_query}]', '')
+
+            if ' in ' in row_query:
+                row_query = row_query.replace(' in ', ' in: ')  # using old use_expresssion wich requires in with colon
+
+            relevant_rows = use_expression(df=df, cols=cols, expr=row_query, sep=sep)
+            info.single_rows[row_query] = relevant_rows
+        df = df[relevant_rows]
+
+    # is it a functional expression? ddd.cumsum()>10
+    # expr="ddd.cumsum()>10"
+    # condition=expr
+    # expr='gender.nunique()==1'
+    # hmm what about properties like .is_monotonic? (no parenthesis!)
+    # if ('.' in condition) and ('(' in condition) and (')' in condition):
+    # still imperfect ... a code could also be a column name ... ok usually not also with a period mark in column name so ok
+    if ('.' in condition) and (condition.split('.')[0] in df.columns):
         codetext = condition
-        codes = condition.split()[-1]  # code condition always last
-        if codes in info.rows:
-            rows = info.rows[codes]
+        codes = re.split('[<=>]', condition)[0]
+
+        if codes in info.single_rows:
+            rows = info.single_rows[codes]
+        # not evaluated before, so calc
+        else:
+            cols, funcexpr = condition.split('.')
+            # a method
+            if '(' in funcexpr:
+                func, threshold = funcexpr.split(')')
+                func, args = func.split('(')
+                rows = pd.eval(f"tmpdf.groupby(['pid'])['{cols}'].transform('{func}', {args}) {threshold}",
+                               engine='python')
+            # an attribute (like is_monotonic)
+            else:
+                rows = pd.eval(f"tmpdf.groupby(['pid'])['{cols}'].transform(lambda x: x.{funcexpr})", engine='python')
+
+            info.single_rows[codes] = rows
+
+    # if it is a simple quantiative conditions (oxygen_level>20)
+    elif re.search(quantity, condition):
+        codetext = condition
+        codes = condition.split()[-1]  # code condition always last hmm unnecessary
+        # check if evaluated before
+        if codes in info.single_rows:
+            rows = info.single_rows[codes]
+        # not evaluated before, so calc
         else:
             # sum(glucose_level)>10
             # if this, then may skip further processing?
@@ -3616,7 +3673,9 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
             # pre-modifier when finding rows (which allows skipping)
 
             # complex quantitative expression: sum(glucose_level)>10
-            if 'sum(' in codes:
+            # better, more flexible ...: glucose.sum()>10 ... can make any function work, and can pass arguments
+
+            if 'sum(' in codes:  # can use ddd.cumsum() now, keep this to double check
                 col, operator = codes.split(')')
                 col = col.replace('sum(', '').strip(')')
                 eval_text = f"df.groupby(df.index)['{col}'].cumsum(){operator}"
@@ -3625,7 +3684,8 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
             else:
                 rows = df.eval(codes).fillna(False)
             codecols = codes
-            info.rows[codecols] = rows
+            info.single_rows[codecols] = rows
+
 
     # code expression (involving a code, not a quantitative expressions
     else:
@@ -3637,7 +3697,7 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
         else:
             cols = incols
 
-        codecols = codes + ' in ' + cols  # cannot use just codes to store rows since same code may be in different columns, so need to include col in name when storing
+        codecols = codes + ' in ' + cols + ' row ' + row_selection  # cannot use just codes to store rows since same code may be in different columns, so need to include col in name when storing
 
         # If conditions is about events in general, create an events column
         if (' event ' in codes) or (' events ' in codes):
@@ -3648,10 +3708,15 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
             if codecols in info.rows:
                 rows = info.rows[codecols]
             else:
-                rows = df[cols].str.contains(codes).fillna(False)
+                # cols = _expand_cols(df=df, cols=cols)
+                # expanded_codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep)
+                # allcodes=_get_allcodes(expanded_codes)
+                # rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
+                rows = use_expression(df=df, expr=codes + ' in:' + cols, sep=sep)
+
                 info.rows[codecols] = rows
 
-                # is there a prefix to the conditions? if not, isolated condition, just return rows
+    # is there a prefix to the conditions? if not, isolated condition, just return rows
     # if not, start preparing for calculating conditions with qualifiers
     # todo: quite messy! refactor: one function to evluate the code/expression itself, another to evalute the qualifier?
     if ' ' not in codetext.strip():
@@ -3745,13 +3810,13 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
 
 
     # first, last range conditions: first 5 of 4A
-    elif any(word in condition for word in first_last_between):
+    elif any(word.strip() in condition for word in first_last_between):  # regex is better
         word, num, _, codes = codetext.split()
         if '%' not in num:
             num = int(num)
-            if ' first' in word:
+            if 'first' in word:
                 select = (rowscum <= num)
-            if ' last ' in word:
+            if 'last' in word:
                 select = (rowscum >= num)
 
 
@@ -3771,7 +3836,7 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
         if word == 'last':
             select = (rowscum > pid_num)
 
-            # percentile condition
+    # percentile condition
     elif ' percentile ' in codetext:
         event_num = rows.groupby(level=0).cumcount()
         n_count = rowscum.groupby(level=0).size()
@@ -3799,14 +3864,14 @@ def eval_single(df, condition, cols=None, sep=None, codebook=None,
     if out == 'pid':
         endrows = (rows & select)
         endrows = endrows.any(level=0)
-        info.single_pid[codecols] = endrows
-        info.single_rows[codecols] = rows
+        info.single_pid[original_condition] = endrows
+        info.single_rows[original_condition] = rows
     elif out == 'interval':
         endrows = select
-        info.interval[codecols] = endrows
+        info.interval[original_condition] = endrows
     elif out == 'rows':
         endrows = (rows & select)
-        info.single_rows[codecols] = endrows
+        info.single_rows[original_condition] = endrows
 
     return endrows
 
