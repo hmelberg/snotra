@@ -827,7 +827,8 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
         # potential problem: empty codebooks?
         new_codebook = {}
         for word, cols in word_cols:
-            sep = _sniff_sep(df=df, cols=cols)
+            if not sep:
+                sep = _sniff_sep(df=df, cols=cols)
             name = "".join(cols)
             if not codebook:
                 if name not in new_codebook:
@@ -875,7 +876,7 @@ def use_expression(df, expr, cols=None, sep=None, out='rows', raw=False, regex=F
         if not codebook:
             codebook = unique_codes(df=df, cols=cols, sep=sep)
 
-            # must avoid * since eval does not like in in var names, replace * with three ___
+        # must avoid * since eval does not like in in var names, replace * with three ___
         # same with column names starting with digit, sp add three (___) to all words
         worddict = {'___' + word.replace('*', '___') + f'_{n}': [word]}
         coldf = pd.DataFrame(index=df.index)
@@ -3180,7 +3181,7 @@ def _fix_space(expr):
 
 
 # %%
-def _format_expr(expr, info=None):
+def _format_expr(expr, rule=None, info=None, insert_cols=True):
     """
 
     >>> expr = '(first 4A and first 4B) before (A and (C or D)) before (A or (B and C))'
@@ -3218,10 +3219,11 @@ def _format_expr(expr, info=None):
     # insert date variable 'in date' after days etc (hmm etc is a problem)
 
     # insert externally defined variables
-    expr = insert_external(expr)
+    expr = _insert_external(expr)
 
     # insert 'in col' for variables with known cols (specified in info)
-    expr = _insert_cols(expr=expr, infor=Info)
+    if insert_cols:
+        expr = _insert_cols(expr=expr, rule=rule, info=info)
 
     # replace some phrases
     replace = {' but not ':' and not '}
@@ -3234,9 +3236,21 @@ def _format_expr(expr, info=None):
     return expr
 
 
+#%%
+def _is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
 # %%
-def _insert_cols(expr, info=None, function=None):
+def _insert_cols(expr, info=None, rule=None):
     """
+    insert column names in expressions (in col ...)
+
+    note: may want to try a different approach: instead of identifying codes y eliminating all else, use positive identification: all terms found in codebooks (or rulebook?) are codes!
+
     expr = 'max 2 of 4AB02 before 4AB04'
     expr = 'max 2 of 4AB02 in x before 4AB04'
 
@@ -3251,17 +3265,17 @@ def _insert_cols(expr, info=None, function=None):
     expr = 'min 8 of days>6'
     expr = 'min 3 of 4AB02 in ncmp within 200 days'
 
-    insert_cols(expr, function=col_rules)
+    insert_cols(expr, rule=col_rules)
     todo1: codes that are in option lists (?[4AB, 4AV] will not be included)
     sol1: special col format after creating all statements from options?
     todo2: dealing with star codes: 4AB* ... what col is that?
     sol2: well, logically impossible (since it could be several cols) unless user gives some rules? could try to infer based on col content, but do not want to guess, so, rely on functions external, based on startswith or len, or just say: provide the col in that case
 
     """
-    ordinal = r'^(-?\d+)(st |nd |rd |th )'  # re to find and split 3rd into 3 and rd etc
+    ordinal = r'^(-?\d+)(st|nd|rd|th)'  # re to find 3rd etc
 
     keywords = set(
-        'min max exactly before after around within days of first last days event events day between to days'.split())
+        'and or not min max exactly before after around within days of first last days event events day between to days'.split())
 
     skip_startswith = ['?[']  # also 1st, 2nd etc
 
@@ -3296,16 +3310,19 @@ def _insert_cols(expr, info=None, function=None):
             n = n + 1  # skip ordinals (1st etc) .. could be problematic if a code also has this pattern ... impose extra condtions to check? partial solution: require it to startwith, not just match
         elif len(skip_contains & set(word)) > 0:
             n = n + 1  # skip qualitative conditions which have cols: days>5
+        elif _is_number(word):
+            n=n+1 # hmmm may not want to skip all numbers if we allow pure number codes?
         elif splitted[n + 1] == 'in':
             n = n + 1  # skip if already have provided a col, cannot check this if last word (no problem, never is)
         else:
             code = word.strip().strip(')').strip('(')
             if info:
-                cols = info.code2cols[code]
-            elif function:
-                cols = function(code)
+                if code in info.code2cols:
+                    cols = info.code2cols[code]
+            elif rule:
+                cols = rule(code)
             else:
-                print('Error: No rules for assigning cols are given in kewords info or external')
+                print('Error: No rules for assigning columns are given in info or rule')
             new_splitted[n] = new_splitted[n].replace(code, f'{code} in {cols}')
             n = n + 1
     new_expr = " ".join(new_splitted[:-1])
@@ -3401,7 +3418,8 @@ def _get_options(expr):
 
 def _insert_external(expr):
     """
-    Replaces variables prefixed with @ in the expression with the value of the variable from the global namespace
+    Replaces variables prefixed with @ in the expression with the
+    value of the variable from the global namespace
 
     Example:
         x=['4AB02', '4AB04', '4AB06']
@@ -3417,7 +3435,7 @@ def _insert_external(expr):
 
 # %%
 
-def count_p(df, expr, cols=None, sep=None, codebook=None, info=None, _use_caching=True):
+def count_p(df, expr, cols=None, sep=None, codebook=None, info=None, _use_caching=True, insert_cols=True):
     """
 
     count persons who satisfy the conditions in an expression
@@ -3461,7 +3479,7 @@ def count_p(df, expr, cols=None, sep=None, codebook=None, info=None, _use_cachin
 
     if not info: info = Info()
 
-    expr = _format_expr(expr, info=info)
+    expr = _format_expr(expr, info=info, rule=rule, insert_cols=insert_cols)
 
     exprs = _get_options(expr)
     who = {}
