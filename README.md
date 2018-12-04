@@ -18,6 +18,17 @@ Snotra is a also a Norse goddess associated with wisdom.
       
     df.count_persons(codes='K50 in: icd and 4AB02 in:atc1, atc2')
     ```
+    
+    - Using temporal expressions
+    ```python
+    df.count_persons('K50 before K51', cols='icd')
+    
+    df.count_persons('4AB02 within 365 days after 4AB04', cols='atc')
+    
+     
+    - Commplex expressions
+    df.count_persons('min 5 of 4AB02 before 4AB04', cols='atc')
+    ```
 
     
 - **Select all events for some persons using codelists or logical expressions**
@@ -36,6 +47,12 @@ Snotra is a also a Norse goddess associated with wisdom.
 - **Calculate Charlson Comorbidity Index***
     ```python
     cci = sa.charlson(df=df, cols=['icd1', 'icd2'], sep=',')
+    ```
+
+- **Find typical treatment patterns***
+    ```python
+    codes = {'i': '4AB02', 'a': '4AB04']
+    df.stringify_order(codes=codes, cols='icd', sep=',', keep_repeats=False).value_counts()
     ```
 
 ## Installation
