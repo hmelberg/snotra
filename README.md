@@ -24,9 +24,10 @@ Snotra is a also a Norse goddess associated with wisdom.
     df.count_persons('K50 before K51', cols='icd')
     
     df.count_persons('4AB02 within 365 days after 4AB04', cols='atc')
-    
+    ```
      
     - Commplex expressions
+    ```python 
     df.count_persons('min 5 of 4AB02 before 4AB04', cols='atc')
     ```
 
@@ -44,6 +45,12 @@ Snotra is a also a Norse goddess associated with wisdom.
     ```python
     df['icd_primary', 'icd_secondary'].count_codes(sep=',')
     ```
+    
+- **Use full text labels instead of medical codes in the output**
+    ```python
+    df['icd_primary'].count_codes().labels('icd')
+    ``` 
+    
 - **Calculate Charlson Comorbidity Index***
     ```python
     cci = sa.charlson(df=df, cols=['icd1', 'icd2'], sep=',')
@@ -78,11 +85,14 @@ Snotra is a also a Norse goddess associated with wisdom.
   
  
  ## Features
- - **Easy and efficient notation and methods to deal with medical codes:** Medical data often use special code systems to indicate diagnoses, pharmaceuticals and medical procedures. We integrated these tools and allow the use of different types of notation (star, hyphen, colon) to make it easy to select or count the relevant patients.
+ - **Easy and efficient notation and methods to deal with medical codes** 
+ Medical data often use special code systems to indicate diagnoses, pharmaceuticals and medical procedures. We integrated these tools and allow the use of different types of notation (star, hyphen, colon) to make it easy to select or count the relevant patients.
 
-- **Answer person level question using event level data:** Often health data contains information about events (a prescription, a hospital stay), while the questions we want answered are both at the event-level and person-level:
+- **Answer person level question using event level data** 
+Often health data contains information about events (a prescription, a hospital stay), while the questions we want answered are both at the event-level and person-level:
     - Event-level: How many doses of a certain pharmaceutical is used in a year?
     - Person-level: How many people have received a given pharmaceutical?
  We have methods, such as `count_persons` that make it easy to get person-level answers from event-level data.
 
-- **Deal with messy data:** Sometimes the files supplied to the analysis are multiple large files of messy administrative data. For instance procedure codes can be merged in one column (comma separated) or spread across many columns. To deal with this we have methods that accept both types of data. For instance: the method `count_codes()` can count codes from many columns, some of which may contain comma seperated codes, some of which may be single valued.
+- **Deal with messy data** 
+Sometimes the files supplied to the analysis are multiple large files of messy administrative data. For instance procedure codes can be merged in one column (comma separated) or spread across many columns. To deal with this we have methods that accept both types of data. For instance: the method `count_codes()` can count codes from many columns, some of which may contain comma seperated codes, some of which may be single valued.
