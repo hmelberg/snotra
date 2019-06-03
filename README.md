@@ -26,7 +26,7 @@ Snotra is a also a Norse goddess associated with wisdom.
     df.count_persons('4AB02 within 365 days after 4AB04', cols='atc')
     ```
      
-    - Commplex expressions
+    - Complex expressions
     ```python 
     df.count_persons('min 5 of 4AB02 before 4AB04', cols='atc')
     ```
