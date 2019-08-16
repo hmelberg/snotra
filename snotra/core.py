@@ -466,6 +466,83 @@ def expand_codes(df=None,
 
 
 # %%
+def get_rows_simple(df, expr, cols=None, sep=None, codebook=None,
+                    pid='pid', _fix=True):
+    """
+    Returns a series with the index and the boolean value for whether the expression is true or not
+
+    Note: no compound expressions using logical operators
+
+    Args:
+        df (dataframe): Dataframe with events
+
+        expr (string): A (simple) expression. Example 4A* in icd, age>20
+
+        cols (string, list): Columns where codes are located
+
+        pid (str): Column with the personal identification number
+
+        codebook (list): User specified list of all possible or allowed codes
+
+    Examples:
+        expr = '4AB02 in icd'
+        expr = '4A* in icd*'
+        expr = '4AB02,4AB04 in icd*'
+        expr = 'age>20'
+
+    Note:
+        Logic:
+        - pick out col and code expression, separate and expand
+        - get codebook (if needed)
+        - use extract code on each expression
+        - execute logic
+        - return series (bool)
+
+    Examples:
+    >>> get_rows_expression(df=npr, expr=expr, cols='icd', sep=',', out='rows'):
+
+
+    """
+
+    df, cols = _to_df(df, cols)
+    # df = df.set_index(pid, drop=False)  # maybe use "if index.name !='pid_index' since indexing may take time
+
+    # quantative expressions
+    # expr='age>20'
+    # expr = 'day,bday>20'
+    # expr = 'age*>20'
+
+    if re.match('[<=>]', expr):
+        cols, threshold = re.split('[<=>]', expr)
+
+        if re.match('[*-:,]', cols):
+            cols = cols.split(',')
+            cols = _expand_cols(df=df, cols=cols)
+        if '>' in expr:
+            rows = df[cols] > threshold
+        elif '<' in expr:
+            rows = df[cols] < threshold
+        elif '=' in expr:
+            rows = df[cols] == threshold
+        if len(cols) > 1:
+            rows = rows.any(axis=0)
+    else:
+        codes, cols = expr.split(' in ')
+        cols = cols.split(',')
+        cols = _expand_cols(df=df, cols=cols)
+
+        if not sep:
+            sep = _sniff_sep(df=df, cols=cols)
+
+        codes = codes.split(',')
+        codes = expand_codes(df=df, codes=codes, cols=cols, sep=sep, codebook=codebook)
+        allcodes = _get_allcodes(codes)
+        rows = get_rows(df=df, codes=allcodes, cols=cols, sep=sep, _fix=False)
+
+    return rows
+
+#%%
+
 def get_rows(df,
              codes,
              cols,
@@ -982,7 +1059,7 @@ def search_text(df, text, cols='text', select=None, raw=False, regex=False, logi
     if skipwords & words:
         logic = True
 
-    # conduct search: either just the raw tet, the regex, or the one with logical operators (and, or not)
+    # conduct search: either just the raw text, the regex, or the one with logical operators (and, or not)
     if raw:
         for col in cols:
             rows_with_word = df[col].str_contains(text, na=False, regex=False)
@@ -1085,7 +1162,7 @@ def extract_codes(df, codes, cols=None, sep=None, new_sep=',', na_rep='',
 
         merge (bool): Content of all columns is merged to one series # only if out='text'?
 
-        group (bool): Star an othernotation remain a single group, not split into indivdiual codes
+        group (bool): Star an other notation remain a single group, not split into individual codes
 
         out (string, ['text', 'category', 'bool' or 'int']): Datatype of output column(s)
 
@@ -1252,15 +1329,25 @@ def read_codebooks(file=None, select=None, sep=';', encoding='latin-1'):
     return books
 
 #%%
-def label(df, labels=None, select=None,  file=None):
+def label(df, labels=None, select=None, file=None, codebook=None, path=None, info=None):
     """
-    Translate codes in index to text labels based on content of the dict labels
+    Translate codes to text labels
+
+    df : series, dataframe
+    codebook : a dataframe with codes and explanation of codes (if not specified, it will read codebooks from the sub-path codebooks)
+    labels : a dictionary of codes to labels (optional, if not specified it will be created from codebooks)
+    file : path and filename of a specific codebook to be used (a csv file)
+    select  : string. if specified, only codebook files with the words in the filename will be used
+    #path : string. if specified, will read codebooks from this path
     """
     if not labels:
-        codebooks = read_codebooks(select=select, file=file)
+        if not codebook:
+            codebooks = read_codebooks(select=select, file=file)
         labels = labels_from_codebooks(codebook=codebooks, select=select)
+
     df = df.rename(index=labels)
     return df
+
 
 #%%
 
@@ -1492,8 +1579,10 @@ def sankey_format(df, labels=None, normalize=False, dropna=False, threshold=0.01
     a = a.apply(lambda row: ' '.join(row))
     a = a.str.split(expand=True)
 
+    a = a.replace(labels)
     for col in a.columns:
         a[col] = a[col] + ' (' + str(col + 1) + ')'
+
 
     if not dropna:
         a = a.fillna(f'No new')
@@ -1511,6 +1600,10 @@ def sankey_format(df, labels=None, normalize=False, dropna=False, threshold=0.01
 
         all_counts[col] = counts
     t1 = pd.concat(all_counts, ignore_index=True)
+
+    #if normalize:
+    #    t1['value'] = t1['value'] / t1['value'].sum()
+
     t1 = t1[t1.source != 'No new']
 
     # a.groupby(1)[2].value_counts()
@@ -3512,6 +3605,8 @@ def count_p(df, expr, cols=None, sep=None, codebook=None, info=None, _use_cachin
 
 
 # %%
+
+#%%
 class Info():
     def __init__(self, rows=None, cumsum=None, has_happened=None, single=None, condition=None):
         self.rows = {}
@@ -3524,6 +3619,12 @@ class Info():
         self.r_exist_pid = {}
         self.after = {}
 
+        self.default = {} # (new) defaults associated with functions
+        self.label = {} # the label to use for codes in given column
+        self.codebook = {} # codebook associated with a column
+
+
+
         # these are not really necessary ....
         self.single = {}
         self.single_pid = {}
@@ -3534,7 +3635,16 @@ class Info():
 
         self.x = {}
         self.xpid = {}
-
+    def read_codebook(self):
+        pass
+    def search_codebook(self):
+        pass
+    def get_codes(self):
+        pass
+    def define(self):
+        pass
+    def lookup(self):
+        pass
 
 # %%
 def eval_condition(df, condition, cols=None, sep=None,
